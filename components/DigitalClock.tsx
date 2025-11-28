@@ -23,7 +23,7 @@ const DigitalClock = () => {
 
     return (
         <div className="font-light">
-            {time}
+            {time || new Date().toLocaleTimeString()}
         </div>
     );
 
