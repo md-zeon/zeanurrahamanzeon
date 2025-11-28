@@ -122,6 +122,9 @@
 }
 
 @layer components {
+	.text-light {
+		@apply text-[#EFEFE6];
+	}
 	.text-description {
 		@apply text-black/60 dark:text-white/60;
 	}

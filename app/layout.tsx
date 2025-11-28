@@ -14,7 +14,7 @@ const brockmann = localFont({
 });
 
 const robotoMono = Roboto_Mono({
-  variable: "--font-geist-mono",
+  variable: "--font-roboto-mono",
   subsets: ["latin"],
 });
 
@@ -29,9 +29,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning={true}>
       <body
-        className={`${brockmann.className} ${robotoMono.variable} antialiased`}
+        className={`${brockmann.className} ${robotoMono.className} antialiased`}
       >
         {children}
       </body>
