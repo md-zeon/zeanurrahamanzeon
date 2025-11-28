@@ -28,7 +28,7 @@ const NavLinks = () => {
         }
     }
     return (
-        <nav className="text-sm md:flex gap-2 items-center uppercase hidden mx-auto">
+        <nav className="text-sm md:flex md:gap-1 lg:gap-2 items-center uppercase hidden">
             {NAV_LINKS.map((link) => {
                 return (
                     <NavLink key={link.title} title={link.title} path={link.path} scrambleEffect={scrambleEffect} />

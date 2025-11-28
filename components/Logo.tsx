@@ -39,7 +39,7 @@ const Logo = () => {
         }
     })
     return (
-        <h1 className="text-2xl w-72 logo">Ze<span className="on">on</span><span className="hiddenText"></span></h1>
+        <h1 className="text-2xl w-68 logo">Ze<span className="on">on</span><span className="hiddenText"></span></h1>
     )
 }
 

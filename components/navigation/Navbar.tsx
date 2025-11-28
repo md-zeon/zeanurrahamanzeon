@@ -4,7 +4,7 @@ import NavLinks from "./NavLinks"
 
 const Navbar = () => {
     return (
-        <nav className="flex items-center px-6 py-6 border rounded">
+        <nav className="flex justify-between items-center px-6 py-6 border rounded">
             <Logo />
             <NavLinks />
             <DigitalClock />
