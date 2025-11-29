@@ -3,14 +3,8 @@
 import NAV_LINKS from "@/constants/navlinks"
 import NavLink from "./NavLink"
 import gsap from "gsap";
-import ScrambleTextPlugin from "gsap/ScrambleTextPlugin";
-import { useGSAP } from "@gsap/react";
 
 const NavLinks = () => {
-    useGSAP(() => {
-        gsap.registerPlugin(ScrambleTextPlugin);
-    }, []);
-
     const scrambleEffect = (text: HTMLElement) => {
         if (!gsap.isTweening(text)) {
             gsap.to(text, {

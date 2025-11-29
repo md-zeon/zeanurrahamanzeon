@@ -2,14 +2,17 @@
 
 import gsap from "gsap"
 import { useGSAP } from "@gsap/react"
+import { useRef } from "react";
 
 const Logo = () => {
+    const logoRef = useRef<HTMLHeadingElement>(null);
+    const onRef = useRef<HTMLSpanElement>(null);
     useGSAP(() => {
-        const logo = document.querySelector(".logo");
+        const logo = logoRef.current;
         if (logo) {
             logo.addEventListener("mouseenter", () => {
                 if (!gsap.isTweening(".hiddenText")) {
-                    document.querySelector(".on")?.classList.add("hidden");
+                    onRef.current?.classList.add("hidden");
                     gsap.to(".hiddenText", {
                         duration: 0.5,
                         scrambleText: {
@@ -23,7 +26,7 @@ const Logo = () => {
             });
 
             logo.addEventListener("mouseleave", () => {
-                document.querySelector(".on")?.classList.remove("hidden");
+                onRef.current?.classList.remove("hidden");
 
                 gsap.to(".hiddenText", {
                     duration: 0.5,
@@ -39,7 +42,7 @@ const Logo = () => {
         }
     })
     return (
-        <h1 className="text-2xl w-68 logo">Ze<span className="on">on</span><span className="hiddenText"></span></h1>
+        <h1 ref={logoRef} className="text-2xl w-68">Ze<span ref={onRef}>on</span><span className="hiddenText"></span></h1>
     )
 }
 

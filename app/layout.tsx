@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Sans, Roboto_Mono } from "next/font/google";
+import { Roboto_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import ScrambleTextPlugin from "gsap/ScrambleTextPlugin";
+import { SplitText } from "gsap/SplitText";
+
+gsap.registerPlugin(ScrollTrigger, ScrambleTextPlugin, SplitText);
 
 export const metadata: Metadata = {
   title: "Zeanur Rahaman Zeon - Portfolio",

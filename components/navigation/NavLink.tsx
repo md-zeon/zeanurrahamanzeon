@@ -11,10 +11,10 @@ const NavLink = ({ title, path, scrambleEffect }: Props) => {
     }
 
     return (
-        <a href={path} onMouseEnter={handleHover} className="py-3 px-4 rounded-sm border border-transparent hover:border-current transition-colors hover:bg-[#44444430] duration-300 ease-in nav-link-text">
+        <a href={path} onMouseEnter={handleHover} className="py-3 px-4 rounded-sm border border-transparent hover:border-current transition-colors hover:bg-[#44444430] duration-300 ease-in">
             <span>{title}</span>
         </a>
     )
 }
 
-export default NavLink
+export default NavLink;

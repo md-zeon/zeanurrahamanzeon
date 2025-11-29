@@ -1,13 +1,9 @@
 "use client";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import ScrollTrigger from "gsap/ScrollTrigger";
 
 const Hero = () => {
     useGSAP(() => {
-        gsap.registerPlugin(ScrollTrigger);
-
-
         const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: "#hero",
@@ -16,11 +12,7 @@ const Hero = () => {
                 scrub: true,
             },
         });
-
-        return () => {
-            tl.kill();
-        };
-    }, []);
+    });
     return (
         <section id="hero" className="relative min-h-screen pt-24 px-16 max-w-[1440px] mx-auto font-mono">
             <div className="hero-content-up py-14">

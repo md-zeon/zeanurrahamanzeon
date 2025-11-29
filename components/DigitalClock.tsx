@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 
-// 1:13 PM
 const DigitalClock = () => {
     const [time, setTime] = useState('');
 
