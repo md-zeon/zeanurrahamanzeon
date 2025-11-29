@@ -89,7 +89,7 @@ const Hero = () => {
     });
     return (
         <section id="hero" className="relative min-h-screen pt-24 mb-8 px-16 max-w-[1440px] mx-auto font-mono z-10 overflow-hidden">
-            <div className="hero-content-up pr-16">
+            <div className="hero-content-up">
                 <div className="px-14 flex flex-col lg:flex-row gap-4 justify-center items-end">
                     <p className="max-lg:self-center text-xl hero-name">Hi, I&apos;m <span className="name">Zeanur Rahaman Zeon</span></p>
                     <h1 className="uppercase text-8xl font-primary font-medium hero-header-1">Str<em>a</em>tegic</h1>

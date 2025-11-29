@@ -1,5 +1,4 @@
 "use client";
-
 import { useRef, useEffect, ReactElement, cloneElement } from "react";
 import gsap from "gsap";
 import ScrambleTextPlugin from "gsap/ScrambleTextPlugin";
@@ -9,34 +8,38 @@ gsap.registerPlugin(ScrambleTextPlugin);
 interface ScrambleProps {
     children: ReactElement;
     chars?: string;
+    text?: string;
     duration?: number;
     ease?: string;
 }
 
 export default function Scramble({
     children,
+    text,
     chars = "01",
     duration = 0.5,
-    ease = "power1.inOut",
+    ease = "power2.inOut",
 }: ScrambleProps) {
     const elRef = useRef<HTMLElement | null>(null);
     const tlRef = useRef<gsap.core.Tween | null>(null);
-    const isHoveredRef = useRef(false);
+    const isHoveredRef = useRef(false); // track if mouse is still over element
 
     useEffect(() => {
-        const el = elRef.current;
-        if (!el) return;
+        if (!elRef.current) return;
 
-        // Capture innerText at mount
-        const text = el.innerText;
+        const currentText = elRef.current.innerText;
 
-        tlRef.current = gsap.to(el, {
+        tlRef.current = gsap.to(elRef.current, {
             duration,
-            scrambleText: { text, chars, speed: 0.3 },
+            scrambleText: {
+                text: text || currentText,
+                chars,
+                speed: 0.3,
+            },
             ease,
             paused: true,
             onComplete: () => {
-                // Reverse only if mouse has left after animation
+                // When animation finishes, reverse only if mouse already left
                 if (!isHoveredRef.current) {
                     tlRef.current?.reverse();
                 }
@@ -51,14 +54,13 @@ export default function Scramble({
 
     const handleLeave = () => {
         isHoveredRef.current = false;
-        // Reverse only if animation already finished
+        // Only reverse if animation is already complete
         if (tlRef.current?.progress() === 1) {
             tlRef.current.reverse();
         }
-        // Otherwise, onComplete will handle reverse after finishing
+        // Otherwise, onComplete will handle reversing
     };
 
-    // eslint-disable-next-line react-hooks/refs
     return cloneElement(children, {
         ref: elRef,
         onMouseEnter: handleEnter,
