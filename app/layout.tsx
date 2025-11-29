@@ -40,7 +40,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning={true}>
-      <body className={`${Brockman.className} ${robotoMono.className} antialiased`}>
+      <body className={`bg-[#0A090E] ${Brockman.className} ${robotoMono.className} antialiased`}>
         {children}
       </body>
     </html >

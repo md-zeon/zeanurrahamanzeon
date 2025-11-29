@@ -15,9 +15,9 @@ const DigitalClock = () => {
         };
 
         updateTime(); // Initial call
-        const intervalId = setInterval(updateTime, 60000); // Update every minute
+        const intervalId = setInterval(updateTime, 30000); // Update every 30 seconds
 
-        return () => clearInterval(intervalId); // Cleanup on unmount
+        return () => clearInterval(intervalId);
     }, []);
 
     return (
