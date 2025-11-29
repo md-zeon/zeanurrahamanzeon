@@ -6,6 +6,7 @@ const Home = () => {
     <main className="font-roboto-mono min-h-screen text-light">
       <Navbar />
       <Hero />
+      <div className="min-h-screen"></div>
     </main>
   )
 }
