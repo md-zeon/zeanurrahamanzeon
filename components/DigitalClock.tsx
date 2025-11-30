@@ -21,7 +21,7 @@ const DigitalClock = () => {
     }, []);
 
     return (
-        <div className="font-light">
+        <div className="font-light ml-auto">
             {time || new Date().toLocaleTimeString()}
         </div>
     );
