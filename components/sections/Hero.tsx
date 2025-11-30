@@ -10,6 +10,7 @@ gsap.registerPlugin(SplitText, ScrambleTextPlugin);
 import { useGSAP } from "@gsap/react";
 import { LucideLinkedin } from "lucide-react";
 import Link from "next/link";
+import FramedMedia from "../FramedMedia";
 
 const Hero = () => {
     useGSAP(() => {
@@ -103,8 +104,8 @@ const Hero = () => {
             </div>
             <div className="hero-content-bottom grid grid-cols-2 gap-8">
                 {/* Left Photo */}
-                <div className="relative -top-16 overflow-hidden w-fit h-fit hero-photo">
-                    <Image src="/images/frame.svg" width={600} height={600} className="z-10" alt="Frame" />
+                <div className="relative -top-16 overflow-hidden w-fit h-fit hero-photo pb-10">
+                    <FramedMedia isVideo={false} src="/images/zeon.webp" className="z-10" alt="Zeanur Rahaman Zeon" />
                 </div>
                 {/* Right Content */}
                 <div className="flex flex-col mt-8">
@@ -115,7 +116,7 @@ const Hero = () => {
                         {/* <p className="flex-1">From polished UI to complex backend systems</p> */}
                         <Link href="https://www.linkedin.com/in/zeanur-rahaman-zeon" className="flex items-center gap-1 font-bold hover:underline" target="_blank w-full"><LucideLinkedin className="inline-block size-4" />/zeanur-rahaman-zeon</Link>
                     </div>
-                    <div className="grow flex gap-8 hero-content-bottom-main">
+                    <div className="grow flex gap-8 hero-content-bottom-main h-full">
                         <Separator className="mt-4 ml-2" orientation="vertical" />
                         {/* Content */}
                         <div className="py-20 pl-10 space-y-12">
