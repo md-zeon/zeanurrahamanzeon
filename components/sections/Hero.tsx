@@ -87,7 +87,8 @@ const Hero = () => {
             duration: 1,
             ease: "power2.out"
         }, "<");
-    });
+    }, []);
+
     return (
         <section id="hero" className="relative min-h-screen pt-24 mb-8 px-16 max-w-[1440px] mx-auto font-mono z-10 overflow-hidden">
             <div className="hero-content-up">
