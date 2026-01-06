@@ -31,100 +31,104 @@ const Hero = () => {
         const header1 = new SplitText(".hero-header-1", { type: "chars" });
         const header2 = new SplitText(".hero-header-2", { type: "chars" });
         const header3 = new SplitText(".hero-header-3", { type: "chars" });
-        tl.from(header1.chars, {
-            x: -100,
-            stagger: 0.05,
+        gsap.set([header1.chars, header2.chars, header3.chars], { x: -100 });
+        tl.to(header1.chars, {
+            x: 0,
+            stagger: 0.01,
             duration: 0.4,
-            autoAlpha: 0,
+            autoAlpha: 1,
             ease: "power2.out"
         });
-        tl.from(header2.chars, {
-            x: -100,
-            stagger: 0.05,
+        tl.to(".hero-header-1", { opacity: 1 }, "<");
+        tl.to(header2.chars, {
+            x: 0,
+            stagger: 0.01,
             duration: 0.6,
-            autoAlpha: 0,
+            autoAlpha: 1,
             ease: "power2.out"
         }, "<");
-        tl.from(header3.chars, {
-            x: -100,
-            stagger: 0.05,
+        tl.to(".hero-header-2", { opacity: 1 }, "<");
+        tl.to(header3.chars, {
+            x: 0,
+            stagger: 0.01,
             duration: 0.8,
-            autoAlpha: 0,
+            autoAlpha: 1,
             ease: "power2.out"
         }, "<");
+        tl.to(".hero-header-3", { opacity: 1 }, "<");
 
         // Hero content bottom animation
-        tl.from(".hero-tagline", {
-            x: -50,
-            autoAlpha: 0,
+        tl.to(".hero-tagline", {
+            x: 0,
+            autoAlpha: 1,
             duration: 0.6,
         });
 
-        tl.from(".hero-content-bottom-main", {
-            autoAlpha: 0,
+        tl.to(".hero-content-bottom-main", {
+            autoAlpha: 1,
             duration: 0.6,
         });
 
-        tl.from(".hero-content-description", {
-            y: 50,
-            autoAlpha: 0,
+        tl.to(".hero-content-description", {
+            y: 0,
+            autoAlpha: 1,
             duration: 0.6,
         }, "<+=0.3");
-        tl.from(".hero-buttons", {
-            y: 50,
-            autoAlpha: 0,
+        tl.to(".hero-buttons", {
+            y: 0,
+            autoAlpha: 1,
             duration: 0.6,
         }, "<+=0.2");
 
-        tl.from(".hero-photo", {
-            autoAlpha: 0,
+        tl.to(".hero-photo", {
+            autoAlpha: 1,
             duration: 0.6
         }, "<");
 
-        tl.from("#navbar", {
-            y: -100,
-            autoAlpha: 0,
+        tl.to("#navbar", {
+            y: 0,
+            autoAlpha: 1,
             duration: 1,
             ease: "power2.out"
         }, "<");
-    }, []);
+    });
 
     return (
         <section id="hero" className="relative min-h-screen pt-24 mb-8 px-16 max-w-[1440px] mx-auto font-mono z-10 overflow-hidden">
             <div className="hero-content-up">
                 <div className="px-14 flex flex-col lg:flex-row gap-4 justify-center items-end">
                     <p className="max-lg:self-center text-xl hero-name">Hi, I&apos;m <span className="name">Zeanur Rahaman Zeon</span></p>
-                    <h1 className="uppercase text-8xl font-primary font-medium hero-header-1">Str<em>a</em>tegic</h1>
+                    <h1 className="uppercase text-8xl font-primary font-medium hero-header-1 opacity-0">Str<em>a</em>tegic</h1>
                 </div>
                 <div className="flex justify-center items-end">
-                    <h1 className="uppercase text-8xl font-primary font-medium hero-header-2"><em className="mr-2">W</em>eb Designer</h1>
+                    <h1 className="uppercase text-8xl font-primary font-medium hero-header-2 opacity-0"><em className="mr-2">W</em>eb Designer</h1>
                 </div>
                 <div className="flex justify-end items-end">
-                    <h1 className="uppercase text-8xl font-primary font-medium hero-header-3">& De<em className="mr-1 -ml-4">v</em>loper</h1>
+                    <h1 className="uppercase text-8xl font-primary font-medium hero-header-3 opacity-0">& De<em className="mr-1 -ml-4">v</em>loper</h1>
                 </div>
             </div>
             <div className="hero-content-bottom grid grid-cols-2 gap-8">
                 {/* Left Photo */}
-                <div className="relative -top-16 overflow-hidden w-fit h-fit hero-photo pb-10">
+                <div className="relative -top-16 overflow-hidden w-fit h-fit hero-photo pb-10 opacity-0">
                     <FramedMedia isVideo={false} src="/images/zeon.webp" className="z-10" alt="Zeanur Rahaman Zeon" />
                 </div>
                 {/* Right Content */}
                 <div className="flex flex-col mt-8">
-                    <div className="flex items-center gap-4 hero-tagline">
+                    <div className="flex items-center gap-4 hero-tagline opacity-0 -translate-x-12">
                         <Image className="invert" src="/icons/flower.svg" width={24} height={24} alt="Flower Icon" />
                         {/* <Separator /> */}
                         <div className="h-px bg-white flex-1" />
                         {/* <p className="flex-1">From polished UI to complex backend systems</p> */}
-                        <Link href="https://www.linkedin.com/in/zeanur-rahaman-zeon" className="flex items-center gap-1 font-bold hover:underline" target="_blank w-full"><LucideLinkedin className="inline-block size-4" />/zeanur-rahaman-zeon</Link>
+                        <Link href="https://www.linkedin.com/in/zeanur-rahaman-zeon" className="flex items-center gap-1 font-bold hover:underline" target="_blank w_full"><LucideLinkedin className="inline-block size-4" />/zeanur-rahaman-zeon</Link>
                     </div>
-                    <div className="grow flex gap-8 hero-content-bottom-main h-full">
+                    <div className="grow flex gap-8 hero-content-bottom-main h_full opacity-0">
                         <Separator className="mt-4 ml-2" orientation="vertical" />
                         {/* Content */}
                         <div className="py-20 pl-10 space-y-12">
-                            <p className="mt-4 text-xl hero-content-description">
+                            <p className="mt-4 text-xl hero-content-description opacity-0 translate-y-12">
                                 I am a passionate web designer and developer with a knack for creating visually stunning and user-friendly websites. With a strong foundation in both design principles and coding languages, I bring ideas to life on the web.
                             </p>
-                            <div className="flex items-center gap-2 hero-buttons">
+                            <div className="flex items-center gap-2 hero-buttons opacity-0 translate-y-12">
                                 <Scramble>
                                     <Button className="text-xl cursor-pointer">
                                         Get in Touch

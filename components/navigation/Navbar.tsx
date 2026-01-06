@@ -18,7 +18,7 @@ const Navbar = () => {
                 end: "bottom bottom",
                 scrub: true,
             },
-        });
+        }); 
         tl.to("#navbar", {
             scrollTrigger: {
                 trigger: "body",
@@ -61,7 +61,7 @@ const Navbar = () => {
     return (
         <>
             {/* Navbar main */}
-            <nav id="navbar" className={`font-roboto-mono fixed top-0 left-0 right-0 z-50 bg-[#0A090E] grid grid-cols-2 md:grid-cols-3 items-center px-6 py-4.5 border rounded`}>
+            <nav id="navbar" className={`font-roboto-mono fixed top-0 left-0 right-0 z-50 bg-[#0A090E] grid grid-cols-2 md:grid-cols-3 items-center px-6 py-4.5 border rounded opacity-0 -translate-y-full`}>
                 <Logo />
                 <NavLinks />
                 <DigitalClock />
