@@ -62,8 +62,8 @@ export default function Scramble({
     };
 
     return cloneElement(children, {
-        ref: elRef,
+        ref: elRef as any,
         onMouseEnter: handleEnter,
         onMouseLeave: handleLeave,
-    });
+    } as any);
 }

@@ -18,7 +18,7 @@ const Navbar = () => {
                 end: "bottom bottom",
                 scrub: true,
             },
-        }); 
+        });
         tl.to("#navbar", {
             scrollTrigger: {
                 trigger: "body",
