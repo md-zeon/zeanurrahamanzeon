@@ -5,7 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 import DigitalClock from "../DigitalClock"
 import Logo from "../Logo"
 import NavLinks from "./NavLinks"
-import { LucideMenu } from "lucide-react"
+import SidebarMenu from "./SidebarMenu"
 gsap.registerPlugin(ScrollTrigger);
 
 const Navbar = () => {
@@ -68,7 +68,7 @@ const Navbar = () => {
             </nav>
             {/* When navbar is hidden */}
             <nav id="menu" className="fixed opacity-0 right-8 top-8 border rounded-full w-fit h-fit p-3 z-40 cursor-pointer">
-                <LucideMenu />
+                <SidebarMenu />
             </nav>
         </>
     )
