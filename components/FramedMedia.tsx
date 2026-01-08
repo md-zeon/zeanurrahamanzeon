@@ -21,7 +21,7 @@ export default function FramedMedia({
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div ref={wrapperRef} className={`w-[320px] md:w-[420px] lg:w-[600px] ${className}`}>
+    <div ref={wrapperRef} className={`w-[320px] md:w-[420px] lg:w-[450px] xl:w-[600px] ${className}`}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="100%"

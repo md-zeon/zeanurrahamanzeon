@@ -96,7 +96,7 @@ const Hero = () => {
     return (
         <section id="hero" className="relative min-h-screen pt-24 mb-8 px-16 max-w-[1440px] mx-auto font-mono z-10 overflow-hidden">
             <div className="hero-content-up">
-                <div className="flex flex-col lg:flex-row gap-4 justify-center items-end">
+                <div className="flex flex-col xl:flex-row gap-4 justify-center items-end">
                     <p className="max-lg:self-center text-xl hero-name sm:px-14">Hi, I&apos;m <span className="name">Zeanur Rahaman Zeon</span></p>
                     <h1 className="px-14 uppercase text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-primary font-medium hero-header-1 opacity-0">Str<em>a</em>tegic</h1>
                 </div>
@@ -109,8 +109,8 @@ const Hero = () => {
             </div>
             <div className="hero-content-bottom grid lg:grid-cols-2 gap-8">
                 {/* Left Photo */}
-                <div className="relative -top-16 overflow-hidden w-fit h-fit hero-photo pb-10 opacity-0 max-lg:hidden">
-                    <FramedMedia isVideo={false} src="/images/zeon.webp" className="z-10" alt="Zeanur Rahaman Zeon" />
+                <div className="relative -xl:top-16 overflow-hidden w-fit h-fit hero-photo pb-10 opacity-0 max-lg:hidden">
+                    <FramedMedia isVideo={false} src="/images/zeon.webp" className="z-10 w-full h-full" alt="Zeanur Rahaman Zeon" />
                 </div>
                 {/* Right Content */}
                 <div className="flex flex-col mt-8">
@@ -124,7 +124,7 @@ const Hero = () => {
                     <div className="grow flex gap-8 hero-content-bottom-main h_full opacity-0">
                         <Separator className="mt-4 ml-2" orientation="vertical" />
                         {/* Content */}
-                        <div className="py-10 md:py-20 pl-10 md:pl-20 space-y-12">
+                        <div className="sm:py-5 md:py-10 xl:py-20 sm:pl-5 md:pl-10 xl:pl-20 space-y-12">
                             <p className="mt-4 text-xl hero-content-description opacity-0 translate-y-12">
                                 I am a passionate web designer and developer with a knack for creating visually stunning and user-friendly websites. With a strong foundation in both design principles and coding languages, I bring ideas to life on the web.
                             </p>
