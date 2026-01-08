@@ -1,35 +1,34 @@
 import { LucideMenu } from "lucide-react"
 import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "../ui/sheet"
 import Logo from "../Logo"
-import Link from "next/link"
+import RollingLink from "../animations/RollingLink"
 
 const SidebarMenu = () => {
     return (
         <Sheet>
-            {/* Menu Button */}
             <SheetTrigger asChild>
-                <LucideMenu />
+                <LucideMenu className="cursor-pointer" />
             </SheetTrigger>
-            {/* Sidebar content */}
+
             <SheetContent className="bg-[#F8FF31] max-w-3xl w-full sidebar-clip">
                 <SheetHeader>
                     <SheetTitle>
                         <Logo />
                     </SheetTitle>
                 </SheetHeader>
-                {/* sidebar links */}
+
                 <nav className="flex flex-col gap-4 pt-12 pl-12 tracking-tighter uppercase text-7xl font-black font-primary">
                     <SheetClose asChild>
-                        <Link href="/">Ho<em>m</em>e</Link>
+                        <RollingLink href="/">Ho<em>m</em>e</RollingLink>
                     </SheetClose>
                     <SheetClose asChild>
-                        <Link href="/about"><em>A</em>bout</Link>
+                        <RollingLink href="/about"><em>A</em>bout</RollingLink>
                     </SheetClose>
                     <SheetClose asChild>
-                        <Link href="/projects">Projec<em className="-ml-3 mr-1">t</em>s</Link>
+                        <RollingLink href="/projects">Projec<em className="-ml-3 mr-1">t</em>s</RollingLink>
                     </SheetClose>
                     <SheetClose asChild>
-                        <Link href="/contact">Cont<em className="-ml-3 mr-1">a</em>ct</Link>
+                        <RollingLink href="/contact">Cont<em className="-ml-3 mr-1">a</em>ct</RollingLink>
                     </SheetClose>
                 </nav>
             </SheetContent >
