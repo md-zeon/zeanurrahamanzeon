@@ -1,6 +1,7 @@
 import { LucideMenu } from "lucide-react"
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "../ui/sheet"
+import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "../ui/sheet"
 import Logo from "../Logo"
+import Link from "next/link"
 
 const SidebarMenu = () => {
     return (
@@ -10,22 +11,30 @@ const SidebarMenu = () => {
                 <LucideMenu />
             </SheetTrigger>
             {/* Sidebar content */}
-            <SheetContent>
+            <SheetContent className="bg-[#F8FF31] max-w-3xl w-full sidebar-clip">
                 <SheetHeader>
                     <SheetTitle>
                         <Logo />
                     </SheetTitle>
                 </SheetHeader>
                 {/* sidebar links */}
-                <nav className="flex flex-col gap-4 mt-8">
-                    <a href="#home" className="text-lg hover:underline">Home</a>
-                    <a href="#about" className="text-lg hover:underline">About</a>
-                    <a href="#projects" className="text-lg hover:underline">Projects</a>
-                    <a href="#contact" className="text-lg hover:underline">Contact</a>
+                <nav className="flex flex-col gap-4 pt-12 pl-12 tracking-tighter uppercase text-7xl font-black font-primary">
+                    <SheetClose asChild>
+                        <Link href="/">Ho<em>m</em>e</Link>
+                    </SheetClose>
+                    <SheetClose asChild>
+                        <Link href="/about"><em>A</em>bout</Link>
+                    </SheetClose>
+                    <SheetClose asChild>
+                        <Link href="/projects">Projec<em className="-ml-3 mr-1">t</em>s</Link>
+                    </SheetClose>
+                    <SheetClose asChild>
+                        <Link href="/contact">Cont<em className="-ml-3 mr-1">a</em>ct</Link>
+                    </SheetClose>
                 </nav>
-            </SheetContent>
+            </SheetContent >
         </Sheet >
     )
 }
 
-export default SidebarMenu
+export default SidebarMenu;

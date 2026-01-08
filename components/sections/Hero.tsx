@@ -124,7 +124,7 @@ const Hero = () => {
                     <div className="grow flex gap-8 hero-content-bottom-main h_full opacity-0">
                         <Separator className="mt-4 ml-2" orientation="vertical" />
                         {/* Content */}
-                        <div className="sm:py-5 md:py-10 xl:py-20 sm:pl-5 md:pl-10 xl:pl-20 space-y-12">
+                        <div className="sm:py-5 md:py-10 xl:py-20 sm:pl-5 md:pl-10 lg:pl-20 space-y-12">
                             <p className="mt-4 text-xl hero-content-description opacity-0 translate-y-12">
                                 I am a passionate web designer and developer with a knack for creating visually stunning and user-friendly websites. With a strong foundation in both design principles and coding languages, I bring ideas to life on the web.
                             </p>
