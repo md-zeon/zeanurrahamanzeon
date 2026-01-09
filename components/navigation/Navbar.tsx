@@ -64,7 +64,7 @@ const Navbar = () => {
             <nav id="navbar" className={`font-roboto-mono fixed top-0 left-0 right-0 z-50 bg-[#0A090E] grid grid-cols-2 md:grid-cols-3 items-center px-6 py-4.5 border rounded opacity-0 -translate-y-full`}>
                 <Logo />
                 <NavLinks />
-                <DigitalClock />
+                <DigitalClock className="ml-auto" />
             </nav>
             {/* When navbar is hidden */}
             <nav id="menu" className="fixed opacity-0 right-8 top-8 border rounded-full w-fit h-fit p-3 z-40 cursor-pointer">
