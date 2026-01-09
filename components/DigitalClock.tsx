@@ -1,8 +1,9 @@
 "use client";
 
+import { cn } from '@/lib/utils';
 import { useState, useEffect } from 'react';
 
-const DigitalClock = () => {
+const DigitalClock = ({ className }: { className?: string }) => {
     const [time, setTime] = useState('');
 
     useEffect(() => {
@@ -21,7 +22,7 @@ const DigitalClock = () => {
     }, []);
 
     return (
-        <div className="font-light ml-auto">
+        <div className={cn(className, "font-light")}>
             {time || new Date().toLocaleTimeString()}
         </div>
     );
