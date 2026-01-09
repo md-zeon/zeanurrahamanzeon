@@ -23,16 +23,11 @@ export const robotoMono = Roboto_Mono({
 })
 
 export const Brockman = localFont({
+  src: './fonts/BrockmannVF.ttf',
   variable: '--font-primary',
-  src: [
-    {
-      path: '../public/fonts/brockmann-medium.woff',
-      weight: '500',
-      style: 'medium',
-    }
-  ],
+  weight: '500',
+  display: 'swap',
 });
-
 
 export default function RootLayout({
   children,
@@ -41,7 +36,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning={true}>
-      <body className={`bg-[#0A090E] ${Brockman.className} ${robotoMono.className} antialiased`}>
+      <body className={`bg-[#0A090E] ${Brockman.variable} ${robotoMono.variable} antialiased`}>
         {children}
         <Footer />
       </body>
