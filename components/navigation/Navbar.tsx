@@ -6,9 +6,12 @@ import DigitalClock from "../DigitalClock"
 import Logo from "../Logo"
 import NavLinks from "./NavLinks"
 import SidebarMenu from "./SidebarMenu"
+import { useRef } from "react"
 gsap.registerPlugin(ScrollTrigger);
 
 const Navbar = () => {
+    const navbarRef = useRef<HTMLElement>(null);
+    const menuRef = useRef<HTMLElement>(null);
     useGSAP(() => {
         // Navbar hide on scroll down and show on scroll up
         const tl = gsap.timeline({
@@ -19,7 +22,7 @@ const Navbar = () => {
                 scrub: true,
             },
         });
-        tl.to("#navbar", {
+        tl.to(navbarRef.current, {
             scrollTrigger: {
                 trigger: "body",
                 start: "top top",
@@ -28,12 +31,12 @@ const Navbar = () => {
                 onUpdate: (self) => {
                     if (self.direction === 1) {
                         // Scrolling down (hide navbar)
-                        gsap.to("#navbar", {
+                        gsap.to(navbarRef.current, {
                             scale: 0.96, duration: 0.4, ease: "power1.out", onComplete: () => {
-                                gsap.to("#navbar", {
+                                gsap.to(navbarRef.current, {
                                     y: "-100%", duration: 0.3, ease: "power1.out", onComplete: () => {
                                         // Show menu icon when navbar is hidden
-                                        gsap.to("#menu", { autoAlpha: 1, duration: 0.3, ease: "power1.out" });
+                                        gsap.to(menuRef.current, { autoAlpha: 1, duration: 0.3, ease: "power1.out" });
                                     }
                                 });
                             }
@@ -41,11 +44,11 @@ const Navbar = () => {
                     } else {
                         // Scrolling up (show navbar)
                         // Hide menu icon when navbar is shown
-                        gsap.to("#menu", {
+                        gsap.to(menuRef.current, {
                             autoAlpha: 0, opacity: 0, duration: 0.3, ease: "power1.out", onComplete: () => {
-                                gsap.to("#navbar", {
+                                gsap.to(navbarRef.current, {
                                     y: "0%", duration: 0.3, ease: "power1.out", onComplete: () => {
-                                        gsap.to("#navbar", {
+                                        gsap.to(navbarRef.current, {
                                             scale: 1, duration: 0.4, ease: "power1.out"
                                         });
                                     }
@@ -61,13 +64,13 @@ const Navbar = () => {
     return (
         <>
             {/* Navbar main */}
-            <nav id="navbar" className={`font-roboto-mono fixed top-0 left-0 right-0 z-50 bg-[#0A090E] grid grid-cols-2 md:grid-cols-3 items-center px-6 py-4.5 border rounded opacity-0 -translate-y-full`}>
+            <nav id="navbar" ref={navbarRef} className={`text-light font-roboto-mono fixed top-0 left-0 right-0 z-50 bg-[#0A090E] grid grid-cols-2 md:grid-cols-3 items-center px-6 py-4.5 border rounded opacity-0 -translate-y-full`}>
                 <Logo />
                 <NavLinks />
                 <DigitalClock className="ml-auto" />
             </nav>
             {/* When navbar is hidden */}
-            <nav id="menu" className="fixed opacity-0 right-8 top-8 border rounded-full w-fit h-fit p-3 z-40 cursor-pointer">
+            <nav ref={menuRef} className="fixed opacity-0 right-8 top-8 border rounded-full w-fit h-fit p-3 z-40 cursor-pointer">
                 <SidebarMenu />
             </nav>
         </>

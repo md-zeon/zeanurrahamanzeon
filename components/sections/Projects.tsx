@@ -33,7 +33,6 @@ const Projects = () => {
         videos.forEach((video, i) => {
             // initial state
             gsap.set(video, {
-                y: i * 50,
                 scale: 1,
                 rotateX: 0,
                 yPercent: i === 0 ? 0 : 100, // first video starts on screen, others below

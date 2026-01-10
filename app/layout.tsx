@@ -6,7 +6,6 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ScrambleTextPlugin from "gsap/ScrambleTextPlugin";
 import { SplitText } from "gsap/SplitText";
-import Footer from "@/components/sections/Footer";
 
 gsap.registerPlugin(ScrollTrigger, ScrambleTextPlugin, SplitText);
 
@@ -38,7 +37,6 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning={true}>
       <body className={`bg-[#0A090E] ${Brockman.variable} ${robotoMono.variable} antialiased`}>
         {children}
-        <Footer />
       </body>
     </html >
   );
