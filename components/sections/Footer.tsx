@@ -1,10 +1,10 @@
-import React from 'react'
 import Logo from '../Logo'
 import Link from 'next/link'
-import { LucideLinkedin } from 'lucide-react'
+import { LucideLinkedin, LucideMail, LucideMapPin, LucidePhone } from 'lucide-react'
 import NavLink from '../navigation/NavLink'
 import { Separator } from '../ui/separator'
 import DigitalClock from '../DigitalClock'
+import Scramble from '../animations/Scramble'
 
 const Footer = () => {
     return (
@@ -61,6 +61,28 @@ const Footer = () => {
                                     </li>
                                 </ul>
                             </nav>
+                        </div>
+                        {/* Get in touch */}
+                        <div>
+                            <h2 className='text-xl tracking-wide text-white/50'>Ge<em>t</em> in T<em>o</em>uch</h2>
+                            <ul className='mt-4 flex flex-col gap-3 font-medium'>
+                                <li className='lowercase'>
+                                    <LucideMail className='inline size-4' />&nbsp;
+                                    <NavLink path="mailto:zeon.cse@gmail.com" title='zeon.cse@gmail.com' isExternal isFooterLink />
+                                </li>
+                                <li>
+                                    <LucidePhone className='inline size-4' />&nbsp;
+                                    <NavLink path="tel:+8801521721040" title='+8801521721040' isExternal isFooterLink />
+                                </li>
+                                <address className='flex items-center'>
+                                    <LucideMapPin className='inline size-4' />&nbsp;
+                                    <Scramble>
+                                        <p>
+                                            Tongi, Dhaka, Bangladesh
+                                        </p>
+                                    </Scramble>
+                                </address>
+                            </ul>
                         </div>
                     </section>
                     {/* Footer Bottom */}
