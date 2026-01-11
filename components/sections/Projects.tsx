@@ -90,8 +90,7 @@ const Projects = () => {
             // initial state
             gsap.set(video, {
                 yPercent: i === 0 ? 0 : 100, // first video starts on screen, others below
-                rotateX: 0,
-                scale: 1,
+                rotateX: i !== 0 ? 15 : 0, // slight tilt for videos not in focus
             });
 
             // Video comes into focus
