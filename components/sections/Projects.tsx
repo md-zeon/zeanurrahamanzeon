@@ -64,14 +64,14 @@ const Projects = () => {
 
     useGSAP(() => {
         gsap.to(projectSectionRef.current, {
-            backgroundColor: "#F8FF31",
+            // backgroundColor: "#F8FF31",
             scrollTrigger: {
                 trigger: projectSectionRef.current,
                 start: "top top",
                 end: "+=600%",
                 toggleActions: "play reverse play reverse",
             },
-            color: "#000000",
+            // color: "#000000",
         });
 
         const videos = gsap.utils.toArray<HTMLVideoElement>(".video");
@@ -166,9 +166,9 @@ const Projects = () => {
 
     return (
         <section ref={projectSectionRef} className="relative overflow-hidden perspective-distant min-h-screen py-20 transition-colors duration-300">
-            <video className="video absolute inset-0 w-[95vw] mx-auto h-screen object-cover transform-3d will-change-transform origin-top" src="/videos/appetite-thumb.mp4" autoPlay muted loop></video>
-            <video className="video absolute inset-0 w-[95vw] mx-auto h-screen object-cover transform-3d will-change-transform origin-top" src="/videos/pickaxe-thumb.mp4" autoPlay muted loop></video>
-            <video className="video absolute inset-0 w-[95vw] mx-auto h-screen object-cover transform-3d will-change-transform origin-top" src="/videos/upkeep-thumb.mp4" autoPlay muted loop></video>
+            <video className="video absolute inset-0 w-[95vw] mx-auto h-screen object-contain transform-3d will-change-transform origin-top" src="/videos/DevQnA.mp4" autoPlay muted loop></video>
+            <video className="video absolute inset-0 w-[95vw] mx-auto h-screen object-contain transform-3d will-change-transform origin-top" src="/videos/pickaxe-thumb.mp4" autoPlay muted loop></video>
+            <video className="video absolute inset-0 w-[95vw] mx-auto h-screen object-contain transform-3d will-change-transform origin-top" src="/videos/upkeep-thumb.mp4" autoPlay muted loop></video>
             {/* Project Banner Component */}
             <div ref={projectBannerRef} className="absolute bottom-10 left-10 max-w-md backdrop-blur-xl z-50 p-4 transition-all duration-500">
                 <h2 className="project-banner-header text-3xl font-bold mb-2 text-dark">

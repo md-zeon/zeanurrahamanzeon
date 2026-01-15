@@ -13,7 +13,7 @@ const SidebarMenu = () => {
                 <LucideMenu className="cursor-pointer" />
             </SheetTrigger>
 
-            <SheetContent className="flex flex-col justify-between bg-[#F8FF31] max-w-3xl w-full sidebar-clip">
+            <SheetContent className="flex flex-col justify-between max-w-3xl w-full sidebar-clip">
                 <SheetHeader>
                     <SheetTitle className="p-4">
                         <Logo />
