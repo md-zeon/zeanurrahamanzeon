@@ -1,0 +1,327 @@
+/* Design system composed from Tailwind utilities.
+   Structural/GSAP hook classes keep their names but styling lives here
+   or as inline utilities in the components. */
+
+/* ---------- Typography ---------- */
+
+.heading-style-h0 {
+  @apply font-brockmann text-[7vw] font-medium uppercase leading-[90%] tracking-[-0.2875rem];
+  font-feature-settings: "ss01" on;
+}
+
+.heading-style-h1 {
+  @apply font-brockmann text-[4.5rem] font-semibold uppercase leading-[100%] tracking-[-0.135rem];
+  font-feature-settings: "ss01" on;
+}
+
+.heading-style-h3 {
+  @apply font-brockmann text-[2.5rem] font-semibold leading-[120%] tracking-[-0.05rem];
+}
+
+.heading-style-h5 {
+  @apply font-brockmann text-[1.5rem] font-normal leading-[140%] tracking-[-0.06rem] no-underline;
+}
+
+.heading-style-h6 {
+  @apply font-brockmann text-[1rem] font-medium uppercase leading-[140%] tracking-[-0.02rem];
+  font-feature-settings: "ss01" on;
+}
+
+.heading-style-h5.is-testimonial {
+  @apply text-[1.1rem];
+}
+
+.heading-style-h1.is-card {
+  @apply text-[4rem];
+}
+
+.heading-style-h0.is-cta {
+  @apply text-[9vw];
+}
+
+.heading-style-h0.is-faq {
+  @apply text-[9.5vw] tracking-[-0.6vw];
+}
+
+.heading-style-h0.is-career {
+  @apply text-[7vw] tracking-[-0.4vw];
+}
+
+.heading-style-h0.is-play {
+  @apply text-[9vw];
+}
+
+.text-size-small {
+  @apply text-[0.875rem] leading-[150%] tracking-[-0.0525rem];
+}
+
+.text-size-regular {
+  @apply text-[1rem];
+}
+
+.text-size-medium {
+  @apply text-[1.125rem] leading-[140%];
+}
+
+.text-size-large {
+  @apply text-[1.25rem] leading-[140%] tracking-[-0.05rem];
+}
+
+.text-caption-2 {
+  @apply text-[0.625rem] font-normal uppercase leading-[120%] tracking-[0];
+  font-feature-settings: "ss01" on;
+}
+
+.text-color-primary {
+  @apply text-brand-white;
+}
+
+.text-color-secondary {
+  @apply text-brand-darker-white;
+}
+
+.text-color-teritary {
+  @apply text-neutral-mid-grey;
+}
+
+.text-style-allcaps {
+  @apply uppercase;
+}
+
+.text-weight-light {
+  @apply font-light;
+}
+
+.text-weight-medium {
+  @apply font-medium;
+}
+
+.text-weight-normal {
+  @apply font-normal;
+}
+
+.text-align-right {
+  @apply text-right;
+}
+
+/* ---------- Layout ---------- */
+
+.container-large {
+  @apply mx-auto w-full max-w-[81.25rem];
+}
+
+.max-width-full {
+  @apply w-full max-w-none;
+}
+
+.padding-global {
+  @apply px-6;
+}
+
+.padding-global.is-bigger {
+  @apply px-[4.37rem];
+}
+
+.padding-section-large {
+  @apply py-[7rem];
+}
+
+.background-color-black {
+  @apply bg-neutral-black;
+}
+
+/* ---------- Buttons ---------- */
+
+.home-header_badge-link {
+  @apply flex flex-none items-center justify-start gap-1 py-1 text-brand-white no-underline;
+}
+
+.button {
+  @apply rounded-[0.25rem] bg-brand-yellow px-8 py-4 text-[1.125rem] text-brand-black no-underline text-center tracking-[-0.04rem];
+}
+
+.button.is-secondary {
+  @apply border border-[#efefe633] bg-[#0a090e4d] text-brand-white;
+  -webkit-backdrop-filter: blur(100px);
+  backdrop-filter: blur(100px);
+}
+
+.button.is-secondary.is-chat {
+  @apply p-2 text-[0.75rem] leading-[150%];
+}
+
+.button.is-small {
+  @apply px-5 py-2 text-[1rem];
+}
+
+.button.is-icon {
+  @apply flex items-center justify-center gap-3;
+}
+
+.button-icon {
+  @apply flex h-[0.875rem] w-[0.875rem] flex-col items-center justify-center;
+}
+
+.button-group {
+  @apply flex flex-wrap items-center gap-4;
+}
+
+.icon-embed-medium {
+  @apply flex h-12 w-12 flex-col items-center justify-center;
+}
+
+.icon-embed-xxsmall {
+  @apply flex h-4 w-4 flex-col items-center justify-center;
+}
+
+/* ---------- Misc ---------- */
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  overflow: -moz-scrollbars-none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* ---------- JS-referenced helpers (from global-embed.css) ---------- */
+
+.is-gsap-hidden {
+  visibility: hidden;
+}
+
+.pin-spacer {
+  min-height: 100vh !important;
+}
+
+#highlighted-text span {
+  will-change: opacity, transform;
+}
+
+.hide {
+  display: none !important;
+}
+
+@media screen and (max-width: 991px) {
+  .hide,
+  .hide-tablet {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .hide-mobile-landscape {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .hide-mobile {
+    display: none !important;
+  }
+}
+
+/* ---------- Responsive overrides (Webflow breakpoints) ---------- */
+
+@media (min-width: 1280px) {
+  .heading-style-h0 {
+    @apply text-[5.75rem];
+  }
+}
+
+@media (max-width: 991px) {
+  .heading-style-h0 {
+    @apply text-[9vw];
+  }
+  .heading-style-h0.is-cta {
+    @apply text-[9vw];
+  }
+  .heading-style-h0.is-faq {
+    @apply text-[9.5vw] tracking-[-0.6vw];
+  }
+  .heading-style-h0.is-career {
+    @apply text-[7vw] tracking-[-0.4vw];
+  }
+  .heading-style-h0.is-play {
+    @apply text-[9vw];
+  }
+  .heading-style-h1 {
+    @apply text-[2.75rem];
+  }
+  .heading-style-h3 {
+    @apply text-[2rem];
+  }
+  .heading-style-h5 {
+    @apply text-[1.3rem];
+  }
+  .padding-global.is-bigger {
+    @apply px-6;
+  }
+  .padding-section-large {
+    @apply py-24;
+  }
+  .icon-embed-medium {
+    @apply h-10 w-10;
+  }
+}
+
+@media (max-width: 767px) {
+  .heading-style-h0 {
+    @apply tracking-[-0.5vw];
+  }
+  .heading-style-h0.is-faq {
+    @apply text-[10vw];
+  }
+  .heading-style-h1 {
+    @apply text-[2rem];
+  }
+  .heading-style-h1.is-card {
+    @apply text-[7vw] tracking-[-0.1rem];
+  }
+  .heading-style-h3 {
+    @apply text-[1.3rem];
+  }
+  .heading-style-h5 {
+    @apply text-[1.25rem];
+  }
+  .heading-style-h5.is-testimonial {
+    @apply text-[1.1rem];
+  }
+  .text-size-small {
+    @apply text-[0.75rem] leading-[140%] tracking-[0];
+  }
+  .text-size-medium {
+    @apply text-[1rem] tracking-[-0.035rem];
+  }
+  .text-size-large {
+    @apply text-[1rem];
+  }
+  .text-caption-2 {
+    @apply text-[0.5rem] leading-[100%];
+  }
+  .padding-global.is-bigger {
+    @apply px-6;
+  }
+  .padding-section-large {
+    @apply py-16;
+  }
+  .button {
+    @apply px-5 py-3 text-[1rem];
+  }
+  .button.is-small {
+    @apply px-4 text-[0.875rem] tracking-[-0.03rem];
+  }
+}
+
+@media (max-width: 479px) {
+  .padding-global.is-bigger {
+    @apply px-6;
+  }
+  .heading-style-h0.is-faq {
+    @apply text-[9.4vw];
+  }
+  .heading-style-h0.is-play {
+    @apply text-[8.8vw];
+  }
+}

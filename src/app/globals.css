@@ -1,14 +1,78 @@
-@import "./styles/webflow.css";
-@import "./styles/global-embed.css";
+@import "tailwindcss";
+@import "./styles/design-system.css" layer(components);
+@import "./styles/migrated.css" layer(components);
+
+@theme {
+  --color-brand-black: #0a090f;
+  --color-brand-white: #efefe6;
+  --color-brand-yellow: #f8ff31;
+  --color-brand-purple: #5542ff;
+  --color-brand-darker-white: #c2c2bb;
+  --color-neutral-mid-grey: #afafaf;
+  --color-neutral-black: #0a090f;
+  --color-neutral-white: #efefe6;
+  --color-border-tertiary: #444;
+
+  --font-brockmann: "Brockmann", Tahoma, sans-serif;
+  --font-roboto-mono: "Roboto Mono", monospace;
+
+  --breakpoint-tablet: 991px;
+  --breakpoint-mobile-portrait: 767px;
+  --breakpoint-mobile-landscape: 479px;
+}
+
+/* Webflow token aliases (referenced by migrated.css) */
+:root {
+  --color-brand--black: var(--color-brand-black);
+  --color-brand--white: var(--color-brand-white);
+  --color-brand--yellow: var(--color-brand-yellow);
+  --color-brand--purple: var(--color-brand-purple);
+  --color-neutral--black: var(--color-neutral-black);
+  --color-neutral--white: var(--color-neutral-white);
+  --background-color--background-primary: var(--color-brand-black);
+  --background-color--background-secondary: var(--color-brand-purple);
+  --background-color--background-tertiary: var(--color-brand-yellow);
+  --border-color--border-primary: var(--color-neutral-black);
+  --border-color--border-tertiary: #444;
+  --color-neutral--dark-grey: #2d2d2d;
+  --color-neutral--light-grey: #ddd;
+  --link-color--link-alternate: var(--color-brand-white);
+  --text-color--text-primary: var(--color-brand-white);
+  --text-color--text-secondary: var(--color-brand-darker-white);
+  --text-color--text-teritary: var(--color-neutral-mid-grey);
+}
 
 html {
   scroll-behavior: auto;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (min-width: 1440px) {
+  html {
+    font-size: 1vw;
+  }
+}
+
+@media (min-width: 1920px) {
+  html {
+    font-size: 0.9vw;
+  }
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -o-font-smoothing: antialiased;
 }
 
 body {
   background-color: #0a090f;
   color: #efefe6;
-  -webkit-text-size-adjust: 100%;
+  letter-spacing: -0.04rem;
+  font-family: var(--font-roboto-mono), Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 140%;
 }
 
 a {
@@ -18,4 +82,32 @@ a {
 
 img {
   max-width: 100%;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-family: var(--font-brockmann), Tahoma, sans-serif;
+  font-feature-settings: "ss01" on;
+}
+
+p {
+  margin-bottom: 0;
+  line-height: 150%;
+}
+
+strong {
+  font-weight: 500;
+}
+
+*[tabindex]:focus-visible,
+input[type="file"]:focus-visible {
+  outline: 0.125rem solid #4d65ff;
+  outline-offset: 0.125rem;
 }
