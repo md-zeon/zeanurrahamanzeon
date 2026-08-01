@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Roboto_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
+import SiteShell from "@/components/SiteShell";
 
 export const brockmann = localFont({
   src: [
@@ -73,7 +74,9 @@ export default function RootLayout({
       lang="en"
       className={`${brockmann.variable} ${robotoMono.variable} w-mod-js`}
     >
-      <body>{children}</body>
+      <body>
+        <SiteShell>{children}</SiteShell>
+      </body>
     </html>
   );
 }
