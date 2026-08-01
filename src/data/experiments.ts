@@ -3,6 +3,8 @@ export const experimentsHeader = {
   title2: "experiments",
   paragraph:
     "A curated collection of experiments, creative coding, and Webflow clonables where I push the limits of interactions, motion, and the web platform.",
+  button1: "Get in touch",
+  button2: "See case studies",
 };
 
 export const experimentsStack = [

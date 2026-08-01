@@ -4,7 +4,7 @@ import { useLayoutEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
 import { logosBannerText } from "@/data/home";
 
-function BannerLayout({ text }: { text: string }) {
+function BannerLayout({ text, number }: { text: string; number?: string }) {
   return (
     <div className="logos_banner-layout">
       <div className="logos_banner-wrapper">
@@ -18,11 +18,12 @@ function BannerLayout({ text }: { text: string }) {
           <div key={i} className="logos_banner-line" />
         ))}
       </div>
+      {number ? <div className="logos_banner-text is-number">{number}</div> : null}
     </div>
   );
 }
 
-export default function LogosBanner({ text = logosBannerText }: { text?: string }) {
+export default function LogosBanner({ text = logosBannerText, number }: { text?: string; number?: string }) {
   const topRef = useRef<HTMLDivElement>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
 
@@ -62,10 +63,10 @@ export default function LogosBanner({ text = logosBannerText }: { text?: string 
   return (
     <div className="logos_banner">
       <div ref={topRef} className="logos_banner-component is-top">
-        <BannerLayout text={text} />
+        <BannerLayout text={text} number={number} />
       </div>
       <div ref={bottomRef} className="logos_banner-component is-bottom">
-        <BannerLayout text={text} />
+        <BannerLayout text={text} number={number} />
       </div>
     </div>
   );

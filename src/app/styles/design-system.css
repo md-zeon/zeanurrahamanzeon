@@ -326,9 +326,7 @@
   }
 }
 
-/* ---------- Work page (verbatim from bjornflow 8bb0a4754, 2025 tokens) ---------- */
-
-.header_italic-word {
+/* ---------- Work page (verbatim from bjornflow 8bb0a4754, 2025 tokens) ---------- */.header_italic-word {
   font-family: "Libre Baskerville", Times New Roman, sans-serif;
   font-style: italic;
 }
@@ -431,4 +429,26 @@
     grid-row-gap: 0.5rem;
     grid-template-columns: auto;
   }
+}
+
+/* ---------- Injected masks (from page <style> blocks, 2025 tokens) ---------- */
+
+.about-header_video-w {
+  -webkit-clip-path: polygon(99% 0, 99% 6%, 100% 7%, 100% 100%, 6% 100%, 0 94%, 0 0);
+  clip-path: polygon(99% 0, 99% 6%, 100% 7%, 100% 100%, 6% 100%, 0 94%, 0 0);
+}
+
+.about-fun_loop-asset-w {
+  -webkit-clip-path: polygon(98.5% 0, 98.5% 6%, 100% 7%, 100% 100%, 10% 100%, 0 90%, 0 0);
+  clip-path: polygon(98.5% 0, 98.5% 6%, 100% 7%, 100% 100%, 10% 100%, 0 90%, 0 0);
+}
+
+/* ---------- Swiper (about-fun cards slider, from about.html <style>) ---------- */
+
+:root {
+  --swiper-pagination-color: #efefe6 !important;
+}
+
+.swiper-pagination-bullet {
+  background-color: rgba(239, 239, 230, 0.5);
 }
