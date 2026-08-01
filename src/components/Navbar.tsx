@@ -44,7 +44,7 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const tlRef = useRef<gsap.core.Timeline | null>(null);
-  const firstEnterRef = useRef(true);
+  const openRef = useRef(false);
 
   useEffect(() => {
     const root = rootRef.current;
@@ -76,18 +76,32 @@ export default function Navbar() {
     };
   }, []);
 
-  useEffect(() => {
+  const runTimeline = (open: boolean) => {
     const tl = tlRef.current;
     if (!tl) return;
-    if (menuOpen) {
-      tl.timeScale(1).play();
-    } else {
-      tl.timeScale(1.4).reverse();
-    }
-  }, [menuOpen]);
+    if (open) tl.timeScale(1).play();
+    else tl.timeScale(1.4).reverse();
+  };
+
+  const toggleMenu = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const next = !openRef.current;
+    openRef.current = next;
+    setMenuOpen(next);
+    runTimeline(next);
+  };
+
+  const closeMenu = () => {
+    if (!openRef.current) return;
+    openRef.current = false;
+    setMenuOpen(false);
+    runTimeline(false);
+  };
 
   useEffect(() => {
-    setMenuOpen(false);
+    if (!openRef.current) return;
+    openRef.current = false;
+    tlRef.current?.timeScale(1.4).reverse();
   }, [pathname]);
 
   const handleEnter = (e: React.MouseEvent) => {
@@ -158,10 +172,7 @@ export default function Navbar() {
                   data-audio-click="https://bjornflow-assets.b-cdn.net/Audio/close-menu.wav"
                   data-audio="https://bjornflow-assets.b-cdn.net/Audio/button%20hover.wav"
                   className="navbar_h-menu-button w-inline-block"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setMenuOpen((v) => !v);
-                  }}
+                  onClick={toggleMenu}
                   aria-label={menuOpen ? "Close menu" : "Open menu"}
                 >
                   <div className="menu-icon is-close">
@@ -189,6 +200,7 @@ export default function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
+                  onClick={closeMenu}
                   data-menu-tab={link.href.replace("/", "")}
                   data-color="#ffffff"
                   data-audio="https://bjornflow-assets.b-cdn.net/Audio/button%20hover.wav"
@@ -226,7 +238,7 @@ export default function Navbar() {
         <div className="navbar_h-menu-bg-wrapper">
           <div className="navbar_h-menu-bg is-second" />
         </div>
-        <div className="navbar_h-bg-close" onClick={() => setMenuOpen(false)} />
+        <div className="navbar_h-bg-close" onClick={closeMenu} />
       </div>
     </>
   );

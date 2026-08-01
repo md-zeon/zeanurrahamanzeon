@@ -1,17 +1,22 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useSyncExternalStore } from "react";
 import lottie, { type AnimationItem } from "lottie-web";
 import { soundWaves } from "@/data/site";
-import { isSoundEnabled, setSoundEnabled, toggleMusic } from "@/lib/sound";
+import {
+  setSoundEnabled,
+  toggleMusic,
+  subscribeSound,
+  getSoundSnapshot,
+  getSoundServerSnapshot,
+} from "@/lib/sound";
 
 export default function SoundButton() {
-  const [on, setOn] = useState(false);
+  const on = useSyncExternalStore(subscribeSound, getSoundSnapshot, getSoundServerSnapshot);
   const wrapRef = useRef<HTMLDivElement>(null);
   const animRef = useRef<AnimationItem | null>(null);
 
   useEffect(() => {
-    setOn(isSoundEnabled());
     if (wrapRef.current) {
       animRef.current = lottie.loadAnimation({
         container: wrapRef.current,
@@ -29,7 +34,6 @@ export default function SoundButton() {
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
     const next = !on;
-    setOn(next);
     setSoundEnabled(next);
     toggleMusic();
     const anim = animRef.current;

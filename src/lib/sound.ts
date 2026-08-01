@@ -2,8 +2,17 @@ import { audio } from "@/data/site";
 
 let ctx: AudioContext | null = null;
 const buffers = new Map<string, AudioBuffer>();
+const listeners = new Set<() => void>();
 let enabled = true;
 let music: HTMLAudioElement | null = null;
+
+try {
+  if (typeof window !== "undefined") {
+    enabled = localStorage.getItem("bf-sound") !== "off";
+  }
+} catch {
+  /* noop */
+}
 
 const cache: Record<string, boolean> = {
   hover: true,
@@ -27,8 +36,29 @@ export function isSoundEnabled() {
   return enabled;
 }
 
-export function setSoundEnabled(value: boolean) {
+function updateEnabled(value: boolean) {
+  if (enabled === value) return;
   enabled = value;
+  listeners.forEach((listener) => listener());
+}
+
+export function subscribeSound(callback: () => void) {
+  listeners.add(callback);
+  return () => {
+    listeners.delete(callback);
+  };
+}
+
+export function getSoundSnapshot() {
+  return enabled;
+}
+
+export function getSoundServerSnapshot() {
+  return true;
+}
+
+export function setSoundEnabled(value: boolean) {
+  updateEnabled(value);
   try {
     localStorage.setItem("bf-sound", value ? "on" : "off");
   } catch {
@@ -38,7 +68,7 @@ export function setSoundEnabled(value: boolean) {
 
 export function initSound() {
   try {
-    enabled = localStorage.getItem("bf-sound") !== "off";
+    updateEnabled(localStorage.getItem("bf-sound") !== "off");
   } catch {
     /* noop */
   }

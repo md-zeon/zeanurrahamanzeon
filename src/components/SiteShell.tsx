@@ -3,7 +3,7 @@
 import { useEffect, useRef, type ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
-import { createLenis } from "@/lib/lenis";
+import { createLenis, setLenis } from "@/lib/lenis";
 import { initSound, playSound } from "@/lib/sound";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
@@ -16,6 +16,7 @@ export default function SiteShell({ children }: { children: ReactNode }) {
   useEffect(() => {
     initSound();
     const lenis = createLenis();
+    setLenis(lenis);
 
     const raf = (time: number) => {
       lenis.raf(time);
@@ -43,6 +44,7 @@ export default function SiteShell({ children }: { children: ReactNode }) {
       gsap.ticker.remove(raf);
       document.removeEventListener("pointerover", onAudioOver);
       document.removeEventListener("click", onAudioClick);
+      setLenis(null);
       lenis.destroy();
     };
   }, []);
@@ -57,7 +59,6 @@ export default function SiteShell({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
-    const root = rootRef.current;
     const lenis = createLenis();
     lenis.scrollTo(0, { immediate: true });
     const t = setTimeout(() => {

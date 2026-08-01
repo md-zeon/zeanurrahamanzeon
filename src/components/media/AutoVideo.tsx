@@ -35,7 +35,7 @@ export default function AutoVideo({ src, poster, className, preload = "metadata"
   }, [playsOnScroll]);
 
   return (
-    <div style={{ position: "relative", width: "100%", height: "100%", overflow: "hidden" }}>
+    <div className={className} style={{ position: "relative", width: "100%", height: "100%", overflow: "hidden" }}>
       <video
         ref={videoRef}
         muted
