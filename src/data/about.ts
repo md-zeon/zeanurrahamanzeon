@@ -46,7 +46,21 @@ export const aboutStory = {
   misc: "Image_356",
 };
 
-export const aboutFacts = {
+export type FactSlide = {
+  caption: string;
+  title: string;
+  elementCaption: string;
+  text: string;
+  video?: string;
+  videoCaption?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+  image?: string;
+  imageClass?: string;
+  misc?: string;
+};
+
+export const aboutFacts: { caption: string; slides: FactSlide[] } = {
   caption: "FUN_FCT_005",
   slides: [
     {
@@ -54,32 +68,44 @@ export const aboutFacts = {
       title: "5 years old",
       video: "/assets/videos/Videos/Experiments/spaceman-gsap---new-thumbnail.mp4",
       videoCaption: "VIDEO_407",
+      elementCaption: "FUN_FCT_001",
       ctaLabel: "See gaming channel",
       ctaHref: "https://www.youtube.com/@bjorn_flow",
+      text: "My gaming journey started when I was 5 years old on a PC and a PlayStation 2. At 14, I started a YouTube gaming channel, which a few years later helped me earn my first income as content creator.",
     },
     {
       caption: "BACKGROUND IN",
       title: "Fine Arts",
       video: "/assets/videos/Videos/Experiments/noirve---new-thumbnail.mp4",
       videoCaption: "VIDEO_407",
+      elementCaption: "FUN_FCT_002",
+      text: "I started with fine arts before studying graphic design, and I won a contest at 6 for my kindergarten. I later built a skateboard illustration portfolio and designed my own tattoo.",
     },
     {
       caption: "photography",
       title: "photography",
       image: photos.img6121,
+      imageClass: "is-photo",
       misc: "IMAGE_857",
+      elementCaption: "FUN_FCT_003",
+      text: "At first my wish was to study photography instead of graphic design. I was always fascinated about capturing moments in time and showing others the way I see the world.",
     },
     {
       caption: "FUN_FCT_003",
       title: "18 plants",
       image: photos.dscf,
+      imageClass: "is-plants",
       misc: "IMAGE_857",
+      elementCaption: "FUN_FCT_004",
+      text: "Currently raising 18 plants (and counting) that are growing faster than my video games collection, and that is scary. Luckily, my cat had something to say about it once she entered my life.",
     },
     {
       caption: "FUN_FCT_004",
       title: "4 cities",
       image: "/assets/images/6713ba0d300a1099644dddd8_Frame-84.png",
       misc: "Image_362",
+      elementCaption: "FUN_FCT_005",
+      text: "I've lived in 4 different cities in Romania in the last decade. I'm currently living in Bucharest, but Cluj-Napoca is forever living in my heart. And yes, we do have vampires!",
     },
   ],
 };
