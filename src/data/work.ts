@@ -8,6 +8,58 @@ export const workHeader = {
   badgeLink: "https://webflow.com/@bjornflow",
 };
 
+export const workCta = {
+  line1: "Let's build something",
+  italicWord: "distinctive",
+  caption: "CTA_BF_195",
+  buttonLabel: "Book a call",
+};
+
+export const workLabSlides = [
+  {
+    caption: "Clonable_001",
+    title: "Spaceman",
+    href: "https://spaceman-gsap.webflow.io/",
+    video: "/assets/videos/Videos/Experiments/spaceman-gsap---new-thumbnail.mp4",
+  },
+  {
+    caption: "Clonable_002",
+    title: "Noirve",
+    href: "https://noirve.webflow.io/",
+    video: "/assets/videos/Videos/Experiments/noirve---new-thumbnail.mp4",
+  },
+  {
+    caption: "Clonable_003",
+    title: "Pitch",
+    href: "https://pitch-rebuild.webflow.io/",
+    video: "/assets/videos/Videos/Experiments/pitch---new-thumbnail.mp4",
+  },
+  {
+    caption: "Clonable_004",
+    title: "Plink",
+    href: "https://plink-rebuild.webflow.io/",
+    video: "/assets/videos/Videos/Experiments/plink---new-thumbnail.mp4",
+  },
+  {
+    caption: "Clonable_005",
+    title: "Bertani",
+    href: "https://bertani-rebuild.webflow.io/",
+    video: "/assets/videos/Videos/Experiments/bertani---new-thumbnail.mp4",
+  },
+  {
+    caption: "Clonable_006",
+    title: "Battlefield 4",
+    href: "https://battlefield-4-webflow-rebuild.webflow.io/",
+    video: "/assets/videos/Videos/Experiments/battlefield-4---new-thumbnail.mp4",
+  },
+  {
+    caption: "Clonable_007",
+    title: "Scrambled Pizza Chaos",
+    href: "https://scrambled-pizza-chaos.webflow.io/",
+    video: "/assets/videos/Videos/Experiments/scramble-pizza-chaos---new-thumbnail.mp4",
+  },
+];
+
 export type WorkProject = {
   index: string;
   title: string;

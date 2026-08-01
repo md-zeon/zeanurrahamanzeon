@@ -3,47 +3,36 @@
 import { useRef } from "react";
 import { useCtaChat } from "@/lib/useCtaChat";
 import { cta } from "@/data/home";
+import { workCta } from "@/data/work";
 import { audio, photos } from "@/data/site";
 import LogosElement from "../LogosElement";
 import AutoVideo from "../media/AutoVideo";
 import { Button } from "../shared";
 
-export default function CtaSection() {
+export default function WorkCtaSection() {
   const ref = useRef<HTMLElement>(null);
 
   useCtaChat(ref);
 
   return (
-    <section id="cta" className="section_cta" ref={ref}>
+    <section className="section_cta background-color-primary" ref={ref}>
       <div className="padding-global is-bigger">
         <div className="container-large">
           <div className="cta_component">
             <div header-animation-type="container" className="cta_header">
               <div className="cta_header-wrapper">
-                <div className="cta_header-top">
-                  <h2 id="cta-h1" header-animation-type="heading-1" className="heading-style-h0 is-cta">
-                    {cta.line1}
-                  </h2>
-                </div>
-                <div className="cta_header-middle">
-                  <div id="cta-h2" header-animation-type="heading-2" className="heading-style-h0 is-cta">
-                    {cta.line2}
-                  </div>
-                </div>
-                <div className="cta_header-bottom">
-                  <div id="cta-h3" header-animation-type="heading-3" className="heading-style-h0 is-cta">
-                    {cta.line3}
-                  </div>
-                </div>
+                <h2 id="cta-h1" header-animation-type="heading-1" className="heading-style-h2">
+                  {workCta.line1} <span className="header_italic-word">{workCta.italicWord}</span>
+                </h2>
               </div>
-              <LogosElement caption={cta.caption} />
+              <LogosElement caption={workCta.caption} />
             </div>
             <div className="cta_wrapper">
               <div className="cta_video-layout">
                 <div className="cta_video-wrapper">
                   <div className="cta_button-wrapper">
                     <Button href="/contact" dataAudio={audio.hover}>
-                      Send a message
+                      {workCta.buttonLabel}
                     </Button>
                   </div>
                   <div className="cta_video-border w-embed">

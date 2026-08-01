@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { useLabSlider } from "@/lib/useLabSlider";
-import { labSlides } from "@/data/home";
+import { workLabSlides } from "@/data/work";
 import { audio } from "@/data/site";
 import LogosElement from "../LogosElement";
 import AutoVideo from "../media/AutoVideo";
@@ -18,26 +18,21 @@ function ArrowIcon() {
   );
 }
 
-export default function LabSection() {
+export default function WorkLabSection() {
   const ref = useRef<HTMLElement>(null);
 
   useLabSlider(ref);
 
   return (
-    <section id="lab" data-parallax-type="ssection" className="section_lab" ref={ref}>
+    <section id="home-services" data-parallax-type="section" className="section_lab background-color-primary" ref={ref}>
       <div className="padding-global is-bigger">
         <div className="container-large">
           <div className="lab_component">
             <div header-animation-type="container" className="lab_header">
               <div className="lab_header-wrapper">
                 <div className="lab_header-top">
-                  <div header-animation-type="heading-1" className="heading-style-h0">
-                    From
-                  </div>
-                </div>
-                <div className="lab_header-bottom">
-                  <h2 header-animation-type="heading-2" className="heading-style-h0">
-                    the lab
+                  <h2 header-animation-type="heading-1" className="heading-style-h2">
+                    From the <span className="header_italic-word">labs</span>
                   </h2>
                 </div>
               </div>
@@ -91,39 +86,44 @@ export default function LabSection() {
                 <div className="lab_buttons-divider" />
                 <div className="lab_button-wrapper">
                   <Button href="/experiments" variant="secondary">
-                    Visit experiments page
+                    See experiments
                   </Button>
                 </div>
               </div>
             </div>
             <div data-slider="list" className="lab_content">
-              {labSlides.map((slide) => (
+              {workLabSlides.map((slide) => (
                 <div key={slide.caption} data-slider="slide" className="lab_card-layout">
                   <div className="lab_card-wrapper">
                     <div className="lab_card-text-wrapper">
-                      <div className="text-caption-2 text-color-teritary">{slide.caption}</div>
+                      <div className="text-caption-2 text-color-secondary">{slide.caption}</div>
                     </div>
-                    <div className="lab_card-content">
+                    <a
+                      aria-label={slide.title}
+                      href={slide.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="lab_card-content w-inline-block"
+                    >
                       <div className="lab_card-asset-wrapper">
-                        <div data-parallax-type="video" className="lab_card-asset">
+                        <div className="lab_card-asset">
                           <AutoVideo src={slide.video} />
                         </div>
-                        <div className="lab_card-overlay" />
                       </div>
-                      <div className="lab_card-cta-wrapper">
-                        <a
-                          data-audio={audio.hover}
-                          href={slide.href}
-                          target={slide.href.startsWith("http") ? "_blank" : undefined}
-                          rel="noopener noreferrer"
-                          className="button is-secondary is-small is-icon w-inline-block"
-                        >
-                          <div className="button-text">View clonable</div>
-                          <ArrowIcon />
-                        </a>
-                      </div>
+                    </a>
+                    <div className="lab_card-cta-wrapper">
+                      <h3 className="heading-style-h4">{slide.title}</h3>
+                      <a
+                        data-audio={audio.hover}
+                        href={slide.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="button is-secondary is-small is-icon w-inline-block"
+                      >
+                        <div className="button-text">View clonable</div>
+                        <ArrowIcon />
+                      </a>
                     </div>
-                    <h3 className="heading-style-h5">{slide.title}</h3>
                   </div>
                 </div>
               ))}
