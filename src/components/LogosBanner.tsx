@@ -26,6 +26,7 @@ function BannerLayout({ text, number }: { text: string; number?: string }) {
 export default function LogosBanner({ text = logosBannerText, number }: { text?: string; number?: string }) {
   const topRef = useRef<HTMLDivElement>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
+  const rootRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     const init = (component: HTMLElement, direction: "left" | "right"): (() => void) => {
@@ -60,8 +61,43 @@ export default function LogosBanner({ text = logosBannerText, number }: { text?:
     return () => cleanups.forEach((fn) => fn());
   }, []);
 
+  useLayoutEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+    const textElements = Array.from(root.querySelectorAll<HTMLElement>(".logos_banner-text.is-number"));
+    if (!textElements.length) return;
+    const chars = ["1", "0"];
+    const timers: number[] = [];
+    textElements.forEach((el) => {
+      const originalText = el.textContent ?? "";
+      const scrambleLength = originalText.length;
+      const scrambleAnimation = () => {
+        gsap.to(el, {
+          duration: 1.5,
+          ease: "expo.out",
+          onUpdate: () => {
+            let scrambled = "";
+            for (let i = 0; i < scrambleLength; i++) {
+              scrambled += chars[Math.floor(Math.random() * chars.length)];
+            }
+            el.textContent = scrambled;
+          },
+          onComplete: () => {
+            el.textContent = originalText;
+            timers.push(window.setTimeout(scrambleAnimation, 3000));
+          },
+        });
+      };
+      scrambleAnimation();
+    });
+    return () => {
+      timers.forEach((t) => window.clearTimeout(t));
+      gsap.killTweensOf(textElements);
+    };
+  }, []);
+
   return (
-    <div className="logos_banner">
+    <div ref={rootRef} className="logos_banner">
       <div ref={topRef} className="logos_banner-component is-top">
         <BannerLayout text={text} number={number} />
       </div>

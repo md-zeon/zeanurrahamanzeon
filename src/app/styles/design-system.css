@@ -452,3 +452,55 @@
 .swiper-pagination-bullet {
   background-color: rgba(239, 239, 230, 0.5);
 }
+
+.swiper-wrapper {
+  z-index: 2;
+  flex-flow: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  display: flex;
+}
+
+.swiper-slide {
+  flex: none;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  display: flex;
+  position: relative;
+}
+
+.swiper.about-card {
+  width: 34rem;
+  height: 45rem;
+  position: relative;
+  overflow: visible;
+}
+
+@media screen and (max-width: 991px) {
+  .swiper-wrapper {
+    justify-content: flex-start;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .swiper-wrapper {
+    grid-column-gap: 2rem;
+    grid-row-gap: 2rem;
+  }
+  .swiper.about-card {
+    width: 75vw;
+    height: 36rem;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .swiper-wrapper {
+    grid-column-gap: 1.5rem;
+    grid-row-gap: 1.5rem;
+  }
+  .swiper.about-card {
+    width: 80vw;
+  }
+}
