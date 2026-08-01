@@ -154,7 +154,7 @@ export default function FaqSection() {
                   </div>
                 </div>
               </div>
-              <LogosElement caption={faq.caption} />
+              <LogosElement caption={faq.caption} extraClasses="is-faq" />
             </div>
             <div className="faq_layout">
               <div className="faq_content">

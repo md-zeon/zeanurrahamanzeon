@@ -1,8 +1,8 @@
 export const experimentsHeader = {
-  title1: "Play",
-  title2: "experiments",
+  title1: "Experiments",
+  title2: "& Clonables",
   paragraph:
-    "A curated collection of experiments, creative coding, and Webflow clonables where I push the limits of interactions, motion, and the web platform.",
+    "A growing collection of Webflow experiments and clonables built to test ideas, push animation boundaries, and share new techniques with the community.",
   button1: "Get in touch",
   button2: "See case studies",
 };
@@ -74,14 +74,14 @@ export const experimentsCards = [
     index: "project_006",
     title: "Battlefield 4",
     href: "https://battlefield-4-webflow-rebuild.webflow.io/",
-    poster: "/assets/videos/Videos/Experiments/thumbnails/battlefield-4---new-thumbnail.webp",
+    poster: "/assets/videos/Videos/Experiments/thumbnails/battlefield---new-thumbnail.webp",
     video: "/assets/videos/Videos/Experiments/battlefield-4---new-thumbnail.mp4",
   },
   {
     index: "project_007",
-    title: "Scramble Pizza Chaos",
-    href: "https://pizza-chaos.webflow.io/",
-    poster: "/assets/videos/Videos/Experiments/thumbnails/scramble-pizza-chaos---new-thumbnail.webp",
+    title: "Scrambled Pizza Chaos",
+    href: "https://scrambled-pizza-chaos.webflow.io/",
+    poster: "/assets/videos/Videos/Experiments/thumbnails/pizza---new-thumbnail.webp",
     video: "/assets/videos/Videos/Experiments/scramble-pizza-chaos---new-thumbnail.mp4",
   },
   {

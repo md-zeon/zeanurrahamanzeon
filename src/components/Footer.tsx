@@ -29,7 +29,6 @@ export default function Footer() {
   const columns = [
     { title: "Overview", links: footer.overview, start: 1 },
     { title: "Case Studies", links: footer.caseStudies, start: 5 },
-    { title: "Connect", links: footer.connect, start: 9 },
   ];
 
   return (
@@ -74,7 +73,7 @@ export default function Footer() {
                           </div>
                         </div>
                       ))}
-                      <div className="footer_link-column">
+                      <div className="footer_link-column is-connect">
                         <div className="footer_link-header">
                           <div className="heading-style-h6 text-color-teritary">Connect</div>
                         </div>

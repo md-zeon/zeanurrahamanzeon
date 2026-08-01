@@ -443,6 +443,39 @@
   clip-path: polygon(98.5% 0, 98.5% 6%, 100% 7%, 100% 100%, 10% 100%, 0 90%, 0 0);
 }
 
+/* ---------- Runtime-required rules (dropped by generate-migrated.js:
+   not className literals in the JSX) ---------- */
+
+/* ContactForm toggles .w--redirected-checked on the pill via JS on radio change
+   (Webflow radio-check behaviour, verbatim from webflow.css) */
+.form_pill-check.w--redirected-checked {
+  background-color: #efefe633;
+  background-image: none;
+  background-size: auto;
+  border-width: 1px;
+  border-color: #efefe64d;
+}
+
+/* Footer: Webflow #w-node- placement rules (id-based, so the generator skips them).
+   At tablet the footer top-wrapper/menu-wrapper collapse to 2 columns and the
+   Connect column + local time move to full-width rows. */
+@media (max-width: 991px) {
+  .footer_link-column.is-connect {
+    grid-area: span 1 / span 2 / span 1 / span 2;
+  }
+  .footer_local-time {
+    order: 9999;
+    grid-area: span 1 / span 2 / span 1 / span 2;
+  }
+}
+
+/* FAQ header logos element: the capture has the id w-node-b881a5f7...
+   which gives justify-self:end on the 1fr column (so the logos shrink
+   to content width rather than stretching). */
+.logos_element-component.is-faq {
+  justify-self: end;
+}
+
 /* ---------- Swiper (about-fun cards slider, from about.html <style>) ---------- */
 
 :root {

@@ -96,8 +96,10 @@ export default function AboutFun() {
                               <div className="about-fun_overlay" />
                               {slide.imageClass === "is-plants" ? (
                                 <img src={slide.image} alt={slide.caption} loading="lazy" className="about-fun_image is-plants" />
-                              ) : (
+                              ) : slide.imageClass === "is-photo" ? (
                                 <img src={slide.image} alt={slide.caption} loading="lazy" className="about-fun_image is-photo" />
+                              ) : (
+                                <img src={slide.image} alt={slide.caption} loading="lazy" className="about-fun_image" />
                               )}
                             </>
                           )}
