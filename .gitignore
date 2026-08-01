@@ -17,6 +17,7 @@
 /.next/
 /out/
 .agents
+.opencode
 skills-lock.json
 
 # production
