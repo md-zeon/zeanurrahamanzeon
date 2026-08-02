@@ -1,63 +1,408 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef } from "react";
 import { gsap } from "@/lib/gsap";
 
-export default function Cursor() {
-  const dotRef = useRef<HTMLDivElement>(null);
-  const ringRef = useRef<HTMLDivElement>(null);
+const INTERACTIVE_SELECTOR =
+  "a, button, [data-hover], [role='button'], input, select, textarea, label, [data-cursor]";
 
-  useEffect(() => {
-    const dot = dotRef.current;
-    const ring = ringRef.current;
-    if (!dot || !ring) return;
-
-    const isTouch = window.matchMedia("(pointer: coarse)").matches;
-    if (isTouch) {
-      gsap.set([dot, ring], { display: "none" });
-      return;
+const getContainingBlock = (element: HTMLElement | null): HTMLElement | null => {
+  let node = element?.parentElement ?? null;
+  while (node && node !== document.documentElement) {
+    const style = getComputedStyle(node);
+    if (
+      style.transform !== "none" ||
+      style.perspective !== "none" ||
+      style.filter !== "none" ||
+      style.willChange.includes("transform") ||
+      style.willChange.includes("perspective") ||
+      style.willChange.includes("filter") ||
+      /paint|layout|strict|content/.test(style.contain)
+    ) {
+      return node;
     }
+    node = node.parentElement;
+  }
+  return null;
+};
 
-    const dotX = gsap.quickTo(dot, "x", { duration: 0.1, ease: "power2.out" });
-    const dotY = gsap.quickTo(dot, "y", { duration: 0.1, ease: "power2.out" });
-    const ringX = gsap.quickTo(ring, "x", { duration: 0.4, ease: "power3.out" });
-    const ringY = gsap.quickTo(ring, "y", { duration: 0.4, ease: "power3.out" });
+const getContainingBlockOffset = (block: HTMLElement | null): { x: number; y: number } => {
+  if (!block) return { x: 0, y: 0 };
+  const rect = block.getBoundingClientRect();
+  return { x: rect.left + block.clientLeft, y: rect.top + block.clientTop };
+};
 
-    const onMove = (e: PointerEvent) => {
-      dotX(e.clientX);
-      dotY(e.clientY);
-      ringX(e.clientX);
-      ringY(e.clientY);
-    };
+type Props = {
+  targetSelector?: string;
+  spinDuration?: number;
+  hideDefaultCursor?: boolean;
+  hoverDuration?: number;
+  parallaxOn?: boolean;
+  cursorColor?: string;
+  cursorColorOnTarget?: string;
+};
 
-    const onOver = (e: Event) => {
-      const target = e.target as HTMLElement;
-      const interactive = target.closest("a, button, [data-hover], video");
-      gsap.to(ring, { scale: interactive ? 2.2 : 1, duration: 0.3, ease: "power2.out" });
-    };
+export default function Cursor({
+  targetSelector = INTERACTIVE_SELECTOR,
+  spinDuration = 2,
+  hideDefaultCursor = true,
+  hoverDuration = 0.2,
+  parallaxOn = true,
+  cursorColor = "#ffffff",
+  cursorColorOnTarget,
+}: Props) {
+  const cursorRef = useRef<HTMLDivElement>(null);
+  const cornersRef = useRef<NodeListOf<HTMLDivElement> | null>(null);
+  const spinTl = useRef<gsap.core.Timeline | null>(null);
+  const dotRef = useRef<HTMLDivElement>(null);
+  const containingBlockRef = useRef<HTMLElement | null>(null);
 
-    const onDown = () => gsap.to(ring, { scale: 0.85, duration: 0.15 });
-    const onUp = () => gsap.to(ring, { scale: 1, duration: 0.3 });
+  const isActiveRef = useRef(false);
+  const targetCornerPositionsRef = useRef<{ x: number; y: number }[] | null>(null);
+  const tickerFnRef = useRef<(() => void) | null>(null);
+  const activeStrengthRef = useRef({ current: 0 });
 
-    window.addEventListener("pointermove", onMove, { passive: true });
-    document.addEventListener("mouseover", onOver);
-    window.addEventListener("pointerdown", onDown);
-    window.addEventListener("pointerup", onUp);
-    gsap.set([dot, ring], { xPercent: -50, yPercent: -50, opacity: 0 });
-    gsap.to([dot, ring], { opacity: 1, duration: 0.4, delay: 0.2 });
-
-    return () => {
-      window.removeEventListener("pointermove", onMove);
-      document.removeEventListener("mouseover", onOver);
-      window.removeEventListener("pointerdown", onDown);
-      window.removeEventListener("pointerup", onUp);
-    };
+  const isMobile = useMemo(() => {
+    if (typeof window === "undefined") return false;
+    const hasTouchScreen = "ontouchstart" in window || navigator.maxTouchPoints > 0;
+    const isSmallScreen = window.innerWidth <= 768;
+    const mobileRegex = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i;
+    const isMobileUserAgent = mobileRegex.test((navigator.userAgent || navigator.vendor || "").toLowerCase());
+    return (hasTouchScreen && isSmallScreen) || isMobileUserAgent;
   }, []);
 
+  const constants = useMemo(
+    () => ({
+      borderWidth: 3,
+      cornerSize: 12,
+    }),
+    []
+  );
+
+  const moveCursor = useCallback((x: number, y: number) => {
+    if (!cursorRef.current) return;
+    const { x: offsetX, y: offsetY } = getContainingBlockOffset(containingBlockRef.current);
+    gsap.to(cursorRef.current, {
+      x: x - offsetX,
+      y: y - offsetY,
+      duration: 0.1,
+      ease: "power3.out",
+    });
+  }, []);
+
+  useEffect(() => {
+    if (isMobile || !cursorRef.current) return;
+
+    if (hideDefaultCursor) {
+      document.documentElement.classList.add("has-target-cursor");
+      document.body.style.cursor = "none";
+    }
+
+    const cursor = cursorRef.current;
+    cornersRef.current = cursor.querySelectorAll<HTMLDivElement>(".target-cursor-corner");
+
+    containingBlockRef.current = getContainingBlock(cursor);
+    const getOffset = () => getContainingBlockOffset(containingBlockRef.current);
+
+    const activeStrength = activeStrengthRef.current;
+
+    let activeTarget: Element | null = null;
+    let currentLeaveHandler: (() => void) | null = null;
+    let resumeTimeout: ReturnType<typeof setTimeout> | null = null;
+
+    const cleanupTarget = (target: Element) => {
+      if (currentLeaveHandler) {
+        target.removeEventListener("mouseleave", currentLeaveHandler);
+      }
+      currentLeaveHandler = null;
+    };
+
+    const initialOffset = getOffset();
+    gsap.set(cursor, {
+      xPercent: -50,
+      yPercent: -50,
+      x: window.innerWidth / 2 - initialOffset.x,
+      y: window.innerHeight / 2 - initialOffset.y,
+    });
+
+    const createSpinTimeline = () => {
+      if (spinTl.current) {
+        spinTl.current.kill();
+      }
+      spinTl.current = gsap
+        .timeline({ repeat: -1 })
+        .to(cursor, { rotation: "+=360", duration: spinDuration, ease: "none" });
+    };
+
+    createSpinTimeline();
+
+    const tickerFn = () => {
+      if (!targetCornerPositionsRef.current || !cursorRef.current || !cornersRef.current) {
+        return;
+      }
+
+      const strength = activeStrengthRef.current.current;
+      if (strength === 0) return;
+
+      const cursorX = gsap.getProperty(cursorRef.current, "x") as number;
+      const cursorY = gsap.getProperty(cursorRef.current, "y") as number;
+
+      const corners = Array.from(cornersRef.current);
+      corners.forEach((corner, i) => {
+        const currentX = gsap.getProperty(corner, "x") as number;
+        const currentY = gsap.getProperty(corner, "y") as number;
+
+        const targetX = targetCornerPositionsRef.current![i].x - cursorX;
+        const targetY = targetCornerPositionsRef.current![i].y - cursorY;
+
+        const finalX = currentX + (targetX - currentX) * strength;
+        const finalY = currentY + (targetY - currentY) * strength;
+
+        const duration = strength >= 0.99 ? (parallaxOn ? 0.2 : 0) : 0.05;
+
+        gsap.to(corner, {
+          x: finalX,
+          y: finalY,
+          duration,
+          ease: duration === 0 ? "none" : "power1.out",
+          overwrite: "auto",
+        });
+      });
+    };
+
+    tickerFnRef.current = tickerFn;
+
+    const moveHandler = (e: MouseEvent) => moveCursor(e.clientX, e.clientY);
+    window.addEventListener("mousemove", moveHandler);
+
+    const scrollHandler = () => {
+      if (!activeTarget || !cursorRef.current) return;
+      const { x: offsetX, y: offsetY } = getOffset();
+      const mouseX = (gsap.getProperty(cursorRef.current, "x") as number) + offsetX;
+      const mouseY = (gsap.getProperty(cursorRef.current, "y") as number) + offsetY;
+      const elementUnderMouse = document.elementFromPoint(mouseX, mouseY);
+      const isStillOverTarget =
+        elementUnderMouse &&
+        (elementUnderMouse === activeTarget || elementUnderMouse.closest(targetSelector) === activeTarget);
+      if (!isStillOverTarget) {
+        currentLeaveHandler?.();
+      }
+    };
+    window.addEventListener("scroll", scrollHandler, { passive: true });
+
+    const mouseDownHandler = () => {
+      if (!dotRef.current) return;
+      gsap.to(dotRef.current, { scale: 0.7, duration: 0.3 });
+      gsap.to(cursorRef.current, { scale: 0.9, duration: 0.2 });
+    };
+
+    const mouseUpHandler = () => {
+      if (!dotRef.current) return;
+      gsap.to(dotRef.current, { scale: 1, duration: 0.3 });
+      gsap.to(cursorRef.current, { scale: 1, duration: 0.2 });
+    };
+
+    window.addEventListener("mousedown", mouseDownHandler);
+    window.addEventListener("mouseup", mouseUpHandler);
+
+    const enterHandler = (e: MouseEvent) => {
+      const directTarget = e.target as Element;
+      const allTargets: Element[] = [];
+      let current: Element | null = directTarget;
+      while (current && current !== document.body) {
+        if (current.matches(targetSelector)) {
+          allTargets.push(current);
+        }
+        current = current.parentElement;
+      }
+      const target = allTargets[0] || null;
+      if (!target || !cursorRef.current || !cornersRef.current) return;
+      if (activeTarget === target) return;
+      if (activeTarget) {
+        cleanupTarget(activeTarget);
+      }
+      if (resumeTimeout) {
+        clearTimeout(resumeTimeout);
+        resumeTimeout = null;
+      }
+
+      activeTarget = target;
+      const corners = Array.from(cornersRef.current);
+      corners.forEach((corner) => gsap.killTweensOf(corner, "x,y"));
+
+      gsap.killTweensOf(cursorRef.current, "rotation");
+      spinTl.current?.pause();
+      gsap.set(cursorRef.current, { rotation: 0 });
+
+      if (cursorColorOnTarget) {
+        gsap.to(corners, { borderColor: cursorColorOnTarget, duration: 0.15, ease: "power2.out" });
+        if (dotRef.current) {
+          gsap.to(dotRef.current, { backgroundColor: cursorColorOnTarget, duration: 0.15, ease: "power2.out" });
+        }
+      }
+
+      const rect = target.getBoundingClientRect();
+      const { borderWidth, cornerSize } = constants;
+      const { x: offsetX, y: offsetY } = getOffset();
+      const cursorX = gsap.getProperty(cursorRef.current, "x") as number;
+      const cursorY = gsap.getProperty(cursorRef.current, "y") as number;
+
+      targetCornerPositionsRef.current = [
+        { x: rect.left - borderWidth - offsetX, y: rect.top - borderWidth - offsetY },
+        { x: rect.right + borderWidth - cornerSize - offsetX, y: rect.top - borderWidth - offsetY },
+        { x: rect.right + borderWidth - cornerSize - offsetX, y: rect.bottom + borderWidth - cornerSize - offsetY },
+        { x: rect.left - borderWidth - offsetX, y: rect.bottom + borderWidth - cornerSize - offsetY },
+      ];
+
+      isActiveRef.current = true;
+      gsap.ticker.add(tickerFnRef.current!);
+
+      gsap.to(activeStrengthRef.current, {
+        current: 1,
+        duration: hoverDuration,
+        ease: "power2.out",
+      });
+
+      corners.forEach((corner, i) => {
+        gsap.to(corner, {
+          x: targetCornerPositionsRef.current![i].x - cursorX,
+          y: targetCornerPositionsRef.current![i].y - cursorY,
+          duration: 0.2,
+          ease: "power2.out",
+        });
+      });
+
+      const leaveHandler = () => {
+        gsap.ticker.remove(tickerFnRef.current!);
+
+        isActiveRef.current = false;
+        targetCornerPositionsRef.current = null;
+        gsap.set(activeStrengthRef.current, { current: 0, overwrite: true });
+        activeTarget = null;
+
+        if (cursorColorOnTarget && cornersRef.current) {
+          gsap.to(Array.from(cornersRef.current), {
+            borderColor: cursorColor,
+            duration: 0.15,
+            ease: "power2.out",
+          });
+          if (dotRef.current) {
+            gsap.to(dotRef.current, {
+              backgroundColor: cursorColor,
+              duration: 0.15,
+              ease: "power2.out",
+            });
+          }
+        }
+
+        if (cornersRef.current) {
+          const restCorners = Array.from(cornersRef.current);
+          gsap.killTweensOf(restCorners, "x,y");
+          const { cornerSize } = constants;
+          const positions = [
+            { x: -cornerSize * 1.5, y: -cornerSize * 1.5 },
+            { x: cornerSize * 0.5, y: -cornerSize * 1.5 },
+            { x: cornerSize * 0.5, y: cornerSize * 0.5 },
+            { x: -cornerSize * 1.5, y: cornerSize * 0.5 },
+          ];
+          const tl = gsap.timeline();
+          restCorners.forEach((corner, index) => {
+            tl.to(corner, { x: positions[index].x, y: positions[index].y, duration: 0.3, ease: "power3.out" }, 0);
+          });
+        }
+
+        resumeTimeout = setTimeout(() => {
+          if (!activeTarget && cursorRef.current && spinTl.current) {
+            const currentRotation = gsap.getProperty(cursorRef.current, "rotation") as number;
+            const normalizedRotation = currentRotation % 360;
+            spinTl.current.kill();
+            spinTl.current = gsap
+              .timeline({ repeat: -1 })
+              .to(cursorRef.current, { rotation: "+=360", duration: spinDuration, ease: "none" });
+            gsap.to(cursorRef.current, {
+              rotation: normalizedRotation + 360,
+              duration: spinDuration * (1 - normalizedRotation / 360),
+              ease: "none",
+              onComplete: () => {
+                spinTl.current?.restart();
+              },
+            });
+          }
+          resumeTimeout = null;
+        }, 50);
+
+        cleanupTarget(target);
+      };
+
+      currentLeaveHandler = leaveHandler;
+      target.addEventListener("mouseleave", leaveHandler);
+    };
+
+    window.addEventListener("mouseover", enterHandler as EventListener, { passive: true });
+
+    const resizeHandler = () => {
+      containingBlockRef.current = getContainingBlock(cursor);
+    };
+    window.addEventListener("resize", resizeHandler);
+
+    return () => {
+      if (tickerFnRef.current) {
+        gsap.ticker.remove(tickerFnRef.current);
+      }
+
+      window.removeEventListener("mousemove", moveHandler);
+      window.removeEventListener("mouseover", enterHandler as EventListener);
+      window.removeEventListener("scroll", scrollHandler);
+      window.removeEventListener("resize", resizeHandler);
+      window.removeEventListener("mousedown", mouseDownHandler);
+      window.removeEventListener("mouseup", mouseUpHandler);
+
+      if (activeTarget) {
+        cleanupTarget(activeTarget);
+      }
+
+      spinTl.current?.kill();
+      document.documentElement.classList.remove("has-target-cursor");
+      document.body.style.cursor = "";
+
+      isActiveRef.current = false;
+      targetCornerPositionsRef.current = null;
+      activeStrength.current = 0;
+    };
+  }, [
+    targetSelector,
+    spinDuration,
+    moveCursor,
+    constants,
+    hideDefaultCursor,
+    isMobile,
+    hoverDuration,
+    parallaxOn,
+    cursorColor,
+    cursorColorOnTarget,
+  ]);
+
+  useEffect(() => {
+    if (isMobile || !cursorRef.current || !spinTl.current) return;
+    if (spinTl.current.isActive()) {
+      spinTl.current.kill();
+      spinTl.current = gsap
+        .timeline({ repeat: -1 })
+        .to(cursorRef.current, { rotation: "+=360", duration: spinDuration, ease: "none" });
+    }
+  }, [spinDuration, isMobile]);
+
+  if (isMobile) {
+    return null;
+  }
+
   return (
-    <>
-      <div ref={dotRef} className="cursor-dot" style={{ position: "fixed", top: 0, left: 0, width: 8, height: 8, borderRadius: "50%", background: "#efefe6", zIndex: 10000, pointerEvents: "none", mixBlendMode: "difference" }} />
-      <div ref={ringRef} className="cursor-big" style={{ position: "fixed", top: 0, left: 0, width: 40, height: 40, borderRadius: "50%", border: "1px solid #efefe6", zIndex: 10000, pointerEvents: "none", mixBlendMode: "difference" }} />
-    </>
+    <div ref={cursorRef} className="target-cursor-wrapper">
+      <div ref={dotRef} className="target-cursor-dot" style={{ backgroundColor: cursorColor }} />
+      <div className="target-cursor-corner corner-tl" style={{ borderColor: cursorColor }} />
+      <div className="target-cursor-corner corner-tr" style={{ borderColor: cursorColor }} />
+      <div className="target-cursor-corner corner-br" style={{ borderColor: cursorColor }} />
+      <div className="target-cursor-corner corner-bl" style={{ borderColor: cursorColor }} />
+    </div>
   );
 }

@@ -39,7 +39,7 @@ export default function Navbar() {
     const tl = gsap.timeline({ paused: true });
     tl.fromTo(bg, { xPercent: -100 }, { xPercent: 0, duration: 0.5, ease: "power2.inOut" })
       .fromTo(bgSecond, { xPercent: -100 }, { xPercent: 0, duration: 0.5, ease: "power2.inOut" }, "-=0.4")
-      .fromTo(menu, { xPercent: 100 }, { xPercent: 0, duration: 0.6, ease: "power2.inOut" }, "-=0.4")
+      .fromTo(menu, { x: 0, xPercent: 100 }, { x: 0, xPercent: 0, duration: 0.6, ease: "power2.inOut" }, "-=0.4")
       .fromTo(links, { yPercent: 110, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: "power3.out" }, "-=0.35")
       .to(lines[0], { rotate: 45, y: 4, duration: 0.35 }, 0)
       .to(lines[1], { scaleX: 0, duration: 0.3 }, 0)

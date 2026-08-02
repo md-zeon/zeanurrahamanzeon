@@ -101,21 +101,6 @@ export default function HomeProjects() {
         }
       };
 
-      const bannerTrigger = ScrollTrigger.create({
-        trigger: el,
-        start: "top top",
-        end: "+=280%",
-        scrub: 1,
-        onUpdate: () => {
-          const st = ScrollTrigger.getById("projectsScroll");
-          if (st) updateActiveProject();
-        },
-      });
-
-      gsap.set(".home-projects_banner-component", { opacity: 0, yPercent: 20 });
-      gsap.set(navButtons, { x: "100%", opacity: 0, visibility: "hidden" });
-      gsap.fromTo(navButtons, { x: "100%", opacity: 0, visibility: "hidden" }, { x: "0%", opacity: 0.9, visibility: "visible", stagger: 0.05, ease: "expo.out", duration: 0.4, scrollTrigger: { trigger: el, start: "top 60%", once: true }, onComplete: () => gsap.to(navButtons[0], { opacity: 1 }) });
-
       const bannerFade = (state: "in" | "out") => {
         gsap.to(".home-projects_banner-component", {
           opacity: state === "in" ? 1 : 0,
@@ -124,10 +109,24 @@ export default function HomeProjects() {
           duration: 0.3,
         });
       };
-      bannerTrigger.vars.onEnter = () => bannerFade("in");
-      bannerTrigger.vars.onLeave = () => bannerFade("out");
-      bannerTrigger.vars.onEnterBack = () => bannerFade("in");
-      bannerTrigger.vars.onLeaveBack = () => bannerFade("out");
+      ScrollTrigger.create({
+        trigger: el,
+        start: "top top",
+        end: "+=280%",
+        scrub: 1,
+        onUpdate: () => {
+          const st = ScrollTrigger.getById("projectsScroll");
+          if (st) updateActiveProject();
+        },
+        onEnter: () => bannerFade("in"),
+        onLeave: () => bannerFade("out"),
+        onEnterBack: () => bannerFade("in"),
+        onLeaveBack: () => bannerFade("out"),
+      });
+
+      gsap.set(".home-projects_banner-component", { opacity: 0, yPercent: 20 });
+      gsap.set(navButtons, { x: "100%", opacity: 0, visibility: "hidden" });
+      gsap.fromTo(navButtons, { x: "100%", opacity: 0, visibility: "hidden" }, { x: "0%", opacity: 0.9, visibility: "visible", stagger: 0.05, ease: "expo.out", duration: 0.4, scrollTrigger: { trigger: el, start: "top 60%", once: true }, onComplete: () => gsap.to(navButtons[0], { opacity: 1 }) });
     }, el);
 
     return () => ctx.revert();
@@ -135,10 +134,14 @@ export default function HomeProjects() {
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, index: number) => {
     e.preventDefault();
-    const el = ref.current;
-    if (!el) return;
-    const projectHeight = window.innerHeight * 0.7;
-    window.scrollTo({ top: el.offsetTop + index * projectHeight, behavior: "smooth" });
+    const pinSpacer = document.querySelector<HTMLElement>(".pin-spacer-projectsScroll");
+    if (!pinSpacer) return;
+    let projectHeight = window.innerHeight * 0.7;
+    if (index >= 2) {
+      projectHeight -= window.innerHeight * 0.01;
+    }
+    const targetScrollY = pinSpacer.offsetTop + index * projectHeight;
+    gsap.to(window, { duration: 1.5, scrollTo: targetScrollY, ease: "expo.out" });
   };
 
   return (

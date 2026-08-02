@@ -4,6 +4,7 @@ import { useEffect, useRef, type ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { initSound, playSound } from "@/lib/sound";
+import { useButtonEffects } from "@/lib/useButtonEffects";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Cursor from "./Cursor";
@@ -11,6 +12,8 @@ import Cursor from "./Cursor";
 export default function SiteShell({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const rootRef = useRef<HTMLDivElement>(null);
+
+  useButtonEffects();
 
   useEffect(() => {
     initSound();
