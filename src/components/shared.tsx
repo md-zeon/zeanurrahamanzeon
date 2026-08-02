@@ -5,8 +5,20 @@ import Link from "next/link";
 export function Asterisk({ className = "" }: { className?: string }) {
   return (
     <div className={className} aria-hidden="true">
-      <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 16 17" fill="none" preserveAspectRatio="xMidYMid meet" role="img">
-        <path d="M2.41002 14.2237L13.7237 2.91001M0 8.54529H16M8.0453 16.5V0.5M2.36688 2.91001L13.6806 14.2237" stroke="currentColor" strokeWidth="1.5" />
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="100%"
+        height="100%"
+        viewBox="0 0 16 17"
+        fill="none"
+        preserveAspectRatio="xMidYMid meet"
+        role="img"
+      >
+        <path
+          d="M2.41002 14.2237L13.7237 2.91001M0 8.54529H16M8.0453 16.5V0.5M2.36688 2.91001L13.6806 14.2237"
+          stroke="currentColor"
+          strokeWidth="1.5"
+        />
       </svg>
     </div>
   );
@@ -15,7 +27,15 @@ export function Asterisk({ className = "" }: { className?: string }) {
 export function WebflowLogo({ className = "" }: { className?: string }) {
   return (
     <div className={`icon-embed-xxsmall ${className}`} aria-hidden="true">
-      <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 16 10" fill="none" preserveAspectRatio="xMidYMid meet" role="img">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="100%"
+        height="100%"
+        viewBox="0 0 16 10"
+        fill="none"
+        preserveAspectRatio="xMidYMid meet"
+        role="img"
+      >
         <path
           fillRule="evenodd"
           clipRule="evenodd"
@@ -36,18 +56,39 @@ type ButtonProps = {
   dataAudio?: string;
 };
 
-export function Button({ href, children, variant = "primary", size = "default", target, dataAudio }: ButtonProps) {
+export function Button({
+  href,
+  children,
+  variant = "primary",
+  size = "default",
+  target,
+  dataAudio,
+}: ButtonProps) {
   const className = `button inline-block ${variant === "secondary" ? "is-secondary" : ""} ${size === "small" ? "is-small" : ""}`;
   if (href.startsWith("http")) {
     return (
-      <a href={href} target={target ?? "_blank"} rel="noopener noreferrer" data-audio={dataAudio} className={className}>
-        <div className="button-text">{children}</div>
+      <a
+        href={href}
+        target={target ?? "_blank"}
+        rel="noopener noreferrer"
+        data-audio={dataAudio}
+        className={className}
+      >
+        <div
+          className={`${variant === "primary" ? "text-brand-black" : "button-text"}`}
+        >
+          {children}
+        </div>
       </a>
     );
   }
   return (
     <Link href={href} data-audio={dataAudio} className={className}>
-      <div className="button-text">{children}</div>
+      <div
+        className={`${variant === "primary" ? "text-brand-black" : "button-text"}`}
+      >
+        {children}
+      </div>
     </Link>
   );
 }
@@ -58,11 +99,23 @@ type WebflowBadgeProps = {
   label?: string;
 };
 
-export function WebflowBadge({ text = "Webflow Certified Partner", href, label }: WebflowBadgeProps) {
+export function WebflowBadge({
+  text = "Webflow Certified Partner",
+  href,
+  label,
+}: WebflowBadgeProps) {
   return (
-    <a data-audio="https://bjornflow-assets.b-cdn.net/Audio/buttons%20scramble.wav" href={href} target="_blank" aria-label={label} className="home-header_badge-link">
+    <a
+      data-audio="https://bjornflow-assets.b-cdn.net/Audio/buttons%20scramble.wav"
+      href={href}
+      target="_blank"
+      aria-label={label}
+      className="home-header_badge-link"
+    >
       <WebflowLogo />
-      <div className="text-size-small text-weight-medium text-style-allcaps">{text}</div>
+      <div className="text-size-small text-weight-medium text-style-allcaps">
+        {text}
+      </div>
     </a>
   );
 }

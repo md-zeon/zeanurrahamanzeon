@@ -1770,6 +1770,19 @@ html.has-target-cursor * {
   cursor: none !important;
 }
 
+html.has-target-cursor [data-default-cursor],
+html.has-target-cursor [data-default-cursor] * {
+  cursor: auto !important;
+}
+
+html.has-target-cursor .footer_component a,
+html.has-target-cursor .footer_component a *,
+html.has-target-cursor [data-default-cursor] a,
+html.has-target-cursor [data-default-cursor] a * {
+  cursor: pointer !important;
+}
+
+
 /* Case Study (work/[slug]) */
 .home_projects-lines {
   z-index:0;border-left:1px solid #efefe633;border-right:1px solid #efefe633;justify-content:flex-end;align-items:flex-start;width:auto;max-width:81.25rem;margin-left:auto;margin-right:auto;display:flex;position:absolute;inset:0% 4.37rem

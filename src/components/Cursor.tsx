@@ -6,6 +6,8 @@ import { gsap } from "@/lib/gsap";
 const INTERACTIVE_SELECTOR =
   "a, button, [data-hover], [role='button'], input, select, textarea, label, [data-cursor]";
 
+const DEFAULT_CURSOR_SELECTOR = ".footer_component a, [data-default-cursor]";
+
 const getContainingBlock = (element: HTMLElement | null): HTMLElement | null => {
   let node = element?.parentElement ?? null;
   while (node && node !== document.documentElement) {
@@ -207,6 +209,14 @@ export default function Cursor({
 
     const enterHandler = (e: MouseEvent) => {
       const directTarget = e.target as Element;
+      if (cursorRef.current) {
+        const inDefaultZone = directTarget.closest(DEFAULT_CURSOR_SELECTOR) !== null;
+        cursorRef.current.style.display = inDefaultZone ? "none" : "block";
+        if (inDefaultZone) {
+          if (activeTarget) currentLeaveHandler?.();
+          return;
+        }
+      }
       const allTargets: Element[] = [];
       let current: Element | null = directTarget;
       while (current && current !== document.body) {
