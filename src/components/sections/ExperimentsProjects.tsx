@@ -154,10 +154,14 @@ export default function ExperimentsProjects() {
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, index: number) => {
     e.preventDefault();
-    const el = ref.current;
-    if (!el) return;
-    const projectHeight = window.innerHeight * 0.7;
-    window.scrollTo({ top: el.offsetTop + index * projectHeight, behavior: "smooth" });
+    const pinSpacer = document.querySelector<HTMLElement>(".pin-spacer-projectsScroll");
+    if (!pinSpacer) return;
+    let projectHeight = window.innerHeight * 0.7;
+    if (index >= 2) {
+      projectHeight -= window.innerHeight * 0.01;
+    }
+    const targetScrollY = pinSpacer.offsetTop + index * projectHeight;
+    gsap.to(window, { duration: 1.5, scrollTo: targetScrollY, ease: "expo.out" });
   };
 
   return (

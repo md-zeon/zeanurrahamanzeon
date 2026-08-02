@@ -75,7 +75,7 @@ export function Button({
         className={className}
       >
         <div
-          className={`${variant === "primary" ? "text-brand-black" : "button-text"}`}
+          className={`button-text ${variant === "primary" ? "text-brand-black" : ""}`}
         >
           {children}
         </div>
@@ -85,7 +85,7 @@ export function Button({
   return (
     <Link href={href} data-audio={dataAudio} className={className}>
       <div
-        className={`${variant === "primary" ? "text-brand-black" : "button-text"}`}
+        className={`button-text ${variant === "primary" ? "text-brand-black" : ""}`}
       >
         {children}
       </div>

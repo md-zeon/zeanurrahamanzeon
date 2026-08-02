@@ -86,7 +86,8 @@ export default function CtaSection() {
                     <div className="text-caption-2 text-color-teritary">{cta.videoCaption}</div>
                   </div>
                 </div>
-                <div className="cta_content-wrapper">
+              </div>
+              <div className="cta_content-wrapper">
                   <div className="cta_chat-component">
                     <div className="cta_chat-top">
                       <div className="cta_chat-buttons">
@@ -187,7 +188,6 @@ export default function CtaSection() {
                     </div>
                   </div>
                 </div>
-              </div>
             </div>
           </div>
         </div>

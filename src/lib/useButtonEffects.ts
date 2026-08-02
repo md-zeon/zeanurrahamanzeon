@@ -27,52 +27,45 @@ export function useButtonEffects() {
       let currentTimeline: gsap.core.Timeline | null = null;
 
       if (label) {
+        const originalText = label.textContent ?? "";
+        const textArray = originalText.split("");
+        const scrambleFor = (predicate: (index: number) => boolean) =>
+          textArray
+            .map((char, index) => (predicate(index) ? (Math.random() > 0.5 ? "1" : "0") : char))
+            .join("");
+
         const onEnter = () => {
-          const textArray = (label.textContent ?? "").split("");
           if (!textArray.length) return;
           currentTimeline?.kill();
           currentTimeline = gsap.timeline();
           for (let i = 0; i < textArray.length; i++) {
             currentTimeline.to(
               label,
-              textTween(() =>
-                textArray
-                  .map((char, index) => (index <= i ? (Math.random() > 0.5 ? "1" : "0") : char))
-                  .join("")
-              ),
+              textTween(() => scrambleFor((index) => index <= i)),
               `+=${SCRAMBLE_STEP}`
             );
           }
           currentTimeline.to(label, {
             duration: 0.1,
-            scrambleText: { text: textArray.join(""), chars: SCRAMBLE_CHARS, speed: 0.4 },
+            scrambleText: { text: originalText, chars: SCRAMBLE_CHARS, speed: 0.4 },
           });
         };
 
         const onLeave = () => {
-          const textArray = (label.textContent ?? "").split("");
           if (!textArray.length) return;
           currentTimeline?.kill();
           currentTimeline = gsap.timeline();
           for (let i = textArray.length - 1; i >= 0; i--) {
             currentTimeline.to(
               label,
-              textTween(() =>
-                textArray
-                  .map((char, index) => (index >= i ? (Math.random() > 0.5 ? "1" : "0") : char))
-                  .join("")
-              ),
+              textTween(() => scrambleFor((index) => index >= i)),
               `+=${SCRAMBLE_STEP}`
             );
           }
           for (let i = textArray.length - 1; i >= 0; i--) {
             currentTimeline.to(
               label,
-              textTween(() =>
-                textArray
-                  .map((char, index) => (index >= i ? char : Math.random() > 0.5 ? "1" : "0"))
-                  .join("")
-              ),
+              textTween(() => scrambleFor((index) => index < i)),
               `+=${SCRAMBLE_STEP}`
             );
           }

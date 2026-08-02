@@ -26,6 +26,7 @@ export default function HeroSection() {
       const name = new SplitText("#home-hero-name", { type: "chars" });
       const split1 = new SplitText("#home-hero-header-1", { type: "chars" });
       const split2 = new SplitText("#home-hero-header-2", { type: "chars" });
+      const split3 = new SplitText("#home-hero-header-3", { type: "chars" });
 
       gsap.from(name.chars, {
         yPercent: 110,
@@ -50,6 +51,14 @@ export default function HeroSection() {
         stagger: 0.04,
         ease: "power3.out",
         delay: 0.55,
+      });
+      gsap.from(split3.chars, {
+        yPercent: 110,
+        opacity: 0,
+        duration: 0.7,
+        stagger: 0.04,
+        ease: "power3.out",
+        delay: 0.65,
       });
 
       gsap.to(
@@ -112,7 +121,7 @@ export default function HeroSection() {
                         </div>
                         <div className="home-header_header-wrapper is-last">
                           <div
-                            id="home-hero-header-2"
+                            id="home-hero-header-3"
                             className="heading-style-h0"
                           >
                             {brand.heroLine3}

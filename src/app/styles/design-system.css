@@ -140,6 +140,14 @@
   @apply rounded-[0.25rem] bg-brand-yellow px-8 py-4 text-[1.125rem] text-brand-black no-underline text-center tracking-[-0.04rem];
 }
 
+.button:not(.is-secondary) {
+  color: var(--color-brand--black);
+}
+
+.button:not(.is-secondary) .button-text {
+  color: inherit;
+}
+
 .button.is-secondary {
   @apply border border-[#efefe633] bg-[#0a090e4d] text-brand-white;
   -webkit-backdrop-filter: blur(100px);
