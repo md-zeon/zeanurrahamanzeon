@@ -18,6 +18,8 @@ function Logo({ className }: { className?: string }) {
   );
 }
 
+const menuIconLine = "h-[0.125rem] w-[1.2rem]";
+
 export default function Navbar() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -281,10 +283,13 @@ export default function Navbar() {
 
   return (
     <>
-      <div ref={rootRef} className="navbar_component w-nav">
-        <div className="navbar_inner">
+      <div
+        ref={rootRef}
+        className="fixed inset-x-0 top-0 z-[9999] w-nav"
+      >
+        <div className="navbar_inner fixed inset-x-0 top-0 z-[2] border border-transparent border-b-[#efefe633] bg-brand-black">
           <div className="padding-global">
-            <div className="navbar_layout">
+            <div className="relative grid h-full w-full grid-cols-[.5fr_auto] items-center justify-between gap-4 py-4 min-[1280px]:grid-cols-[.5fr_auto_.55fr] min-[1440px]:grid-cols-[.4fr_auto_.4fr] max-[991px]:flex max-[991px]:grid-cols-[.25fr_1fr] max-[767px]:py-[1.1rem] max-[479px]:py-[1.4rem]">
               <div className="navbar_logo-wrapper">
                 <Link
                   href="/"
@@ -297,7 +302,7 @@ export default function Navbar() {
                 </Link>
               </div>
 
-              <nav role="navigation" className="navbar_menu w-nav-menu">
+              <nav role="navigation" className="navbar_menu relative flex gap-2 max-[991px]:absolute max-[991px]:flex max-[991px]:w-full max-[991px]:justify-center max-[991px]:overflow-auto max-[991px]:border-b max-[991px]:border-neutral-black max-[991px]:bg-brand-black max-[991px]:px-[5%] max-[991px]:pt-4 max-[991px]:pb-10 w-nav-menu">
                 {navLinks.map((link) => (
                   <Link
                     key={link.href}
@@ -305,20 +310,20 @@ export default function Navbar() {
                     aria-current={isActive(link.href) ? "page" : undefined}
                     data-color="#ffffff"
                     data-audio="https://bjornflow-assets.b-cdn.net/Audio/button%20hover.wav"
-                    className="navbar_link w-inline-block"
+                    className="navbar_link relative z-[1] flex items-center justify-center gap-2 rounded-full px-5 py-[0.6rem] text-brand-white min-[1280px]:cursor-pointer min-[1280px]:px-6 min-[1280px]:static max-[991px]:py-3 max-[991px]:text-center max-[991px]:text-[1.125rem] w-inline-block"
                   >
                     <div className="text-size-small text-weight-normal text-style-allcaps">{link.label}</div>
                   </Link>
                 ))}
-                <div className="navbar_link-bg" />
+                <div className="navbar_link-bg absolute left-0 top-0 z-0 h-full w-full rounded-[0.25rem] border-0 bg-transparent" />
               </nav>
 
-              <div className="navbar_right-wrapper">
-                <div className="navbar_local-component">
-                  <div className="navbar_icons-wrapper hide-mobile-portrait">
+              <div className="flex gap-4 pr-20 min-[1280px]:pr-0 max-[991px]:items-center max-[767px]:pr-16">
+                <div className="flex items-center justify-end gap-4 max-[767px]:gap-2">
+                  <div className="flex gap-2 max-[479px]:hidden">
                     <SoundButton />
                   </div>
-                  <div className="navbar_local-time">
+                  <div className="flex items-center justify-start gap-2">
                     <div id="nav-time" className="text-size-regular text-weight-light">
                       <Clock />
                     </div>
@@ -333,26 +338,29 @@ export default function Navbar() {
           href="#"
           data-audio-click="https://bjornflow-assets.b-cdn.net/Audio/close-menu.wav"
           data-audio="https://bjornflow-assets.b-cdn.net/Audio/button%20hover.wav"
-          className="navbar_h-menu-button w-inline-block"
+          className="navbar_h-menu-button fixed right-6 top-3 z-[9999] flex items-center justify-center rounded-full border border-[#efefe633] bg-[#0a090e4d] p-2 shadow-[inset_0_0_0_1000px_#0a090e33] backdrop-blur-[100px] min-[1280px]:hidden min-[1280px]:top-6 max-[767px]:right-4 max-[767px]:top-[0.8rem] w-inline-block"
           onClick={toggleMenu}
           aria-label={menuOpen ? "Close menu" : "Open menu"}
         >
-          <div className="menu-icon is-close">
-            <div className="menu-icon_line-top" />
-            <div className="menu-icon_line-middle">
-              <div className="menu-icon_line-middle-inner" />
+          <div className="relative z-[1] flex h-8 w-8 flex-col items-center justify-center gap-1 max-[767px]:h-[1.7rem] max-[767px]:w-[1.7rem]">
+            <div className={`${menuIconLine} menu-icon_line-top bg-neutral-white`} />
+            <div className={`${menuIconLine} menu-icon_line-middle flex items-center justify-center bg-brand-white`}>
+              <div className="menu-icon_line-middle-inner h-0 w-1" />
             </div>
-            <div className="menu-icon_line-bottom" />
+            <div className={`${menuIconLine} menu-icon_line-bottom bg-neutral-white`} />
           </div>
           <div className="navbar_h-open" />
           <div className="navbar_h-close" />
         </a>
       </div>
 
-      <div ref={overlayRef} className="navbar_h-menu-component">
-        <div className="navbar_h-menu-inner">
-          <div className="navbar_h-menu">
-            <div className="navbar_h-logo-wrapper">
+      <div
+        ref={overlayRef}
+        className="fixed inset-0 z-[9998] hidden h-screen w-screen overflow-hidden"
+      >
+        <div className="navbar_h-menu-inner absolute inset-y-0 right-0 z-[2] h-screen w-full max-w-[45rem] [transform:translate(100%)] max-[991px]:max-w-[30rem] max-[767px]:max-w-[20rem]">
+          <div className="relative z-[2] flex h-screen flex-col items-start justify-start gap-4 pb-6 pl-14 pr-10 pt-[9.1rem] max-[767px]:px-6">
+            <div className="navbar_h-logo-wrapper absolute left-6 top-6 flex flex-col overflow-hidden pb-[0.2rem]">
               <Link
                 href="/"
                 data-audio="https://bjornflow-assets.b-cdn.net/Audio/buttons%20scramble.wav"
@@ -362,7 +370,7 @@ export default function Navbar() {
                 <Logo className="is-animation" />
               </Link>
             </div>
-            <nav role="navigation" className="navbar_h-menu-wrapper w-nav-menu">
+            <div className="navbar_h-menu-wrapper relative z-[3] flex flex-col items-start justify-start gap-4 w-nav-menu">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
@@ -371,9 +379,9 @@ export default function Navbar() {
                   data-menu-tab={link.href.replace("/", "")}
                   data-color="#ffffff"
                   data-audio="https://bjornflow-assets.b-cdn.net/Audio/button%20hover.wav"
-                  className="navbar_h-link w-inline-block"
+                  className="navbar_h-link relative z-[1] flex items-start justify-start gap-3 overflow-hidden px-0 py-0 text-brand-white [font-feature-settings:'ss01'_on] max-[991px]:pr-1 w-inline-block"
                 >
-                  <div menu-link="number" className="navbar_h-link-number">
+                  <div menu-link="number" className="navbar_h-link-number pt-[0.4rem]">
                     <div className="text-caption-2">{link.index}</div>
                   </div>
                   <div menu-link="text" className="heading-style-h1">
@@ -381,14 +389,14 @@ export default function Navbar() {
                   </div>
                 </Link>
               ))}
-            </nav>
-            <div className="navbar_h-bottom">
+            </div>
+            <div className="navbar_h-bottom absolute bottom-6 left-20 right-10 z-[2] grid grid-cols-2 items-end justify-between gap-2 max-[991px]:flex max-[991px]:flex-col max-[991px]:items-stretch max-[767px]:flex max-[767px]:flex-wrap max-[767px]:items-stretch max-[767px]:left-12 max-[479px]:bottom-24 max-[479px]:left-12">
               <div className="home-header_badge-component">
-                <div className="navbar_footer-line">
-                  <div className="navbar_footer-line-bg" />
+                <div className="navbar_footer-line relative h-[0.06rem] w-full overflow-hidden">
+                  <div className="navbar_footer-line-bg absolute inset-0 bg-brand-white" />
                 </div>
                 <div className="nav_badge-icon-wrapper">
-                  <div className="navbar_footer-asterisk w-embed" aria-hidden="true">
+                  <div className="navbar_footer-asterisk flex h-4 w-4 flex-col items-center justify-center w-embed" aria-hidden="true">
                     <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 16 17" fill="none" preserveAspectRatio="xMidYMid meet">
                       <path d="M2.41002 14.2237L13.7237 2.91001M0 8.54529H16M8.0453 16.5V0.5M2.36688 2.91001L13.6806 14.2237" stroke="currentColor" strokeWidth="1.5" />
                     </svg>
@@ -398,8 +406,8 @@ export default function Navbar() {
               <div menu-link="misc">
                 <WebflowBadge href={socials.webflowPartner} />
               </div>
-              <div menu-link="misc" className="navbar_local-component is-menu">
-                <div className="navbar_icons-wrapper">
+              <div menu-link="misc" className="navbar_local-component is-menu flex items-center justify-end gap-4 pr-6 max-[991px]:justify-start max-[991px]:pr-0 max-[767px]:w-full max-[767px]:justify-between max-[767px]:gap-2">
+                <div className="flex gap-2">
                   <SoundButton />
                 </div>
                 <div id="menu-time" className="text-size-regular text-weight-light">
@@ -409,10 +417,11 @@ export default function Navbar() {
             </div>
           </div>
         </div>
-        <div className="navbar_h-menu-bg-wrapper">
-          <div className="navbar_h-menu-bg is-second" />
+        <div className="navbar_h-menu-bg-wrapper absolute inset-y-0 right-0 z-[1] w-full">
+          <div className="navbar_h-menu-bg absolute inset-0 z-0 bg-brand-yellow [clip-path:polygon(100%_0,100%_100%,4%_100%,4%_85%,0_82%,0_0)]" />
+          <div className="navbar_h-menu-bg is-second absolute inset-0 z-0 bg-brand-purple [clip-path:polygon(100%_0,100%_100%,4%_100%,4%_85%,0_82%,0_0)]" />
         </div>
-        <div className="navbar_h-bg-close" onClick={closeMenu} />
+        <div className="navbar_h-bg-close absolute inset-0 z-[1] h-full w-full bg-[#0000001a] backdrop-blur-[5px]" onClick={closeMenu} />
       </div>
     </>
   );
