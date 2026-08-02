@@ -45,7 +45,7 @@ export default function HomeProjects() {
         scrollTrigger: {
           id: "projectsScroll",
           trigger: ".home-projects_track",
-          pin: ".section_home-projects",
+          pin: el,
           start: "top top",
           end: "+=300%",
           scrub: 1,
@@ -102,7 +102,7 @@ export default function HomeProjects() {
       };
 
       const bannerTrigger = ScrollTrigger.create({
-        trigger: ".section_home-projects",
+        trigger: el,
         start: "top top",
         end: "+=280%",
         scrub: 1,
@@ -114,7 +114,7 @@ export default function HomeProjects() {
 
       gsap.set(".home-projects_banner-component", { opacity: 0, yPercent: 20 });
       gsap.set(navButtons, { x: "100%", opacity: 0, visibility: "hidden" });
-      gsap.fromTo(navButtons, { x: "100%", opacity: 0, visibility: "hidden" }, { x: "0%", opacity: 0.9, visibility: "visible", stagger: 0.05, ease: "expo.out", duration: 0.4, scrollTrigger: { trigger: ".section_home-projects", start: "top 60%", once: true }, onComplete: () => gsap.to(navButtons[0], { opacity: 1 }) });
+      gsap.fromTo(navButtons, { x: "100%", opacity: 0, visibility: "hidden" }, { x: "0%", opacity: 0.9, visibility: "visible", stagger: 0.05, ease: "expo.out", duration: 0.4, scrollTrigger: { trigger: el, start: "top 60%", once: true }, onComplete: () => gsap.to(navButtons[0], { opacity: 1 }) });
 
       const bannerFade = (state: "in" | "out") => {
         gsap.to(".home-projects_banner-component", {

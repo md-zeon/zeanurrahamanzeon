@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { services } from "@/data/home";
+import { useSectionHeadings } from "@/lib/useHeaderReveal";
 import LogosElement from "../LogosElement";
 
 const SERVICE_ASSETS = [
@@ -12,6 +13,8 @@ const SERVICE_ASSETS = [
 
 export default function ServicesSection() {
   const ref = useRef<HTMLElement>(null);
+
+  useSectionHeadings(ref);
 
   return (
     <section id="services" data-parallax-type="ssection" className="section_home-services" ref={ref}>

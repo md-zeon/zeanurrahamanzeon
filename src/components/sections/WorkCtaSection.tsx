@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { useCtaChat } from "@/lib/useCtaChat";
+import { useSectionHeadings } from "@/lib/useHeaderReveal";
 import { cta } from "@/data/home";
 import { workCta } from "@/data/work";
 import { audio, photos } from "@/data/site";
@@ -13,6 +14,7 @@ export default function WorkCtaSection() {
   const ref = useRef<HTMLElement>(null);
 
   useCtaChat(ref);
+  useSectionHeadings(ref);
 
   return (
     <section className="section_cta background-color-primary" ref={ref}>

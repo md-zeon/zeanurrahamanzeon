@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { useLabSlider } from "@/lib/useLabSlider";
+import { useSectionHeadings } from "@/lib/useHeaderReveal";
 import { labSlides } from "@/data/home";
 import { audio } from "@/data/site";
 import LogosElement from "../LogosElement";
@@ -22,6 +23,7 @@ export default function LabSection() {
   const ref = useRef<HTMLElement>(null);
 
   useLabSlider(ref);
+  useSectionHeadings(ref);
 
   return (
     <section id="lab" data-parallax-type="ssection" className="section_lab" ref={ref}>

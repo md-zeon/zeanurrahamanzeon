@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { useCtaChat } from "@/lib/useCtaChat";
+import { useSectionHeadings } from "@/lib/useHeaderReveal";
 import { cta } from "@/data/home";
 import { audio, photos } from "@/data/site";
 import LogosElement from "../LogosElement";
@@ -12,6 +13,7 @@ export default function CtaSection() {
   const ref = useRef<HTMLElement>(null);
 
   useCtaChat(ref);
+  useSectionHeadings(ref);
 
   return (
     <section id="cta" className="section_cta" ref={ref}>

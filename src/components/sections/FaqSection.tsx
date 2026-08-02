@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
 import { faq } from "@/data/contact";
 import { audio } from "@/data/site";
+import { useSectionHeadings } from "@/lib/useHeaderReveal";
 import LogosElement from "../LogosElement";
 
 function PlusIcon() {
@@ -59,6 +60,8 @@ function Answer({ answer }: { answer: string[] }) {
 
 export default function FaqSection() {
   const ref = useRef<HTMLElement>(null);
+
+  useSectionHeadings(ref);
 
   useEffect(() => {
     const el = ref.current;

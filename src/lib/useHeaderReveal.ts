@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, type RefObject } from "react";
-import { gsap } from "@/lib/gsap";
+import { gsap, SplitText } from "@/lib/gsap";
 
 const LINE_CLASSES = ["hide-tablet", "hide-mobile-landscape"];
 
@@ -61,4 +61,63 @@ export function linesFor(): string[] {
   chunk(8, LINE_CLASSES[1]);
   chunk(6, "");
   return classes;
+}
+
+export function useSectionHeadings(container: RefObject<HTMLElement | null>) {
+  useEffect(() => {
+    const el = container.current;
+    if (!el) return;
+
+    const containerEl = el.querySelector<HTMLElement>('[header-animation-type="container"]');
+    if (!containerEl) return;
+
+    const headingEls = [
+      containerEl.querySelector<HTMLElement>('[header-animation-type="heading-1"]'),
+      containerEl.querySelector<HTMLElement>('[header-animation-type="heading-2"]'),
+      containerEl.querySelector<HTMLElement>('[header-animation-type="heading-3"]'),
+    ].filter((h): h is HTMLElement => !!h);
+
+    if (!headingEls.length) return;
+
+    const splits = headingEls
+      .map((heading) => new SplitText(heading, { type: "chars" }))
+      .filter((split) => split.chars.length > 0);
+
+    splits.forEach((split) => {
+      split.chars.forEach((char) => {
+        const wrapper = document.createElement("div");
+        wrapper.classList.add("char-wrapper");
+        wrapper.style.overflow = "hidden";
+        wrapper.style.display = "inline-block";
+        wrapper.style.position = "relative";
+        wrapper.style.padding = "0.3vw";
+        wrapper.style.margin = "-0.3vw";
+        char.parentNode?.insertBefore(wrapper, char);
+        wrapper.appendChild(char);
+      });
+    });
+
+    const ctx = gsap.context(() => {
+      splits.forEach((split) => gsap.set(split.chars, { xPercent: -120 }));
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerEl,
+          start: "bottom bottom",
+          once: true,
+        },
+      });
+
+      splits.forEach((split, i) => {
+        tl.to(
+          split.chars,
+          { xPercent: 0, duration: 0.6, ease: "expo.out", stagger: 0.04 },
+          i === 0 ? 0 : "<+0.15"
+        );
+      });
+    }, containerEl);
+
+    return () => ctx.revert();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 }

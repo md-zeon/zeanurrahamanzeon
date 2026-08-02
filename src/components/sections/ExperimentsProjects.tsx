@@ -54,7 +54,7 @@ export default function ExperimentsProjects() {
         scrollTrigger: {
           id: "projectsScroll",
           trigger: ".home-projects_track",
-          pin: ".section_home-projects",
+          pin: el,
           start: "top top",
           end: "+=300%",
           scrub: 1,
@@ -108,7 +108,7 @@ export default function ExperimentsProjects() {
       };
 
       const bannerTrigger = ScrollTrigger.create({
-        trigger: ".section_home-projects",
+        trigger: el,
         start: "top top",
         end: "+=280%",
         scrub: 1,
@@ -130,7 +130,7 @@ export default function ExperimentsProjects() {
           stagger: 0.05,
           ease: "expo.out",
           duration: 0.4,
-          scrollTrigger: { trigger: ".section_home-projects", start: "top 60%", once: true },
+          scrollTrigger: { trigger: el, start: "top 60%", once: true },
           onComplete: () => gsap.to(navButtons[0], { opacity: 1 }),
         }
       );

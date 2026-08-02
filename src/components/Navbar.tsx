@@ -3,10 +3,11 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { gsap } from "@/lib/gsap";
-import { navLinks, brand } from "@/data/site";
+import { gsap, Observer } from "@/lib/gsap";
+import { navLinks, brand, socials } from "@/data/site";
 import SoundButton from "./SoundButton";
 import Clock from "./Clock";
+import { WebflowBadge } from "./shared";
 
 function Logo({ className }: { className?: string }) {
   const isAnimation = className?.includes("is-animation");
@@ -33,7 +34,6 @@ export default function Navbar() {
     const bgSecond = overlay.querySelector(".navbar_h-menu-bg.is-second");
     const menu = overlay.querySelector(".navbar_h-menu-inner");
     const links = overlay.querySelectorAll(".navbar_h-link");
-    const misc = overlay.querySelectorAll(".navbar_h-menu [data-menu-misc]");
     const lines = gsap.utils.toArray<HTMLElement>(root.querySelectorAll(".menu-icon_line-top, .menu-icon_line-middle-inner, .menu-icon_line-bottom"));
 
     const tl = gsap.timeline({ paused: true });
@@ -41,7 +41,6 @@ export default function Navbar() {
       .fromTo(bgSecond, { xPercent: -100 }, { xPercent: 0, duration: 0.5, ease: "power2.inOut" }, "-=0.4")
       .fromTo(menu, { xPercent: 100 }, { xPercent: 0, duration: 0.6, ease: "power2.inOut" }, "-=0.4")
       .fromTo(links, { yPercent: 110, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: "power3.out" }, "-=0.35")
-      .fromTo(misc, { opacity: 0 }, { opacity: 1, duration: 0.4, stagger: 0.05 }, "-=0.3")
       .to(lines[0], { rotate: 45, y: 4, duration: 0.35 }, 0)
       .to(lines[1], { scaleX: 0, duration: 0.3 }, 0)
       .to(lines[2], { rotate: -45, y: -4, duration: 0.35 }, 0);
@@ -177,6 +176,107 @@ export default function Navbar() {
     tlRef.current?.timeScale(1.4).reverse();
   }, [pathname]);
 
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+    const menuButton = root.querySelector<HTMLElement>(".navbar_h-menu-button");
+    const navbarInner = root.querySelector<HTMLElement>(".navbar_inner");
+    if (!menuButton || !navbarInner) return;
+
+    navbarInner.style.willChange = "transform";
+    let isNavbarHidden = false;
+    let currentTimeline: gsap.core.Timeline | null = null;
+
+    const downTimeline = gsap.timeline({ paused: true });
+    downTimeline.to(navbarInner, { duration: 0.4, y: "-110%", ease: "expo.out" }, "+=0.2");
+    if (window.innerWidth > 1280) {
+      downTimeline
+        .set(menuButton, { display: "flex" }, ">")
+        .fromTo(menuButton, { scale: 0 }, { duration: 0.3, scale: 1, ease: "expo.out" }, ">0.05");
+    }
+
+    const upTimeline = gsap.timeline({ paused: true });
+    if (window.innerWidth > 1280) {
+      upTimeline.to(menuButton, {
+        duration: 0.3,
+        scale: 0,
+        ease: "expo.out",
+        onComplete: () => {
+          menuButton.style.display = "none";
+        },
+      });
+    }
+    upTimeline.to(navbarInner, { duration: 0.4, y: "0%", ease: "expo.out" }, "+=0.2");
+
+    const observer = Observer.create({
+      target: window,
+      type: "wheel,touch",
+      onDown: () => {
+        if (!isNavbarHidden) {
+          currentTimeline?.kill();
+          downTimeline.restart();
+          currentTimeline = downTimeline;
+          isNavbarHidden = true;
+        }
+      },
+      onUp: () => {
+        if (isNavbarHidden) {
+          currentTimeline?.kill();
+          upTimeline.restart();
+          currentTimeline = upTimeline;
+          isNavbarHidden = false;
+        }
+      },
+    });
+
+    return () => {
+      observer.kill();
+      downTimeline.kill();
+      upTimeline.kill();
+    };
+  }, []);
+
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+    const navbarInner = root.querySelector<HTMLElement>(".navbar_inner");
+    if (!navbarInner) return;
+
+    const updateNavbarStyle = () => {
+      if (window.scrollY === 0) {
+        gsap.to(navbarInner, {
+          duration: 0.4,
+          ease: "expo.out",
+          borderRadius: "0rem",
+          margin: "0rem",
+          borderTopColor: "transparent",
+          borderLeftColor: "transparent",
+          borderRightColor: "transparent",
+          borderBottomColor: "#444",
+        });
+      } else {
+        gsap.to(navbarInner, {
+          duration: 0.4,
+          ease: "expo.out",
+          borderRadius: "0.5rem",
+          margin: "0.5rem",
+          borderColor: "#444",
+        });
+      }
+    };
+
+    updateNavbarStyle();
+    window.addEventListener("scroll", updateNavbarStyle);
+    return () => window.removeEventListener("scroll", updateNavbarStyle);
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
   const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
 
   return (
@@ -224,27 +324,29 @@ export default function Navbar() {
                     </div>
                   </div>
                 </div>
-
-                <a
-                  href="#"
-                  data-audio-click="https://bjornflow-assets.b-cdn.net/Audio/close-menu.wav"
-                  data-audio="https://bjornflow-assets.b-cdn.net/Audio/button%20hover.wav"
-                  className="navbar_h-menu-button w-inline-block"
-                  onClick={toggleMenu}
-                  aria-label={menuOpen ? "Close menu" : "Open menu"}
-                >
-                  <div className="menu-icon is-close">
-                    <div className="menu-icon_line-top" />
-                    <div className="menu-icon_line-middle">
-                      <div className="menu-icon_line-middle-inner" />
-                    </div>
-                    <div className="menu-icon_line-bottom" />
-                  </div>
-                </a>
               </div>
             </div>
           </div>
         </div>
+
+        <a
+          href="#"
+          data-audio-click="https://bjornflow-assets.b-cdn.net/Audio/close-menu.wav"
+          data-audio="https://bjornflow-assets.b-cdn.net/Audio/button%20hover.wav"
+          className="navbar_h-menu-button w-inline-block"
+          onClick={toggleMenu}
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+        >
+          <div className="menu-icon is-close">
+            <div className="menu-icon_line-top" />
+            <div className="menu-icon_line-middle">
+              <div className="menu-icon_line-middle-inner" />
+            </div>
+            <div className="menu-icon_line-bottom" />
+          </div>
+          <div className="navbar_h-open" />
+          <div className="navbar_h-close" />
+        </a>
       </div>
 
       <div ref={overlayRef} className="navbar_h-menu-component">
@@ -281,15 +383,22 @@ export default function Navbar() {
               ))}
             </nav>
             <div className="navbar_h-bottom">
-              <div className="navbar_footer-line">
-                <div className="navbar_footer-line-bg" />
+              <div className="home-header_badge-component">
+                <div className="navbar_footer-line">
+                  <div className="navbar_footer-line-bg" />
+                </div>
+                <div className="nav_badge-icon-wrapper">
+                  <div className="navbar_footer-asterisk w-embed" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 16 17" fill="none" preserveAspectRatio="xMidYMid meet">
+                      <path d="M2.41002 14.2237L13.7237 2.91001M0 8.54529H16M8.0453 16.5V0.5M2.36688 2.91001L13.6806 14.2237" stroke="currentColor" strokeWidth="1.5" />
+                    </svg>
+                  </div>
+                </div>
               </div>
-              <div className="navbar_footer-asterisk w-embed" aria-hidden="true">
-                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 16 17" fill="none" preserveAspectRatio="xMidYMid meet">
-                  <path d="M2.41002 14.2237L13.7237 2.91001M0 8.54529H16M8.0453 16.5V0.5M2.36688 2.91001L13.6806 14.2237" stroke="currentColor" strokeWidth="1.5" />
-                </svg>
+              <div menu-link="misc">
+                <WebflowBadge href={socials.webflowPartner} />
               </div>
-              <div data-menu-misc className="navbar_local-component is-menu">
+              <div menu-link="misc" className="navbar_local-component is-menu">
                 <div className="navbar_icons-wrapper">
                   <SoundButton />
                 </div>

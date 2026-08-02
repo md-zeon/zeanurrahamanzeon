@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect } from "react";
-import { brand, footer, socials } from "@/data/site";
+import { useEffect, useRef } from "react";
+import { gsap } from "@/lib/gsap";
+import { audio, brand, footer, socials } from "@/data/site";
 import Clock from "./Clock";
 
 function WebflowLogo() {
@@ -21,9 +22,75 @@ function WebflowLogo() {
 }
 
 export default function Footer() {
+  const ref = useRef<HTMLElement>(null);
+
   useEffect(() => {
     const year = document.querySelector(".footer_year");
     if (year) year.textContent = String(new Date().getFullYear());
+  }, []);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const ctx = gsap.context(() => {
+      el.querySelectorAll<HTMLElement>(".footer_link").forEach((link) => {
+        const textElement = link.querySelector<HTMLElement>(".text-size-small");
+        if (!textElement) return;
+
+        const originalText = textElement.textContent ?? "";
+        const iterations = 7;
+        const totalDuration = 0.3;
+        const stepDuration = totalDuration / (iterations * 2);
+        let currentTimeline: gsap.core.Timeline | null = null;
+
+        const scramble = (predicate: (index: number) => boolean) =>
+          originalText
+            .split("")
+            .map((char, index) => (predicate(index) ? (Math.random() > 0.5 ? "1" : "0") : char))
+            .join("");
+
+        const textTween = (text: () => string): gsap.TweenVars => ({
+          duration: stepDuration,
+          text: text as unknown as string,
+          ease: "expo.out",
+        });
+
+        link.addEventListener("mouseenter", () => {
+          if (currentTimeline) currentTimeline.kill();
+          currentTimeline = gsap.timeline();
+          for (let i = 0; i < originalText.length; i++) {
+            currentTimeline.to(
+              textElement,
+              textTween(() => scramble((index) => index <= i)),
+              `+=${stepDuration}`
+            );
+          }
+          currentTimeline.to(textElement, { duration: 0.1, text: originalText });
+        });
+
+        link.addEventListener("mouseleave", () => {
+          if (currentTimeline) currentTimeline.kill();
+          currentTimeline = gsap.timeline();
+          for (let i = originalText.length - 1; i >= 0; i--) {
+            currentTimeline.to(
+              textElement,
+              textTween(() => scramble((index) => index >= i)),
+              `+=${stepDuration}`
+            );
+          }
+          for (let i = originalText.length - 1; i >= 0; i--) {
+            currentTimeline.to(
+              textElement,
+              textTween(() => scramble((index) => index < i)),
+              `+=${stepDuration}`
+            );
+          }
+        });
+      });
+    }, el);
+
+    return () => ctx.revert();
   }, []);
 
   const columns = [
@@ -32,7 +99,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="footer_component">
+    <footer className="footer_component" ref={ref}>
       <div className="padding-global is-bigger">
         <div className="footer_comp">
           <div className="container-large">
@@ -41,14 +108,14 @@ export default function Footer() {
                 <div className="w-layout-grid footer_top-wrapper">
                   <div className="footer_left-wrapper">
                     <div className="footer_logo-link-wrapper">
-                      <Link href="/" className="navbar_logo-link w-nav-brand">
+                      <Link href="/" className="navbar_logo-link w-nav-brand" data-audio={audio.scramble}>
                         <div className="navbar_logo">{brand.logoStart}</div>
                         <div className="navbar_logo is-animation">{brand.logoEnd}</div>
                       </Link>
                     </div>
                     <div className="footer_tag">
                       <div className="align-right">
-                        <a href={socials.webflowPartner} target="_blank" className="home-header_badge-link w-inline-block">
+                        <a href={socials.webflowPartner} target="_blank" className="home-header_badge-link w-inline-block" data-audio={audio.scramble}>
                           <WebflowLogo />
                           <div className="text-size-small text-weight-medium text-style-allcaps">Webflow Certified Partner</div>
                         </a>
@@ -65,7 +132,7 @@ export default function Footer() {
                           </div>
                           <div className="footer_link-list">
                             {col.links.map((link, i) => (
-                              <a key={link.href} href={link.href} className="footer_link w-inline-block">
+                              <a key={link.href} href={link.href} className="footer_link w-inline-block" data-audio={audio.scramble}>
                                 <div className="text-caption-2 text-color-teritary">[{String(col.start + i).padStart(2, "0")}]</div>
                                 <div className="text-size-small text-style-allcaps">{link.label}</div>
                               </a>
@@ -80,7 +147,7 @@ export default function Footer() {
                         <div className="footer_link-wrapper">
                           <div className="footer_link-list">
                             {footer.connect.map((link, i) => (
-                              <a key={link.href} href={link.href} target="_blank" className="footer_link w-inline-block">
+                              <a key={link.href} href={link.href} target="_blank" className="footer_link w-inline-block" data-audio={audio.scramble}>
                                 <div className="text-caption-2 text-color-teritary">[{String(9 + i).padStart(2, "0")}]</div>
                                 <div className="text-size-small text-style-allcaps">{link.label}</div>
                               </a>
@@ -88,7 +155,7 @@ export default function Footer() {
                           </div>
                           <div className="footer_link-list">
                             {footer.connectMore.map((link, i) => (
-                              <a key={link.href} href={link.href} target="_blank" className="footer_link w-inline-block">
+                              <a key={link.href} href={link.href} target="_blank" className="footer_link w-inline-block" data-audio={audio.scramble}>
                                 <div className="text-caption-2 text-color-teritary">[{String(13 + i).padStart(2, "0")}]</div>
                                 <div className="text-size-small text-style-allcaps">{link.label}</div>
                               </a>

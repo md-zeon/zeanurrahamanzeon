@@ -19,4 +19,4 @@ gsap.registerPlugin(
   Draggable
 );
 
-export { gsap, ScrollTrigger, SplitText };
+export { gsap, ScrollTrigger, SplitText, Observer };
