@@ -3,22 +3,74 @@
 @import "./styles/migrated.css" layer(components);
 
 @theme {
+  /* ---------- Color tokens ---------- */
   --color-brand-black: #0a090f;
   --color-brand-white: #efefe6;
   --color-brand-yellow: #f8ff31;
   --color-brand-purple: #5542ff;
   --color-brand-darker-white: #c2c2bb;
   --color-neutral-mid-grey: #afafaf;
+  --color-neutral-dark-grey: #2d2d2d;
+  --color-neutral-light-grey: #ddd;
   --color-neutral-black: #0a090f;
   --color-neutral-white: #efefe6;
   --color-border-tertiary: #444;
+  --color-white-10: #efefe61a;
+  --color-white-20: #efefe633;
+  --color-white-30: #efefe64d;
+  --color-black-30: #0a090e4d;
+  --color-focus-ring: #4d65ff;
 
+  /* ---------- Typography tokens ---------- */
   --font-brockmann: "Brockmann", Tahoma, sans-serif;
   --font-roboto-mono: "Roboto Mono", monospace;
 
+  --text-h0: 7vw 90%;
+  --text-h1: 4.5rem 100%;
+  --text-h2: 3rem 120%;
+  --text-h3: 2.5rem 120%;
+  --text-h4: 2rem 130%;
+  --text-h5: 1.5rem 140%;
+  --text-h6: 1rem 140%;
+  --text-tiny: 0.75rem 150%;
+  --text-small: 0.875rem 150%;
+  --text-regular: 1rem 140%;
+  --text-medium: 1.125rem 140%;
+  --text-large: 1.25rem 140%;
+  --text-caption-2: 0.625rem 120%;
+
+  --tracking-h0: -0.2875rem;
+  --tracking-h1: -0.135rem;
+  --tracking-h2: -0.06rem;
+  --tracking-large: -0.05rem;
+
+  /* ---------- Radius / elevation ---------- */
+  --radius-btn: 0.25rem;
+  --radius-pill: 2rem;
+
+  --z-header: 2;
+  --z-main: 3;
+  --z-badge: 3;
+  --z-overlay: 9999;
+
+  /* ---------- Spacing tokens ---------- */
+  --spacing-section-large: 7rem;
+  --spacing-section-medium: 6rem;
+  --spacing-section-small: 4rem;
+  --spacing-gutter-bigger: 4.37rem;
+
+  /* ---------- Motion tokens ---------- */
+  --ease-power2-out: cubic-bezier(0.5, 1, 0.89, 1);
+  --ease-power3-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-expo-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* ---------- Breakpoints (Webflow vocabulary) ---------- */
   --breakpoint-tablet: 991px;
   --breakpoint-mobile-portrait: 767px;
   --breakpoint-mobile-landscape: 479px;
+  --breakpoint-desktop: 1280px;
+  --breakpoint-wide: 1440px;
+  --breakpoint-ultrawide: 1920px;
 }
 
 /* Webflow token aliases (referenced by migrated.css) */

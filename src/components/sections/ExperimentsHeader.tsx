@@ -1,6 +1,7 @@
 import { experimentsHeader } from "@/data/experiments";
 import { workHeader } from "@/data/work";
 import { audio } from "@/data/site";
+import Link from "next/link";
 import { Asterisk, WebflowLogo } from "../shared";
 
 export default function ExperimentsHeader() {
@@ -58,7 +59,7 @@ export default function ExperimentsHeader() {
                               {experimentsHeader.button1}
                             </div>
                           </a>
-                          <a
+                          <Link
                             id="home-header-button-2"
                             data-audio={audio.hover}
                             header-content-type="button"
@@ -68,7 +69,7 @@ export default function ExperimentsHeader() {
                             <div className="button-text">
                               {experimentsHeader.button2}
                             </div>
-                          </a>
+                          </Link>
                         </div>
                       </div>
                       <div

@@ -12,6 +12,7 @@
 
 # testing
 /coverage
+AUDIT
 
 # next.js
 /.next/

@@ -36,34 +36,6 @@ export const experimentsStack = [
 
 export const experimentsCards = [
   {
-    index: "project_001",
-    title: "Spaceman",
-    href: "https://spaceman-gsap.webflow.io/",
-    poster: "/assets/videos/Videos/Experiments/thumbnails/spaceman-gsap---new-thumbnail.webp",
-    video: "/assets/videos/Videos/Experiments/spaceman-gsap---new-thumbnail.mp4",
-  },
-  {
-    index: "project_002",
-    title: "Noirve",
-    href: "https://noirve.webflow.io/",
-    poster: "/assets/videos/Videos/Experiments/thumbnails/noirve---new-thumbnail.webp",
-    video: "/assets/videos/Videos/Experiments/noirve---new-thumbnail.mp4",
-  },
-  {
-    index: "project_003",
-    title: "Pitch",
-    href: "https://pitch-rebuild.webflow.io/",
-    poster: "/assets/videos/Videos/Experiments/thumbnails/pitch---new-thumbnail.webp",
-    video: "/assets/videos/Videos/Experiments/pitch---new-thumbnail.mp4",
-  },
-  {
-    index: "project_004",
-    title: "Plink",
-    href: "https://plink-rebuild.webflow.io/",
-    poster: "/assets/videos/Videos/Experiments/thumbnails/plink---new-thumbnail.webp",
-    video: "/assets/videos/Videos/Experiments/plink---new-thumbnail.mp4",
-  },
-  {
     index: "project_005",
     title: "Bertani",
     href: "https://bertani-rebuild.webflow.io/",
@@ -84,17 +56,4 @@ export const experimentsCards = [
     poster: "/assets/videos/Videos/Experiments/thumbnails/pizza---new-thumbnail.webp",
     video: "/assets/videos/Videos/Experiments/scramble-pizza-chaos---new-thumbnail.mp4",
   },
-  {
-    index: "project_008",
-    title: "Callisto",
-    href: "https://callisto-clonable.webflow.io/",
-    poster: "/assets/videos/Videos/Experiments/thumbnails/callisto---new-thumbnail.webp",
-    video: "/assets/videos/Videos/Experiments/thumbnails/callisto---new-thumbnail.webp",
-  },
 ];
-
-export const experimentsCta = {
-  line1: "Like what",
-  line2: "you",
-  line3: "see?",
-};

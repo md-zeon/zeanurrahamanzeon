@@ -5,8 +5,6 @@ import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { ScrambleTextPlugin } from "gsap/ScrambleTextPlugin";
 import { SplitText } from "gsap/SplitText";
 import { TextPlugin } from "gsap/TextPlugin";
-import { InertiaPlugin } from "gsap/InertiaPlugin";
-import { Draggable } from "gsap/Draggable";
 
 gsap.registerPlugin(
   ScrollTrigger,
@@ -14,9 +12,7 @@ gsap.registerPlugin(
   ScrollToPlugin,
   ScrambleTextPlugin,
   SplitText,
-  TextPlugin,
-  InertiaPlugin,
-  Draggable
+  TextPlugin
 );
 
 export { gsap, ScrollTrigger, SplitText, Observer };

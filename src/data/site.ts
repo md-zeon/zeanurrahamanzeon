@@ -10,7 +10,6 @@ export const brand = {
     "I create immersive, high-performing Webflow websites tailored for startups, scale-ups, and design-led brands that value performance, scalability, and conversion.",
   heroVideo: "/assets/videos/Videos/CTA/cta-loop---new.mp4",
   heroVideoCaption: "VIDEO_459",
-  available: true,
 };
 
 export const audio = {
@@ -24,7 +23,6 @@ export const audio = {
 
 export const soundWaves = {
   light: "/assets/images/6894e65f6468ea9326628d4a_Sound-Waves.json",
-  black: "/assets/images/694bdfd0afc509bfab87bf07_Sound-Waves-Black.json",
 };
 
 export const photos = {

@@ -11,12 +11,6 @@ export const contactForm = {
     { label: "[for collaborators]", text: "I'm always open to partnering up with creatives, developers, agencies, and whoever is interested in my work. Send me an email and let's discuss." },
     { label: "[for questions]", text: "Have questions? Check out the FAQ below or feel free to contact me." },
   ],
-  fields: [
-    { label: "What's your name?", name: "Full-Name", placeholder: "Full Name", type: "text", required: true, half: true },
-    { label: "What's your email?", name: "Email", placeholder: "name@company.com", type: "email", required: true, half: true },
-    { label: "What's your brief?", name: "Message", placeholder: "Write your brief here: I need ___ with this scope, pages, specific needs ___.", type: "textarea", required: true },
-    { label: "Current website URL", name: "Current-website-URL", placeholder: "www.example.com", type: "url", half: true },
-  ],
   companyStage: {
     label: "Company stage",
     options: ["Early-stage startup", "Mid-stage startup", "Late-stage startup", "Scaleup", "Enterprise", "Not applicable"],

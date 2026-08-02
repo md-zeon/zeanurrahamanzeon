@@ -90,7 +90,7 @@ export const workProjects: WorkProject[] = [
     ariaLabel: "Pickaxe",
     tags: ["Marketplace", "Mining & Construction"],
     href: "/work/pickaxe",
-    poster: "/assets/videos/Videos/Work/pickaxe/pickaxe---new-thumbnail.webp",
+    poster: "/assets/videos/Videos/Work/pickaxe/thumbnails/pickaxe---new-thumbnail.webp",
     video: "/assets/videos/Videos/Work/pickaxe/pickaxe---new-thumb.mp4",
     result: "3–5×",
     resultLabel: "stronger performance and better-qualified leads over time",

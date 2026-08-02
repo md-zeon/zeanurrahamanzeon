@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Link from "next/link";
 import { gsap, SplitText } from "@/lib/gsap";
 import { aboutHeader } from "@/data/about";
 import { audio } from "@/data/site";
@@ -139,9 +140,9 @@ export default function AboutHeader() {
                           <a id="about-header-button-1" data-audio={audio.hover} href="/contact" className="button w-inline-block">
                             <div className="button-text">{aboutHeader.button1}</div>
                           </a>
-                          <a id="about-header-button-2" data-audio={audio.hover} href="/work" className="button is-secondary w-inline-block">
+                          <Link id="about-header-button-2" data-audio={audio.hover} href="/work" className="button is-secondary w-inline-block">
                             <div className="button-text">{aboutHeader.button2}</div>
-                          </a>
+                          </Link>
                         </div>
                       </div>
                       <div className="about-header_inner-border" />
