@@ -3,7 +3,6 @@
 import { useEffect, useRef, type ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
-import { createLenis, setLenis } from "@/lib/lenis";
 import { initSound, playSound } from "@/lib/sound";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
@@ -15,16 +14,6 @@ export default function SiteShell({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     initSound();
-    const lenis = createLenis();
-    setLenis(lenis);
-
-    const raf = (time: number) => {
-      lenis.raf(time);
-    };
-    gsap.ticker.add(raf);
-    gsap.ticker.lagSmoothing(0);
-
-    lenis.on("scroll", ScrollTrigger.update);
 
     const onAudioOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
@@ -41,11 +30,8 @@ export default function SiteShell({ children }: { children: ReactNode }) {
     document.addEventListener("click", onAudioClick);
 
     return () => {
-      gsap.ticker.remove(raf);
       document.removeEventListener("pointerover", onAudioOver);
       document.removeEventListener("click", onAudioClick);
-      setLenis(null);
-      lenis.destroy();
     };
   }, []);
 
@@ -59,11 +45,9 @@ export default function SiteShell({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
-    const lenis = createLenis();
-    lenis.scrollTo(0, { immediate: true });
+    window.scrollTo(0, 0);
     const t = setTimeout(() => {
       ScrollTrigger.refresh();
-      lenis.destroy();
     }, 120);
     return () => clearTimeout(t);
   }, [pathname]);

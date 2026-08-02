@@ -5,36 +5,14 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "@/lib/gsap";
 import { navLinks, brand } from "@/data/site";
-import { playSound } from "@/lib/sound";
 import SoundButton from "./SoundButton";
 import Clock from "./Clock";
 
 function Logo({ className }: { className?: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const words = el.querySelectorAll<HTMLElement>(".navbar_logo-word");
-    const tl = gsap.timeline({ paused: true });
-    tl.to(words, { yPercent: -105, duration: 0.4, stagger: 0.05, ease: "power2.inOut" });
-    const onEnter = () => tl.play();
-    const onLeave = () => tl.reverse();
-    el.addEventListener("mouseenter", onEnter);
-    el.addEventListener("mouseleave", onLeave);
-    return () => {
-      el.removeEventListener("mouseenter", onEnter);
-      el.removeEventListener("mouseleave", onLeave);
-    };
-  }, []);
-
+  const isAnimation = className?.includes("is-animation");
   return (
-    <div ref={ref} className={`navbar_logo ${className ?? ""}`}>
-      {[brand.logoStart, brand.logoEnd].map((word, i) => (
-        <span key={i} className="navbar_logo-word">
-          {word}
-        </span>
-      ))}
+    <div className={`navbar_logo ${className ?? ""}`}>
+      {isAnimation ? brand.logoEnd : brand.logoStart}
     </div>
   );
 }
@@ -43,37 +21,132 @@ export default function Navbar() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
   const tlRef = useRef<gsap.core.Timeline | null>(null);
   const openRef = useRef(false);
 
   useEffect(() => {
     const root = rootRef.current;
-    if (!root) return;
-    const bg = root.querySelector(".navbar_h-menu-bg-wrapper");
-    const bgSecond = root.querySelector(".navbar_h-menu-bg.is-second");
-    const menu = root.querySelector(".navbar_h-menu-inner");
-    const links = root.querySelectorAll(".navbar_h-link");
-    const misc = root.querySelectorAll(".navbar_h-menu [data-menu-misc]");
+    const overlay = overlayRef.current;
+    if (!root || !overlay) return;
+    const bg = overlay.querySelector(".navbar_h-menu-bg-wrapper");
+    const bgSecond = overlay.querySelector(".navbar_h-menu-bg.is-second");
+    const menu = overlay.querySelector(".navbar_h-menu-inner");
+    const links = overlay.querySelectorAll(".navbar_h-link");
+    const misc = overlay.querySelectorAll(".navbar_h-menu [data-menu-misc]");
     const lines = gsap.utils.toArray<HTMLElement>(root.querySelectorAll(".menu-icon_line-top, .menu-icon_line-middle-inner, .menu-icon_line-bottom"));
 
     const tl = gsap.timeline({ paused: true });
-    tl.set(root, { pointerEvents: "none" })
-      .set(menu, { display: "none" })
-      .to(bg, { xPercent: 0, duration: 0, ease: "none" })
-      .add(() => gsap.set(menu, { display: "block" }))
-      .fromTo(bg, { xPercent: -100 }, { xPercent: 0, duration: 0.5, ease: "power2.inOut" })
+    tl.fromTo(bg, { xPercent: -100 }, { xPercent: 0, duration: 0.5, ease: "power2.inOut" })
       .fromTo(bgSecond, { xPercent: -100 }, { xPercent: 0, duration: 0.5, ease: "power2.inOut" }, "-=0.4")
-      .fromTo(menu, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, "-=0.3")
-      .from(links, { yPercent: 110, opacity: 0, duration: 0.5, stagger: 0.06, ease: "power3.out" }, "-=0.25")
-      .from(misc, { opacity: 0, duration: 0.4, stagger: 0.05 }, "-=0.3")
+      .fromTo(menu, { xPercent: 100 }, { xPercent: 0, duration: 0.6, ease: "power2.inOut" }, "-=0.4")
+      .fromTo(links, { yPercent: 110, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: "power3.out" }, "-=0.35")
+      .fromTo(misc, { opacity: 0 }, { opacity: 1, duration: 0.4, stagger: 0.05 }, "-=0.3")
       .to(lines[0], { rotate: 45, y: 4, duration: 0.35 }, 0)
       .to(lines[1], { scaleX: 0, duration: 0.3 }, 0)
       .to(lines[2], { rotate: -45, y: -4, duration: 0.35 }, 0);
+    tl.eventCallback("onStart", () => gsap.set(overlay, { display: "block" }));
+    tl.eventCallback("onReverseComplete", () => gsap.set(overlay, { display: "none" }));
     tlRef.current = tl;
 
     return () => {
       tl.kill();
     };
+  }, []);
+
+  useEffect(() => {
+    const root = rootRef.current;
+    const overlay = overlayRef.current;
+    if (!root || !overlay) return;
+    const cleanup: Array<() => void> = [];
+    [root, overlay].forEach((scope) => {
+      scope.querySelectorAll(".navbar_logo-link").forEach((link) => {
+        const logo = link.querySelector(".navbar_logo.is-animation");
+        if (!logo) return;
+        const onEnter = () =>
+          gsap.to(logo, {
+            duration: 0.5,
+            scrambleText: { text: "encutescu", chars: "110101110", speed: 0.3 },
+          });
+        const onLeave = () =>
+          gsap.to(logo, {
+            duration: 0.5,
+            scrambleText: { text: brand.logoEnd, chars: "110101110", speed: 0.3 },
+          });
+        link.addEventListener("mouseenter", onEnter);
+        link.addEventListener("mouseleave", onLeave);
+        cleanup.push(() => {
+          link.removeEventListener("mouseenter", onEnter);
+          link.removeEventListener("mouseleave", onLeave);
+        });
+      });
+    });
+    return () => cleanup.forEach((fn) => fn());
+  }, []);
+
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+    const menu = root.querySelector(".navbar_menu");
+    const linkBg = root.querySelector(".navbar_link-bg");
+    if (!menu || !linkBg) return;
+    let hasHoveredBefore = false;
+    const links = menu.querySelectorAll<HTMLElement>(".navbar_link");
+
+    const positionVars = (link: HTMLElement) => {
+      const linkRect = link.getBoundingClientRect();
+      const menuRect = menu.getBoundingClientRect();
+      return {
+        x: linkRect.left - menuRect.left,
+        width: linkRect.width,
+        height: linkRect.height,
+        borderRadius: "0.25rem",
+        border: "1px solid rgba(239, 239, 230, 0.20)",
+        background: "rgba(239, 239, 230, 0.05)",
+        backdropFilter: "blur(100px)",
+      };
+    };
+
+    const cleanup: Array<() => void> = [];
+    links.forEach((link) => {
+      const onEnter = () => {
+        const vars = positionVars(link);
+        if (!hasHoveredBefore) {
+          gsap.set(linkBg, vars);
+          hasHoveredBefore = true;
+        }
+        gsap.to(linkBg, { ...vars, duration: 0.4, ease: "expo.out" });
+      };
+      const onLeave = () => {
+        gsap.to(linkBg, {
+          borderRadius: 0,
+          border: "none",
+          background: "transparent",
+          backdropFilter: "none",
+          duration: 0.4,
+          ease: "expo.out",
+        });
+      };
+      link.addEventListener("mouseenter", onEnter);
+      link.addEventListener("mouseleave", onLeave);
+      cleanup.push(() => {
+        link.removeEventListener("mouseenter", onEnter);
+        link.removeEventListener("mouseleave", onLeave);
+      });
+    });
+
+    const onMenuLeave = () => {
+      gsap.to(linkBg, {
+        background: "transparent",
+        border: "none",
+        backdropFilter: "none",
+        duration: 0,
+        ease: "expo.out",
+      });
+    };
+    menu.addEventListener("mouseleave", onMenuLeave);
+    cleanup.push(() => menu.removeEventListener("mouseleave", onMenuLeave));
+    return () => cleanup.forEach((fn) => fn());
   }, []);
 
   const runTimeline = (open: boolean) => {
@@ -104,19 +177,6 @@ export default function Navbar() {
     tlRef.current?.timeScale(1.4).reverse();
   }, [pathname]);
 
-  const handleEnter = (e: React.MouseEvent) => {
-    const el = e.currentTarget as HTMLElement;
-    const target = el.querySelector(".navbar_link-bg") as HTMLElement;
-    if (target) gsap.fromTo(target, { scaleX: 0 }, { scaleX: 1, duration: 0.4, ease: "power2.out", overwrite: "auto" });
-    playSound("https://bjornflow-assets.b-cdn.net/Audio/button%20hover.wav", 0.5);
-  };
-
-  const handleLeave = (e: React.MouseEvent) => {
-    const el = e.currentTarget as HTMLElement;
-    const target = el.querySelector(".navbar_link-bg") as HTMLElement;
-    if (target) gsap.to(target, { scaleX: 0, duration: 0.4, ease: "power2.out", overwrite: "auto" });
-  };
-
   const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
 
   return (
@@ -146,13 +206,11 @@ export default function Navbar() {
                     data-color="#ffffff"
                     data-audio="https://bjornflow-assets.b-cdn.net/Audio/button%20hover.wav"
                     className="navbar_link w-inline-block"
-                    onMouseEnter={handleEnter}
-                    onMouseLeave={handleLeave}
                   >
                     <div className="text-size-small text-weight-normal text-style-allcaps">{link.label}</div>
-                    <div className="navbar_link-bg" />
                   </Link>
                 ))}
+                <div className="navbar_link-bg" />
               </nav>
 
               <div className="navbar_right-wrapper">
@@ -189,11 +247,18 @@ export default function Navbar() {
         </div>
       </div>
 
-      <div className="navbar_h-menu-component">
+      <div ref={overlayRef} className="navbar_h-menu-component">
         <div className="navbar_h-menu-inner">
           <div className="navbar_h-menu">
             <div className="navbar_h-logo-wrapper">
-              <Logo />
+              <Link
+                href="/"
+                data-audio="https://bjornflow-assets.b-cdn.net/Audio/buttons%20scramble.wav"
+                className="navbar_logo-link w-nav-brand"
+              >
+                <Logo />
+                <Logo className="is-animation" />
+              </Link>
             </div>
             <nav role="navigation" className="navbar_h-menu-wrapper w-nav-menu">
               {navLinks.map((link) => (

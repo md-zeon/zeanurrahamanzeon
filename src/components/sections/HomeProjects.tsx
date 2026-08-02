@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { featuredProjects } from "@/data/home";
-import { getLenis } from "@/lib/lenis";
 import AutoVideo from "../media/AutoVideo";
 
 export default function HomeProjects() {
@@ -137,10 +136,9 @@ export default function HomeProjects() {
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, index: number) => {
     e.preventDefault();
     const el = ref.current;
-    const lenis = getLenis();
-    if (!el || !lenis) return;
+    if (!el) return;
     const projectHeight = window.innerHeight * 0.7;
-    lenis.scrollTo(el.offsetTop + index * projectHeight, { duration: 1.5, easing: (t: number) => 1 - Math.pow(1 - t, 4) });
+    window.scrollTo({ top: el.offsetTop + index * projectHeight, behavior: "smooth" });
   };
 
   return (

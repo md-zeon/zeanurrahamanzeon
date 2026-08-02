@@ -537,3 +537,9 @@
     width: 80vw;
   }
 }
+
+@media screen and (max-width: 991px) {
+  .navbar_menu {
+    display: none;
+  }
+}
