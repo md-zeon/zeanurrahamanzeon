@@ -145,15 +145,15 @@ export default function HomeProjects() {
   };
 
   return (
-    <section className="section_home-projects" ref={ref}>
-      <div className="home-projects_track">
-        <div className="home-projects_layout">
+    <section className="relative z-[2] min-h-[100vh] max-h-[100vh] w-full overflow-hidden" ref={ref}>
+      <div className="home-projects_track relative h-[600vh] w-full overflow-hidden">
+        <div className="relative grid h-full w-full max-h-[100vh] auto-cols-fr grid-cols-1 grid-rows-1 content-start items-center justify-center justify-items-center gap-0 py-8 [transform-style:preserve-3d] max-[767px]:pb-32">
           {featuredProjects.map((project, i) => (
-            <div key={project.index} data-index={i + 1} className={`home-projects_project ${i === 0 ? "first" : "middle"}`}>
+            <div key={project.index} data-index={i + 1} className={`home-projects_project ${i === 0 ? "first" : "middle"} relative z-[2] flex h-[54vw] w-[90%] [grid-area:1/1/2/2] [transform-origin:50%_0] [transform-style:preserve-3d] min-[1280px]:h-full min-[1280px]:[transform:perspective(100vh)]`}>
               <div className="absolute left-[-2.7rem] top-1/2 [transform:rotate(-90deg)_translateY(-50%)] max-[767px]:left-[-2.3rem] max-[479px]:left-[-2rem]">
                 <div className="text-caption-2">PROJECT_{project.index}</div>
               </div>
-              <div className="home-projects_video relative inset-0 z-[2] aspect-[16/9.5] h-full w-full max-h-[93.5vh] overflow-hidden rounded-lg max-[767px]:rounded w-embed">
+              <div className="relative inset-0 z-[2] aspect-[16/9.5] h-full w-full max-h-[93.5vh] overflow-hidden rounded-lg max-[767px]:rounded w-embed">
                 <AutoVideo src={project.video} />
               </div>
             </div>
@@ -161,11 +161,11 @@ export default function HomeProjects() {
         </div>
       </div>
 
-      <div className="home-projects_nav-component">
+      <div className="absolute top-1/2 right-[-7rem] z-[3] hidden -translate-y-1/2 flex-col items-stretch justify-end gap-2 min-[1280px]:flex min-[1440px]:right-[-6rem]">
         {featuredProjects.map((project, i) => (
-          <a key={project.index} data-audio="https://bjornflow-assets.b-cdn.net/Audio/secondary%20hover%20sound.wav" data-project={i + 1} href="#" className={`home-projects_nav-wrapper is-${i + 1} w-inline-block`} onClick={(e) => handleNavClick(e, i)}>
+          <a key={project.index} data-audio="https://bjornflow-assets.b-cdn.net/Audio/secondary%20hover%20sound.wav" data-project={i + 1} href="#" className={`home-projects_nav-wrapper is-${i + 1} w-inline-block flex flex-col items-start justify-start gap-1 text-brand-white no-underline`} onClick={(e) => handleNavClick(e, i)}>
             <div className="text-caption-2">[0{i + 1}]</div>
-            <div className="home-projects_nav-image-wrapper">
+            <div className="home-projects_nav-image-wrapper h-[6.25rem] w-[8.85rem] overflow-hidden rounded min-[1280px]:border min-[1280px]:border-transparent">
               <div className="h-full w-full object-cover w-embed">
                 <AutoVideo src={project.navVideo} />
               </div>
@@ -174,10 +174,10 @@ export default function HomeProjects() {
         ))}
       </div>
 
-      <div className="home-projects_banner-component">
+      <div className="home-projects_banner-component absolute bottom-8 left-8 z-[3] flex w-full max-w-[25rem] flex-col gap-4 rounded border border-white-20 bg-[#0a090e4d] p-6 shadow-[inset_0_0_0_1000px_#0a090e33] backdrop-blur-[100px] max-[767px]:bottom-16 max-[767px]:gap-6 max-[767px]:p-4 max-[479px]:bottom-[12%] max-[479px]:left-[4%] max-[479px]:w-[90%]">
         <div className="flex-none">
-          <div className="heading-style-h3">Plus X Innovation</div>
-          <div className="text-size-regular">Helped the marketing team migrate to Webflow, optimise SEO, and scale their site with a flexible CMS.</div>
+          <div className="heading-style-h3 block max-w-full max-h-24 overflow-hidden whitespace-normal break-words min-[992px]:max-h-16">Plus X Innovation</div>
+          <div className="text-size-regular block max-w-full max-h-24 overflow-hidden whitespace-normal break-words min-[992px]:max-h-16">Helped the marketing team migrate to Webflow, optimise SEO, and scale their site with a flexible CMS.</div>
         </div>
         <div className="btn-group">
           <a href="#" className="btn btn-small">
