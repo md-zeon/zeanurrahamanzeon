@@ -810,13 +810,6 @@ input[type="file"]:focus-visible {
     }
   }
 
-  /* FAQ header logos element: the capture has the id w-node-b881a5f7...
-   which gives justify-self:end on the 1fr column (so the logos shrink
-   to content width rather than stretching). */
-  .logos_element-component.is-faq {
-    justify-self: end;
-  }
-
   /* ---------- Swiper (about-fun cards slider, from about.html <style>) ---------- */
 
   :root {
@@ -1330,61 +1323,6 @@ input[type="file"]:focus-visible {
     padding-top: 1.5rem;
     display: flex;
   }
-  .logos_banner-component {
-    grid-column-gap: 0.7rem;
-    grid-row-gap: 0.7rem;
-    padding-top: 0.333333rem;
-    padding-bottom: 0.333333rem;
-    display: flex;
-    position: relative;
-  }
-  .logos_banner-component.is-bottom {
-    justify-content: flex-end;
-  }
-  .logos_banner-layout {
-    grid-column-gap: 0.7rem;
-    grid-row-gap: 0.7rem;
-    flex: none;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-  }
-  .logos_banner-wrapper {
-    grid-column-gap: 0.3rem;
-    grid-row-gap: 0.3rem;
-    padding-left: 0.15rem;
-    padding-right: 0.15rem;
-    display: flex;
-    overflow: hidden;
-  }
-  .logos_banner-line {
-    background-color: var(--color-brand--white);
-    width: 0.094rem;
-    height: 0.75rem;
-    transform: rotate(15deg);
-  }
-  .logos_banner-text {
-    letter-spacing: 0;
-    text-transform: uppercase;
-    flex: none;
-    margin-top: 0.1rem;
-    font-size: 0.65rem;
-    font-weight: 400;
-    line-height: 120%;
-  }
-  .logos_banner {
-    border-top: 1px solid var(--color-neutral--white);
-    border-bottom: 1px solid var(--color-neutral--white);
-    white-space: nowrap;
-    width: 100%;
-    display: flex;
-    position: relative;
-    overflow: hidden;
-  }
-  .logos_banner.is-bottom {
-    justify-content: flex-end;
-  }
-
   .home-projects_text-wrapper {
     position: absolute;
     inset: 50% auto auto -2.7rem;
@@ -1849,12 +1787,6 @@ input[type="file"]:focus-visible {
     place-items: stretch start;
     display: grid;
   }
-  .testimonial_line-bg {
-    background-color: var(--color-brand--white);
-    position: absolute;
-    inset: 0%;
-  }
-
   .about-story_link {
     cursor: pointer;
     border-bottom: 2px solid #efefe64d;
@@ -1900,18 +1832,6 @@ input[type="file"]:focus-visible {
     margin-top: -0.5rem;
     padding-left: 7.3vw;
     display: flex;
-  }
-  .logos_element-wrapper {
-    grid-column-gap: 0.6rem;
-    grid-row-gap: 0.6rem;
-    justify-content: flex-end;
-    display: flex;
-  }
-  .logos_element-line {
-    width: 100%;
-    height: 1px;
-    position: relative;
-    overflow: hidden;
   }
   .why_paragraph-wrapper {
     border-bottom: 1px solid #efefe633;
@@ -2018,20 +1938,6 @@ input[type="file"]:focus-visible {
     margin-top: -0.5rem;
     padding-left: 7.3vw;
     display: flex;
-  }
-  .logos_element-component {
-    grid-column-gap: 0.25rem;
-    grid-row-gap: 0.25rem;
-    flex-flow: column;
-    justify-content: flex-end;
-    align-items: stretch;
-    width: 100%;
-    max-width: 26rem;
-    padding-right: 0.2rem;
-    display: flex;
-  }
-  .logos_element-component.is-faq {
-    border-bottom: 1px solid #efefe633;
   }
   .testimonial_bottom {
     border-left: 1px solid #efefe633;
@@ -2405,11 +2311,6 @@ input[type="file"]:focus-visible {
     height: 100%;
     display: flex;
     position: relative;
-  }
-  .logos_line-bg {
-    background-color: var(--color-brand--white);
-    position: absolute;
-    inset: 0%;
   }
   .lab_controls-wrapper {
     justify-content: space-between;
@@ -2860,11 +2761,6 @@ input[type="file"]:focus-visible {
     }
   }
   @media screen and (max-width: 991px) {
-    .logos_element-component {
-      width: 28vw;
-    }
-  }
-  @media screen and (max-width: 991px) {
     .home-services_header {
       grid-template-columns: 1fr;
       place-items: start;
@@ -2975,17 +2871,6 @@ input[type="file"]:focus-visible {
     .form_field-layout {
       grid-template-rows: auto auto;
       grid-template-columns: 1fr;
-    }
-  }
-  @media screen and (max-width: 767px) {
-    .logos_banner-wrapper {
-      grid-column-gap: 0.2rem;
-      grid-row-gap: 0.2rem;
-    }
-  }
-  @media screen and (max-width: 767px) {
-    .logos_banner-line {
-      height: 0.5rem;
     }
   }
   @media screen and (max-width: 767px) {
@@ -3107,14 +2992,6 @@ input[type="file"]:focus-visible {
   @media screen and (max-width: 767px) {
     .why_header-bottom {
       margin-top: -0.2rem;
-    }
-  }
-  @media screen and (max-width: 767px) {
-    .logos_element-wrapper {
-      grid-column-gap: 0.3rem;
-      grid-row-gap: 0.3rem;
-      justify-content: flex-start;
-      align-items: center;
     }
   }
   @media screen and (max-width: 767px) {
@@ -3358,12 +3235,6 @@ input[type="file"]:focus-visible {
   @media screen and (max-width: 479px) {
     .about-fun_video-misc {
       bottom: 12vw;
-    }
-  }
-  @media screen and (max-width: 479px) {
-    .logos_element-wrapper {
-      grid-column-gap: 0.3rem;
-      grid-row-gap: 0.3rem;
     }
   }
   @media screen and (max-width: 479px) {

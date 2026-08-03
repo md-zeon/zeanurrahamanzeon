@@ -5,20 +5,22 @@ import { gsap } from "@/lib/gsap";
 import { logosBannerText } from "@/data/home";
 
 function BannerLayout({ text, number }: { text: string; number?: string }) {
+  const line = "logos_banner-line h-3 w-[0.094rem] rotate-[15deg] bg-brand-white max-[767px]:h-2";
+  const row = "logos_banner-wrapper flex gap-[0.3rem] overflow-hidden px-[0.15rem] max-[767px]:gap-[0.2rem]";
   return (
-    <div className="logos_banner-layout">
-      <div className="logos_banner-wrapper">
+    <div className="logos_banner-layout flex flex-none items-center justify-center gap-[0.7rem]">
+      <div className={row}>
         {Array.from({ length: 27 }).map((_, i) => (
-          <div key={i} className="logos_banner-line" />
+          <div key={i} className={line} />
         ))}
       </div>
-      <div className="logos_banner-text">{text}</div>
-      <div className="logos_banner-wrapper">
+      <div className="logos_banner-text mt-[0.1rem] flex-none text-[0.65rem] font-normal uppercase leading-[120%] tracking-normal">{text}</div>
+      <div className={row}>
         {Array.from({ length: 27 }).map((_, i) => (
-          <div key={i} className="logos_banner-line" />
+          <div key={i} className={line} />
         ))}
       </div>
-      {number ? <div className="logos_banner-text is-number">{number}</div> : null}
+      {number ? <div className="logos_banner-text is-number mt-[0.1rem] flex-none text-[0.65rem] font-normal uppercase leading-[120%] tracking-normal">{number}</div> : null}
     </div>
   );
 }
@@ -97,11 +99,11 @@ export default function LogosBanner({ text = logosBannerText, number }: { text?:
   }, []);
 
   return (
-    <div ref={rootRef} className="logos_banner">
-      <div ref={topRef} className="logos_banner-component is-top">
+    <div ref={rootRef} className="logos_banner relative flex w-full overflow-hidden whitespace-nowrap border-y border-neutral-white">
+      <div ref={topRef} className="logos_banner-component relative flex gap-[0.7rem] py-[0.333333rem]">
         <BannerLayout text={text} number={number} />
       </div>
-      <div ref={bottomRef} className="logos_banner-component is-bottom">
+      <div ref={bottomRef} className="logos_banner-component is-bottom relative flex justify-end gap-[0.7rem] py-[0.333333rem]">
         <BannerLayout text={text} number={number} />
       </div>
     </div>

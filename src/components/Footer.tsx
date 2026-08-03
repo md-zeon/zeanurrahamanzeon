@@ -120,8 +120,8 @@ export default function Footer() {
                           <div className="text-size-small text-weight-medium text-style-allcaps">Webflow Certified Partner</div>
                         </a>
                       </div>
-                      <div className="logos_element-line">
-                        <div className="testimonial_line-bg" />
+                      <div className="relative h-px w-full overflow-hidden">
+                        <div className="absolute inset-0 bg-brand-white" />
                       </div>
                     </div>
                     <div className="grid w-full grid-cols-[minmax(auto,10rem)_minmax(200px,14rem)_.7fr] items-start justify-between gap-x-12 gap-y-4 max-[991px]:grid-cols-2 max-[991px]:justify-start max-[991px]:[place-items:start_stretch] max-[991px]:gap-24 max-[991px]:flex-wrap max-[767px]:gap-6 max-[479px]:flex max-[479px]:flex-wrap max-[479px]:items-start max-[479px]:justify-start max-[479px]:gap-12">
