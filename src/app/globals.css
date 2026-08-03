@@ -1933,15 +1933,6 @@ input[type="file"]:focus-visible {
     padding-left: 1rem;
     display: grid;
   }
-  .home-services_header-wrapper {
-    padding-top: 3.5rem;
-    padding-bottom: 1.5rem;
-    padding-right: 1.5rem;
-  }
-  .home-services_header-top {
-    justify-content: flex-start;
-    display: flex;
-  }
   .home-services_header-bottom {
     justify-content: flex-start;
     align-items: stretch;
@@ -2740,12 +2731,6 @@ input[type="file"]:focus-visible {
     .home-services_header {
       grid-template-columns: 1fr;
       place-items: start;
-    }
-  }
-  @media screen and (max-width: 991px) {
-    .home-services_header-wrapper {
-      border-right-style: none;
-      padding-top: 5rem;
     }
   }
   @media screen and (max-width: 991px) {
