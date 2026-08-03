@@ -19,7 +19,10 @@ export default function WorkHeader() {
                           header-content-type="heading-1"
                           className="heading-style-h1"
                         >
-                          {workHeader.title1} <span className="header_italic-word">{workHeader.title2}</span>
+                          {workHeader.title1}{" "}
+                          <span className="header_italic-word">
+                            {workHeader.title2}
+                          </span>
                         </h1>
                       </div>
                     </div>
@@ -34,15 +37,17 @@ export default function WorkHeader() {
                         >
                           {workHeader.paragraph}
                         </div>
-                        <div className="button-group is-grid">
+                        <div className="btn-group btn-group--grid">
                           <a
                             id="home-header-button-1"
                             data-audio={audio.hover}
                             header-content-type="button"
                             href="/contact"
-                            className="button w-inline-block"
+                            className="btn"
                           >
-                            <div className="button-text">{workHeader.buttonLabel}</div>
+                            <div className="btn__text">
+                              {workHeader.buttonLabel}
+                            </div>
                           </a>
                         </div>
                       </div>
@@ -73,15 +78,26 @@ export default function WorkHeader() {
                           className="home-header_badge-link w-inline-block"
                         >
                           <WebflowLogo />
-                          <div className="text-caption-1">{workHeader.badge}</div>
+                          <div className="text-caption-1">
+                            {workHeader.badge}
+                          </div>
                         </a>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div header-content-type="border" className="home-header_border" />
-                <div header-content-type="border" className="home-header_border is-right" />
-                <div header-content-type="border" className="home-header_border is-bottom" />
+                <div
+                  header-content-type="border"
+                  className="home-header_border"
+                />
+                <div
+                  header-content-type="border"
+                  className="home-header_border is-right"
+                />
+                <div
+                  header-content-type="border"
+                  className="home-header_border is-bottom"
+                />
               </div>
             </div>
           </div>

@@ -64,7 +64,7 @@ export function Button({
   target,
   dataAudio,
 }: ButtonProps) {
-  const className = `button inline-block ${variant === "secondary" ? "is-secondary" : ""} ${size === "small" ? "is-small" : ""}`;
+  const className = `btn ${variant === "secondary" ? "btn-secondary" : ""} ${size === "small" ? "btn-small" : ""}`;
   if (href.startsWith("http")) {
     return (
       <a
@@ -74,9 +74,7 @@ export function Button({
         data-audio={dataAudio}
         className={className}
       >
-        <div
-          className={`button-text ${variant === "primary" ? "text-brand-black" : ""}`}
-        >
+        <div className="btn__text">
           {children}
         </div>
       </a>
@@ -84,9 +82,7 @@ export function Button({
   }
   return (
     <Link href={href} data-audio={dataAudio} className={className}>
-      <div
-        className={`button-text ${variant === "primary" ? "text-brand-black" : ""}`}
-      >
+      <div className="btn__text">
         {children}
       </div>
     </Link>

@@ -172,22 +172,22 @@ export default function AboutHeader() {
                         <div id="about-header-p" className="text-size-large">
                           {aboutHeader.paragraph}
                         </div>
-                        <div className="button-group is-grid">
+                        <div className="btn-group btn-group--grid">
                           <a
                             id="about-header-button-1"
                             data-audio={audio.hover}
                             href="/contact"
-                            className="button w-inline-block"
+                            className="btn"
                           >
-                            <div className="button-text">{aboutHeader.button1}</div>
+                            <div className="btn__text">{aboutHeader.button1}</div>
                           </a>
                           <Link
                             id="about-header-button-2"
                             data-audio={audio.hover}
                             href="/work"
-                            className="button is-secondary w-inline-block"
+                            className="btn btn-secondary"
                           >
-                            <div className="button-text">{aboutHeader.button2}</div>
+                            <div className="btn__text">{aboutHeader.button2}</div>
                           </Link>
                         </div>
                       </div>

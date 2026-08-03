@@ -4,7 +4,7 @@ import AutoVideo from "../media/AutoVideo";
 
 function ArrowIcon() {
   return (
-    <div className="button-icon w-embed">
+    <div className="btn__icon w-embed">
       <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 14 14" fill="none" preserveAspectRatio="xMidYMid meet" role="img">
         <path d="M0.823227 13.4736L12.8232 1.47362M12.8232 1.47362V11.3272M12.8232 1.47362H3.17677" stroke="currentColor" />
       </svg>
@@ -36,8 +36,8 @@ export default function ExperimentsCards() {
                         <div className="work_card-overlay" />
                       </div>
                       <div className="work-projects_card-cta-wrapper">
-                        <a data-audio={audio.hover} href={card.href} target="_blank" rel="noopener noreferrer" className="button is-icon is-small is-secondary w-inline-block">
-                          <div className="button-text">View clonable</div>
+                        <a data-audio={audio.hover} href={card.href} target="_blank" rel="noopener noreferrer" className="btn btn-secondary btn-small btn-icon">
+                          <div className="btn__text">View clonable</div>
                           <ArrowIcon />
                         </a>
                       </div>

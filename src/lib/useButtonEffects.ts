@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { gsap } from "@/lib/gsap";
 
-const BTN_SELECTOR = ".button";
+const BTN_SELECTOR = ".btn";
 const SCRAMBLE_CHARS = "10";
 const SCRAMBLE_STEP = 0.2 / (7 * 2);
 const MAGNET_STRENGTH = 0.35;
@@ -23,7 +23,7 @@ export function useButtonEffects() {
       if (cleanups.has(button)) return;
       const cleanupFns: Array<() => void> = [];
 
-      const label = button.querySelector<HTMLElement>(".button-text");
+      const label = button.querySelector<HTMLElement>(".btn__text");
       let currentTimeline: gsap.core.Timeline | null = null;
 
       if (label) {

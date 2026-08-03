@@ -11,7 +11,7 @@ import { Button } from "../shared";
 
 function ArrowIcon() {
   return (
-    <div className="button-icon w-embed">
+    <div className="btn__icon w-embed">
       <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 14 14" fill="none" preserveAspectRatio="xMidYMid meet" role="img">
         <path d="M0.823227 13.4736L12.8232 1.47362M12.8232 1.47362V11.3272M12.8232 1.47362H3.17677" stroke="currentColor" />
       </svg>
@@ -118,9 +118,9 @@ export default function LabSection() {
                           href={slide.href}
                           target={slide.href.startsWith("http") ? "_blank" : undefined}
                           rel="noopener noreferrer"
-                          className="button is-secondary is-small is-icon w-inline-block"
+                          className="btn btn-secondary btn-small btn-icon"
                         >
-                          <div className="button-text">View clonable</div>
+                          <div className="btn__text">View clonable</div>
                           <ArrowIcon />
                         </a>
                       </div>

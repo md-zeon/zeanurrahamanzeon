@@ -60,9 +60,9 @@ export default function CaseStudyHeader({
                         <div id="home-header-p" header-content-type="paragraph" className="text-size-large text-color-secondary">
                           {paragraph}
                         </div>
-                        <div className="button-group is-grid">
-                          <a id="home-header-button-1" data-audio={audio.hover} header-content-type="button" href={buttonHref} className="button w-inline-block">
-                            <div className="button-text">{buttonLabel}</div>
+                        <div className="btn-group btn-group--grid">
+                          <a id="home-header-button-1" data-audio={audio.hover} header-content-type="button" href={buttonHref} className="btn">
+                            <div className="btn__text">{buttonLabel}</div>
                           </a>
                         </div>
                       </div>

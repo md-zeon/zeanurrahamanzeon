@@ -108,10 +108,10 @@ function Info({ study }: { study: CaseStudy }) {
                 data-audio="https://bjornflow-assets.b-cdn.net/Audio/button%20hover.wav"
                 href={study.info.websiteUrl}
                 target="_blank"
-                className="button is-secondary is-icon w-inline-block"
+                className="btn btn-secondary btn-icon"
               >
-                <div className="button-text">{study.info.websiteLabel}</div>
-                <div className="button-icon w-embed">
+                <div className="btn__text">{study.info.websiteLabel}</div>
+                <div className="btn__icon w-embed">
                   <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 14 14" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
                     <path d="M0.823227 13.0732L12.8232 1.07323M12.8232 1.07323V10.9268M12.8232 1.07323H3.17677" stroke="currentColor" />
                   </svg>

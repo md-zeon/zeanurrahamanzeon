@@ -8,7 +8,7 @@ import Reveal from "../Reveal";
 
 function ArrowIcon() {
   return (
-    <div className="button-icon w-embed" aria-hidden="true">
+    <div className="btn__icon w-embed" aria-hidden="true">
       <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 14 14" fill="none" preserveAspectRatio="xMidYMid meet" role="img">
         <path d="M0.823227 13.0732L12.8232 1.07323M12.8232 1.07323V10.9268M12.8232 1.07323H3.17677" stroke="currentColor" />
       </svg>
@@ -60,8 +60,8 @@ export default function WhySection() {
                     </div>
                   </div>
                   <div className={`why_card-content ${i % 2 === 1 ? "is-right" : ""}`}>
-                    <a href={card.href} target="_blank" className="button is-secondary is-icon w-inline-block">
-                      <div className="button-text">{card.buttonLabel}</div>
+                    <a href={card.href} target="_blank" className="btn btn-secondary btn-icon">
+                      <div className="btn__text">{card.buttonLabel}</div>
                       <ArrowIcon />
                     </a>
                     <div className="why_text-wrapper">

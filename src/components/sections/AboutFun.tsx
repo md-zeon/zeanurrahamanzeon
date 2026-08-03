@@ -37,7 +37,7 @@ function VideoBorder() {
 
 function LinkIcon() {
   return (
-    <div className="button-icon is-link w-embed">
+    <div className="btn__icon btn__icon--lg w-embed">
       <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 21 17" fill="none" preserveAspectRatio="xMidYMid meet" role="img">
         <path d="M5.49658 13.2106L14.6647 4.04248M14.6647 4.04248V12.2538M14.6647 4.04248L6.62603 4.04248" stroke="currentColor" />
         <path d="M0 16.682V0.318359H3.27273V1.28995H1.08665V15.7104H3.27273V16.682H0Z" fill="currentColor" />
@@ -109,8 +109,8 @@ export default function AboutFun() {
                         </div>
                         {slide.ctaLabel ? (
                           <div className="about-fun_video-cta">
-                            <a data-audio={audio.secondaryHover} href={slide.ctaHref} target="_blank" className="button is-link is-icon w-inline-block">
-                              <div className="button-text">{slide.ctaLabel}</div>
+                            <a data-audio={audio.secondaryHover} href={slide.ctaHref} target="_blank" className="btn btn-ghost btn-icon">
+                              <div className="btn__text">{slide.ctaLabel}</div>
                               <LinkIcon />
                             </a>
                           </div>

@@ -77,8 +77,8 @@ export default function CaseStudyFeatured() {
                 </div>
                 <div className="lab_buttons-divider" />
                 <div className="lab_button-wrapper">
-                  <Link href="/work" data-audio={audio.hover} className="button is-secondary is-alternate w-inline-block">
-                    <div className="button-text">Visit work page</div>
+                  <Link href="/work" data-audio={audio.hover} className="btn btn-secondary">
+                    <div className="btn__text">Visit work page</div>
                   </Link>
                 </div>
               </div>
@@ -104,8 +104,8 @@ export default function CaseStudyFeatured() {
                     </Link>
                     <div className="lab_card-cta-wrapper">
                       <h3 className="heading-style-h4">{project.title}</h3>
-                      <Link data-audio={audio.hover} href={project.href} className="button is-small w-inline-block">
-                        <div className="button-text">View case study</div>
+                      <Link data-audio={audio.hover} href={project.href} className="btn btn-small">
+                        <div className="btn__text">View case study</div>
                       </Link>
                     </div>
                   </div>

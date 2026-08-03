@@ -182,42 +182,47 @@
   @apply flex flex-none items-center justify-start gap-1 py-1 text-brand-white no-underline;
 }
 
-.button {
-  @apply rounded-[0.25rem] bg-brand-yellow px-8 py-4 text-[1.125rem] text-brand-black no-underline text-center tracking-[-0.04rem];
+.btn {
+  @apply inline-block max-w-full rounded-[0.25rem] bg-brand-yellow px-8 py-4 text-[1.125rem] text-brand-black text-center tracking-[-0.04rem] no-underline;
 }
 
-.button:not(.is-secondary) {
-  color: var(--color-brand--black);
-}
-
-.button:not(.is-secondary) .button-text {
-  color: inherit;
-}
-
-.button.is-secondary {
+.btn-secondary {
   @apply border border-[#efefe633] bg-[#0a090e4d] text-brand-white;
   -webkit-backdrop-filter: blur(100px);
   backdrop-filter: blur(100px);
 }
 
-.button.is-secondary.is-chat {
+.btn-ghost {
+  @apply bg-transparent px-0 py-[0.25rem] text-brand-white no-underline;
+  line-height: 1;
+}
+
+.btn-chat {
   @apply p-2 text-[0.75rem] leading-[150%];
 }
 
-.button.is-small {
+.btn-small {
   @apply px-5 py-2 text-[1rem];
 }
 
-.button.is-icon {
+.btn-icon {
   @apply flex items-center justify-center gap-3;
 }
 
-.button-icon {
+.btn-ghost.btn-icon {
+  @apply justify-start gap-2;
+}
+
+.btn-group {
+  @apply flex flex-wrap items-center gap-4;
+}
+
+.btn__icon {
   @apply flex h-[0.875rem] w-[0.875rem] flex-col items-center justify-center;
 }
 
-.button-group {
-  @apply flex flex-wrap items-center gap-4;
+.btn__icon--lg {
+  @apply h-4 w-[1.3rem];
 }
 
 .icon-embed-medium {
@@ -395,17 +400,29 @@
   .padding-section-large {
     @apply py-16;
   }
-  .button {
+  .btn {
     @apply px-5 py-3 text-[1rem];
   }
-  .button.is-small {
+  .btn-small {
     @apply px-4 text-[0.875rem] tracking-[-0.03rem];
+  }
+  .btn-group--grid {
+    @apply grid grid-cols-2 gap-4;
   }
 }
 
 @media (max-width: 479px) {
   .padding-global.is-bigger {
     @apply px-6;
+  }
+  .btn {
+    @apply px-5 py-3 text-[1rem];
+  }
+  .btn-group {
+    @apply gap-3;
+  }
+  .btn-group--grid {
+    @apply grid-cols-1;
   }
   .text-size-tiny {
     @apply order-3;

@@ -17,7 +17,7 @@ export default function HomeProjects() {
       const projects = gsap.utils.toArray<HTMLElement>(".home-projects_project");
       const heading = el.querySelector(".home-projects_banner-component .heading-style-h3");
       const text = el.querySelector(".home-projects_banner-component .text-size-regular");
-      const buttons = el.querySelectorAll(".home-projects_banner-component .button:not(.is-secondary)");
+      const buttons = el.querySelectorAll(".home-projects_banner-component .btn:not(.btn-secondary)");
       const navButtons = el.querySelectorAll(".home-projects_nav-wrapper");
       const track = el.querySelector(".home-projects_track");
       const section = el;
@@ -179,12 +179,12 @@ export default function HomeProjects() {
           <div className="heading-style-h3">Plus X Innovation</div>
           <div className="text-size-regular">Helped the marketing team migrate to Webflow, optimise SEO, and scale their site with a flexible CMS.</div>
         </div>
-        <div className="button-group">
-          <a href="#" className="button is-small w-inline-block">
-            <div className="button-text">View case study</div>
+        <div className="btn-group">
+          <a href="#" className="btn btn-small">
+            <div className="btn__text">View case study</div>
           </a>
-          <Link href="/work" className="button is-secondary is-small w-inline-block">
-            <div className="button-text">See all work</div>
+          <Link href="/work" className="btn btn-secondary btn-small">
+            <div className="btn__text">See all work</div>
           </Link>
         </div>
       </div>

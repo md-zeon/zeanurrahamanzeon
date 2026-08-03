@@ -198,7 +198,7 @@ export default function HeroSection() {
                             <div id="home-header-p" className="text-size-large">
                               {brand.heroIntro}
                             </div>
-                            <div className="button-group is-grid">
+                            <div className="btn-group btn-group--grid">
                               <Button href="/contact">Get in touch</Button>
                               <Button href="/work" variant="secondary">
                                 See work

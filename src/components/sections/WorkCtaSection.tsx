@@ -161,17 +161,17 @@ export default function WorkCtaSection() {
                         id="cta-chat-button-1"
                         data-audio={audio.hover}
                         href="#"
-                        className="button is-secondary is-chat w-inline-block"
+                        className="btn btn-secondary btn-chat"
                       >
-                        <div className="button-text">{cta.chat.buttons[0]}</div>
+                        <div className="btn__text">{cta.chat.buttons[0]}</div>
                       </a>
                       <a
                         id="cta-chat-button-2"
                         data-audio={audio.hover}
                         href="#"
-                        className="button is-secondary is-chat w-inline-block"
+                        className="btn btn-secondary btn-chat"
                       >
-                        <div className="button-text">{cta.chat.buttons[1]}</div>
+                        <div className="btn__text">{cta.chat.buttons[1]}</div>
                       </a>
                     </div>
                   </div>

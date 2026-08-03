@@ -47,15 +47,15 @@ export default function ExperimentsHeader() {
                         >
                           {experimentsHeader.paragraph}
                         </div>
-                        <div className="button-group is-grid">
+                        <div className="btn-group btn-group--grid">
                           <a
                             id="home-header-button-1"
                             data-audio={audio.hover}
                             header-content-type="button"
                             href="/contact"
-                            className="button w-inline-block"
+                            className="btn"
                           >
-                            <div className="button-text text-brand-black">
+                            <div className="btn__text">
                               {experimentsHeader.button1}
                             </div>
                           </a>
@@ -64,9 +64,9 @@ export default function ExperimentsHeader() {
                             data-audio={audio.hover}
                             header-content-type="button"
                             href="/work"
-                            className="button is-secondary w-inline-block"
+                            className="btn btn-secondary"
                           >
-                            <div className="button-text">
+                            <div className="btn__text">
                               {experimentsHeader.button2}
                             </div>
                           </Link>

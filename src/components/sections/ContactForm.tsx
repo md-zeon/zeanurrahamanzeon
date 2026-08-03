@@ -197,7 +197,7 @@ export default function ContactForm() {
                     </div>
                   </div>
                   <div className="form_cta-wrapper">
-                    <input type="submit" data-wait="Please wait..." data-audio={audio.hover} className="button is-small w-button" value="Submit" />
+                    <input type="submit" data-wait="Please wait..." data-audio={audio.hover} className="btn btn-small cursor-pointer border-0" value="Submit" />
                   </div>
                 </form>
                 <div className="form_message-success-wrapper w-form-done">
