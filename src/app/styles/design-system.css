@@ -178,10 +178,6 @@
 
 /* ---------- Buttons ---------- */
 
-.home-header_badge-link {
-  @apply flex flex-none items-center justify-start gap-1 py-1 text-brand-white no-underline;
-}
-
 .btn {
   @apply inline-block max-w-full rounded-[0.25rem] bg-brand-yellow px-8 py-4 text-[1.125rem] text-brand-black text-center tracking-[-0.04rem] no-underline;
 }
@@ -239,6 +235,44 @@
 
 .icon-embed-xxsmall {
   @apply flex h-4 w-4 flex-col items-center justify-center;
+}
+
+/* ---------- Header badge + frame ---------- */
+
+.badge {
+  @apply relative z-[3] flex w-full items-center justify-start gap-2;
+}
+
+.badge__icon-wrapper {
+  @apply bg-brand-black py-1 text-brand-white;
+}
+
+.badge__icon {
+  @apply flex h-4 w-4 flex-col items-center justify-center;
+}
+
+.badge__line {
+  @apply relative h-[0.06rem] w-full overflow-hidden;
+}
+
+.badge__line-bg {
+  @apply absolute inset-0 bg-brand-white;
+}
+
+.badge-link {
+  @apply flex flex-none items-center justify-start gap-1 py-1 text-brand-white no-underline;
+}
+
+.frame {
+  @apply absolute inset-y-0 left-0 z-[2] h-full w-px bg-white-20;
+}
+
+.frame.is-right {
+  @apply left-auto right-0;
+}
+
+.frame.is-bottom {
+  @apply inset-x-0 bottom-0 h-px w-full;
 }
 
 /* ---------- Misc ---------- */
@@ -336,6 +370,9 @@
   }
   .padding-section-large {
     @apply py-24;
+  }
+  .badge {
+    @apply [order:-1];
   }
 }
 

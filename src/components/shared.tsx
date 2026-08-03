@@ -106,7 +106,7 @@ export function WebflowBadge({
       href={href}
       target="_blank"
       aria-label={label}
-      className="home-header_badge-link"
+      className="badge-link"
     >
       <WebflowLogo />
       <div className="text-size-small text-weight-medium text-style-allcaps">

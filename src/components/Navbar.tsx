@@ -391,7 +391,7 @@ export default function Navbar() {
               ))}
             </div>
             <div className="navbar_h-bottom absolute bottom-6 left-20 right-10 z-[2] grid grid-cols-2 items-end justify-between gap-2 max-[991px]:flex max-[991px]:flex-col max-[991px]:items-stretch max-[767px]:flex max-[767px]:flex-wrap max-[767px]:items-stretch max-[767px]:left-12 max-[479px]:bottom-24 max-[479px]:left-12">
-              <div className="home-header_badge-component">
+              <div className="badge">
                 <div className="navbar_footer-line relative h-[0.06rem] w-full overflow-hidden">
                   <div className="navbar_footer-line-bg absolute inset-0 bg-brand-white" />
                 </div>

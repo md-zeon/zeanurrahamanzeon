@@ -175,19 +175,19 @@ export default function HeroSection() {
                       </div>
                     </div>
                     <div className="relative flex flex-wrap items-start justify-start gap-6 min-[1280px]:pt-16 max-[991px]:pt-0">
-                      <div className="home-header_badge-component">
-                        <div className="home-header_badge-icon-wrapper">
+                      <div className="badge">
+                        <div className="badge__icon-wrapper">
                           <div
                             id="home-hero-asterisk"
-                            className="home-header_asterisk w-embed"
+                            className="badge__icon w-embed"
                           >
                             <Asterisk />
                           </div>
                         </div>
                         <div className="flex flex-col">
                           <div className="flex items-center gap-1">
-                            <div className="home-header_badge-line">
-                              <div className="home-header_badge-line-bg" />
+                            <div className="badge__line">
+                              <div className="badge__line-bg" />
                             </div>
                             <WebflowBadge href={socials.webflowPartner} />
                           </div>
@@ -211,8 +211,8 @@ export default function HeroSection() {
                     </div>
                   </div>
                 </div>
-                <div className="home-header_border" />
-                <div className="home-header_border is-right" />
+                <div className="frame" />
+                <div className="frame is-right" />
               </div>
             </div>
           </div>

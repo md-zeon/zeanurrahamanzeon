@@ -37,11 +37,11 @@ export default function WorkProjects() {
               </Link>
               <div
                 header-content-type="border"
-                className="home-header_border"
+                className="frame"
               />
               <div
                 header-content-type="border"
-                className="home-header_border is-right"
+                className="frame is-right"
               />
             </div>
             <div className="work-projects_content">

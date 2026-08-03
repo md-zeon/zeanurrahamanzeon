@@ -55,27 +55,27 @@ export default function WorkHeader() {
                         header-content-type="border"
                         className="absolute inset-y-0 left-0 z-[2] h-full w-px bg-[#efefe633] max-[991px]:hidden"
                       />
-                      <div className="home-header_badge-component">
-                        <div className="home-header_badge-icon-wrapper">
+                      <div className="badge">
+                        <div className="badge__icon-wrapper">
                           <div
                             id="home-hero-asterisk"
                             header-content-type="asterisk"
-                            className="home-header_asterisk w-embed"
+                            className="badge__icon w-embed"
                           >
                             <Asterisk />
                           </div>
                         </div>
-                        <div className="home-header_badge-line">
+                        <div className="badge__line">
                           <div
                             header-content-type="line-bg"
-                            className="home-header_badge-line-bg"
+                            className="badge__line-bg"
                           />
                         </div>
                         <a
                           data-audio={audio.scramble}
                           href={workHeader.badgeLink}
                           target="_blank"
-                          className="home-header_badge-link w-inline-block"
+                          className="badge-link w-inline-block"
                         >
                           <WebflowLogo />
                           <div className="text-caption-1">
@@ -88,15 +88,15 @@ export default function WorkHeader() {
                 </div>
                 <div
                   header-content-type="border"
-                  className="home-header_border"
+                  className="frame"
                 />
                 <div
                   header-content-type="border"
-                  className="home-header_border is-right"
+                  className="frame is-right"
                 />
                 <div
                   header-content-type="border"
-                  className="home-header_border is-bottom"
+                  className="frame is-bottom"
                 />
               </div>
             </div>

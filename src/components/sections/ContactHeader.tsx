@@ -53,9 +53,9 @@ export default function ContactHeader() {
                 </div>
               </div>
             </div>
-            <div header-content-type="border" className="home-header_border" />
-            <div header-content-type="border" className="home-header_border is-bottom" />
-            <div header-content-type="border" className="home-header_border is-right" />
+            <div header-content-type="border" className="frame" />
+            <div header-content-type="border" className="frame is-bottom" />
+            <div header-content-type="border" className="frame is-right" />
           </div>
         </div>
       </div>

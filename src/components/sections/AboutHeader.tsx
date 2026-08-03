@@ -17,7 +17,7 @@ export default function AboutHeader() {
 
     const ctx = gsap.context(() => {
       gsap.set(
-        ["#about-header-p", "[data-about-fade]", ".home-header_badge-link", "[data-about-caption]"],
+        ["#about-header-p", "[data-about-fade]", ".badge-link", "[data-about-caption]"],
         { opacity: 0 }
       );
 
@@ -53,7 +53,7 @@ export default function AboutHeader() {
 
       tl.fromTo("[data-about-line]", { xPercent: -100 }, { xPercent: 0, duration: 0.3 }, "headings+=0.8");
 
-      tl.to(".home-header_badge-link", { opacity: 1, duration: 0.1 }, "headings+=1.1");
+      tl.to(".badge-link", { opacity: 1, duration: 0.1 }, "headings+=1.1");
 
       const paragraph = el.querySelector("#about-header-p");
       if (paragraph) {
@@ -157,7 +157,7 @@ export default function AboutHeader() {
                           data-audio={audio.scramble}
                           href="https://webflow.com/@bjorn-encutescu"
                           target="_blank"
-                          className="home-header_badge-link w-inline-block"
+                          className="badge-link w-inline-block"
                         >
                           <WebflowLogo />
                           <div className="text-size-small text-weight-medium text-style-allcaps">
