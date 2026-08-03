@@ -70,7 +70,7 @@
   .home-services_card-asset{z-index:2;object-fit:cover;object-position:0% 0%;flex:none;width:110%;height:110%}
   .home-services_card-asset.is-1{z-index:1}
   .home-services_card-asset.is-2{z-index:2}
-  
+  .section_cta{z-index:2;position:relative}
   
   
   
@@ -101,7 +101,7 @@
   .logos_banner-text{letter-spacing:0;text-transform:uppercase;flex:none;margin-top:.1rem;font-size:.65rem;font-weight:400;line-height:120%}
   .logos_banner{border-top:1px solid var(--color-neutral--white);border-bottom:1px solid var(--color-neutral--white);white-space:nowrap;width:100%;display:flex;position:relative;overflow:hidden}
   .logos_banner.is-bottom{justify-content:flex-end}
-  
+  .align-right{justify-content:flex-end;align-items:center;display:flex}
   .home-projects_text-wrapper{position:absolute;inset:50% auto auto -2.7rem;transform:rotate(-90deg)translateY(-50%)}
   .home-projects_nav-image-wrapper{border-radius:.25rem;width:8.85rem;height:6.25rem;overflow:hidden}
   .home-projects_banner-component{z-index:3;grid-column-gap:1rem;grid-row-gap:1rem;-webkit-backdrop-filter:blur(100px);backdrop-filter:blur(100px);background-color:#0a090e4d;border:1px solid #efefe633;border-radius:.25rem;flex-flow:column;width:100%;max-width:25rem;padding:1.5rem;display:flex;position:absolute;inset:auto auto 2rem 2rem;box-shadow:inset 0 0 0 1000px #0a090e33}
