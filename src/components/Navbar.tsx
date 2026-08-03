@@ -12,7 +12,9 @@ import { WebflowBadge } from "./shared";
 function Logo({ className }: { className?: string }) {
   const isAnimation = className?.includes("is-animation");
   return (
-    <div className={`navbar_logo ${className ?? ""}`}>
+    <div
+      className={`navbar_logo font-brockmann text-[1.5rem] font-normal leading-[100%] text-brand-white no-underline max-[767px]:text-[1.25rem] ${className ?? ""}`}
+    >
       {isAnimation ? brand.logoEnd : brand.logoStart}
     </div>
   );
@@ -290,12 +292,12 @@ export default function Navbar() {
         <div className="navbar_inner fixed inset-x-0 top-0 z-[2] border border-transparent border-b-[#efefe633] bg-brand-black">
           <div className="padding-global">
             <div className="relative grid h-full w-full grid-cols-[.5fr_auto] items-center justify-between gap-4 py-4 min-[1280px]:grid-cols-[.5fr_auto_.55fr] min-[1440px]:grid-cols-[.4fr_auto_.4fr] max-[991px]:flex max-[991px]:grid-cols-[.25fr_1fr] max-[767px]:py-[1.1rem] max-[479px]:py-[1.4rem]">
-              <div className="navbar_logo-wrapper">
+              <div>
                 <Link
                   href="/"
                   aria-current={isActive("/") ? "page" : undefined}
                   data-audio="https://bjornflow-assets.b-cdn.net/Audio/buttons%20scramble.wav"
-                  className="navbar_logo-link w-nav-brand"
+                  className="navbar_logo-link flex w-nav-brand flex-row pl-0"
                 >
                   <Logo />
                   <Logo className="is-animation" />
@@ -349,8 +351,6 @@ export default function Navbar() {
             </div>
             <div className={`${menuIconLine} menu-icon_line-bottom bg-neutral-white`} />
           </div>
-          <div className="navbar_h-open" />
-          <div className="navbar_h-close" />
         </a>
       </div>
 
@@ -360,17 +360,17 @@ export default function Navbar() {
       >
         <div className="navbar_h-menu-inner absolute inset-y-0 right-0 z-[2] h-screen w-full max-w-[45rem] [transform:translate(100%)] max-[991px]:max-w-[30rem] max-[767px]:max-w-[20rem]">
           <div className="relative z-[2] flex h-screen flex-col items-start justify-start gap-4 pb-6 pl-14 pr-10 pt-[9.1rem] max-[767px]:px-6">
-            <div className="navbar_h-logo-wrapper absolute left-6 top-6 flex flex-col overflow-hidden pb-[0.2rem]">
+            <div className="absolute left-6 top-6 flex flex-col overflow-hidden pb-[0.2rem]">
               <Link
                 href="/"
                 data-audio="https://bjornflow-assets.b-cdn.net/Audio/buttons%20scramble.wav"
-                className="navbar_logo-link w-nav-brand"
+                className="navbar_logo-link flex w-nav-brand flex-row pl-0"
               >
                 <Logo />
                 <Logo className="is-animation" />
               </Link>
             </div>
-            <div className="navbar_h-menu-wrapper relative z-[3] flex flex-col items-start justify-start gap-4 w-nav-menu">
+            <div className="relative z-[3] flex flex-col items-start justify-start gap-4 w-nav-menu">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
@@ -392,11 +392,11 @@ export default function Navbar() {
             </div>
             <div className="navbar_h-bottom absolute bottom-6 left-20 right-10 z-[2] grid grid-cols-2 items-end justify-between gap-2 max-[991px]:flex max-[991px]:flex-col max-[991px]:items-stretch max-[767px]:flex max-[767px]:flex-wrap max-[767px]:items-stretch max-[767px]:left-12 max-[479px]:bottom-24 max-[479px]:left-12">
               <div className="badge">
-                <div className="navbar_footer-line relative h-[0.06rem] w-full overflow-hidden">
-                  <div className="navbar_footer-line-bg absolute inset-0 bg-brand-white" />
+                <div className="relative h-[0.06rem] w-full overflow-hidden">
+                  <div className="absolute inset-0 bg-brand-white" />
                 </div>
-                <div className="nav_badge-icon-wrapper">
-                  <div className="navbar_footer-asterisk flex h-4 w-4 flex-col items-center justify-center w-embed" aria-hidden="true">
+                <div className="py-1">
+                  <div className="flex h-4 w-4 flex-col items-center justify-center w-embed" aria-hidden="true">
                     <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 16 17" fill="none" preserveAspectRatio="xMidYMid meet">
                       <path d="M2.41002 14.2237L13.7237 2.91001M0 8.54529H16M8.0453 16.5V0.5M2.36688 2.91001L13.6806 14.2237" stroke="currentColor" strokeWidth="1.5" />
                     </svg>
@@ -406,7 +406,7 @@ export default function Navbar() {
               <div menu-link="misc">
                 <WebflowBadge href={socials.webflowPartner} />
               </div>
-              <div menu-link="misc" className="navbar_local-component is-menu flex items-center justify-end gap-4 pr-6 max-[991px]:justify-start max-[991px]:pr-0 max-[767px]:w-full max-[767px]:justify-between max-[767px]:gap-2">
+              <div menu-link="misc" className="flex items-center justify-end gap-4 pr-6 max-[991px]:justify-start max-[991px]:pr-0 max-[767px]:w-full max-[767px]:justify-between max-[767px]:gap-2">
                 <div className="flex gap-2">
                   <SoundButton />
                 </div>

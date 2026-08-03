@@ -108,9 +108,9 @@ export default function Footer() {
                 <div className="flex w-full flex-col items-start justify-between gap-[3.38rem] max-[767px]:gap-12">
                   <div className="flex w-full flex-none items-end justify-between gap-16 border-b border-white-20 max-[767px]:gap-8 max-[479px]:flex-wrap max-[479px]:gap-4">
                     <div className="mb-[0.8rem] overflow-hidden">
-                      <Link href="/" className="navbar_logo-link w-nav-brand" data-audio={audio.scramble}>
-                        <div className="navbar_logo">{brand.logoStart}</div>
-                        <div className="navbar_logo is-animation">{brand.logoEnd}</div>
+                      <Link href="/" className="navbar_logo-link flex w-nav-brand flex-row pl-0" data-audio={audio.scramble}>
+                        <div className="navbar_logo font-brockmann text-[1.5rem] font-normal leading-[100%] text-brand-white no-underline">{brand.logoStart}</div>
+                        <div className="navbar_logo is-animation font-brockmann text-[1.5rem] font-normal leading-[100%] text-brand-white no-underline">{brand.logoEnd}</div>
                       </Link>
                     </div>
                     <div className="flex w-full max-w-[26rem] flex-col items-stretch justify-end gap-1 pr-[0.2rem] max-[991px]:w-[28vw] max-[767px]:w-auto max-[767px]:max-w-none">
