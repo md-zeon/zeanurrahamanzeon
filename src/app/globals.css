@@ -1899,15 +1899,6 @@ input[type="file"]:focus-visible {
     padding-left: 1rem;
     display: grid;
   }
-  .testimonial_header-wrapper {
-    padding-top: 7rem;
-    padding-bottom: 1.5rem;
-    padding-right: 1.5rem;
-  }
-  .testimonial_header-top {
-    justify-content: flex-start;
-    display: flex;
-  }
   .testimonial_header-bottom {
     justify-content: flex-start;
     align-items: stretch;
@@ -2714,12 +2705,6 @@ input[type="file"]:focus-visible {
     .testimonial_header {
       grid-template-columns: 1fr;
       place-items: start;
-    }
-  }
-  @media screen and (max-width: 991px) {
-    .testimonial_header-wrapper {
-      border-right-style: none;
-      padding-top: 5rem;
     }
   }
   @media screen and (max-width: 991px) {

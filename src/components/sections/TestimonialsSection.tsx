@@ -95,8 +95,8 @@ export default function TestimonialsSection() {
         <div className="container-large">
           <div className="testimonials_component">
             <div header-animation-type="container" className="testimonial_header">
-              <div className="testimonial_header-wrapper">
-                <div className="testimonial_header-top">
+              <div className="pt-[7rem] pb-[1.5rem] pr-[1.5rem] max-[991px]:pt-[5rem]">
+                <div className="flex justify-start">
                   <h2 id="testimonial-h1" className="heading-style-h0">
                     Words From
                   </h2>
