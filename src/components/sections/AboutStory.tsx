@@ -20,7 +20,12 @@ function StoryBody() {
       if (idx === -1) break;
       if (idx > cursor) parts.push(text.slice(cursor, idx));
       parts.push(
-        <a key={`${pi}-${linkIdx}`} href={link.href} target="_blank" className="about-story_link">
+        <a
+          key={`${pi}-${linkIdx}`}
+          href={link.href}
+          target="_blank"
+          className="cursor-pointer border-b-2 border-white-30 no-underline transition-all duration-200 hover:border-brand-white"
+        >
           {link.text}
         </a>
       );
@@ -145,50 +150,50 @@ export default function AboutStory() {
   }, []);
 
   return (
-    <section data-parallax-type="section" className="section_about-story" ref={ref}>
+    <section data-parallax-type="section" className="relative z-[2]" ref={ref}>
       <div className="padding-global is-bigger">
         <div className="container-large">
-          <div className="about-story_component">
-            <div className="about-story_grid">
-              <div className="about-story_left">
-                <div className="about-story_year">
+          <div className="relative z-[2] grid w-full auto-cols-fr grid-cols-1 items-center justify-center border-l border-white-20 max-[767px]:pb-12 max-[479px]:border-l-0 max-[479px]:pb-0">
+            <div className="about-story_grid relative grid auto-cols-fr grid-cols-[0.5fr_1fr] items-start justify-items-stretch justify-between gap-x-6 gap-y-20 border-b border-white-20 max-[991px]:flex max-[991px]:flex-col max-[991px]:min-h-0">
+              <div className="about-story_left relative h-full w-full max-[991px]:hidden">
+                <div className="about-story_year z-10 w-auto self-start">
                   <div id="career-year" className="heading-style-h0 is-career">
                     {aboutStory.year}
                   </div>
                 </div>
-                <div className="about-story_cards-component">
-                  <div className="about-story_cards-layout">
-                    <div className="about-story_cards-wrapper is-1">
-                      <img src={aboutStory.images[0].src} alt={aboutStory.images[0].alt} loading="lazy" className="about-story_cards-image" />
+                <div className="about-story_cards-component absolute right-4 top-24 w-[80%] max-[767px]:hidden">
+                  <div className="relative aspect-[2/3]">
+                    <div className="absolute inset-0 z-[1] flex h-full w-full items-center justify-center overflow-hidden rounded-lg">
+                      <img src={aboutStory.images[0].src} alt={aboutStory.images[0].alt} loading="lazy" className="h-full w-full max-w-full flex-none object-cover" />
                     </div>
-                    <div className="about-story_cards-wrapper is-2">
-                      <div className="about-story_testimonial-card">
-                        <div className="about-story_testimonial-wrapper">
-                          <div className="about-story_testimonial-quote">
+                    <div className="absolute inset-0 z-[1] flex h-full w-full items-center justify-center overflow-hidden rounded-lg">
+                      <div className="flex h-full w-full flex-col justify-between rounded-lg border border-white-20 bg-[#efefe60d] p-6 backdrop-blur-[100px] max-[991px]:p-4">
+                        <div className="relative">
+                          <div className="absolute -left-[0.6rem] top-0">
                             <div className="text-size-medium">&quot;</div>
                           </div>
                           <div className="text-size-medium">{aboutStory.quote}</div>
                         </div>
-                        <div className="about-story_info">
+                        <div>
                           <div className="text-size-regular text-weight-medium">{aboutStory.quoteName}</div>
                           <div className="text-size-regular text-color-secondary">{aboutStory.quoteRole}</div>
                         </div>
                       </div>
                     </div>
-                    <div className="about-story_cards-wrapper is-3">
-                      <img src={aboutStory.images[1].src} alt={aboutStory.images[1].alt} loading="lazy" className="about-story_cards-image" />
+                    <div className="absolute inset-0 z-[1] flex h-full w-full items-center justify-center overflow-hidden rounded-lg">
+                      <img src={aboutStory.images[1].src} alt={aboutStory.images[1].alt} loading="lazy" className="h-full w-full max-w-full flex-none object-cover" />
                     </div>
-                    <div className="about-story_cards-wrapper is-4">
-                      <img src={aboutStory.images[2].src} alt={aboutStory.images[2].alt} loading="lazy" className="about-story_cards-image" />
+                    <div className="absolute inset-0 z-[1] flex h-full w-full items-center justify-center overflow-hidden rounded-lg">
+                      <img src={aboutStory.images[2].src} alt={aboutStory.images[2].alt} loading="lazy" className="h-full w-full max-w-full flex-none object-cover" />
                     </div>
                   </div>
-                  <div className="about-story_cards-misc">
+                  <div className="absolute -left-[2.7rem] bottom-[1.9rem] -rotate-90">
                     <div className="text-caption-2 text-color-teritary">{aboutStory.misc}</div>
                   </div>
                 </div>
               </div>
-              <div className="about-story_content">
-                <div className="about-story_wrapper">
+              <div className="flex max-w-[53.625rem] flex-col items-start justify-start gap-8 min-[1440px]:max-w-[65.5rem]">
+                <div className="border-l border-r border-white-20 px-4 py-28 max-[991px]:px-12 max-[991px]:py-20 max-[767px]:px-8 max-[767px]:py-12 max-[479px]:px-6">
                   <div id="highlighted-text" className="heading-style-h4">
                     <StoryBody />
                   </div>
