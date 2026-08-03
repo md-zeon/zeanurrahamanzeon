@@ -9,8 +9,19 @@ import AutoVideo from "../media/AutoVideo";
 function ArrowIcon() {
   return (
     <div className="btn__icon w-embed">
-      <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 14 14" fill="none" preserveAspectRatio="xMidYMid meet" role="img">
-        <path d="M0.823227 13.4736L12.8232 1.47362M12.8232 1.47362V11.3272M12.8232 1.47362H3.17677" stroke="currentColor" />
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="100%"
+        height="100%"
+        viewBox="0 0 14 14"
+        fill="none"
+        preserveAspectRatio="xMidYMid meet"
+        role="img"
+      >
+        <path
+          d="M0.823227 13.4736L12.8232 1.47362M12.8232 1.47362V11.3272M12.8232 1.47362H3.17677"
+          stroke="currentColor"
+        />
       </svg>
     </div>
   );
@@ -24,29 +35,55 @@ export default function ExperimentsProjects() {
     if (!el) return;
 
     const ctx = gsap.context(() => {
-      const projects = gsap.utils.toArray<HTMLElement>(".home-projects_project");
-      const heading = el.querySelector(".home-projects_banner-component .heading-style-h3");
+      const projects = gsap.utils.toArray<HTMLElement>(
+        ".home-projects_project",
+      );
+      const heading = el.querySelector(
+        ".home-projects_banner-component .heading-style-h3",
+      );
       const button = el.querySelector(".home-projects_banner-component .btn");
       const navButtons = el.querySelectorAll(".home-projects_nav-wrapper");
       const track = el.querySelector(".home-projects_track");
       const section = el;
 
-      gsap.set(projects, { transformStyle: "preserve-3d", transformPerspective: 800 });
-      gsap.set(projects.filter((p) => p.classList.contains("middle")), {
-        transformOrigin: "center top",
-        y: window.innerHeight,
-        rotationX: 40,
-        scale: 1.1,
+      gsap.set(projects, {
+        transformStyle: "preserve-3d",
+        transformPerspective: 800,
       });
-      gsap.set([track, section, document.querySelector('[data-projects-section="second"]')], { backgroundColor: "#0A090F" });
-      gsap.set(el.querySelector(".home-projects_project.first"), { transformOrigin: "center top", yPercent: 20, opacity: 0 });
+      gsap.set(
+        projects.filter((p) => p.classList.contains("middle")),
+        {
+          transformOrigin: "center top",
+          y: window.innerHeight,
+          rotationX: 40,
+          scale: 1.1,
+        },
+      );
+      gsap.set(
+        [
+          track,
+          section,
+          document.querySelector('[data-projects-section="second"]'),
+        ],
+        { backgroundColor: "#0A090F" },
+      );
+      gsap.set(el.querySelector(".home-projects_project.first"), {
+        transformOrigin: "center top",
+        yPercent: 20,
+        opacity: 0,
+      });
 
       ScrollTrigger.create({
         trigger: el.querySelector(".home-projects_project.first"),
         start: "top 85%",
         once: true,
         onEnter: () => {
-          gsap.to(el.querySelector(".home-projects_project.first"), { yPercent: 0, opacity: 1, ease: "expo.out", duration: 0.6 });
+          gsap.to(el.querySelector(".home-projects_project.first"), {
+            yPercent: 0,
+            opacity: 1,
+            ease: "expo.out",
+            duration: 0.6,
+          });
         },
       });
 
@@ -60,33 +97,77 @@ export default function ExperimentsProjects() {
           scrub: 1,
           pinSpacing: true,
           onEnter: () => {
-            gsap.to([track, section, document.querySelector('[data-projects-section="second"]')], { backgroundColor: "#5542ff", ease: "expo.out", duration: 1 });
+            gsap.to(
+              [
+                track,
+                section,
+                document.querySelector('[data-projects-section="second"]'),
+              ],
+              { backgroundColor: "#5542ff", ease: "expo.out", duration: 1 },
+            );
           },
           onLeave: () => {
-            gsap.to([track, section, document.querySelector('[data-projects-section="second"]')], { backgroundColor: "#0A090F", ease: "expo.out", duration: 1 });
+            gsap.to(
+              [
+                track,
+                section,
+                document.querySelector('[data-projects-section="second"]'),
+              ],
+              { backgroundColor: "#0A090F", ease: "expo.out", duration: 1 },
+            );
           },
           onEnterBack: () => {
-            gsap.to([track, section, document.querySelector('[data-projects-section="second"]')], { backgroundColor: "#5542ff", ease: "expo.out", duration: 1 });
+            gsap.to(
+              [
+                track,
+                section,
+                document.querySelector('[data-projects-section="second"]'),
+              ],
+              { backgroundColor: "#5542ff", ease: "expo.out", duration: 1 },
+            );
           },
           onLeaveBack: () => {
-            gsap.to([track, section, document.querySelector('[data-projects-section="second"]')], { backgroundColor: "#0A090F", ease: "expo.out", duration: 1 });
+            gsap.to(
+              [
+                track,
+                section,
+                document.querySelector('[data-projects-section="second"]'),
+              ],
+              { backgroundColor: "#0A090F", ease: "expo.out", duration: 1 },
+            );
           },
         },
       });
 
       timeline
-        .to(".home-projects_project.first", { rotationX: -40, y: -6, ease: "expo.in", scale: 0.7 })
-        .to(".home-projects_project.middle", { scale: 1, ease: "expo.out", y: (i: number) => 2 * i, rotationX: 0, stagger: { each: 0.5 } }, "-=0.4")
+        .to(".home-projects_project.first", {
+          rotationX: -40,
+          y: -6,
+          ease: "expo.in",
+          scale: 0.7,
+        })
+        .to(
+          ".home-projects_project.middle",
+          {
+            scale: 1,
+            ease: "expo.out",
+            y: (i: number) => 2 * i,
+            rotationX: 0,
+            stagger: { each: 0.5 },
+          },
+          "-=0.4",
+        )
         .to(
           ".home-projects_project.middle",
           {
             rotationX: -40,
             y: (i: number) => 20 * i,
             ease: "expo.in",
-            scale: (i: number) => gsap.utils.mapRange(0, projects.length - 1, 0.75, 1)(i),
+            scale: (i: number) =>
+              gsap.utils.mapRange(0, projects.length - 1, 0.75, 1)(i),
             stagger: { each: 0.5 },
           },
-          "<+=0.5"
+          "<+=0.5",
         );
 
       let lastActiveIndex = -1;
@@ -94,15 +175,37 @@ export default function ExperimentsProjects() {
         const st = ScrollTrigger.getById("projectsScroll");
         if (!st || !projects.length) return;
         const progress = st.progress;
-        const activeIndex = Math.min(projects.length - 1, Math.round(progress * projects.length));
+        const activeIndex = Math.min(
+          projects.length - 1,
+          Math.round(progress * projects.length),
+        );
         if (activeIndex !== lastActiveIndex && experimentsStack[activeIndex]) {
           lastActiveIndex = activeIndex;
-          gsap.to(heading, { duration: 1.2, scrambleText: { text: experimentsStack[activeIndex].title, chars: "10", speed: 0.2 }, ease: "expo.out" });
-          if (button) button.setAttribute("href", experimentsStack[activeIndex].href);
+          gsap.to(heading, {
+            duration: 1.2,
+            scrambleText: {
+              text: experimentsStack[activeIndex].title,
+              chars: "10",
+              speed: 0.2,
+            },
+            ease: "expo.out",
+          });
+          if (button)
+            button.setAttribute("href", experimentsStack[activeIndex].href);
           navButtons.forEach((b, index) => {
-            gsap.to(b, { duration: 0.05, ease: "expo.out", marginLeft: index === activeIndex ? "-0.7rem" : "0rem", opacity: index === activeIndex ? 1 : 0.9 });
+            gsap.to(b, {
+              duration: 0.05,
+              ease: "expo.out",
+              marginLeft: index === activeIndex ? "-0.7rem" : "0rem",
+              opacity: index === activeIndex ? 1 : 0.9,
+            });
             const imgWrap = b.querySelector(".home-projects_nav-image-wrapper");
-            if (imgWrap) gsap.to(imgWrap, { duration: 0.05, ease: "expo.out", borderColor: index === activeIndex ? "#EFEFE6" : "transparent" });
+            if (imgWrap)
+              gsap.to(imgWrap, {
+                duration: 0.05,
+                ease: "expo.out",
+                borderColor: index === activeIndex ? "#EFEFE6" : "transparent",
+              });
           });
         }
       };
@@ -132,7 +235,7 @@ export default function ExperimentsProjects() {
           duration: 0.4,
           scrollTrigger: { trigger: el, start: "top 60%", once: true },
           onComplete: () => gsap.to(navButtons[0], { opacity: 1 }),
-        }
+        },
       );
 
       const bannerFade = (state: "in" | "out") => {
@@ -152,28 +255,45 @@ export default function ExperimentsProjects() {
     return () => ctx.revert();
   }, []);
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, index: number) => {
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    index: number,
+  ) => {
     e.preventDefault();
-    const pinSpacer = document.querySelector<HTMLElement>(".pin-spacer-projectsScroll");
+    const pinSpacer = document.querySelector<HTMLElement>(
+      ".pin-spacer-projectsScroll",
+    );
     if (!pinSpacer) return;
     let projectHeight = window.innerHeight * 0.7;
     if (index >= 2) {
       projectHeight -= window.innerHeight * 0.01;
     }
     const targetScrollY = pinSpacer.offsetTop + index * projectHeight;
-    gsap.to(window, { duration: 1.5, scrollTo: targetScrollY, ease: "expo.out" });
+    gsap.to(window, {
+      duration: 1.5,
+      scrollTo: targetScrollY,
+      ease: "expo.out",
+    });
   };
 
   return (
-    <section header-content-type="border" className="relative z-[2] min-h-[100vh] max-h-[100vh] w-full overflow-hidden" ref={ref}>
+    <section
+      header-content-type="border"
+      className="relative z-2 min-h-screen max-h-screen w-full overflow-hidden"
+      ref={ref}
+    >
       <div className="home-projects_track relative h-[600vh] w-full overflow-hidden">
-        <div className="relative grid h-full w-full max-h-[100vh] auto-cols-fr grid-cols-1 grid-rows-1 content-start items-center justify-center justify-items-center gap-0 py-8 [transform-style:preserve-3d] max-[767px]:pb-32">
+        <div className="relative grid h-full w-full max-h-screen auto-cols-fr grid-cols-1 grid-rows-1 content-start items-center justify-center justify-items-center gap-0 py-8 transform-3d max-[767px]:pb-32">
           {experimentsStack.map((project, i) => (
-            <div key={project.index} data-index={i + 1} className={`home-projects_project ${i === 0 ? "first" : "middle"} relative z-[2] flex h-[54vw] w-[90%] [grid-area:1/1/2/2] [transform-origin:50%_0] [transform-style:preserve-3d] min-[1280px]:h-full min-[1280px]:[transform:perspective(100vh)]`}>
-              <div className="absolute left-[-2.7rem] top-1/2 [transform:rotate(-90deg)_translateY(-50%)] max-[767px]:left-[-2.3rem] max-[479px]:left-[-2rem]">
+            <div
+              key={project.index}
+              data-index={i + 1}
+              className={`home-projects_project ${i === 0 ? "first" : "middle"} relative z-2 flex h-[54vw] w-[90%] [grid-area:1/1/2/2] origin-[50%_0] transform-3d desktop:h-full desktop:transform-[perspective(100vh)]`}
+            >
+              <div className="absolute left-[-2.7rem] top-1/2 transform-[rotate(-90deg)_translateY(-50%)] max-[767px]:left-[-2.3rem] max-[479px]:-left-8">
                 <div className="text-caption-2">{project.index}</div>
               </div>
-              <div className="relative inset-0 z-[2] aspect-[16/9.5] h-full w-full max-h-[93.5vh] overflow-hidden rounded-lg max-[767px]:rounded w-embed">
+              <div className="relative inset-0 z-2 aspect-16/9.5 h-full w-full max-h-[93.5vh] overflow-hidden rounded-lg max-[767px]:rounded w-embed">
                 <AutoVideo src={project.video} />
               </div>
             </div>
@@ -181,11 +301,18 @@ export default function ExperimentsProjects() {
         </div>
       </div>
 
-      <div className="absolute top-1/2 right-[-7rem] z-[3] hidden -translate-y-1/2 flex-col items-stretch justify-end gap-2 min-[1280px]:flex min-[1440px]:right-[-6rem]">
+      <div className="absolute top-1/2 right-[-7rem] z-3 hidden -translate-y-1/2 flex-col items-stretch justify-end gap-2 desktop:flex wide:right-[-6rem]">
         {experimentsStack.map((project, i) => (
-          <a key={project.index} data-audio={audio.secondaryHover} data-project={i + 1} href="#" className={`home-projects_nav-wrapper is-${i + 1} w-inline-block flex flex-col items-start justify-start gap-1 text-brand-white no-underline`} onClick={(e) => handleNavClick(e, i)}>
+          <a
+            key={project.index}
+            data-audio={audio.secondaryHover}
+            data-project={i + 1}
+            href="#"
+            className={`home-projects_nav-wrapper is-${i + 1} w-inline-block flex flex-col items-start justify-start gap-1 text-brand-white no-underline`}
+            onClick={(e) => handleNavClick(e, i)}
+          >
             <div className="text-caption-2">[0{i + 1}]</div>
-            <div className="home-projects_nav-image-wrapper h-[6.25rem] w-[8.85rem] overflow-hidden rounded min-[1280px]:border min-[1280px]:border-transparent">
+            <div className="home-projects_nav-image-wrapper h-25 w-[8.85rem] overflow-hidden rounded desktop:border desktop:border-transparent">
               <div className="h-full w-full object-cover w-embed">
                 <AutoVideo src={project.video} />
               </div>
@@ -194,12 +321,20 @@ export default function ExperimentsProjects() {
         ))}
       </div>
 
-      <div className="home-projects_banner-component is-experiments absolute bottom-8 left-8 z-[3] flex w-full max-w-[16rem] max-h-[10rem] flex-col gap-4 rounded border border-white-20 bg-[#0a090e4d] p-6 shadow-[inset_0_0_0_1000px_#0a090e33] backdrop-blur-[100px] max-[767px]:bottom-16 max-[767px]:gap-6 max-[767px]:p-4 max-[479px]:bottom-[12%] max-[479px]:left-[4%] max-[479px]:w-[90%]">
+      <div className="home-projects_banner-component is-experiments absolute bottom-8 left-8 z-3 flex w-full max-w-[16rem] max-h-40 flex-col gap-4 rounded border border-white-20 bg-black-30 p-6 shadow-[inset_0_0_0_1000px_#0a090e33] backdrop-blur-[100px] max-[767px]:bottom-16 max-[767px]:gap-6 max-[767px]:p-4 max-[479px]:bottom-[12%] max-[479px]:left-[4%] max-[479px]:w-[90%]">
         <div className="flex-none">
-          <div className="heading-style-h3 block max-w-full max-h-24 overflow-hidden whitespace-normal break-words min-[992px]:max-h-16">{experimentsStack[0].title}</div>
+          <div className="heading-style-h3 block max-w-full max-h-24 overflow-hidden whitespace-normal wrap-break-word min-[992px]:max-h-16">
+            {experimentsStack[0].title}
+          </div>
         </div>
         <div className="btn-group">
-          <a data-audio={audio.hover} href={experimentsStack[0].href} target="_blank" rel="noopener noreferrer" className="btn btn-small btn-icon">
+          <a
+            data-audio={audio.hover}
+            href={experimentsStack[0].href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-small btn-icon"
+          >
             <div className="btn__text">View clonable</div>
             <ArrowIcon />
           </a>

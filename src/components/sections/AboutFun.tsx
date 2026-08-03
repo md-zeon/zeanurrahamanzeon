@@ -28,7 +28,10 @@ function LogoLines({ isCard = false }: { isCard?: boolean }) {
 
 function VideoBorder() {
   return (
-    <div className="pointer-events-none absolute inset-0 z-[3] flex h-full w-full flex-col items-center justify-center w-embed" aria-hidden="true">
+    <div
+      className="pointer-events-none absolute inset-0 z-3 flex h-full w-full flex-col items-center justify-center w-embed"
+      aria-hidden="true"
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="100%"
@@ -76,11 +79,14 @@ function LinkIcon() {
 
 export default function AboutFun() {
   return (
-    <section data-parallax-type="section" className="relative z-[2] overflow-hidden">
+    <section
+      data-parallax-type="section"
+      className="relative z-2 overflow-hidden"
+    >
       <div className="padding-global is-bigger">
         <div className="container-large">
-          <div className="relative grid auto-cols-auto grid-cols-[auto_1fr] items-start gap-[11rem] border-l border-white-20 py-28">
-            <div className="grid auto-cols-fr grid-cols-[0.25fr_auto] items-stretch justify-items-start gap-x-24 gap-y-24 min-[1280px]:justify-items-stretch min-[1280px]:gap-[11rem] max-[991px]:grid-cols-1 max-[991px]:justify-items-stretch max-[991px]:gap-y-20 max-[767px]:gap-12">
+          <div className="relative grid auto-cols-auto grid-cols-[auto_1fr] items-start gap-44 border-l border-white-20 py-28">
+            <div className="grid auto-cols-fr grid-cols-[0.25fr_auto] items-stretch justify-items-start gap-x-24 gap-y-24 desktop:justify-items-stretch desktop:gap-44 max-[991px]:grid-cols-1 max-[991px]:justify-items-stretch max-[991px]:gap-y-20 max-[767px]:gap-12">
               <div className="flex flex-col pl-4 max-[991px]:place-items-start">
                 <div className="flex justify-end pr-[0.7rem]">
                   <h2 className="heading-style-h0">FUN</h2>
@@ -103,84 +109,84 @@ export default function AboutFun() {
                 grabCursor
                 pagination={{ clickable: true }}
               >
-              {aboutFacts.slides.map((slide, i) => (
-                <SwiperSlide key={i}>
-                  <div className="z-[2] flex h-full w-full flex-col gap-6 rounded-lg border border-[#ffffff33] border-l-white-20 bg-[#16151b] p-10 backdrop-blur-[100px] min-[1280px]:max-w-[39.718rem] max-[767px]:gap-4 max-[767px]:p-6">
-                    <div>
-                      <div className="text-caption-1 text-color-teritary">
-                        {slide.caption}
-                      </div>
-                      <h3 className="heading-style-h1 is-card">
-                        {slide.title}
-                      </h3>
-                    </div>
-                    <div className="flex flex-col items-stretch justify-end gap-1">
-                      <div className="h-px w-full bg-border-tertiary" />
-                      <div className="flex justify-end gap-[0.6rem]">
-                        <LogoLines isCard />
-                        <div className="text-caption-2 text-color-teritary">
-                          {slide.elementCaption}
+                {aboutFacts.slides.map((slide, i) => (
+                  <SwiperSlide key={i}>
+                    <div className="z-2 flex h-full w-full flex-col gap-6 rounded-lg border border-[#ffffff33] border-l-white-20 bg-[#16151b] p-10 backdrop-blur-[100px] desktop:max-w-[39.718rem] max-[767px]:gap-4 max-[767px]:p-6">
+                      <div>
+                        <div className="text-caption-1 text-color-teritary">
+                          {slide.caption}
                         </div>
+                        <h3 className="heading-style-h1 is-card">
+                          {slide.title}
+                        </h3>
                       </div>
-                    </div>
-                    <div className="relative z-[2] flex aspect-[1.27] w-full items-end justify-center overflow-visible">
-                      <VideoBorder />
-                      <div className="about-fun_loop-asset-w relative flex h-full w-full items-center justify-center">
-                        {slide.video ? (
-                          <div className="absolute inset-0 z-[2] block h-full w-full flex-none bg-neutral-dark-grey object-cover w-embed">
-                            <AutoVideo src={slide.video} />
+                      <div className="flex flex-col items-stretch justify-end gap-1">
+                        <div className="h-px w-full bg-border-tertiary" />
+                        <div className="flex justify-end gap-[0.6rem]">
+                          <LogoLines isCard />
+                          <div className="text-caption-2 text-color-teritary">
+                            {slide.elementCaption}
                           </div>
-                        ) : (
-                          <>
-                            <div className="absolute inset-0 z-[2] h-full w-full bg-[#0a090f4d]" />
-                            {slide.imageClass === "is-plants" ? (
-                              <img
-                                src={slide.image}
-                                alt={slide.caption}
-                                loading="lazy"
-                                className="absolute inset-0 z-[1] m-0 h-full w-full max-w-full flex-none overflow-hidden object-cover object-[50%_85%]"
-                              />
-                            ) : slide.imageClass === "is-photo" ? (
-                              <img
-                                src={slide.image}
-                                alt={slide.caption}
-                                loading="lazy"
-                                className="absolute inset-0 z-[1] m-0 h-full w-full max-w-full flex-none overflow-hidden object-cover object-[50%_85%]"
-                              />
-                            ) : (
-                              <img
-                                src={slide.image}
-                                alt={slide.caption}
-                                loading="lazy"
-                                className="absolute inset-0 z-[1] m-0 h-full w-full max-w-full flex-none overflow-hidden object-cover"
-                              />
-                            )}
-                          </>
-                        )}
-                      </div>
-                      <div className="absolute -left-[2.7rem] bottom-[4.2rem] -rotate-90 max-[767px]:bottom-[3.7rem] max-[767px]:left-[-2rem] max-[479px]:bottom-[12vw]">
-                        <div className="text-caption-2 text-color-teritary">
-                          {slide.videoCaption ?? slide.misc}
                         </div>
                       </div>
-                      {slide.ctaLabel ? (
-                        <div className="absolute bottom-4 right-4 z-[3]">
-                          <a
-                            data-audio={audio.secondaryHover}
-                            href={slide.ctaHref}
-                            target="_blank"
-                            className="btn btn-ghost btn-icon"
-                          >
-                            <div className="btn__text">{slide.ctaLabel}</div>
-                            <LinkIcon />
-                          </a>
+                      <div className="relative z-2 flex aspect-[1.27] w-full items-end justify-center overflow-visible">
+                        <VideoBorder />
+                        <div className="about-fun_loop-asset-w relative flex h-full w-full items-center justify-center">
+                          {slide.video ? (
+                            <div className="absolute inset-0 z-2 block h-full w-full flex-none bg-neutral-dark-grey object-cover w-embed">
+                              <AutoVideo src={slide.video} />
+                            </div>
+                          ) : (
+                            <>
+                              <div className="absolute inset-0 z-2 h-full w-full bg-[#0a090f4d]" />
+                              {slide.imageClass === "is-plants" ? (
+                                <img
+                                  src={slide.image}
+                                  alt={slide.caption}
+                                  loading="lazy"
+                                  className="absolute inset-0 z-1 m-0 h-full w-full max-w-full flex-none overflow-hidden object-cover object-[50%_85%]"
+                                />
+                              ) : slide.imageClass === "is-photo" ? (
+                                <img
+                                  src={slide.image}
+                                  alt={slide.caption}
+                                  loading="lazy"
+                                  className="absolute inset-0 z-1 m-0 h-full w-full max-w-full flex-none overflow-hidden object-cover object-[50%_85%]"
+                                />
+                              ) : (
+                                <img
+                                  src={slide.image}
+                                  alt={slide.caption}
+                                  loading="lazy"
+                                  className="absolute inset-0 z-1 m-0 h-full w-full max-w-full flex-none overflow-hidden object-cover"
+                                />
+                              )}
+                            </>
+                          )}
                         </div>
-                      ) : null}
+                        <div className="absolute left-[-2.7rem] bottom-[4.2rem] -rotate-90 max-[767px]:bottom-[3.7rem] max-[767px]:-left-8 max-[479px]:bottom-[12vw]">
+                          <div className="text-caption-2 text-color-teritary">
+                            {slide.videoCaption ?? slide.misc}
+                          </div>
+                        </div>
+                        {slide.ctaLabel ? (
+                          <div className="absolute bottom-4 right-4 z-3">
+                            <a
+                              data-audio={audio.secondaryHover}
+                              href={slide.ctaHref}
+                              target="_blank"
+                              className="btn btn-ghost btn-icon"
+                            >
+                              <div className="btn__text">{slide.ctaLabel}</div>
+                              <LinkIcon />
+                            </a>
+                          </div>
+                        ) : null}
+                      </div>
+                      <div className="text-size-regular">{slide.text}</div>
                     </div>
-                    <div className="text-size-regular">{slide.text}</div>
-                  </div>
-                </SwiperSlide>
-              ))}
+                  </SwiperSlide>
+                ))}
               </Swiper>
             </div>
           </div>

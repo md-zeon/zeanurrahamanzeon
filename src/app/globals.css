@@ -172,21 +172,21 @@ input[type="file"]:focus-visible {
   /* ---------- Typography ---------- */
 
   .heading-style-h0 {
-    @apply font-brockmann text-[7vw] font-medium uppercase leading-[90%] tracking-[-0.2875rem];
+    @apply font-brockmann text-[7vw] font-medium uppercase leading-[90%] tracking-h0;
     font-feature-settings: "ss01" on;
   }
 
   .heading-style-h1 {
-    @apply font-brockmann text-[4.5rem] font-semibold uppercase leading-[100%] tracking-[-0.135rem];
+    @apply font-brockmann text-[4.5rem] font-semibold uppercase leading-[100%] tracking-h1;
     font-feature-settings: "ss01" on;
   }
 
   .heading-style-h3 {
-    @apply font-brockmann text-[2.5rem] font-semibold leading-[120%] tracking-[-0.05rem];
+    @apply font-brockmann text-[2.5rem] font-semibold leading-[120%] tracking-large;
   }
 
   .heading-style-h5 {
-    @apply font-brockmann text-[1.5rem] font-normal leading-[140%] tracking-[-0.06rem] no-underline;
+    @apply font-brockmann text-[1.5rem] font-normal leading-[140%] tracking-h2 no-underline;
   }
 
   .heading-style-h6 {
@@ -203,7 +203,7 @@ input[type="file"]:focus-visible {
   }
 
   .heading-style-h2 {
-    @apply font-brockmann text-[3rem] font-semibold leading-[120%] tracking-[-0.06rem];
+    @apply font-brockmann text-[3rem] font-semibold leading-[120%] tracking-h2;
   }
 
   .heading-style-h4 {
@@ -239,7 +239,7 @@ input[type="file"]:focus-visible {
   }
 
   .text-size-large {
-    @apply text-[1.25rem] leading-[140%] tracking-[-0.05rem];
+    @apply text-[1.25rem] leading-[140%] tracking-large;
   }
 
   .text-size-tiny {
@@ -253,7 +253,7 @@ input[type="file"]:focus-visible {
   }
 
   .text-caption-2 {
-    @apply text-[0.625rem] font-normal uppercase leading-[120%] tracking-[0];
+    @apply text-[0.625rem] font-normal uppercase leading-[120%] tracking-normal;
     font-feature-settings: "ss01" on;
   }
 
@@ -296,7 +296,7 @@ input[type="file"]:focus-visible {
   /* ---------- Layout ---------- */
 
   .container-large {
-    @apply mx-auto w-full max-w-[81.25rem];
+    @apply mx-auto w-full max-w-325;
   }
 
   .max-width-full {
@@ -304,7 +304,7 @@ input[type="file"]:focus-visible {
   }
 
   .main-wrapper {
-    @apply relative z-[3];
+    @apply relative z-3;
   }
 
   .padding-global {
@@ -312,7 +312,7 @@ input[type="file"]:focus-visible {
   }
 
   .padding-global.is-bigger {
-    @apply px-[4.37rem];
+    @apply px-gutter-bigger;
   }
 
   .padding-section-large {
@@ -350,13 +350,13 @@ input[type="file"]:focus-visible {
   }
 
   .btn-secondary {
-    @apply border border-[#efefe633] bg-[#0a090e4d] text-brand-white;
+    @apply border border-white-20 bg-black-30 text-brand-white;
     -webkit-backdrop-filter: blur(100px);
     backdrop-filter: blur(100px);
   }
 
   .btn-ghost {
-    @apply bg-transparent px-0 py-[0.25rem] text-brand-white no-underline;
+    @apply bg-transparent px-0 py-1 text-brand-white no-underline;
     line-height: 1;
   }
 
@@ -381,7 +381,7 @@ input[type="file"]:focus-visible {
   }
 
   .btn__icon {
-    @apply flex h-[0.875rem] w-[0.875rem] flex-col items-center justify-center;
+    @apply flex h-3.5 w-3.5 flex-col items-center justify-center;
   }
 
   .btn__icon--lg {
@@ -407,7 +407,7 @@ input[type="file"]:focus-visible {
   /* ---------- Header badge + frame ---------- */
 
   .badge {
-    @apply relative z-[3] flex w-full items-center justify-start gap-2;
+    @apply relative z-3 flex w-full items-center justify-start gap-2;
   }
 
   .badge__icon-wrapper {
@@ -431,7 +431,7 @@ input[type="file"]:focus-visible {
   }
 
   .frame {
-    @apply absolute inset-y-0 left-0 z-[2] h-full w-px bg-white-20;
+    @apply absolute inset-y-0 left-0 z-2 h-full w-px bg-white-20;
   }
 
   .frame.is-right {
@@ -539,7 +539,7 @@ input[type="file"]:focus-visible {
       @apply py-24;
     }
     .badge {
-      @apply [order:-1];
+      @apply -order-1;
     }
   }
 
@@ -572,7 +572,7 @@ input[type="file"]:focus-visible {
       @apply text-[1.1rem];
     }
     .text-size-small {
-      @apply text-[0.75rem] leading-[140%] tracking-[0];
+      @apply text-[0.75rem] leading-[140%] tracking-normal;
     }
     .text-size-medium {
       @apply text-[1rem] tracking-[-0.035rem];
@@ -897,6 +897,7 @@ input[type="file"]:focus-visible {
     display: inline-block;
   }
   input.w-button {
+    appearance: button; /* added this line  leter*/
     -webkit-appearance: button;
   }
   .w-embed:before,

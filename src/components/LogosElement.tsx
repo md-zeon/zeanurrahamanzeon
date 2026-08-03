@@ -9,7 +9,11 @@ type LogosElementProps = {
   extraClasses?: string;
 };
 
-export default function LogosElement({ caption, captionFirst = false, extraClasses = "" }: LogosElementProps) {
+export default function LogosElement({
+  caption,
+  captionFirst = false,
+  extraClasses = "",
+}: LogosElementProps) {
   const ref = useRef<HTMLDivElement>(null);
   useHeaderReveal(ref);
 
@@ -17,7 +21,10 @@ export default function LogosElement({ caption, captionFirst = false, extraClass
   const row = "flex gap-[0.3rem] overflow-hidden max-[767px]:gap-[0.2rem]";
 
   return (
-    <div ref={ref} className={`flex w-full max-w-[26rem] flex-col justify-end gap-1 pr-[0.2rem] max-[991px]:w-[28vw] ${extraClasses}`}>
+    <div
+      ref={ref}
+      className={`flex w-full max-w-104 flex-col justify-end gap-1 pr-[0.2rem] max-[991px]:w-[28vw] ${extraClasses}`}
+    >
       <div className="flex flex-wrap gap-[0.6rem] max-[991px]:justify-start max-[991px]:items-center max-[767px]:gap-[0.3rem]">
         {captionFirst ? (
           <>
@@ -26,7 +33,11 @@ export default function LogosElement({ caption, captionFirst = false, extraClass
             </div>
             <div className={row}>
               {linesFor().map((cls, i) => (
-                <div key={i} header-animation-type="lines-grid" className={`${line} ${cls}`} />
+                <div
+                  key={i}
+                  header-animation-type="lines-grid"
+                  className={`${line} ${cls}`}
+                />
               ))}
             </div>
           </>
@@ -34,7 +45,11 @@ export default function LogosElement({ caption, captionFirst = false, extraClass
           <>
             <div className={row}>
               {linesFor().map((cls, i) => (
-                <div key={i} header-animation-type="lines-grid" className={`${line} ${cls}`} />
+                <div
+                  key={i}
+                  header-animation-type="lines-grid"
+                  className={`${line} ${cls}`}
+                />
               ))}
             </div>
             <div header-animation-type="text" className="text-caption-2">
@@ -44,7 +59,10 @@ export default function LogosElement({ caption, captionFirst = false, extraClass
         )}
       </div>
       <div className="relative h-px w-full overflow-hidden">
-        <div header-animation-type="line" className="absolute inset-0 bg-brand-white" />
+        <div
+          header-animation-type="line"
+          className="absolute inset-0 bg-brand-white"
+        />
       </div>
     </div>
   );

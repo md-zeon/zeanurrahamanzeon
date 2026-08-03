@@ -10,10 +10,10 @@ const HEADER_FADE =
   '[data-hero-fade="header"],[data-hero-fade="video"],[data-hero-fade="cta"]';
 
 const headerWrapperBase =
-  "flex flex-col items-center gap-4 min-[1280px]:flex-row min-[1280px]:items-end min-[1280px]:justify-center max-[991px]:relative max-[991px]:items-end max-[991px]:justify-start max-[991px]:pr-[24.5vw] max-[767px]:gap-y-2";
-const headerWrapperFirst = `${headerWrapperBase} gap-0 min-[1280px]:pr-[1.8rem] max-[991px]:pt-8`;
-const headerWrapperMiddle = `${headerWrapperBase} -mt-2 -mr-[0.2rem] pr-[17vw] min-[1280px]:pr-[0.6rem] max-[991px]:pl-0 max-[991px]:pr-[34vw] max-[767px]:-mt-[0.3rem] max-[479px]:-mt-[0.3rem]`;
-const headerWrapperLast = `${headerWrapperBase} -mt-2 pl-[23vw] min-[1280px]:pl-[32.6rem] min-[1280px]:pr-0 max-[991px]:justify-end max-[991px]:pr-[7vw] max-[767px]:-mt-[0.3rem] max-[479px]:-mt-[0.3rem]`;
+  "flex flex-col items-center gap-4 desktop:flex-row desktop:items-end desktop:justify-center max-[991px]:relative max-[991px]:items-end max-[991px]:justify-start max-[991px]:pr-[24.5vw] max-[767px]:gap-y-2";
+const headerWrapperFirst = `${headerWrapperBase} gap-0 desktop:pr-[1.8rem] max-[991px]:pt-8`;
+const headerWrapperMiddle = `${headerWrapperBase} -mt-2 -mr-[0.2rem] pr-[17vw] desktop:pr-[0.6rem] max-[991px]:pl-0 max-[991px]:pr-[34vw] max-[767px]:-mt-[0.3rem] max-[479px]:-mt-[0.3rem]`;
+const headerWrapperLast = `${headerWrapperBase} -mt-2 pl-[23vw] desktop:pl-[32.6rem] desktop:pr-0 max-[991px]:justify-end max-[991px]:pr-[7vw] max-[767px]:-mt-[0.3rem] max-[479px]:-mt-[0.3rem]`;
 
 export default function HeroSection() {
   const ref = useRef<HTMLElement>(null);
@@ -80,23 +80,23 @@ export default function HeroSection() {
     <header
       data-projects-section="first"
       data-parallax-type="section"
-      className="relative z-[2] overflow-hidden"
+      className="relative z-2 overflow-hidden"
       ref={ref}
     >
       <div className="padding-global is-bigger">
         <div className="container-large">
-          <div className="relative flex w-full items-center justify-center border-b border-[#efefe633]">
+          <div className="relative flex w-full items-center justify-center border-b border-white-20">
             <div className="padding-section-large max-width-full">
-              <div className="relative z-[2] min-w-full text-brand-white min-[1280px]:pb-12 max-[991px]:flex max-[991px]:flex-col max-[991px]:items-center max-[991px]:pt-12">
-                <div className="grid min-w-full grid-cols-1 place-items-start-center gap-16 min-[1280px]:place-items-start-stretch max-[991px]:gap-12 max-[767px]:gap-6 max-[479px]:max-w-[97%]">
-                  <div className="relative z-[2] flex w-full flex-col gap-8 min-[1280px]:gap-4 max-[991px]:gap-4 max-[767px]:gap-2">
+              <div className="relative z-2 min-w-full text-brand-white desktop:pb-12 max-[991px]:flex max-[991px]:flex-col max-[991px]:items-center max-[991px]:pt-12">
+                <div className="grid min-w-full grid-cols-1 place-items-start-center gap-16 desktop:place-items-start-stretch max-[991px]:gap-12 max-[767px]:gap-6 max-[479px]:max-w-[97%]">
+                  <div className="relative z-2 flex w-full flex-col gap-8 desktop:gap-4 max-[991px]:gap-4 max-[767px]:gap-2">
                     <div className="flex w-full flex-col gap-6">
                       <div>
                         <div
                           data-hero-fade="header"
                           className={headerWrapperFirst}
                         >
-                          <div className="flex items-center justify-start gap-4 mb-[0.8rem] max-[991px]:absolute max-[991px]:inset-x-0 max-[991px]:top-0 max-[991px]:mb-0 max-[991px]:w-full max-[991px]:justify-center max-[991px]:pl-[3.5vw] max-[767px]:-mr-[26.5vw]">
+                          <div className="flex items-center justify-start gap-4 mb-[0.8rem] max-[991px]:absolute max-[991px]:inset-x-0 max-[991px]:top-0 max-[991px]:mb-0 max-[991px]:w-full max-[991px]:justify-center max-[991px]:pl-[3.5vw] max-[767px]:mr-[-26.5vw]">
                             <div className="flex flex-row">
                               <p
                                 id="home-hero-name"
@@ -138,13 +138,13 @@ export default function HeroSection() {
                       </div>
                     </div>
                   </div>
-                  <div className="relative z-[1] flex w-full flex-col justify-between gap-x-[4vw] gap-y-[4vw] pl-[3.25rem] pr-[4.2rem] min-[1280px]:mt-[-6.7rem] min-[1280px]:grid min-[1280px]:grid-cols-2 min-[1280px]:gap-16 max-[991px]:gap-x-12 max-[991px]:gap-y-12 max-[991px]:pr-[3.25rem] max-[767px]:gap-y-6 max-[479px]:pl-4 max-[479px]:pr-4">
+                  <div className="relative z-1 flex w-full flex-col justify-between gap-x-[4vw] gap-y-[4vw] pl-13 pr-[4.2rem] desktop:mt-[-6.7rem] desktop:grid desktop:grid-cols-2 desktop:gap-16 max-[991px]:gap-x-12 max-[991px]:gap-y-12 max-[991px]:pr-13 max-[767px]:gap-y-6 max-[479px]:pl-4 max-[479px]:pr-4">
                     <div
                       data-hero-fade="video"
-                      className="relative z-[2] flex aspect-square h-full w-full max-w-full flex-none items-end justify-center overflow-visible min-[1280px]:max-w-[36rem] min-[1440px]:max-w-none max-[991px]:mr-auto max-[991px]:max-w-none"
+                      className="relative z-2 flex aspect-square h-full w-full max-w-full flex-none items-end justify-center overflow-visible desktop:max-w-xl wide:max-w-none max-[991px]:mr-auto max-[991px]:max-w-none"
                     >
                       <div
-                        className="pointer-events-none absolute inset-0 z-[3] flex h-full w-full flex-col items-center justify-center"
+                        className="pointer-events-none absolute inset-0 z-3 flex h-full w-full flex-col items-center justify-center"
                         aria-hidden="true"
                       >
                         <svg
@@ -163,18 +163,18 @@ export default function HeroSection() {
                       <div className="flex h-full w-full items-center justify-center max-[479px]:[clip-path:polygon(99%_0,99%_6%,100%_7%,100%_100%,6%_100%,0_94%,0_0)]">
                         <div
                           data-parallax-type="video"
-                          className="z-[2] bg-neutral-dark-grey min-[1920px]:ml-8 min-[1920px]:mt-12"
+                          className="z-2 bg-neutral-dark-grey ultrawide:ml-8 ultrawide:mt-12"
                         >
                           <AutoVideo src={brand.heroVideo} />
                         </div>
                       </div>
-                      <div className="absolute -rotate-90 bottom-[3.2rem] left-[-2.7rem] max-[991px]:bottom-[7.9vw] max-[991px]:left-[-2.5rem] max-[767px]:bottom-[9.9vw] max-[767px]:left-[-2.1rem] max-[479px]:bottom-[10.2vw] max-[479px]:left-[-1.9rem]">
+                      <div className="absolute -rotate-90 bottom-[3.2rem] left-[-2.7rem] max-[991px]:bottom-[7.9vw] max-[991px]:-left-10 max-[767px]:bottom-[9.9vw] max-[767px]:left-[-2.1rem] max-[479px]:bottom-[10.2vw] max-[479px]:left-[-1.9rem]">
                         <div className="text-caption-2 text-color-teritary">
                           {brand.heroVideoCaption}
                         </div>
                       </div>
                     </div>
-                    <div className="relative flex flex-wrap items-start justify-start gap-6 min-[1280px]:pt-16 max-[991px]:pt-0">
+                    <div className="relative flex flex-wrap items-start justify-start gap-6 desktop:pt-16 max-[991px]:pt-0">
                       <div className="badge">
                         <div className="badge__icon-wrapper">
                           <div
@@ -193,7 +193,7 @@ export default function HeroSection() {
                           </div>
                           <div
                             data-hero-fade="cta"
-                            className="flex w-full max-w-[37rem] flex-col gap-10 min-[1280px]:pl-16 max-[991px]:mt-0 max-[991px]:max-w-none max-[991px]:gap-8 max-[991px]:pl-0 max-[767px]:gap-6"
+                            className="flex w-full max-w-148 flex-col gap-10 desktop:pl-16 max-[991px]:mt-0 max-[991px]:max-w-none max-[991px]:gap-8 max-[991px]:pl-0 max-[767px]:gap-6"
                           >
                             <div id="home-header-p" className="text-size-large">
                               {brand.heroIntro}
@@ -206,7 +206,7 @@ export default function HeroSection() {
                             </div>
                           </div>
                         </div>
-                        <div className="absolute bottom-0 left-[0.5rem] top-8 z-[2] hidden h-[170%] w-px bg-[#efefe633] min-[1280px]:block min-[1280px]:top-24 max-[991px]:hidden" />
+                        <div className="absolute bottom-0 left-2 top-8 z-2 hidden h-[170%] w-px bg-white-20 desktop:block desktop:top-24 max-[991px]:hidden" />
                       </div>
                     </div>
                   </div>

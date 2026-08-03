@@ -9,7 +9,14 @@ import Clock from "./Clock";
 function WebflowLogo() {
   return (
     <div className="icon-embed-xxsmall" aria-hidden="true">
-      <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 16 10" fill="none" preserveAspectRatio="xMidYMid meet">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="100%"
+        height="100%"
+        viewBox="0 0 16 10"
+        fill="none"
+        preserveAspectRatio="xMidYMid meet"
+      >
         <path
           fillRule="evenodd"
           clipRule="evenodd"
@@ -47,7 +54,9 @@ export default function Footer() {
         const scramble = (predicate: (index: number) => boolean) =>
           originalText
             .split("")
-            .map((char, index) => (predicate(index) ? (Math.random() > 0.5 ? "1" : "0") : char))
+            .map((char, index) =>
+              predicate(index) ? (Math.random() > 0.5 ? "1" : "0") : char,
+            )
             .join("");
 
         const textTween = (text: () => string): gsap.TweenVars => ({
@@ -63,10 +72,13 @@ export default function Footer() {
             currentTimeline.to(
               textElement,
               textTween(() => scramble((index) => index <= i)),
-              `+=${stepDuration}`
+              `+=${stepDuration}`,
             );
           }
-          currentTimeline.to(textElement, { duration: 0.1, text: originalText });
+          currentTimeline.to(textElement, {
+            duration: 0.1,
+            text: originalText,
+          });
         });
 
         link.addEventListener("mouseleave", () => {
@@ -76,14 +88,14 @@ export default function Footer() {
             currentTimeline.to(
               textElement,
               textTween(() => scramble((index) => index >= i)),
-              `+=${stepDuration}`
+              `+=${stepDuration}`,
             );
           }
           for (let i = originalText.length - 1; i >= 0; i--) {
             currentTimeline.to(
               textElement,
               textTween(() => scramble((index) => index < i)),
-              `+=${stepDuration}`
+              `+=${stepDuration}`,
             );
           }
         });
@@ -108,16 +120,31 @@ export default function Footer() {
                 <div className="flex w-full flex-col items-start justify-between gap-[3.38rem] max-[767px]:gap-12">
                   <div className="flex w-full flex-none items-end justify-between gap-16 border-b border-white-20 max-[767px]:gap-8 max-[479px]:flex-wrap max-[479px]:gap-4">
                     <div className="mb-[0.8rem] overflow-hidden">
-                      <Link href="/" className="navbar_logo-link flex w-nav-brand flex-row pl-0" data-audio={audio.scramble}>
-                        <div className="navbar_logo font-brockmann text-[1.5rem] font-normal leading-[100%] text-brand-white no-underline">{brand.logoStart}</div>
-                        <div className="navbar_logo is-animation font-brockmann text-[1.5rem] font-normal leading-[100%] text-brand-white no-underline">{brand.logoEnd}</div>
+                      <Link
+                        href="/"
+                        className="navbar_logo-link flex w-nav-brand flex-row pl-0"
+                        data-audio={audio.scramble}
+                      >
+                        <div className="navbar_logo font-brockmann text-[1.5rem] font-normal leading-[100%] text-brand-white no-underline">
+                          {brand.logoStart}
+                        </div>
+                        <div className="navbar_logo is-animation font-brockmann text-[1.5rem] font-normal leading-[100%] text-brand-white no-underline">
+                          {brand.logoEnd}
+                        </div>
                       </Link>
                     </div>
-                    <div className="flex w-full max-w-[26rem] flex-col items-stretch justify-end gap-1 pr-[0.2rem] max-[991px]:w-[28vw] max-[767px]:w-auto max-[767px]:max-w-none">
+                    <div className="flex w-full max-w-104 flex-col items-stretch justify-end gap-1 pr-[0.2rem] max-[991px]:w-[28vw] max-[767px]:w-auto max-[767px]:max-w-none">
                       <div className="text-right">
-                        <a href={socials.webflowPartner} target="_blank" className="badge-link w-inline-block" data-audio={audio.scramble}>
+                        <a
+                          href={socials.webflowPartner}
+                          target="_blank"
+                          className="badge-link w-inline-block"
+                          data-audio={audio.scramble}
+                        >
                           <WebflowLogo />
-                          <div className="text-size-small text-weight-medium text-style-allcaps">Webflow Certified Partner</div>
+                          <div className="text-size-small text-weight-medium text-style-allcaps">
+                            Webflow Certified Partner
+                          </div>
                         </a>
                       </div>
                       <div className="relative h-px w-full overflow-hidden">
@@ -126,38 +153,74 @@ export default function Footer() {
                     </div>
                     <div className="grid w-full grid-cols-[minmax(auto,10rem)_minmax(200px,14rem)_.7fr] items-start justify-between gap-x-12 gap-y-4 max-[991px]:grid-cols-2 max-[991px]:justify-start max-[991px]:[place-items:start_stretch] max-[991px]:gap-24 max-[991px]:flex-wrap max-[767px]:gap-6 max-[479px]:flex max-[479px]:flex-wrap max-[479px]:items-start max-[479px]:justify-start max-[479px]:gap-12">
                       {columns.map((col) => (
-                        <div key={col.title} className="footer_link-column flex w-full flex-col gap-4 max-[991px]:w-auto max-[767px]:gap-2">
+                        <div
+                          key={col.title}
+                          className="footer_link-column flex w-full flex-col gap-4 max-[991px]:w-auto max-[767px]:gap-2"
+                        >
                           <div className="overflow-hidden">
-                            <div className="heading-style-h6 text-color-teritary">{col.title}</div>
+                            <div className="heading-style-h6 text-color-teritary">
+                              {col.title}
+                            </div>
                           </div>
                           <div className="flex flex-col">
                             {col.links.map((link, i) => (
-                              <a key={link.href} href={link.href} className="footer_link flex gap-1 overflow-hidden py-2 text-[0.875rem] leading-[150%] text-brand-white no-underline" data-audio={audio.scramble}>
-                                <div className="text-caption-2 text-color-teritary">[{String(col.start + i).padStart(2, "0")}]</div>
-                                <div className="text-size-small text-style-allcaps">{link.label}</div>
-                              </a>
+                              <Link
+                                key={link.href}
+                                href={link.href}
+                                className="footer_link flex gap-1 overflow-hidden py-2 text-[0.875rem] leading-[150%] text-brand-white no-underline"
+                                data-audio={audio.scramble}
+                              >
+                                <div className="text-caption-2 text-color-teritary">
+                                  [{String(col.start + i).padStart(2, "0")}]
+                                </div>
+                                <div className="text-size-small text-style-allcaps">
+                                  {link.label}
+                                </div>
+                              </Link>
                             ))}
                           </div>
                         </div>
                       ))}
                       <div className="footer_link-column is-connect flex w-full flex-col gap-4 max-[991px]:w-auto max-[767px]:gap-2">
                         <div className="overflow-hidden">
-                          <div className="heading-style-h6 text-color-teritary">Connect</div>
+                          <div className="heading-style-h6 text-color-teritary">
+                            Connect
+                          </div>
                         </div>
-                        <div className="grid w-full grid-cols-[auto_auto] gap-12 max-[991px]:grid-cols-2 max-[991px]:gap-16 min-[1440px]:gap-20 max-[767px]:gap-6 max-[479px]:flex max-[479px]:flex-wrap max-[479px]:justify-between max-[479px]:gap-12">
+                        <div className="grid w-full grid-cols-[auto_auto] gap-12 max-[991px]:grid-cols-2 max-[991px]:gap-16 wide:gap-20 max-[767px]:gap-6 max-[479px]:flex max-[479px]:flex-wrap max-[479px]:justify-between max-[479px]:gap-12">
                           <div className="flex flex-col">
                             {footer.connect.map((link, i) => (
-                              <a key={link.href} href={link.href} target="_blank" className="footer_link flex gap-1 overflow-hidden py-2 text-[0.875rem] leading-[150%] text-brand-white no-underline" data-audio={audio.scramble}>
-                                <div className="text-caption-2 text-color-teritary">[{String(9 + i).padStart(2, "0")}]</div>
-                                <div className="text-size-small text-style-allcaps">{link.label}</div>
+                              <a
+                                key={link.href}
+                                href={link.href}
+                                target="_blank"
+                                className="footer_link flex gap-1 overflow-hidden py-2 text-[0.875rem] leading-[150%] text-brand-white no-underline"
+                                data-audio={audio.scramble}
+                              >
+                                <div className="text-caption-2 text-color-teritary">
+                                  [{String(9 + i).padStart(2, "0")}]
+                                </div>
+                                <div className="text-size-small text-style-allcaps">
+                                  {link.label}
+                                </div>
                               </a>
                             ))}
                           </div>
                           <div className="flex flex-col">
                             {footer.connectMore.map((link, i) => (
-                              <a key={link.href} href={link.href} target="_blank" className="footer_link flex gap-1 overflow-hidden py-2 text-[0.875rem] leading-[150%] text-brand-white no-underline" data-audio={audio.scramble}>
-                                <div className="text-caption-2 text-color-teritary">[{String(13 + i).padStart(2, "0")}]</div>
-                                <div className="text-size-small text-style-allcaps">{link.label}</div>
+                              <a
+                                key={link.href}
+                                href={link.href}
+                                target="_blank"
+                                className="footer_link flex gap-1 overflow-hidden py-2 text-[0.875rem] leading-[150%] text-brand-white no-underline"
+                                data-audio={audio.scramble}
+                              >
+                                <div className="text-caption-2 text-color-teritary">
+                                  [{String(13 + i).padStart(2, "0")}]
+                                </div>
+                                <div className="text-size-small text-style-allcaps">
+                                  {link.label}
+                                </div>
                               </a>
                             ))}
                           </div>
@@ -169,28 +232,61 @@ export default function Footer() {
                 <div className="h-px w-full bg-white-20" />
                 <div className="grid grid-cols-3 items-center justify-between gap-8 overflow-hidden max-[991px]:grid-cols-2 max-[767px]:flex max-[767px]:flex-col max-[767px]:items-start max-[767px]:justify-between max-[767px]:gap-6 max-[767px]:pb-4 max-[479px]:flex max-[479px]:flex-col max-[479px]:grid-cols-[auto]">
                   <div className="text-size-small text-color-teritary">
-                    © <span className="footer_year">2024</span> {brand.logoStart}{brand.logoEnd}. All rights reserved.
+                    © <span className="footer_year">2024</span>{" "}
+                    {brand.logoStart}
+                    {brand.logoEnd}. All rights reserved.
                   </div>
                   <div className="footer_local-time flex items-center justify-center gap-2 max-[767px]:w-full max-[767px]:items-center max-[767px]:justify-start max-[479px]:order-1">
-                    <div id="footer-time" className="text-size-small text-color-teritary">
+                    <div
+                      id="footer-time"
+                      className="text-size-small text-color-teritary"
+                    >
                       <Clock />
                     </div>
                   </div>
                   <div className="flex justify-end gap-6 max-[767px]:w-full max-[767px]:justify-start max-[767px]:gap-8 max-[479px]:order-2">
-                    <Link href="/privacy-policy" className="text-brand-white no-underline">
-                      <div className="text-size-small text-color-teritary">Privacy Policy</div>
+                    <Link
+                      href="/privacy-policy"
+                      className="text-brand-white no-underline"
+                    >
+                      <div className="text-size-small text-color-teritary">
+                        Privacy Policy
+                      </div>
                     </Link>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="absolute inset-y-0 left-0 -ml-6 -mt-0.5 flex h-[45.875rem] w-[1.625rem] flex-col items-center justify-center text-white-20" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 26 734" fill="none" preserveAspectRatio="xMidYMid meet">
-                <path d="M1 734C1.00001 458.764 1.00002 304.451 1.00003 29.2154L25 1" stroke="currentColor" />
+            <div
+              className="absolute inset-y-0 left-0 -ml-6 -mt-0.5 flex h-183.5 w-6.5 flex-col items-center justify-center text-white-20"
+              aria-hidden="true"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="100%"
+                height="100%"
+                viewBox="0 0 26 734"
+                fill="none"
+                preserveAspectRatio="xMidYMid meet"
+              >
+                <path
+                  d="M1 734C1.00001 458.764 1.00002 304.451 1.00003 29.2154L25 1"
+                  stroke="currentColor"
+                />
               </svg>
             </div>
-            <div className="absolute inset-y-0 right-0 -mr-[1.3rem] -mt-0.5 flex h-[45.875rem] w-[1.625rem] flex-col items-center justify-center text-white-20" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 18 734" fill="none" preserveAspectRatio="xMidYMid meet">
+            <div
+              className="absolute inset-y-0 right-0 mr-[-1.3rem] -mt-0.5 flex h-183.5 w-6.5 flex-col items-center justify-center text-white-20"
+              aria-hidden="true"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="100%"
+                height="100%"
+                viewBox="0 0 18 734"
+                fill="none"
+                preserveAspectRatio="xMidYMid meet"
+              >
                 <path d="M17.0001 734L17 19.6102L1 1" stroke="currentColor" />
               </svg>
             </div>
