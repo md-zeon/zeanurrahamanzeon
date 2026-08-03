@@ -90,18 +90,21 @@ export default function TestimonialsSection() {
   }, []);
 
   return (
-    <section className="section_testimonials" ref={ref}>
+    <section className="relative z-[2]" ref={ref}>
       <div className="padding-global is-bigger">
         <div className="container-large">
-          <div className="testimonials_component">
-            <div header-animation-type="container" className="testimonial_header">
+          <div className="grid grid-cols-1">
+            <div
+              header-animation-type="container"
+              className="grid auto-cols-fr grid-cols-[auto_auto] justify-between gap-0 border-b border-l border-white-20 pl-4 max-[991px]:grid-cols-1 max-[991px]:place-items-start"
+            >
               <div className="pt-[7rem] pb-[1.5rem] pr-[1.5rem] max-[991px]:pt-[5rem]">
                 <div className="flex justify-start">
                   <h2 id="testimonial-h1" className="heading-style-h0">
                     Words From
                   </h2>
                 </div>
-                <div className="testimonial_header-bottom">
+                <div className="flex items-stretch justify-start -mt-2 pl-[7.3vw] min-[1280px]:pl-24 max-[991px]:pl-[10.7vw] max-[767px]:-mt-[0.2rem] max-[767px]:pl-0">
                   <div id="testimonial-h2" className="heading-style-h0">
                     collaborators
                   </div>
@@ -109,11 +112,11 @@ export default function TestimonialsSection() {
               </div>
               <LogosElement caption="CLI_TES_104" />
             </div>
-            <div className="testimonial_layout">
-              <div className="testimonial_quote-component">
-                <div className="testimonial_quote-layout">
-                  <div className="testimonial_quote-wrapper">
-                    <div className="testimonial_mark">
+            <div className="relative z-[2] grid grid-cols-1 items-stretch">
+              <div className="flex justify-end border-b border-l border-r border-white-20 px-[7.3vw] py-20 min-[1280px]:pl-0 min-[1280px]:pr-[6.88rem] max-[767px]:px-6 max-[767px]:py-8">
+                <div className="testimonial_quote-layout flex w-full max-w-[54.3125rem] flex-col gap-10 max-[991px]:gap-6">
+                  <div className="relative pl-[0.7rem] text-color-secondary max-[991px]:pl-[0.6rem] max-[479px]:-ml-2 max-[479px]:pl-2">
+                    <div className="absolute left-0 top-0 overflow-hidden">
                       <div id="testimonial-marks" className="heading-style-h5 is-testimonial">
                         &ldquo;
                       </div>
@@ -122,9 +125,9 @@ export default function TestimonialsSection() {
                       {testimonials[0].quote}
                     </div>
                   </div>
-                  <div className="testimonial_info-layout">
-                    <div className="testimonial_photo-wrapper">
-                      <img src={testimonials[0].image} loading="lazy" alt="" className="testimonial_photo" />
+                  <div className="testimonial_info-layout flex items-center justify-start gap-4 pl-[0.8rem] max-[767px]:pl-[0.6rem] max-[479px]:pl-0">
+                    <div className="flex h-14 w-14 flex-none items-center justify-center overflow-hidden rounded-full max-[767px]:h-10 max-[767px]:w-10">
+                      <img src={testimonials[0].image} loading="lazy" alt="" className="testimonial_photo h-full w-full" />
                     </div>
                     <div className="testimonial_info-wrapper">
                       <div className="testimonial_name">
@@ -141,15 +144,15 @@ export default function TestimonialsSection() {
                   </div>
                 </div>
               </div>
-              <div className="testimonial_nav-component no-scrollbar">
+              <div className="testimonial_nav-component no-scrollbar hidden max-[991px]:overflow-auto max-[991px]:rounded-r max-[991px]:border-r max-[991px]:border-white-20">
                 {testimonials.map((item, i) => (
-                  <a key={i} data-audio="https://bjornflow-assets.b-cdn.net/Audio/secondary%20hover%20sound.wav" href="#" className={`testimonial_nav-wrapper ${i === 0 ? "is-first is-active" : i === testimonials.length - 1 ? "is-last" : ""} w-inline-block`}>
-                    <img src={item.logo} loading="lazy" alt="" className="testimonial_nav-logo" />
+                  <a key={i} data-audio="https://bjornflow-assets.b-cdn.net/Audio/secondary%20hover%20sound.wav" href="#" className={`testimonial_nav-wrapper flex aspect-[1.3] items-center justify-center border border-white-20 bg-[#efefe600] backdrop-blur-[100px] transition-all duration-200 max-[991px]:min-h-28 max-[767px]:min-h-24 max-[479px]:min-h-[30vw] ${i === 0 ? "rounded-l is-first is-active" : i === testimonials.length - 1 ? "rounded-r is-last" : ""} w-inline-block`}>
+                    <img src={item.logo} loading="lazy" alt="" className="testimonial_nav-logo h-full max-h-[2.2rem] min-[1440px]:max-h-10 max-[991px]:max-h-[1.7rem] max-[479px]:max-h-[8vw]" />
                   </a>
                 ))}
               </div>
             </div>
-            <div className="testimonial_bottom" />
+            <div className="hidden h-28 border-l border-white-20" />
           </div>
         </div>
       </div>
