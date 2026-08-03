@@ -79,7 +79,7 @@ export default function AboutFun() {
     <section data-parallax-type="section" className="relative z-[2] overflow-hidden">
       <div className="padding-global is-bigger">
         <div className="container-large">
-          <div className="relative grid auto-cols-auto grid-cols-[auto_1fr] items-start gap-[11rem] border-l border-white-20 py-28 min-[1280px]:justify-items-stretch">
+          <div className="relative grid auto-cols-auto grid-cols-[auto_1fr] items-start gap-[11rem] border-l border-white-20 py-28">
             <div className="grid auto-cols-fr grid-cols-[0.25fr_auto] items-stretch justify-items-start gap-x-24 gap-y-24 min-[1280px]:justify-items-stretch min-[1280px]:gap-[11rem] max-[991px]:grid-cols-1 max-[991px]:justify-items-stretch max-[991px]:gap-y-20 max-[767px]:gap-12">
               <div className="flex flex-col pl-4 max-[991px]:place-items-start">
                 <div className="flex justify-end pr-[0.7rem]">
@@ -105,7 +105,7 @@ export default function AboutFun() {
               >
               {aboutFacts.slides.map((slide, i) => (
                 <SwiperSlide key={i}>
-                  <div className="z-[2] flex h-full w-full flex-col gap-6 rounded-lg border border-[#ffffff33] border-l-white-20 p-10 backdrop-blur-[100px] min-[1280px]:max-w-[39.718rem] max-[767px]:gap-4 max-[767px]:p-6">
+                  <div className="z-[2] flex h-full w-full flex-col gap-6 rounded-lg border border-[#ffffff33] border-l-white-20 bg-[#16151b] p-10 backdrop-blur-[100px] min-[1280px]:max-w-[39.718rem] max-[767px]:gap-4 max-[767px]:p-6">
                     <div>
                       <div className="text-caption-1 text-color-teritary">
                         {slide.caption}
