@@ -1476,151 +1476,6 @@ input[type="file"]:focus-visible {
   .about-story_link:hover {
     border-bottom-color: #efefe6;
   }
-  .section_lab {
-    z-index: 2;
-    position: relative;
-    overflow: hidden;
-  }
-  .lab_component {
-    flex-flow: column;
-    grid-template-rows: auto auto;
-    grid-template-columns: 1fr;
-    grid-auto-columns: 1fr;
-    display: flex;
-  }
-  .lab_header {
-    grid-column-gap: 0rem;
-    grid-row-gap: 0rem;
-    border-bottom: 0.0625rem solid #efefe633;
-    border-left: 1px solid #efefe633;
-    grid-template-rows: auto;
-    grid-template-columns: 1fr 1fr;
-    grid-auto-columns: 1fr;
-    justify-content: space-between;
-    padding-left: 1rem;
-    display: grid;
-  }
-  .lab_header-bottom {
-    justify-content: flex-start;
-    align-items: stretch;
-    margin-top: -0.5rem;
-    padding-left: 7.2vw;
-    display: flex;
-  }
-  .lab_controls {
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
-    border-style: none solid;
-    border-width: 1px;
-    border-color: var(--border-color--border-tertiary);
-    grid-template-rows: auto;
-    grid-template-columns: 1fr 1fr;
-    grid-auto-columns: 1fr;
-    align-items: center;
-    display: block;
-  }
-  .lab_buttons-layout {
-    grid-column-gap: 0rem;
-    grid-row-gap: 0rem;
-    border-right: 1px solid #efefe633;
-    grid-template-rows: auto;
-    grid-template-columns: 1fr 1fr;
-    grid-auto-columns: 1fr;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.8rem 1.5rem;
-    display: grid;
-    position: relative;
-  }
-  .lab_buttons-wrapper {
-    grid-column-gap: 0.5rem;
-    grid-row-gap: 0.5rem;
-    display: flex;
-  }
-  .lab_content {
-    border-style: none solid;
-    border-width: 1px;
-    border-color: var(--border-color--border-tertiary);
-    display: flex;
-    position: relative;
-  }
-  .lab_card-layout {
-    z-index: 1;
-    grid-column-gap: 1rem;
-    grid-row-gap: 1rem;
-    border-top: 1px solid #efefe633;
-    border-bottom: 1px solid #efefe633;
-    flex-flow: column;
-    flex: none;
-    width: 50%;
-    padding: 2rem 1rem;
-    display: flex;
-    position: relative;
-  }
-  .lab_overlay {
-    z-index: 2;
-    background-color: #0a090f80;
-    margin-right: 1px;
-    position: absolute;
-    inset: 0% 100% 0% -100%;
-  }
-  .lab_content-divider {
-    z-index: 3;
-    background-color: var(--border-color--border-tertiary);
-    width: 1px;
-    height: 100%;
-    margin-left: -1px;
-    position: absolute;
-    left: 50%;
-  }
-  .lab_card-wrapper {
-    grid-column-gap: 0.5rem;
-    grid-row-gap: 0.5rem;
-    flex-flow: column;
-    display: flex;
-  }
-  .lab_card-text-wrapper {
-    padding-left: 0.44rem;
-  }
-  .lab_card-content {
-    position: relative;
-  }
-  .lab_card-asset-wrapper {
-    z-index: 1;
-    border-radius: 0.5rem;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    position: relative;
-    overflow: hidden;
-  }
-  .lab_card-asset {
-    aspect-ratio: 16/9;
-    flex: none;
-    width: 110%;
-    height: 110%;
-  }
-  .lab_card-cta-wrapper {
-    z-index: 2;
-    justify-content: flex-start;
-    align-items: flex-end;
-    padding: 1rem;
-    display: flex;
-    position: absolute;
-    inset: 0%;
-  }
-  .lab_buttons-divider {
-    z-index: 3;
-    background-color: #efefe633;
-    width: 1px;
-    height: 100%;
-    margin-left: -1px;
-    position: absolute;
-    left: 50%;
-  }
-
   .about-story_wrapper {
     border-left: 1px solid #efefe633;
     border-right: 1px solid #efefe633;
@@ -1781,24 +1636,6 @@ input[type="file"]:focus-visible {
     display: flex;
     position: relative;
   }
-  .lab_controls-wrapper {
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    padding-right: 1.5rem;
-    display: flex;
-  }
-  .lab_tabs-number {
-    justify-content: flex-start;
-    align-items: center;
-    display: flex;
-  }
-  .lab_button-wrapper {
-    justify-content: flex-end;
-    align-items: center;
-    display: flex;
-  }
-
   .contact_email {
     grid-column-gap: 1rem;
     grid-row-gap: 1rem;
@@ -1857,18 +1694,6 @@ input[type="file"]:focus-visible {
   .about-story_testimonial-quote {
     position: absolute;
     inset: 0% auto auto -0.6rem;
-  }
-  .lab_card-overlay {
-    z-index: 2;
-    opacity: 0.3;
-    background-image: linear-gradient(45deg, #000, #000 0%, #0000);
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    inset: 0%;
-  }
-  .lab_card-overlay.is-right {
-    background-image: linear-gradient(-45deg, #000, #000 0%, #0000);
   }
   .work_card-overlay {
     z-index: 2;
@@ -1939,11 +1764,6 @@ input[type="file"]:focus-visible {
       grid-column-gap: 11rem;
       grid-row-gap: 11rem;
       justify-items: stretch;
-    }
-  }
-  @media screen and (min-width: 1280px) {
-    .lab_header-bottom {
-      padding-left: 6rem;
     }
   }
   @media screen and (min-width: 1440px) {
@@ -2020,34 +1840,6 @@ input[type="file"]:focus-visible {
     }
   }
   @media screen and (max-width: 991px) {
-    .lab_component {
-      flex-flow: column;
-    }
-  }
-  @media screen and (max-width: 991px) {
-    .lab_header {
-      grid-template-columns: 1fr;
-      place-items: start;
-    }
-  }
-  @media screen and (max-width: 991px) {
-    .lab_header-bottom {
-      padding-left: 10vw;
-    }
-  }
-  @media screen and (max-width: 991px) {
-    .lab_controls {
-      grid-template-columns: 1fr;
-    }
-  }
-  @media screen and (max-width: 991px) {
-    .lab_card-asset {
-      width: 120%;
-      height: 120%;
-    }
-  }
-
-  @media screen and (max-width: 991px) {
     .about-story_wrapper {
       padding: 5rem 3rem;
     }
@@ -2120,39 +1912,6 @@ input[type="file"]:focus-visible {
     }
   }
   @media screen and (max-width: 767px) {
-    .lab_header-bottom {
-      margin-top: -0.2rem;
-      padding-left: 0;
-    }
-  }
-  @media screen and (max-width: 767px) {
-    .lab_buttons-layout {
-      grid-column-gap: 1rem;
-      grid-row-gap: 1rem;
-      flex-flow: column;
-      grid-template-columns: 1fr;
-      justify-content: space-between;
-      align-items: flex-start;
-      padding: 1rem;
-      display: flex;
-    }
-  }
-  @media screen and (max-width: 767px) {
-    .lab_card-layout {
-      width: 100%;
-      padding-top: 1rem;
-      padding-bottom: 1rem;
-    }
-  }
-  @media screen and (max-width: 767px) {
-    .lab_content-divider,
-    .lab_buttons-divider {
-      display: none;
-      left: 80%;
-    }
-  }
-
-  @media screen and (max-width: 767px) {
     .about-story_wrapper {
       padding: 3rem 2rem;
     }
@@ -2179,19 +1938,6 @@ input[type="file"]:focus-visible {
     .work-projects_content-divider {
       display: none;
       left: 80%;
-    }
-  }
-  @media screen and (max-width: 767px) {
-    .lab_controls-wrapper {
-      order: 1;
-      padding-right: 0;
-    }
-  }
-  @media screen and (max-width: 767px) {
-    .lab_button-wrapper {
-      flex-flow: column;
-      align-items: stretch;
-      width: 100%;
     }
   }
 
@@ -2247,17 +1993,6 @@ input[type="file"]:focus-visible {
   @media screen and (max-width: 479px) {
     .about-fun_video-misc {
       bottom: 12vw;
-    }
-  }
-  @media screen and (max-width: 479px) {
-    .lab_buttons-layout {
-      flex-flow: wrap;
-    }
-  }
-  @media screen and (max-width: 479px) {
-    .lab_content-divider,
-    .lab_buttons-divider {
-      left: 90%;
     }
   }
   @media screen and (max-width: 479px) {

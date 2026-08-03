@@ -26,11 +26,14 @@ export default function WorkLabSection() {
   useSectionHeadings(ref);
 
   return (
-    <section id="home-services" data-parallax-type="section" className="section_lab background-color-primary" ref={ref}>
+    <section id="home-services" data-parallax-type="section" className="relative z-[2] overflow-hidden background-color-primary" ref={ref}>
       <div className="padding-global is-bigger">
         <div className="container-large">
-          <div className="lab_component">
-            <div header-animation-type="container" className="lab_header">
+          <div className="flex flex-col">
+            <div
+              header-animation-type="container"
+              className="grid auto-cols-fr grid-cols-[1fr_1fr] justify-between gap-0 border-b border-l border-white-20 pl-4 max-[991px]:grid-cols-1 max-[991px]:place-items-start"
+            >
               <div className="pt-[7rem] pb-[1.5rem] pr-[1.5rem] max-[767px]:pt-[5rem]">
                 <div className="flex justify-start">
                   <h2 header-animation-type="heading-1" className="heading-style-h2">
@@ -40,10 +43,10 @@ export default function WorkLabSection() {
               </div>
               <LogosElement caption="LAB_BF_188" />
             </div>
-            <div className="lab_controls">
-              <div className="lab_buttons-layout">
-                <div className="lab_controls-wrapper">
-                  <div className="lab_tabs-number">
+            <div className="border-x border-[#444]">
+              <div className="relative grid auto-cols-fr grid-cols-[1fr_1fr] items-center justify-between gap-0 border-r border-white-20 p-[1.8rem_1.5rem] max-[767px]:flex max-[767px]:flex-col max-[767px]:items-start max-[767px]:gap-4 max-[767px]:p-4 max-[479px]:flex-row max-[479px]:flex-wrap">
+                <div className="flex w-full items-center justify-between pr-6 max-[767px]:order-1 max-[767px]:pr-0">
+                  <div className="flex items-center justify-start">
                     <div className="text-size-large">[</div>
                     <div data-slide-count="step" className="text-size-large">
                       01
@@ -54,13 +57,13 @@ export default function WorkLabSection() {
                     </div>
                     <div className="text-size-large">]</div>
                   </div>
-                  <div className="lab_buttons-wrapper">
+                  <div className="flex gap-2">
                     <a
                       data-audio={audio.hover}
                       data-slider="button-prev"
                       aria-label="previous slide"
                       href="#"
-                      className="lab_button w-inline-block"
+                      className="w-inline-block"
                     >
                       <div className="icon-embed-medium w-embed">
                         <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 48 49" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
@@ -74,7 +77,7 @@ export default function WorkLabSection() {
                       data-slider="button-next"
                       aria-label="next slide"
                       href="#"
-                      className="lab_button w-inline-block"
+                      className="w-inline-block"
                     >
                       <div className="icon-embed-medium w-embed">
                         <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 48 49" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
@@ -85,19 +88,23 @@ export default function WorkLabSection() {
                     </a>
                   </div>
                 </div>
-                <div className="lab_buttons-divider" />
-                <div className="lab_button-wrapper">
+                <div className="absolute left-1/2 z-[3] -ml-px h-full w-px bg-white-20 max-[767px]:hidden" />
+                <div className="flex items-center justify-end max-[767px]:w-full max-[767px]:flex-col max-[767px]:items-stretch">
                   <Button href="/experiments" variant="secondary">
                     See experiments
                   </Button>
                 </div>
               </div>
             </div>
-            <div data-slider="list" className="lab_content">
+            <div data-slider="list" className="relative flex border-x border-[#444]">
               {workLabSlides.map((slide) => (
-                <div key={slide.caption} data-slider="slide" className="lab_card-layout">
-                  <div className="lab_card-wrapper">
-                    <div className="lab_card-text-wrapper">
+                <div
+                  key={slide.caption}
+                  data-slider="slide"
+                  className="relative z-[1] flex w-1/2 flex-none flex-col gap-4 border-y border-white-20 px-4 py-8 max-[767px]:w-full max-[767px]:py-4"
+                >
+                  <div className="flex flex-col gap-2">
+                    <div className="pl-[0.44rem]">
                       <div className="text-caption-2 text-color-secondary">{slide.caption}</div>
                     </div>
                     <a
@@ -105,15 +112,15 @@ export default function WorkLabSection() {
                       href={slide.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="lab_card-content w-inline-block"
+                      className="relative w-inline-block"
                     >
-                      <div className="lab_card-asset-wrapper">
-                        <div className="lab_card-asset">
+                      <div className="relative z-[1] flex h-full w-full items-center justify-center overflow-hidden rounded-lg">
+                        <div className="aspect-video h-[110%] w-[110%] flex-none max-[991px]:h-[120%] max-[991px]:w-[120%]">
                           <AutoVideo src={slide.video} />
                         </div>
                       </div>
                     </a>
-                    <div className="lab_card-cta-wrapper">
+                    <div className="absolute inset-0 z-[2] flex items-end justify-start p-4">
                       <h3 className="heading-style-h4">{slide.title}</h3>
                       <a
                         data-audio={audio.hover}
@@ -130,8 +137,8 @@ export default function WorkLabSection() {
                 </div>
               ))}
             </div>
-            <div className="lab_overlay" />
-            <div className="lab_content-divider" />
+            <div className="absolute inset-y-0 right-full left-[-100%] z-[2] mr-px bg-[#0a090f80]" />
+            <div className="absolute left-1/2 z-[3] -ml-px h-full w-px bg-[#444] max-[767px]:hidden" />
           </div>
         </div>
       </div>
