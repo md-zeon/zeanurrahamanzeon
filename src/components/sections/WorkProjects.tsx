@@ -9,12 +9,12 @@ export default function WorkProjects() {
       id="home-services"
       data-projects-section="second"
       data-parallax-type="section"
-      className="section_work-projects"
+      className="relative z-[2] overflow-hidden"
     >
       <div className="padding-global is-bigger">
         <div className="container-large">
-          <div className="work-projects_component">
-            <div className="work-projects_content-divider" />
+          <div>
+            <div className="work-projects_content-divider absolute left-1/2 z-[3] h-full w-px -ml-px bg-white-20 max-[767px]:hidden" />
             <div className="work-projects_nav">
               <Link
                 href="/work"
@@ -44,11 +44,11 @@ export default function WorkProjects() {
                 className="frame is-right"
               />
             </div>
-            <div className="work-projects_content">
+            <div className="work-projects_content relative grid auto-cols-fr grid-cols-2 gap-0 border-x border-t border-white-20 max-[767px]:grid-cols-1">
               {workProjects.map((project) => (
-                <div key={project.index} className="work-projects_card-layout">
-                  <div className="work-projects_card-wrapper">
-                    <div className="work-projects_card-text-wrapper">
+                <div key={project.index} className="work-projects_card-layout relative z-[1] flex w-full flex-none flex-col gap-4 border-b border-white-20 p-[2rem_1rem] max-[767px]:py-4">
+                  <div className="work-projects_card-wrapper flex flex-col gap-2">
+                    <div className="work-projects_card-text-wrapper pl-[0.44rem]">
                       <div className="text-caption-2 text-color-secondary">
                         {project.index}
                       </div>
@@ -66,10 +66,10 @@ export default function WorkProjects() {
                       aria-label={project.ariaLabel}
                       data-audio={audio.hover}
                       href={project.href}
-                      className="work-projects_card-content w-inline-block"
+                      className="work-projects_card-content relative w-inline-block"
                     >
-                      <div className="work-projects_card-asset-wrapper">
-                        <div className="work-projects_card-asset">
+                      <div className="work-projects_card-asset-wrapper relative z-[1] flex aspect-video items-center justify-center overflow-hidden rounded-lg">
+                        <div className="work-projects_card-asset h-[120%] w-[120%] flex-none">
                           <AutoVideo
                             src={project.video}
                             poster={project.poster}
@@ -79,7 +79,7 @@ export default function WorkProjects() {
                     </Link>
                   </div>
                   <div className="work-projects_card-bottom">
-                    <div className="work-projects_card-cta-wrapper">
+                    <div className="work-projects_card-cta-wrapper absolute inset-0 z-[2] flex items-end justify-start p-4">
                       <h3 className="heading-style-h4">{project.title}</h3>
                       <Link
                         data-audio={audio.hover}
