@@ -1221,11 +1221,6 @@ input[type="file"]:focus-visible {
     grid-auto-columns: 1fr;
     display: grid;
   }
-  .faq_component {
-    flex-flow: column;
-    padding-top: 7.5rem;
-    display: flex;
-  }
   .form_cta-wrapper {
     grid-column-gap: 1rem;
     grid-row-gap: 1rem;
@@ -1283,77 +1278,6 @@ input[type="file"]:focus-visible {
     display: grid;
     position: relative;
   }
-  .faq_layout {
-    grid-column-gap: 0rem;
-    grid-row-gap: 0rem;
-    grid-template-rows: auto;
-    grid-template-columns: 1fr 0.33fr;
-    grid-auto-columns: 1fr;
-    justify-content: space-between;
-    align-items: start;
-    display: grid;
-    position: relative;
-  }
-  .faq_content {
-    border-top: 1px solid #efefe633;
-    border-left: 1px solid #efefe633;
-    flex-flow: column;
-    width: 100%;
-    padding-bottom: 10rem;
-    display: flex;
-  }
-  .faq_wrapper.is-last {
-    border-bottom: 1px solid var(--border-color--border-tertiary);
-  }
-  .faq_question {
-    grid-column-gap: 1.5rem;
-    grid-row-gap: 1.5rem;
-    border-style: none solid none none;
-    border-width: 1px;
-    border-color: var(--border-color--border-tertiary);
-    grid-template-rows: auto;
-    grid-template-columns: 1fr auto;
-    grid-auto-columns: 1fr;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 2rem 1.5rem;
-    text-decoration: none;
-    display: grid;
-  }
-  .faq_question-wrapper {
-    grid-column-gap: 1.5rem;
-    grid-row-gap: 1.5rem;
-    justify-content: flex-start;
-    align-items: center;
-    display: flex;
-  }
-  .faq_answer {
-    grid-column-gap: 2rem;
-    grid-row-gap: 2rem;
-    border-bottom: 1px solid #efefe633;
-    border-left: 1px #efefe633;
-    border-right: 1px solid #efefe633;
-    flex-flow: column;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-    display: flex;
-    overflow: hidden;
-  }
-  .faq_header-bottom {
-    justify-content: flex-start;
-    align-items: stretch;
-    margin-top: -0.5rem;
-    padding-left: 24vw;
-    display: flex;
-  }
-  .faq_header-middle {
-    justify-content: flex-start;
-    align-items: stretch;
-    margin-top: -2.5rem;
-    padding-left: 37.5vw;
-    display: flex;
-  }
-
   .section_about-divider {
     z-index: 2;
     position: relative;
@@ -1551,25 +1475,6 @@ input[type="file"]:focus-visible {
   }
   .about-story_link:hover {
     border-bottom-color: #efefe6;
-  }
-  .faq_header {
-    grid-column-gap: 0rem;
-    grid-row-gap: 0rem;
-    grid-template-rows: auto;
-    grid-template-columns: auto 1fr;
-    grid-auto-columns: 1fr;
-    justify-content: space-between;
-    padding-left: 1rem;
-    display: grid;
-  }
-  .faq_contact {
-    width: 100%;
-    max-width: 26rem;
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
-    padding-left: 1.5rem;
-    position: sticky;
-    top: 6rem;
   }
   .section_lab {
     z-index: 2;
@@ -2025,11 +1930,6 @@ input[type="file"]:focus-visible {
     }
   }
   @media screen and (min-width: 1280px) {
-    .faq_header-middle {
-      padding-left: 31rem;
-    }
-  }
-  @media screen and (min-width: 1280px) {
     .about-fun_card {
       max-width: 39.718rem;
     }
@@ -2053,21 +1953,6 @@ input[type="file"]:focus-visible {
   }
 
   @media screen and (min-width: 1440px) {
-    .faq_layout {
-      grid-template-columns: 1fr 0.485fr;
-    }
-  }
-  @media screen and (min-width: 1440px) {
-    .faq_content {
-      max-width: 65.5rem;
-    }
-  }
-  @media screen and (min-width: 1440px) {
-    .faq_header-bottom {
-      padding-left: 19.5vw;
-    }
-  }
-  @media screen and (min-width: 1440px) {
     .about-story_component {
       grid-template-rows: auto;
       grid-template-columns: 1fr;
@@ -2077,11 +1962,6 @@ input[type="file"]:focus-visible {
   @media screen and (min-width: 1440px) {
     .about-story_content {
       max-width: 65.5rem;
-    }
-  }
-  @media screen and (min-width: 1920px) {
-    .faq_layout {
-      grid-template-columns: 1fr 24.3rem;
     }
   }
   @media screen and (max-width: 991px) {
@@ -2115,28 +1995,6 @@ input[type="file"]:focus-visible {
     }
   }
   @media screen and (max-width: 991px) {
-    .faq_component {
-      padding-top: 5.5rem;
-    }
-  }
-  @media screen and (max-width: 991px) {
-    .faq_layout {
-      grid-template-columns: 1fr;
-    }
-  }
-  @media screen and (max-width: 991px) {
-    .faq_header-bottom {
-      width: 100%;
-    }
-  }
-  @media screen and (max-width: 991px) {
-    .faq_header-middle {
-      margin-top: -4vw;
-      padding-left: 50vw;
-    }
-  }
-
-  @media screen and (max-width: 991px) {
     .about-story_grid {
       flex-flow: column;
       min-height: auto;
@@ -2159,18 +2017,6 @@ input[type="file"]:focus-visible {
       grid-row-gap: 5rem;
       grid-template-columns: 1fr;
       justify-items: stretch;
-    }
-  }
-  @media screen and (max-width: 991px) {
-    .faq_header {
-      grid-template-columns: 1fr;
-      place-items: start;
-    }
-  }
-  @media screen and (max-width: 991px) {
-    .faq_contact {
-      display: none;
-      position: static;
     }
   }
   @media screen and (max-width: 991px) {
@@ -2243,24 +2089,6 @@ input[type="file"]:focus-visible {
       padding-bottom: 8rem;
     }
   }
-  @media screen and (max-width: 767px) {
-    .faq_content {
-      padding-bottom: 7rem;
-    }
-  }
-  @media screen and (max-width: 767px) {
-    .faq_question {
-      padding-top: 1.5rem;
-      padding-bottom: 1.5rem;
-    }
-  }
-  @media screen and (max-width: 767px) {
-    .faq_header-middle {
-      margin-top: -5vw;
-      padding-left: 53.5vw;
-    }
-  }
-
   @media screen and (max-width: 767px) {
     .about-story_component {
       padding-bottom: 3rem;
@@ -2392,21 +2220,6 @@ input[type="file"]:focus-visible {
       left: 4%;
     }
   }
-  @media screen and (max-width: 479px) {
-    .faq_header-bottom {
-      grid-template-rows: auto;
-      grid-template-columns: 0.6fr 1fr;
-      grid-auto-columns: 1fr;
-      margin-top: -0.2rem;
-    }
-  }
-  @media screen and (max-width: 479px) {
-    .faq_header-middle {
-      width: 100%;
-      padding-left: 50vw;
-    }
-  }
-
   @media screen and (max-width: 479px) {
     .about-story_component {
       border-left-style: none;

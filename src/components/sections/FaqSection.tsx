@@ -135,23 +135,26 @@ export default function FaqSection() {
   }, []);
 
   return (
-    <section id="faq-section" className="section_faq" ref={ref}>
+    <section id="faq-section" ref={ref}>
       <div className="padding-global is-bigger">
         <div className="container-large">
-          <div className="faq_component">
-            <div header-animation-type="container" className="faq_header">
+          <div className="faq_component flex flex-col pt-[7.5rem] max-[991px]:pt-[5.5rem]">
+            <div
+              header-animation-type="container"
+              className="grid auto-cols-fr grid-cols-[auto_1fr] justify-between gap-0 pl-4 max-[991px]:grid-cols-1 max-[991px]:place-items-start"
+            >
               <div className="border-r border-[#efefe633] pt-[2rem] pb-[1.5rem] pr-[1.5rem] max-[991px]:border-r-0">
                 <div className="flex items-stretch justify-start max-[479px]:pl-0">
                   <h2 id="faq-h1" header-animation-type="heading-1" className="heading-style-h0 is-faq">
                     {faq.header[0]}
                   </h2>
                 </div>
-                <div className="faq_header-middle">
+                <div className="flex items-stretch justify-start -mt-10 pl-[37.5vw] min-[1280px]:pl-[31rem] max-[991px]:-mt-[4vw] max-[991px]:pl-[50vw] max-[767px]:-mt-[5vw] max-[767px]:pl-[53.5vw] max-[479px]:w-full max-[479px]:pl-[50vw]">
                   <h2 id="faq-h2" header-animation-type="heading-2" className="heading-style-h0 is-faq">
                     {faq.header[1]}
                   </h2>
                 </div>
-                <div className="faq_header-bottom">
+                <div className="flex items-stretch justify-start -mt-2 pl-[24vw] min-[1440px]:pl-[19.5vw] max-[991px]:w-full max-[479px]:-mt-[0.2rem]">
                   <div id="faq-h3" header-animation-type="heading-3" className="heading-style-h0 is-faq">
                     {faq.header[2]}
                   </div>
@@ -159,19 +162,19 @@ export default function FaqSection() {
               </div>
               <LogosElement caption={faq.caption} extraClasses="is-faq" />
             </div>
-            <div className="faq_layout">
-              <div className="faq_content">
+            <div className="relative grid auto-cols-fr grid-cols-[1fr_0.33fr] items-start justify-between gap-0 min-[1440px]:grid-cols-[1fr_0.485fr] min-[1920px]:grid-cols-[1fr_24.3rem] max-[991px]:grid-cols-1">
+              <div className="faq_content flex w-full flex-col border-t border-l border-white-20 pb-40 max-[767px]:pb-28">
                 {faq.items.map((item, i) => (
                   <div key={i} className="faq_wrapper">
-                    <a data-audio-click={audio.closeMenu} data-audio={audio.secondaryHover} href="#" className="faq_question w-inline-block" onClick={(e) => e.preventDefault()}>
-                      <div className="faq_question-wrapper">
+                    <a data-audio-click={audio.closeMenu} data-audio={audio.secondaryHover} href="#" className="faq_question grid auto-cols-fr grid-cols-[1fr_auto] items-center justify-start gap-6 border-r border-r-[#444] px-6 py-8 no-underline max-[767px]:py-6 w-inline-block" onClick={(e) => e.preventDefault()}>
+                      <div className="faq_question-wrapper flex items-center justify-start gap-6">
                         <div className="heading-style-h5">{item.question}</div>
                       </div>
                       <div className="faq_icon-wrapper">
                         <PlusIcon />
                       </div>
                     </a>
-                    <div className="faq_answer" aria-hidden="true">
+                    <div className="faq_answer flex flex-col gap-8 overflow-hidden border-b border-l border-r border-white-20 px-6" aria-hidden="true">
                       <div className="margin-bottom margin-medium">
                         <div className="text-size-regular text-color-secondary">
                           <Answer answer={item.answer} />
@@ -180,7 +183,7 @@ export default function FaqSection() {
                     </div>
                   </div>
                 ))}
-                <div className="faq_contact">
+                <div className="sticky top-24 w-full max-w-[26rem] py-6 pl-6 max-[991px]:static max-[991px]:hidden">
                   <div className="text-size-regular">{faq.contactText}</div>
                 </div>
               </div>
