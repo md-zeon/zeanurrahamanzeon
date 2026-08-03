@@ -20,9 +20,9 @@ export default function CaseStudyFeatured() {
       <div className="padding-global is-bigger">
         <div className="container-large">
           <div className="lab_component">
-            <div header-animation-type="container" className="cs-more_header">
+            <div header-animation-type="container" className="grid auto-cols-fr grid-rows-[auto] grid-cols-[1.5fr_1fr] justify-between gap-0 border-b border-l border-neutral-black pl-4 max-[991px]:grid-cols-1 max-[991px]:place-items-start">
               <div className="lab_header-wrapper">
-                <div className="cs_header-top">
+                <div className="flex justify-start">
                   <h2 id="why-h1" header-animation-type="heading-1" className="heading-style-h2">
                     <span className="header_italic-word">Featured</span> client projects
                   </h2>

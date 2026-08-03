@@ -1011,4 +1011,12 @@ html.has-target-cursor [data-default-cursor] a * {
 }
 
 
-
+/* Case Study (work/[slug]) */
+.home_projects-lines {
+  z-index:0;border-left:1px solid #efefe633;border-right:1px solid #efefe633;justify-content:flex-end;align-items:flex-start;width:auto;max-width:81.25rem;margin-left:auto;margin-right:auto;display:flex;position:absolute;inset:0% 4.37rem
+}
+@media screen and (max-width:991px) {
+  .home_projects-lines {
+    left:1.5rem;right:1.5rem
+  }
+}

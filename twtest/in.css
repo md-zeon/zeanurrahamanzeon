@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+.home_projects-lines-probe {
+  @apply flex items-start justify-end border-l border-r border-[#efefe633] z-0 w-auto max-w-[81.25rem] mx-auto absolute inset-[0_4.37rem] max-[991px]:inset-x-[1.5rem];
+}
