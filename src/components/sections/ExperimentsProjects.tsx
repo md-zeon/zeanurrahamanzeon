@@ -170,10 +170,10 @@ export default function ExperimentsProjects() {
         <div className="home-projects_layout">
           {experimentsStack.map((project, i) => (
             <div key={project.index} data-index={i + 1} className={`home-projects_project ${i === 0 ? "first" : "middle"}`}>
-              <div className="home-projects_text-wrapper">
+              <div className="absolute left-[-2.7rem] top-1/2 [transform:rotate(-90deg)_translateY(-50%)] max-[767px]:left-[-2.3rem] max-[479px]:left-[-2rem]">
                 <div className="text-caption-2">{project.index}</div>
               </div>
-              <div className="home-projects_video w-embed">
+              <div className="home-projects_video relative inset-0 z-[2] aspect-[16/9.5] h-full w-full max-h-[93.5vh] overflow-hidden rounded-lg max-[767px]:rounded w-embed">
                 <AutoVideo src={project.video} />
               </div>
             </div>
@@ -186,7 +186,7 @@ export default function ExperimentsProjects() {
           <a key={project.index} data-audio={audio.secondaryHover} data-project={i + 1} href="#" className={`home-projects_nav-wrapper is-${i + 1} w-inline-block`} onClick={(e) => handleNavClick(e, i)}>
             <div className="text-caption-2">[0{i + 1}]</div>
             <div className="home-projects_nav-image-wrapper">
-              <div className="home-projects_nav-image w-embed">
+              <div className="h-full w-full object-cover w-embed">
                 <AutoVideo src={project.video} />
               </div>
             </div>
@@ -195,7 +195,7 @@ export default function ExperimentsProjects() {
       </div>
 
       <div className="home-projects_banner-component is-experiments">
-        <div className="home-projects_banner-header">
+        <div className="flex-none">
           <div className="heading-style-h3">{experimentsStack[0].title}</div>
         </div>
         <div className="btn-group">

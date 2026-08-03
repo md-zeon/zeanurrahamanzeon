@@ -1136,17 +1136,6 @@ input[type="file"]:focus-visible {
     position: relative;
     overflow: hidden;
   }
-  .home-projects_video {
-    z-index: 2;
-    aspect-ratio: 16/9.5;
-    border-radius: 0.5rem;
-    width: 100%;
-    height: 100%;
-    max-height: 93.5vh;
-    position: relative;
-    inset: 0%;
-    overflow: hidden;
-  }
   .home-projects_nav-component {
     z-index: 3;
     grid-column-gap: 0.5rem;
@@ -1168,11 +1157,6 @@ input[type="file"]:focus-visible {
     align-items: flex-start;
     text-decoration: none;
     display: flex;
-  }
-  .home-projects_nav-image {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
   }
   .home-projects_project {
     z-index: 2;
@@ -1323,11 +1307,6 @@ input[type="file"]:focus-visible {
     padding-top: 1.5rem;
     display: flex;
   }
-  .home-projects_text-wrapper {
-    position: absolute;
-    inset: 50% auto auto -2.7rem;
-    transform: rotate(-90deg) translateY(-50%);
-  }
   .home-projects_nav-image-wrapper {
     border-radius: 0.25rem;
     width: 8.85rem;
@@ -1357,9 +1336,6 @@ input[type="file"]:focus-visible {
     grid-row-gap: 1rem;
     max-width: 16rem;
     max-height: 10rem;
-  }
-  .home-projects_banner-header {
-    flex: none;
   }
   .home-projects_layout {
     grid-column-gap: 0rem;
@@ -2844,11 +2820,6 @@ input[type="file"]:focus-visible {
     }
   }
   @media screen and (max-width: 767px) {
-    .home-projects_video {
-      border-radius: 0.25rem;
-    }
-  }
-  @media screen and (max-width: 767px) {
     .home-services_grid-list {
       padding-left: 1.5rem;
       padding-right: 1.5rem;
@@ -2871,11 +2842,6 @@ input[type="file"]:focus-visible {
     .form_field-layout {
       grid-template-rows: auto auto;
       grid-template-columns: 1fr;
-    }
-  }
-  @media screen and (max-width: 767px) {
-    .home-projects_text-wrapper {
-      left: -2.3rem;
     }
   }
   @media screen and (max-width: 767px) {
@@ -3130,11 +3096,6 @@ input[type="file"]:focus-visible {
     .contact_form-block {
       padding-left: 1.3rem;
       padding-right: 1.3rem;
-    }
-  }
-  @media screen and (max-width: 479px) {
-    .home-projects_text-wrapper {
-      left: -2rem;
     }
   }
   @media screen and (max-width: 479px) {
