@@ -31,8 +31,8 @@ export default function WorkLabSection() {
         <div className="container-large">
           <div className="lab_component">
             <div header-animation-type="container" className="lab_header">
-              <div className="lab_header-wrapper">
-                <div className="lab_header-top">
+              <div className="pt-[7rem] pb-[1.5rem] pr-[1.5rem] max-[767px]:pt-[5rem]">
+                <div className="flex justify-start">
                   <h2 header-animation-type="heading-1" className="heading-style-h2">
                     From the <span className="header_italic-word">labs</span>
                   </h2>

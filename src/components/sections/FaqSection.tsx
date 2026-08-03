@@ -140,8 +140,8 @@ export default function FaqSection() {
         <div className="container-large">
           <div className="faq_component">
             <div header-animation-type="container" className="faq_header">
-              <div className="faq_header-wrapper">
-                <div className="faq_header-top">
+              <div className="border-r border-[#efefe633] pt-[2rem] pb-[1.5rem] pr-[1.5rem] max-[991px]:border-r-0">
+                <div className="flex items-stretch justify-start max-[479px]:pl-0">
                   <h2 id="faq-h1" header-animation-type="heading-1" className="heading-style-h0 is-faq">
                     {faq.header[0]}
                   </h2>

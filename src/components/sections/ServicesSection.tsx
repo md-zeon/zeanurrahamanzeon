@@ -20,15 +20,15 @@ export default function ServicesSection() {
     <section
       id="services"
       data-parallax-type="ssection"
-      className="section_home-services"
+      className="relative z-[2]"
       ref={ref}
     >
       <div className="padding-global is-bigger">
         <div className="container-large">
-          <div className="home-services_component">
+          <div className="grid gap-20 max-[479px]:gap-12">
             <div
               header-animation-type="container"
-              className="home-services_header"
+              className="grid auto-cols-fr grid-cols-[auto_auto] justify-between gap-0 border-b border-l border-white-20 pl-4 pt-12 max-[991px]:grid-cols-1 max-[991px]:place-items-start max-[479px]:pt-0"
             >
               <div className="pt-[7rem] pb-[1.5rem] pr-[1.5rem]">
                 <div className="flex justify-start">
@@ -39,7 +39,7 @@ export default function ServicesSection() {
                     SERVICES &
                   </h2>
                 </div>
-                <div className="home-services_header-bottom">
+                <div className="flex items-stretch justify-start -mt-2 pl-[12.4vw] min-[1280px]:pl-24 max-[991px]:pl-[10.7vw] max-[767px]:-mt-[0.2rem] max-[767px]:pl-0">
                   <div
                     header-animation-type="heading-2"
                     className="heading-style-h0"
@@ -50,38 +50,41 @@ export default function ServicesSection() {
               </div>
               <LogosElement caption="SER_EXP_019" />
             </div>
-            <div className="home-services_layout">
+            <div className="relative z-[2] flex flex-col items-stretch justify-start gap-6">
               {services.map((service, i) => (
                 <div
                   key={service.index}
                   data-audio="https://bjornflow-assets.b-cdn.net/Audio/Card%20Hover.wav"
-                  className="home-services_card"
+                  className="relative flex h-[36.625rem] flex-col items-stretch justify-between overflow-hidden rounded-lg border border-white-20 bg-[#efefe60d] p-[2.5rem_2.5rem_2.5rem_2rem] backdrop-blur-[100px] [transform-style:preserve-3d] transition-all duration-200 ease-out max-[991px]:h-auto max-[991px]:gap-16 max-[991px]:px-0 max-[991px]:py-8 max-[767px]:gap-8"
                 >
-                  <div className="home-services_card-top">
-                    <div className="home-services_card-header">
+                  <div className="relative z-[2] flex flex-col gap-2 max-[991px]:px-8 max-[767px]:px-6 max-[767px]:gap-y-[0.3rem]">
+                    <div className="flex gap-2 overflow-hidden max-[991px]:flex-col max-[767px]:gap-1">
                       <div className="text-caption-2 text-color-secondary">
                         [{service.index}]
                       </div>
                       <div className="heading-style-h5">{service.title}</div>
                     </div>
-                    <div className="home-services_card-p">
+                    <div className="flex max-w-[31.25rem] flex-col items-start justify-start gap-6 pl-8 max-[991px]:max-w-none max-[991px]:pl-0">
                       <p className="text-size-regular text-color-secondary">
                         {service.description}
                       </p>
                     </div>
                   </div>
-                  <div className="home-services_grid-list">
+                  <div className="relative z-[2] flex max-w-[49.25rem] flex-wrap gap-2 max-[991px]:max-w-none max-[991px]:px-8 max-[767px]:px-6">
                     {service.items.map((item) => (
-                      <div key={item} className="home-services_item">
+                      <div
+                        key={item}
+                        className="rounded bg-[#efefe61a] px-4 py-2 text-[1rem] backdrop-blur-[100px] max-[767px]:px-3 max-[767px]:py-1 max-[767px]:text-[0.9rem] max-[767px]:tracking-[-0.03rem] max-[479px]:text-[0.85rem] max-[479px]:tracking-[-0.025rem]"
+                      >
                         <div>{item}</div>
                       </div>
                     ))}
                   </div>
-                  <div className="home-services_card-asset-wrapper">
+                  <div className="absolute inset-y-0 right-0 z-[1] flex w-[40%] items-center justify-center overflow-hidden max-[991px]:relative max-[991px]:inset-auto max-[991px]:bottom-0 max-[991px]:hidden max-[991px]:w-full">
                     <div
                       data-us-lazyload="true"
                       data-us-project={service.usProject}
-                      className="home-services_card-asset"
+                      className="z-[2] h-[110%] w-[110%] flex-none object-cover [object-position:0%_0%]"
                     >
                       <video
                         muted
