@@ -2,7 +2,7 @@
 export const brand = {
   name: "Zeanur Rahaman Zeon",
   logoStart: "zeanur",
-  logoEnd: "zeon",
+  logoEnd: "rahaman",
   heroName: "Hi, I'm Zeanur Rahaman Zeon",
   heroLine1: "Strategic",
   heroLine2: "Software",
@@ -48,12 +48,12 @@ export const navLinks = [
 
 /** External social/profile links used across headers and footer. */
 export const socials = {
-  linkedin: "https://www.linkedin.com/in/bjorn-encutescu/",
-  youtube: "https://www.youtube.com/@bjorn_flow",
-  instagram: "https://www.instagram.com/bjornflow/",
-  twitter: "https://x.com/bjorn_flow",
-  webflowPartner: "https://webflow.com/@bjorn-encutescu",
-  webflowClonables: "https://webflow.com/@bjornflow",
+  linkedin: "https://www.linkedin.com/in/zeanur-rahaman-zeon/",
+  youtube: "https://www.youtube.com/@zeanurrahamanzeon",
+  instagram: "https://www.instagram.com/zeanurrahamanzeon/",
+  twitter: "https://x.com/developer_zeon",
+  webflowPartner: "https://webflow.com/@zeanurrahamanzeon",
+  webflowClonables: "https://webflow.com/@zeanurrahamanzeon",
   awwwards: "https://www.awwwards.com/bjornflow/",
 };
 

@@ -122,7 +122,11 @@ export default function Navbar() {
         const onEnter = () =>
           gsap.to(logo, {
             duration: 0.5,
-            scrambleText: { text: "encutescu", chars: "110101110", speed: 0.3 },
+            scrambleText: {
+              text: "rahamanzeon",
+              chars: "1101011101",
+              speed: 0.3,
+            },
           });
         const onLeave = () =>
           gsap.to(logo, {

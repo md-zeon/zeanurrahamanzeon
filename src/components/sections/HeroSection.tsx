@@ -158,7 +158,7 @@ export default function HeroSection() {
                   <div className="relative z-1 flex w-full flex-col justify-between gap-x-[4vw] gap-y-[4vw] pl-13 pr-[4.2rem] desktop:mt-[-6.7rem] desktop:grid desktop:grid-cols-2 desktop:gap-16 max-[991px]:gap-x-12 max-[991px]:gap-y-12 max-[991px]:pr-13 max-[767px]:gap-y-6 max-[479px]:pl-4 max-[479px]:pr-4">
                     <div
                       data-hero-fade="video"
-                      className="relative z-2 flex aspect-square h-full w-full max-w-full flex-none items-end justify-center overflow-visible desktop:max-w-xl wide:max-w-none max-[991px]:mr-auto max-[991px]:max-w-none"
+                      className="relative z-2 flex aspect-square w-full max-w-full flex-none items-end justify-center overflow-visible desktop:max-w-xl wide:max-w-none max-[991px]:mr-auto max-[991px]:max-w-none"
                     >
                       <div
                         className="pointer-events-none absolute inset-0 z-3 flex h-full w-full flex-col items-center justify-center"
@@ -180,7 +180,7 @@ export default function HeroSection() {
                       <div className="flex h-full w-full items-center justify-center max-[479px]:[clip-path:polygon(99%_0,99%_6%,100%_7%,100%_100%,6%_100%,0_94%,0_0)]">
                         <div
                           data-parallax-type="video"
-                          className="z-2 bg-neutral-dark-grey ultrawide:ml-8 ultrawide:mt-12"
+                          className="z-2 flex-none bg-neutral-dark-grey object-cover h-full w-full ultrawide:ml-8 ultrawide:mt-12"
                         >
                           <AutoVideo src={brand.heroVideo} />
                         </div>
