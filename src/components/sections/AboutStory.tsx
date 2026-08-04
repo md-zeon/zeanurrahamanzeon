@@ -4,6 +4,17 @@ import { useEffect, useRef } from "react";
 import { gsap, SplitText, ScrollTrigger } from "@/lib/gsap";
 import { aboutStory } from "@/data/about";
 
+/**
+ * Career story section with scroll-scrubbed effects:
+ *  - the story text's words brighten progressively while scrolling
+ *  - the left column (big year number + stacked photos/quote) is pinned
+ *  - the year counter scrambles between milestone years at set scroll points
+ *
+ * `StoryBody` renders the body text, turning any `aboutStory.links` fragment
+ * found in the text into an inline external link.
+ */
+
+/** Renders body text as paragraphs, splicing in the defined links. */
 function StoryBody() {
   const { body, links } = aboutStory;
   const paragraphs: React.ReactNode[] = [];
@@ -15,6 +26,8 @@ function StoryBody() {
     let cursor = 0;
     let link = links[linkIdx];
 
+    // Walk the paragraph, replacing each occurrence of a link's text with an
+    // <a> tag and keeping the plain text chunks in between.
     while (linkIdx < links.length) {
       const idx = text.indexOf(link.text, cursor);
       if (idx === -1) break;
@@ -63,6 +76,9 @@ export default function AboutStory() {
     const ctx = gsap.context(() => {
       const element = el.querySelector<HTMLElement>("#highlighted-text");
       if (element) {
+        // Split into words then characters (chars are easier to stagger
+        // across a scrub), and brighten each char from 20% to 100% as the
+        // text scrolls through the viewport.
         const splitWords = new SplitText(element, { type: "words" });
         const allChars: Element[] = [];
         splitWords.words.forEach((word) => {
@@ -92,6 +108,7 @@ export default function AboutStory() {
         );
       }
 
+      // Keep the year number in place while the section scrolls.
       ScrollTrigger.create({
         trigger: ".about-story_grid",
         start: "top 85%",
@@ -101,6 +118,8 @@ export default function AboutStory() {
         scrub: true,
       });
 
+      // Keep the photo/quote stack on the left pinned while the story text
+      // scrolls beside it.
       ScrollTrigger.create({
         trigger: ".about-story_left",
         start: "top top",
@@ -110,6 +129,8 @@ export default function AboutStory() {
         scrub: true,
       });
 
+      // Scramble the year counter between milestones as the page scrolls.
+      // Each ScrollTrigger fires `scrambleTo` on enter/enter-back.
       const yearEl = el.querySelector<HTMLElement>("#career-year");
       if (yearEl) {
         const yearSequence = [
@@ -122,6 +143,8 @@ export default function AboutStory() {
         ];
 
         let currentTween: gsap.core.Tween | null = null;
+        // Animate the numeric display from its current value to `newValue`
+        // (killing any in-flight scramble so rapid triggers stay smooth).
         const scrambleTo = (newValue: number) => {
           if (currentTween) currentTween.kill();
           const oldValue = parseInt(yearEl.textContent || "0", 10) || 0;

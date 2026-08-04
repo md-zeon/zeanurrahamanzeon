@@ -10,6 +10,7 @@ export const metadata: Metadata = {
     "A curated collection of web design and Webflow development projects crafted with strategy, design, and development in one process.",
 };
 
+/** Work page: hero, project grid, CTA, and "from the labs" slider. */
 export default function Work() {
   return (
     <main className="main-wrapper background-color-black">

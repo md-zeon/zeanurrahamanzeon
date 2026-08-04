@@ -5,8 +5,18 @@ import { gsap, SplitText } from "@/lib/gsap";
 import { testimonials } from "@/data/home";
 import LogosElement from "../LogosElement";
 
+/**
+ * Client testimonials: quote, marks, name/role and photo, plus a strip of
+ * client logos used as navigation.
+ *
+ * On scroll the quote reveals line-by-line (each line wrapped in an
+ * overflow-hidden box), the photo/name/role scramble-fade in, and the nav
+ * slides up. Clicking a logo swaps the quote/name/role/photo with a
+ * slide-out + slide-in transition.
+ */
 export default function TestimonialsSection() {
   const ref = useRef<HTMLElement>(null);
+  // Which testimonial is currently shown (avoids re-triggering on same click).
   const currentIndexRef = useRef(0);
 
   useEffect(() => {
@@ -21,6 +31,8 @@ export default function TestimonialsSection() {
       const photoElement =
         el.querySelector<HTMLImageElement>(".testimonial_photo");
 
+      // Splits the quote into lines and wraps each in an overflow-hidden div
+      // so the line reveal (slide up from below) is masked cleanly.
       const wrapLines = (quote: HTMLElement) => {
         const split = new SplitText(quote, { type: "lines" });
         split.lines.forEach((line) => {
@@ -34,6 +46,7 @@ export default function TestimonialsSection() {
       };
 
       if (quoteElement) {
+        // Hide marks + lines, reveal them when scrolled into view.
         gsap.set(marksElement, { opacity: 0, y: 30 });
         gsap.set(quoteElement, { opacity: 0 });
         wrapLines(quoteElement);
@@ -67,6 +80,7 @@ export default function TestimonialsSection() {
         });
       }
 
+      // Photo fades in; name and role scramble-reveal on scroll.
       gsap.set(".testimonial_photo", { opacity: 0 });
       gsap.to(".testimonial_photo", {
         opacity: 1,
@@ -123,6 +137,9 @@ export default function TestimonialsSection() {
         },
       });
 
+      // Swap to testimonial `index`: slide the current quote out (re-wrapped
+      // to match the new text length), swap content, slide the new one in,
+      // and highlight the active nav logo.
       const switchTo = (index: number) => {
         if (currentIndexRef.current === index || !quoteElement) return;
         currentIndexRef.current = index;

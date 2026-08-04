@@ -8,6 +8,14 @@ import { audio } from "@/data/site";
 import { Asterisk, WebflowLogo } from "../shared";
 import AutoVideo from "../media/AutoVideo";
 
+/**
+ * About page hero.
+ *
+ * Plays a choreographed load-in: both headline lines slide in character by
+ * character, the asterisk spins + fades in, the divider line grows, the
+ * badge fades in, and the intro paragraph reveals line-by-line. Everything
+ * runs once on mount (no scroll dependency).
+ */
 export default function AboutHeader() {
   const ref = useRef<HTMLElement>(null);
 
@@ -16,6 +24,7 @@ export default function AboutHeader() {
     if (!el) return;
 
     const ctx = gsap.context(() => {
+      // Hide all secondary elements until their timeline step plays.
       gsap.set(
         [
           "#about-header-p",
@@ -29,6 +38,8 @@ export default function AboutHeader() {
       const header1 = new SplitText("#about-hero-header-1", { type: "chars" });
       const header2 = new SplitText("#about-hero-header-2", { type: "chars" });
 
+      // Wrap each character in an overflow-hidden box (masks the slide-in);
+      // the small padding/margin pair keeps descenders from clipping.
       [header1, header2].forEach((header) => {
         header.chars.forEach((char) => {
           const wrapper = document.createElement("div");
@@ -41,9 +52,12 @@ export default function AboutHeader() {
           char.parentNode?.insertBefore(wrapper, char);
           wrapper.appendChild(char);
         });
+        // Characters start off-screen to the left.
         gsap.set(header.chars, { xPercent: -120, opacity: 0 });
       });
 
+      // One timeline with labeled positions so every step's relative timing
+      // is explicit ("headings+=0.6" = 0.6s after the headline finishes).
       const tl = gsap.timeline({ defaults: { ease: "expo.out" } });
       tl.add("headings");
       tl.to(
@@ -75,6 +89,7 @@ export default function AboutHeader() {
 
       const paragraph = el.querySelector("#about-header-p");
       if (paragraph) {
+        // Split paragraph into masked lines, then reveal them in sequence.
         const splitText = new SplitText(paragraph, { type: "lines" });
         splitText.lines.forEach((line) => {
           const wrapper = document.createElement("div");
@@ -84,11 +99,13 @@ export default function AboutHeader() {
           wrapper.appendChild(line);
         });
         gsap.set(paragraph, { opacity: 1 });
+        // Pre-hide the lines while the headline is still animating...
         tl.to(
           "[data-about-cta] .line-wrapper",
           { yPercent: 100, opacity: 0, duration: 0.001 },
           "headings+=0.2",
         );
+        // ...then reveal them once the rest has settled.
         tl.to(
           "[data-about-cta] .line-wrapper",
           { yPercent: 0, opacity: 1, duration: 0.6, stagger: 0.04 },

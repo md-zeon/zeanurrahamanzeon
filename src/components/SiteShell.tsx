@@ -9,12 +9,23 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Cursor from "./Cursor";
 
+/**
+ * Global application shell mounted once in the root layout.
+ *
+ * Owns everything that spans the whole site: the Navbar/Footer/Cursor, global
+ * event delegation for `data-audio` hover/click sounds, the page fade-in, and
+ * a scroll-to-top + ScrollTrigger refresh on every route change.
+ */
 export default function SiteShell({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const rootRef = useRef<HTMLDivElement>(null);
 
+  // Button scramble/magnetic effects for all `.btn` elements (dynamic too).
   useButtonEffects();
 
+  // Global sound delegation: any element with `data-audio` plays a hover
+  // sound, `data-audio-click` a click sound. Keeps sound wiring out of the
+  // markup of every individual button.
   useEffect(() => {
     initSound();
 
@@ -38,6 +49,7 @@ export default function SiteShell({ children }: { children: ReactNode }) {
     };
   }, []);
 
+  // Fade the whole page in on first load.
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
@@ -47,6 +59,8 @@ export default function SiteShell({ children }: { children: ReactNode }) {
     }
   }, []);
 
+  // On route change: reset scroll and recompute ScrollTrigger positions after
+  // the new page has had a moment to lay out.
   useEffect(() => {
     window.scrollTo(0, 0);
     const t = setTimeout(() => {

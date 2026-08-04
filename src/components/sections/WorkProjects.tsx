@@ -3,6 +3,12 @@ import { workProjects } from "@/data/work";
 import { audio } from "@/data/site";
 import AutoVideo from "../media/AutoVideo";
 
+/**
+ * Work page project grid — two-column list of full case-study cards. Each
+ * card shows the index, tags, a looped video (page-parallax target), title,
+ * "View case study" link, and a headline result. A small nav row at the top
+ * toggles between Portfolio and [See Labs].
+ */
 export default function WorkProjects() {
   return (
     <section
@@ -14,7 +20,9 @@ export default function WorkProjects() {
       <div className="padding-global is-bigger">
         <div className="container-large">
           <div>
+            {/* Center hairline behind the grid */}
             <div className="work-projects_content-divider absolute left-1/2 z-3 h-full w-px -ml-px bg-white-20 max-[767px]:hidden" />
+            {/* Portfolio / Labs switcher */}
             <div className="work-projects_nav">
               <Link
                 href="/work"
@@ -38,6 +46,7 @@ export default function WorkProjects() {
               <div header-content-type="border" className="frame" />
               <div header-content-type="border" className="frame is-right" />
             </div>
+            {/* Project cards */}
             <div className="work-projects_content relative grid auto-cols-fr grid-cols-2 gap-0 border-x border-t border-white-20 max-[767px]:grid-cols-1">
               {workProjects.map((project) => (
                 <div
@@ -45,6 +54,7 @@ export default function WorkProjects() {
                   className="work-projects_card-layout relative z-1 flex w-full flex-none flex-col gap-4 border-b border-white-20 p-[2rem_1rem] max-[767px]:py-4"
                 >
                   <div className="work-projects_card-wrapper flex flex-col gap-2">
+                    {/* Index + service tags */}
                     <div className="work-projects_card-text-wrapper pl-[0.44rem]">
                       <div className="text-caption-2 text-color-secondary">
                         {project.index}
@@ -59,6 +69,7 @@ export default function WorkProjects() {
                         ))}
                       </div>
                     </div>
+                    {/* Clickable video media */}
                     <Link
                       aria-label={project.ariaLabel}
                       data-audio={audio.hover}
@@ -75,6 +86,7 @@ export default function WorkProjects() {
                       </div>
                     </Link>
                   </div>
+                  {/* Title CTA overlay + result stat */}
                   <div className="work-projects_card-bottom">
                     <div className="work-projects_card-cta-wrapper absolute inset-0 z-2 flex items-end justify-start p-4">
                       <h3 className="heading-style-h4">{project.title}</h3>

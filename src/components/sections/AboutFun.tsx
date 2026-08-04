@@ -10,6 +10,12 @@ import { aboutFacts } from "@/data/about";
 import { audio } from "@/data/site";
 import AutoVideo from "../media/AutoVideo";
 
+/**
+ * Renders the little diagonal logo strokes used as a footer accent on the
+ * "FUN" header and on each fact card. The three class groups layer lines for
+ * different breakpoints (tablet, mobile-landscape, always-on) so the mark
+ * thins out on small screens.
+ */
 function LogoLines({ isCard = false }: { isCard?: boolean }) {
   const cls = (extra: string) =>
     `h-3 w-[0.094rem] rotate-[15deg] max-[767px]:h-2 ${isCard ? "bg-neutral-mid-grey" : "bg-brand-white"} ${extra}`.trim();
@@ -26,6 +32,10 @@ function LogoLines({ isCard = false }: { isCard?: boolean }) {
   );
 }
 
+/**
+ * Decorative white SVG border that sits above each card's media area. Pure
+ * visual frame — not interactive, hence pointer-events-none and aria-hidden.
+ */
 function VideoBorder() {
   return (
     <div
@@ -48,6 +58,7 @@ function VideoBorder() {
   );
 }
 
+/** Small arrow-in-box glyph used in the per-card "learn more" buttons. */
 function LinkIcon() {
   return (
     <div className="btn__icon btn__icon--lg w-embed">
@@ -77,6 +88,11 @@ function LinkIcon() {
   );
 }
 
+/**
+ * "FUN FACTS" section — a deck of cards shown with Swiper's cards effect.
+ * Each slide flips through a media asset (video via AutoVideo, or a photo)
+ * with a caption, a rotated side label, and an optional external link.
+ */
 export default function AboutFun() {
   return (
     <section
@@ -87,6 +103,7 @@ export default function AboutFun() {
         <div className="container-large">
           <div className="relative grid auto-cols-auto grid-cols-[auto_1fr] items-start gap-44 border-l border-white-20 py-28">
             <div className="grid auto-cols-fr grid-cols-[0.25fr_auto] items-stretch justify-items-start gap-x-24 gap-y-24 desktop:justify-items-stretch desktop:gap-44 max-[991px]:grid-cols-1 max-[991px]:justify-items-stretch max-[991px]:gap-y-20 max-[767px]:gap-12">
+              {/* Left column: oversized stacked "FUN / Facts" heading */}
               <div className="flex flex-col pl-4 max-[991px]:place-items-start">
                 <div className="flex justify-end pr-[0.7rem]">
                   <h2 className="heading-style-h0">FUN</h2>
@@ -102,6 +119,7 @@ export default function AboutFun() {
                   </div>
                 </div>
               </div>
+              {/* Right column: stacked-card slider */}
               <Swiper
                 className="about-card"
                 modules={[EffectCards, Pagination]}
@@ -132,6 +150,8 @@ export default function AboutFun() {
                       <div className="relative z-2 flex aspect-[1.27] w-full items-end justify-center overflow-visible">
                         <VideoBorder />
                         <div className="about-fun_loop-asset-w relative flex h-full w-full items-center justify-center">
+                          {/* Media: looping video, or a photo with the
+                              plants/photo crop variants */}
                           {slide.video ? (
                             <div className="absolute inset-0 z-2 block h-full w-full flex-none bg-neutral-dark-grey object-cover w-embed">
                               <AutoVideo src={slide.video} />
@@ -164,11 +184,13 @@ export default function AboutFun() {
                             </>
                           )}
                         </div>
+                        {/* Vertical caption running up the left edge */}
                         <div className="absolute left-[-2.7rem] bottom-[4.2rem] -rotate-90 max-[767px]:bottom-[3.7rem] max-[767px]:-left-8 max-[479px]:bottom-[12vw]">
                           <div className="text-caption-2 text-color-teritary">
                             {slide.videoCaption ?? slide.misc}
                           </div>
                         </div>
+                        {/* Optional external link, bottom-right corner */}
                         {slide.ctaLabel ? (
                           <div className="absolute bottom-4 right-4 z-3">
                             <a

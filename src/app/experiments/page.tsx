@@ -10,6 +10,10 @@ export const metadata: Metadata = {
     "A curated collection of experiments, creative coding, and Webflow clonables where I push the limits of interactions, motion, and the web platform.",
 };
 
+/**
+ * Experiments page: hero, pinned 3D carousel of experiments, clonables
+ * grid, and closing CTA.
+ */
 export default function Experiments() {
   return (
     <main className="main-wrapper background-color-black">

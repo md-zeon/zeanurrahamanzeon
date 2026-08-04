@@ -13,6 +13,10 @@ export const metadata: Metadata = {
     "I'm an independent web designer and creative developer with years of experience building scalable, interactive web experiences.",
 };
 
+/**
+ * About page: hero, career-story marquee, the story section, testimonials,
+ * "fun facts" deck, labs slider, and closing CTA.
+ */
 export default function About() {
   return (
     <main className="main-wrapper background-color-black">

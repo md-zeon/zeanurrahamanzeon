@@ -2,6 +2,14 @@
 
 import Link from "next/link";
 
+/**
+ * Small shared UI primitives used across sections:
+ * decorative SVGs, the reusable `Button`, and a Webflow badge link.
+ * Components are client components because they carry `data-audio` hooks
+ * consumed by the global sound system.
+ */
+
+/** Decorative asterisk ("*") icon; purely presentational. */
 export function Asterisk({ className = "" }: { className?: string }) {
   return (
     <div className={className} aria-hidden="true">
@@ -24,6 +32,7 @@ export function Asterisk({ className = "" }: { className?: string }) {
   );
 }
 
+/** Inline Webflow "w" logo mark. */
 export function WebflowLogo({ className = "" }: { className?: string }) {
   return (
     <div className={`icon-embed-xxsmall ${className}`} aria-hidden="true">
@@ -53,9 +62,16 @@ type ButtonProps = {
   variant?: "primary" | "secondary";
   size?: "default" | "small";
   target?: string;
+  /** Hover sound played via `data-audio`, matched by the global sound system. */
   dataAudio?: string;
 };
 
+/**
+ * Reusable CTA button with the site's `.btn` styling.
+ *
+ * Renders a real `<a>` for external URLs and a Next.js `<Link>` for internal
+ * routes. `useButtonEffects` picks up the `.btn` class automatically.
+ */
 export function Button({
   href,
   children,
@@ -95,6 +111,7 @@ type WebflowBadgeProps = {
   label?: string;
 };
 
+/** Small link + Webflow logo pairing, e.g. "Webflow Certified Partner". */
 export function WebflowBadge({
   text = "Webflow Certified Partner",
   href,

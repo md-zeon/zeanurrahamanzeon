@@ -11,10 +11,12 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
+/** Statically pre-renders the known case study slugs at build time. */
 export function generateStaticParams() {
   return [{ slug: "plus-x-innovation" }];
 }
 
+/** Page metadata comes from the matched case study. */
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const study = getCaseStudy(slug);
@@ -22,6 +24,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return { title: study.metaTitle, description: study.metaDescription };
 }
 
+/**
+ * Case study detail page: header, content blocks, testimonials, CTA, and a
+ * featured-projects slider. Renders a 404 for unknown slugs.
+ */
 export default async function CaseStudyPage({ params }: Props) {
   const { slug } = await params;
   const study = getCaseStudy(slug);

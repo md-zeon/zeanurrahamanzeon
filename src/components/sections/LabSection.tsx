@@ -9,6 +9,16 @@ import LogosElement from "../LogosElement";
 import AutoVideo from "../media/AutoVideo";
 import { Button } from "../shared";
 
+/**
+ * "From the lab" section: a horizontally scrolling slider of experiment
+ * videos with prev/next controls and a [01/02] counter.
+ *
+ * Interactivity is fully delegated: `useLabSlider` wires the track/counter/
+ * buttons (matched by `data-slider` / `data-slide-count` attributes) and
+ * `useSectionHeadings` animates the heading.
+ */
+
+/** Diagonal arrow used on the "View clonable" buttons. */
 function ArrowIcon() {
   return (
     <div className="btn__icon w-embed">

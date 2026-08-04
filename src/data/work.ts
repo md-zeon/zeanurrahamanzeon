@@ -1,3 +1,4 @@
+/** Copy for the work page hero header. */
 export const workHeader = {
   title1: "Client",
   title2: "projects",
@@ -8,6 +9,7 @@ export const workHeader = {
   badgeLink: "https://webflow.com/@bjornflow",
 };
 
+/** Copy for the "Let's build something distinctive" CTA on the work page. */
 export const workCta = {
   line1: "Let's build something",
   italicWord: "distinctive",
@@ -15,6 +17,7 @@ export const workCta = {
   buttonLabel: "Book a call",
 };
 
+/** Clonable slides for the "From the labs" slider on the work page. */
 export const workLabSlides = [
   {
     caption: "Clonable_001",
@@ -60,6 +63,7 @@ export const workLabSlides = [
   },
 ];
 
+/** A work page project card: metadata, media paths, tags, and result stat. */
 export type WorkProject = {
   index: string;
   title: string;
@@ -72,6 +76,7 @@ export type WorkProject = {
   resultLabel: string;
 };
 
+/** All work page projects, in display order. */
 export const workProjects: WorkProject[] = [
   {
     index: "project_001",

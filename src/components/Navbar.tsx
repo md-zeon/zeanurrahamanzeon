@@ -9,6 +9,19 @@ import SoundButton from "./SoundButton";
 import Clock from "./Clock";
 import { WebflowBadge } from "./shared";
 
+/**
+ * Fixed site header with two distinct states:
+ *  - Desktop/wide: logo + inline nav with a moving "pill" highlight on hover.
+ *  - Mobile: hamburger button that opens a full-screen overlay menu (yellow
+ *    panels slide in, links stagger up, icon morphs into an X).
+ *
+ * Other behaviours: the logo's second word scrambles on hover, the navbar
+ * hides on scroll-down and reappears on scroll-up, its shape/border changes
+ * once the page is scrolled, and body scroll is locked while the menu is
+ * open.
+ */
+
+/** One half of the two-tone logo (start = first word, is-animation = second). */
 function Logo({ className }: { className?: string }) {
   const isAnimation = className?.includes("is-animation");
   return (
@@ -27,9 +40,15 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
+  // Paused timeline built once and (re)played/reversed by the open/close logic.
   const tlRef = useRef<gsap.core.Timeline | null>(null);
+  // Mirror of `menuOpen` so imperative handlers don't read stale state.
   const openRef = useRef(false);
 
+  // Build the mobile menu animation timeline once. Panels slide in, then the
+  // links stagger up, and the hamburger lines morph into a close "X". The
+  // overlay is display:none until the timeline starts and hidden again after
+  // it fully reverses.
   useEffect(() => {
     const root = rootRef.current;
     const overlay = overlayRef.current;
@@ -74,6 +93,7 @@ export default function Navbar() {
         },
         "-=0.35",
       )
+      // Hamburger lines -> X, overlaid at the start (position 0).
       .to(lines[0], { rotate: 45, y: 4, duration: 0.35 }, 0)
       .to(lines[1], { scaleX: 0, duration: 0.3 }, 0)
       .to(lines[2], { rotate: -45, y: -4, duration: 0.35 }, 0);
@@ -88,6 +108,8 @@ export default function Navbar() {
     };
   }, []);
 
+  // Scramble the second logo word ("is-animation") on hover in both the
+  // topbar and the menu overlay.
   useEffect(() => {
     const root = rootRef.current;
     const overlay = overlayRef.current;
@@ -122,6 +144,8 @@ export default function Navbar() {
     return () => cleanup.forEach((fn) => fn());
   }, []);
 
+  // Desktop nav link hover: slide a rounded "pill" background behind the
+  // hovered link. First hover sets it in place, later hovers animate it.
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
@@ -173,6 +197,7 @@ export default function Navbar() {
       });
     });
 
+    // Leaving the whole menu bar clears the pill instantly.
     const onMenuLeave = () => {
       gsap.to(linkBg, {
         background: "transparent",
@@ -187,6 +212,8 @@ export default function Navbar() {
     return () => cleanup.forEach((fn) => fn());
   }, []);
 
+  // Play the menu timeline forward/backward. Closing reverses ~1.4× faster
+  // so the menu snaps shut snappier than it opened.
   const runTimeline = (open: boolean) => {
     const tl = tlRef.current;
     if (!tl) return;
@@ -209,12 +236,16 @@ export default function Navbar() {
     runTimeline(false);
   };
 
+  // Close the menu automatically whenever navigation happens.
   useEffect(() => {
     if (!openRef.current) return;
     openRef.current = false;
     tlRef.current?.timeScale(1.4).reverse();
   }, [pathname]);
 
+  // Hide-on-scroll-down / reveal-on-scroll-up for the header bar. On wide
+  // screens the hamburger button pops in while hidden so the menu stays
+  // reachable.
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
@@ -288,6 +319,8 @@ export default function Navbar() {
     };
   }, []);
 
+  // Morph the header from a flat full-width bar (at top of page) into a
+  // rounded floating card once the user scrolls.
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
@@ -322,6 +355,7 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", updateNavbarStyle);
   }, []);
 
+  // Lock page scroll while the full-screen menu is open.
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => {

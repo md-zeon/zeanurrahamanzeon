@@ -1,3 +1,4 @@
+/** Copy for the contact page hero header. */
 export const contactHeader = {
   title1: "Let's work",
   title2: "together",
@@ -5,6 +6,11 @@ export const contactHeader = {
     "Get in touch today if you're looking to launch a website, refine your existing site, or discuss a potential collaboration, and let's find solutions together.",
 };
 
+/**
+ * Contact form config: contact email, info sidebar sections, the select
+ * option lists (company stage / deadline / budget / source), and the
+ * submit/success/error copy.
+ */
 export const contactForm = {
   email: "hello@bjornflow.com",
   sections: [
@@ -33,6 +39,11 @@ export const contactForm = {
   error: "Oops! Something went wrong while submitting the form.",
 };
 
+/**
+ * FAQ data: the stacked heading words, caption chip, the Q&A items
+ * (answers may contain `- ` bullet lines), and the "can't find an answer"
+ * contact prompt.
+ */
 export const faq = {
   header: ["FREQUENTLY", "ASKED", "QUESTIONS"],
   caption: "FAQ_007",

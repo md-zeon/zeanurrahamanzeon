@@ -6,6 +6,15 @@ import { gsap } from "@/lib/gsap";
 import { audio, brand, footer, socials } from "@/data/site";
 import Clock from "./Clock";
 
+/**
+ * Site footer: link columns, logo, Webflow badge, copyright + live clock.
+ *
+ * Two behaviours live here: the copyright year is kept current, and every
+ * `.footer_link` label scrambles between binary text on hover (left-to-right
+ * on enter, right-to-left on leave) — same effect family as the buttons.
+ */
+
+/** Inline Webflow "w" logo mark (local copy used by the badge). */
 function WebflowLogo() {
   return (
     <div className="icon-embed-xxsmall" aria-hidden="true">
@@ -31,11 +40,13 @@ function WebflowLogo() {
 export default function Footer() {
   const ref = useRef<HTMLElement>(null);
 
+  // Keep the copyright year current without hardcoding it in markup.
   useEffect(() => {
     const year = document.querySelector(".footer_year");
     if (year) year.textContent = String(new Date().getFullYear());
   }, []);
 
+  // Binary scramble hover effect on each footer link label.
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
@@ -46,11 +57,14 @@ export default function Footer() {
         if (!textElement) return;
 
         const originalText = textElement.textContent ?? "";
+        // Reveal step budget: 7 iterations × 2 passes over the string.
         const iterations = 7;
         const totalDuration = 0.3;
         const stepDuration = totalDuration / (iterations * 2);
         let currentTimeline: gsap.core.Timeline | null = null;
 
+        // Builds a variant of the label where positions matching `predicate`
+        // show random bits and everything else keeps its real character.
         const scramble = (predicate: (index: number) => boolean) =>
           originalText
             .split("")
@@ -65,6 +79,8 @@ export default function Footer() {
           ease: "expo.out",
         });
 
+        // On enter: scramble one more character per step, left to right,
+        // then restore the real text exactly.
         link.addEventListener("mouseenter", () => {
           if (currentTimeline) currentTimeline.kill();
           currentTimeline = gsap.timeline();
@@ -81,6 +97,7 @@ export default function Footer() {
           });
         });
 
+        // On leave: scramble back right-to-left, then restore again.
         link.addEventListener("mouseleave", () => {
           if (currentTimeline) currentTimeline.kill();
           currentTimeline = gsap.timeline();
@@ -105,6 +122,7 @@ export default function Footer() {
     return () => ctx.revert();
   }, []);
 
+  // Column index ranges for the [nn] numbering on each group of links.
   const columns = [
     { title: "Overview", links: footer.overview, start: 1 },
     { title: "Case Studies", links: footer.caseStudies, start: 5 },

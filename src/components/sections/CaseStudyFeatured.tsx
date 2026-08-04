@@ -9,6 +9,12 @@ import { audio } from "@/data/site";
 import LogosElement from "../LogosElement";
 import AutoVideo from "../media/AutoVideo";
 
+/**
+ * Home-page carousel of featured client projects ("Featured client
+ * projects"). A 2-up slider driven by `useLabSlider` via the
+ * `data-slider="list" / slide / button-prev / button-next` attributes, with a
+ * step/total counter (the `[01/00]` readout) updated by the same hook.
+ */
 export default function CaseStudyFeatured() {
   const ref = useRef<HTMLElement>(null);
 
@@ -25,6 +31,8 @@ export default function CaseStudyFeatured() {
       <div className="padding-global is-bigger">
         <div className="container-large">
           <div className="flex flex-col">
+            {/* Header row: heading (revealed via header-animation-type) +
+                corner caption chip */}
             <div
               header-animation-type="container"
               className="grid auto-cols-fr grid-rows-[auto] grid-cols-[1.5fr_1fr] justify-between gap-0 border-b border-l border-neutral-black pl-4 max-[991px]:grid-cols-1 max-[991px]:place-items-start"
@@ -43,6 +51,7 @@ export default function CaseStudyFeatured() {
               </div>
               <LogosElement caption="WRK_CS_267" />
             </div>
+            {/* Controls bar: counter + prev/next buttons + "Visit work page" */}
             <div className="border-x border-border-tertiary">
               <div className="relative grid auto-cols-fr grid-cols-[1fr_1fr] items-center justify-between gap-0 border-r border-white-20 p-[1.8rem_1.5rem] max-[767px]:flex max-[767px]:flex-col max-[767px]:items-start max-[767px]:gap-4 max-[767px]:p-4 max-[479px]:flex-row max-[479px]:flex-wrap">
                 <div className="flex w-full items-center justify-between pr-6 max-[767px]:order-1 max-[767px]:pr-0">
@@ -142,6 +151,7 @@ export default function CaseStudyFeatured() {
                 </div>
               </div>
             </div>
+            {/* Slide track: two project slides side-by-side per page */}
             <div
               data-slider="list"
               className="relative flex border-x border-border-tertiary"
@@ -165,6 +175,8 @@ export default function CaseStudyFeatured() {
                       className="relative w-inline-block"
                     >
                       <div className="relative z-1 flex h-full w-full items-center justify-center overflow-hidden rounded-lg">
+                        {/* Oversized media so the looped video covers the
+                            frame completely on every breakpoint */}
                         <div className="aspect-video h-[110%] w-[110%] flex-none max-[991px]:h-[120%] max-[991px]:w-[120%]">
                           <AutoVideo
                             src={project.video}
@@ -173,6 +185,7 @@ export default function CaseStudyFeatured() {
                         </div>
                       </div>
                     </Link>
+                    {/* Overlay: title + "View case study" action */}
                     <div className="absolute inset-0 z-2 flex items-end justify-start p-4">
                       <h3 className="heading-style-h4">{project.title}</h3>
                       <Link
@@ -187,6 +200,7 @@ export default function CaseStudyFeatured() {
                 </div>
               ))}
             </div>
+            {/* Full-width wash behind the strip + center hairline on desktop */}
             <div className="absolute inset-y-0 right-full -left-full z-2 mr-px bg-[#0a090f80]" />
             <div className="absolute left-1/2 z-3 -ml-px h-full w-px bg-border-tertiary max-[767px]:hidden" />
           </div>

@@ -2,6 +2,7 @@ import { experimentsCards } from "@/data/experiments";
 import { audio } from "@/data/site";
 import AutoVideo from "../media/AutoVideo";
 
+/** Small arrow glyph used in the "View clonable" buttons. */
 function ArrowIcon() {
   return (
     <div className="btn__icon w-embed">
@@ -23,10 +24,17 @@ function ArrowIcon() {
   );
 }
 
+// Only the "clonable" experiment cards (project_005..007) appear on the
+// experiments page; the rest belong to the work page grid.
 const clonableCards = experimentsCards.filter(
   (card) => card.index >= "project_005" && card.index <= "project_007",
 );
 
+/**
+ * "Clonables" grid — two-column row of experiment cards. Each card shows a
+ * looped video (with a page-parallax target on the asset) and a "View
+ * clonable" button linking out.
+ */
 export default function ExperimentsCards() {
   return (
     <section
@@ -39,6 +47,7 @@ export default function ExperimentsCards() {
         <div className="container-large">
           <div>
             <div className="work-projects_content relative grid auto-cols-fr grid-cols-2 gap-0 border-x border-t border-white-20 max-[767px]:grid-cols-1">
+              {/* Center hairline splitting the two columns */}
               <div className="work-projects_content-divider absolute left-1/2 z-3 h-full w-px -ml-px bg-white-20 max-[767px]:hidden" />
               {clonableCards.map((card) => (
                 <div
@@ -46,12 +55,14 @@ export default function ExperimentsCards() {
                   className="work-projects_card-layout relative z-1 flex w-full flex-none flex-col gap-4 border-b border-white-20 p-[2rem_1rem] max-[767px]:py-4"
                 >
                   <div className="work-projects_card-wrapper flex flex-col gap-2">
+                    {/* Card index label */}
                     <div className="work-projects_card-text-wrapper pl-[0.44rem]">
                       <div className="text-caption-2 text-color-teritary">
                         {card.index}
                       </div>
                     </div>
                     <div className="work-projects_card-content relative">
+                      {/* Oversized media + page-parallax target + dark wash */}
                       <div className="work-projects_card-asset-wrapper relative z-1 flex aspect-video items-center justify-center overflow-hidden rounded-lg">
                         <div
                           data-parallax-type="video"
@@ -61,6 +72,7 @@ export default function ExperimentsCards() {
                         </div>
                         <div className="work_card-overlay absolute inset-0 z-2 h-full w-full bg-[linear-gradient(45deg,#000,#000_0%,#0000)] opacity-30" />
                       </div>
+                      {/* Overlay CTA, bottom-left */}
                       <div className="work-projects_card-cta-wrapper absolute inset-0 z-2 flex items-end justify-start p-4">
                         <a
                           data-audio={audio.hover}

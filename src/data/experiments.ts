@@ -1,3 +1,4 @@
+/** Copy for the experiments page hero header. */
 export const experimentsHeader = {
   title1: "Experiments",
   title2: "& Clonables",
@@ -7,6 +8,7 @@ export const experimentsHeader = {
   button2: "See case studies",
 };
 
+/** Projects shown in the pinned 3D carousel on the experiments page. */
 export const experimentsStack = [
   {
     index: "Experiment_001",
@@ -34,6 +36,7 @@ export const experimentsStack = [
   },
 ];
 
+/** Clonable cards (project_005..007) shown in the "Clonables" grid. */
 export const experimentsCards = [
   {
     index: "project_005",

@@ -10,6 +10,11 @@ import LogosElement from "../LogosElement";
 import AutoVideo from "../media/AutoVideo";
 import { Button } from "../shared";
 
+/**
+ * Work page variant of the CTA section: same video + mock chat widget and
+ * animation wiring as `CtaSection`, but with the primary background color
+ * and work-page-specific heading/button copy.
+ */
 export default function WorkCtaSection() {
   const ref = useRef<HTMLElement>(null);
 
@@ -62,6 +67,8 @@ export default function WorkCtaSection() {
                     </svg>
                   </div>
                   <div className="relative flex h-full w-full items-center justify-center [clip-path:polygon(98.5%_0,98.5%_6%,100%_7%,100%_100%,10%_100%,0_90%,0_0)]">
+                    {/* Neutral loop + the two option-specific loops; which is
+                        visible is driven by useCtaChat. */}
                     <div
                       data-parallax-type="video"
                       className="cta_loop-video is-1 absolute inset-auto z-1 block aspect-square h-[110%] w-[110%] flex-none bg-neutral-dark-grey object-cover max-[767px]:h-[120%] max-[767px]:w-[120%]"

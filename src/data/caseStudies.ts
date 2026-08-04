@@ -1,3 +1,4 @@
+/** A video asset used in a case study example block. */
 export type CaseVideo = {
   kind: "video";
   caption: string;
@@ -5,6 +6,7 @@ export type CaseVideo = {
   poster: string;
 };
 
+/** A static image asset used in a case study example block. */
 export type CaseImage = {
   kind: "image";
   caption: string;
@@ -12,13 +14,21 @@ export type CaseImage = {
   alt: string;
 };
 
+/** Discriminated union of media a case study block can hold. */
 export type CaseMedia = CaseVideo | CaseImage;
 
+/**
+ * A content block of a case study, discriminated by `type`:
+ *  - "info": services + date + website link
+ *  - "content": caption over paragraphs
+ *  - "example": a showcase strip of media (full-bleed or second row)
+ */
 export type CaseBlock =
   | { type: "info" }
   | { type: "content"; caption: string; paragraphs: string[] }
   | { type: "example"; row: "full" | "second"; media: CaseMedia[] };
 
+/** A full case study page: metadata, header, info row, and content blocks. */
 export type CaseStudy = {
   slug: string;
   metaTitle: string;
@@ -45,8 +55,10 @@ export type CaseStudy = {
   blocks: CaseBlock[];
 };
 
+/** Base asset path shared by all case study media. */
 const workBase = "/assets/videos/Videos/Work/plus-x";
 
+/** All case studies in the site (looked up by slug in the detail page). */
 export const caseStudies: CaseStudy[] = [
   {
     slug: "plus-x-innovation",
@@ -228,6 +240,7 @@ export const caseStudies: CaseStudy[] = [
   },
 ];
 
+/** Looks up a case study by its slug, or undefined when not found. */
 export function getCaseStudy(slug: string): CaseStudy | undefined {
   return caseStudies.find((study) => study.slug === slug);
 }

@@ -9,6 +9,15 @@ import LogosElement from "../LogosElement";
 import AutoVideo from "../media/AutoVideo";
 import { Button } from "../shared";
 
+/**
+ * Bottom-of-home CTA: "let's work together" heading, a looping video, and a
+ * mock chat widget that plays a short scripted conversation when one of the
+ * two options is clicked.
+ *
+ * The chat animation lives in `useCtaChat` (which looks up the `#cta-chat-*`
+ * ids and `.cta_chat-*` classes in this markup); the heading reveal is
+ * handled by `useSectionHeadings`.
+ */
 export default function CtaSection() {
   const ref = useRef<HTMLElement>(null);
 
@@ -78,6 +87,9 @@ export default function CtaSection() {
                     </svg>
                   </div>
                   <div className="relative flex h-full w-full items-center justify-center [clip-path:polygon(98.5%_0,98.5%_6%,100%_7%,100%_100%,10%_100%,0_90%,0_0)]">
+                    {/* The three video layers for the chat: the neutral loop,
+                        and the two option-specific loops. `useCtaChat` swaps
+                        which one is visible. */}
                     <div
                       data-parallax-type="video"
                       className="cta_loop-video is-1 absolute inset-auto z-1 block aspect-square h-[110%] w-[110%] flex-none bg-neutral-dark-grey object-cover max-[767px]:h-[120%] max-[767px]:w-[120%]"
@@ -139,6 +151,8 @@ export default function CtaSection() {
                 </div>
               </div>
               <div className="flex items-start justify-center px-4 py-24 max-[991px]:relative max-[991px]:z-4 max-[991px]:justify-end max-[991px]:items-start max-[991px]:border-x max-[991px]:border-white-20 max-[991px]:pb-12 max-[991px]:pt-0 max-[479px]:justify-center max-[479px]:items-start">
+                {/* Mock chat card: window chrome, then message bubbles the
+                    animation drives (see useCtaChat), and the two options. */}
                 <div className="flex w-full max-w-93 flex-col gap-4 overflow-hidden rounded-lg border border-white-20 p-4 backdrop-blur-[100px] bg-[#efefe60d] max-[991px]:mt-[-5.6rem] max-[991px]:mr-[3.6rem] max-[767px]:mt-[-3.1rem] max-[767px]:mr-0 max-[479px]:mt-0">
                   <div className="flex flex-col gap-4">
                     <div className="flex gap-2">

@@ -1,7 +1,9 @@
 import { photos } from "./site";
 
+/** Text for the animated collaboration marquee. */
 export const logosBannerText = "Collaborations & Brand Experience";
 
+/** Featured projects shown in the home hero carousel. */
 export const featuredProjects = [
   {
     index: "001",
@@ -41,6 +43,7 @@ export const featuredProjects = [
   },
 ];
 
+/** "Why partner with me?" section heading and highlight copy. */
 export const whyHeader = {
   line1: "Why partner",
   line2: "with me?",
@@ -49,13 +52,15 @@ export const whyHeader = {
     "With a background in design and development, I craft structured, high-performing Webflow websites that drive results, scale easily, and maintain visual integrity over time.",
 };
 
+/** Credibility cards in the "Why partner with me?" section. */
 export const whyCards = [
   {
     caption: "Why_ME_001",
     buttonLabel: "Webflow community educator",
     href: "https://www.youtube.com/@bjorn_flow",
     icon: true,
-    video: "/assets/videos/Videos/Experiments/spaceman-gsap---new-thumbnail.mp4",
+    video:
+      "/assets/videos/Videos/Experiments/spaceman-gsap---new-thumbnail.mp4",
     webgl: false,
   },
   {
@@ -84,6 +89,7 @@ export const whyCards = [
   },
 ];
 
+/** The three service offerings (development, design, optimisation). */
 export const services = [
   {
     index: "01",
@@ -143,6 +149,7 @@ export const services = [
   },
 ];
 
+/** Client testimonials shown on the home page. */
 export const testimonials = [
   {
     quote:
@@ -153,8 +160,7 @@ export const testimonials = [
     logo: "/assets/images/677056164bccc35aba788abc_d9743b34182def9321b08034b660e0ae_altiverse.svg",
   },
   {
-    quote:
-      "Suspendisse varius enim in eros elementum tristique.",
+    quote: "Suspendisse varius enim in eros elementum tristique.",
     name: "Jane Smith",
     role: "CTO - Company B",
     image: photos.ellipseLight,
@@ -168,7 +174,8 @@ export const testimonials = [
     logo: "/assets/images/677056168e060f50417adc2b_mindsum.svg",
   },
   {
-    quote: "Ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet.",
+    quote:
+      "Ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet.",
     name: "Bob Brown",
     role: "Manager - Company D",
     image: photos.ellipseLight,
@@ -183,12 +190,14 @@ export const testimonials = [
   },
 ];
 
+/** "From the labs" clonable slides for the home lab slider. */
 export const labSlides = [
   {
     caption: "Clonable_001",
     title: "Spaceman",
     href: "https://spaceman-gsap.webflow.io/",
-    video: "/assets/videos/Videos/Experiments/spaceman-gsap---new-thumbnail.mp4",
+    video:
+      "/assets/videos/Videos/Experiments/spaceman-gsap---new-thumbnail.mp4",
   },
   {
     caption: "Clonable_002",
@@ -218,29 +227,33 @@ export const labSlides = [
     caption: "Clonable_006",
     title: "Battlefield 4",
     href: "https://battlefield-4-webflow-rebuild.webflow.io/",
-    video: "/assets/videos/Videos/Experiments/battlefield-4---new-thumbnail.mp4",
+    video:
+      "/assets/videos/Videos/Experiments/battlefield-4---new-thumbnail.mp4",
   },
   {
     caption: "Clonable_007",
     title: "Pizza Chaos",
     href: "/experiments",
-    video: "/assets/videos/Videos/Experiments/scramble-pizza-chaos---new-thumbnail.mp4",
+    video:
+      "/assets/videos/Videos/Experiments/scramble-pizza-chaos---new-thumbnail.mp4",
   },
   {
     caption: "Clonable_008",
     title: "Callisto",
     href: "/experiments",
-    video: "/assets/videos/Videos/Experiments/thumbnails/callisto---new-thumbnail.webp",
+    video:
+      "/assets/videos/Videos/Experiments/thumbnails/callisto---new-thumbnail.webp",
   },
 ];
 
+/** Bottom CTA: heading, caption, video assets, and the chat script. */
 export const cta = {
   line1: "Interested in",
   line2: "working",
   line3: "together?",
   caption: "CTA_BF_195",
   buttonLabel: "Send a message",
-  videoLoop: "/assets/videos/Videos/CTA/cta-loop---new.mp4",
+  videoLoop: "/assets/videos/hero-clip-vid.mp4",
   videoClientCall: "/assets/videos/Videos/CTA/cta-client-call---new.mp4",
   videoFun: "/assets/videos/Videos/CTA/cta-fun---new.mp4",
   videoCaption: "VIDEO_628",

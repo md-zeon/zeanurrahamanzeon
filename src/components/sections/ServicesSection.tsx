@@ -5,12 +5,20 @@ import { services } from "@/data/home";
 import { useSectionHeadings } from "@/lib/useHeaderReveal";
 import LogosElement from "../LogosElement";
 
+// Thumbnail videos cycled through the service cards, one per card (looping).
 const SERVICE_ASSETS = [
   "/assets/videos/Videos/Experiments/spaceman-gsap---new-thumbnail.mp4",
   "/assets/videos/Videos/Experiments/noirve---new-thumbnail.mp4",
   "/assets/videos/Videos/Experiments/pitch---new-thumbnail.mp4",
 ];
 
+/**
+ * Services & Expertise section.
+ *
+ * Header heading is char-split/slid in via `useSectionHeadings`; each
+ * service is a bordered card with an index, title, description, skill tags
+ * and a looping background video on the right (desktop only).
+ */
 export default function ServicesSection() {
   const ref = useRef<HTMLElement>(null);
 

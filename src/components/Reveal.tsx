@@ -6,10 +6,18 @@ import { gsap } from "@/lib/gsap";
 type RevealProps = {
   children: ReactNode;
   className?: string;
+  /** Seconds to wait before the reveal starts. */
   delay?: number;
+  /** Vertical travel distance (px) of the reveal. */
   y?: number;
 };
 
+/**
+ * Scroll-triggered fade/slide-in wrapper for arbitrary content.
+ *
+ * Content starts invisible (opacity 0 is also set inline so nothing flashes
+ * before the effect runs) and animates in once when scrolled into view.
+ */
 export default function Reveal({ children, className, delay = 0, y = 40 }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
 

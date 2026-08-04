@@ -4,6 +4,13 @@ import localFont from "next/font/local";
 import "./globals.css";
 import SiteShell from "@/components/SiteShell";
 
+/**
+ * Root layout: loads the two typefaces (local Brockmann + Google Roboto
+ * Mono) as CSS variables, sets global metadata/viewport, and wraps all
+ * pages in SiteShell (preloader, cursor, navbar, footer, audio).
+ */
+
+/** Local display font (Brockmann) with its weights/italics preloaded. */
 export const brockmann = localFont({
   src: [
     { path: "./fonts/brockmann/brockmann-400.woff2", weight: "400", style: "normal" },
@@ -20,6 +27,7 @@ export const brockmann = localFont({
   preload: true,
 });
 
+/** Mono font used for labels/captions, preloaded via next/font/google. */
 export const robotoMono = Roboto_Mono({
   subsets: ["latin"],
   style: ["normal", "italic"],
@@ -28,6 +36,7 @@ export const robotoMono = Roboto_Mono({
   preload: true,
 });
 
+/** Site-wide metadata (title template, description, keywords). */
 export const metadata: Metadata = {
   title: {
     default: "Zeanur Rahaman Zeon | Software Engineer",
@@ -60,6 +69,7 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
+/** Responsive viewport + theme color (the site's dark background). */
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,

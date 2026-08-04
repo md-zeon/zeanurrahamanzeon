@@ -1,5 +1,6 @@
 import { photos } from "./site";
 
+/** Copy for the About page hero header. */
 export const aboutHeader = {
   title1: "Please",
   title2: "call me Bjorn",
@@ -12,8 +13,14 @@ export const aboutHeader = {
   videoCaption: "VIDEO_041",
 };
 
+/** Marquee strip label for the "Career story" divider. */
 export const aboutDividerText = "Webflow & Creative Developer";
 
+/**
+ * Career story content: the body paragraphs with inline link fragments
+ * (`links` splice into the text by matching their `text`), the milestone
+ * year sequence, and the left-column photos/quote stack.
+ */
 export const aboutStory = {
   year: "2018",
   body: [
@@ -46,6 +53,7 @@ export const aboutStory = {
   misc: "Image_356",
 };
 
+/** One card in the "FUN FACTS" deck (media is video, or image with a crop variant). */
 export type FactSlide = {
   caption: string;
   title: string;
@@ -60,6 +68,7 @@ export type FactSlide = {
   misc?: string;
 };
 
+/** The "FUN FACTS" deck: a caption plus the stack of fact cards. */
 export const aboutFacts: { caption: string; slides: FactSlide[] } = {
   caption: "FUN_FCT_005",
   slides: [

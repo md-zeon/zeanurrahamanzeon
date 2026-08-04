@@ -5,6 +5,15 @@ import { gsap } from "@/lib/gsap";
 import { contactForm } from "@/data/contact";
 import { audio } from "@/data/site";
 
+/**
+ * Contact section with a two-column layout: email + info on the left, the
+ * project brief form on the right. Form handling is client-side only —
+ * submit validates the HTML5 form, then swaps the form for the "done" panel
+ * (no backend). Also includes the copy-email button and the pill-style
+ * radio group for "how did you hear about me".
+ */
+
+/** Reusable input/select class strings (Webflow-style form field styling). */
 const textInput =
   "form_input w-input h-auto mb-0 min-h-[2.75rem] w-full rounded border border-white-20 bg-[#efefe61a] p-[0.5rem_1rem] text-[1rem] font-normal leading-[150%] text-brand-white placeholder:text-brand-darker-white focus:border-[#3898ec] focus:outline-none";
 const areaInput =
@@ -12,6 +21,7 @@ const areaInput =
 const selectInput =
   "form_input w-select h-auto mb-0 min-h-[2.75rem] w-full rounded border border-white-20 bg-[#efefe61a] p-[0.5rem_1rem] text-[1rem] font-normal leading-[150%] text-brand-white focus:border-[#3898ec] focus:outline-none";
 
+/** Copy glyph for the email copy-to-clipboard button. */
 function CopyIcon() {
   return (
     <div className="icon-embed-xxsmall w-embed">
@@ -43,6 +53,7 @@ function CopyIcon() {
   );
 }
 
+/** Checkmark glyph shown after a successful copy. */
 function CheckIcon() {
   return (
     <div className="icon-embed-xxsmall w-embed">
@@ -78,6 +89,7 @@ export default function ContactForm() {
     const icons =
       emailRef.current?.querySelectorAll<HTMLElement>(".contact_copy-icon");
     if (!icons || icons.length < 2) return;
+    // Flip copy icon out and check icon in, then flip back after a beat.
     gsap.killTweensOf([icons[0], icons[1]]);
     gsap.to([icons[0], icons[1]], {
       yPercent: -100,
@@ -92,6 +104,8 @@ export default function ContactForm() {
     });
   };
 
+  // Pills are styled via a separate element; keep the "checked" pill state in
+  // sync by moving the w--redirected-checked class between siblings.
   const handleRadioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const layout = e.currentTarget.closest(".form_checkbox-layout");
     if (!layout) return;
@@ -102,6 +116,7 @@ export default function ContactForm() {
     if (pill) pill.classList.add("w--redirected-checked");
   };
 
+  // Client-side only submit: no network call, just reveal the success panel.
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
@@ -121,6 +136,7 @@ export default function ContactForm() {
         <div className="container-large">
           <div className="border-b border-l border-white-20">
             <div className="w-layout-grid grid auto-cols-fr grid-cols-[0.5fr_1fr] items-start gap-10 max-[991px]:grid-flow-row max-[991px]:grid-cols-1 max-[991px]:gap-20 max-[991px]:border-r max-[991px]:border-r-border-tertiary max-[767px]:gap-y-12">
+              {/* Left column: contact email + info sections */}
               <div className="flex h-full flex-col gap-8 border-r border-white-20 p-[4.5rem_2.5rem_3.5rem] max-[991px]:border-r-0 max-[991px]:pb-0 max-[479px]:px-[1.3rem] max-[479px]:pt-12">
                 <div className="flex flex-col gap-2">
                   <div className="text-caption-2 text-color-secondary">
@@ -160,6 +176,8 @@ export default function ContactForm() {
                     <div className="text-caption-2 text-color-secondary">
                       {section.label}
                     </div>
+                    {/* Turn the literal "FAQ below" token into an anchor to
+                        the FAQ section on the page */}
                     <div className="text-size-regular">
                       {section.text.split("FAQ below").map((part, i, arr) => (
                         <span key={i}>
@@ -178,6 +196,7 @@ export default function ContactForm() {
                   </div>
                 ))}
               </div>
+              {/* Right column: the brief form */}
               <div className="flex w-form flex-col items-stretch pb-8 pt-14 max-[991px]:px-10 max-[991px]:pt-0 max-[479px]:px-[1.3rem]">
                 <form
                   id="wf-form-Contact"
@@ -186,6 +205,7 @@ export default function ContactForm() {
                   className="grid auto-cols-fr grid-cols-1 gap-12"
                   onSubmit={handleSubmit}
                 >
+                  {/* Name + email */}
                   <div className="grid auto-cols-fr grid-cols-2 gap-8 max-[767px]:grid-cols-1">
                     <div className="relative">
                       <label
@@ -224,6 +244,7 @@ export default function ContactForm() {
                       />
                     </div>
                   </div>
+                  {/* Brief textarea */}
                   <div className="relative">
                     <label
                       htmlFor="Message"
@@ -241,6 +262,7 @@ export default function ContactForm() {
                       className={areaInput}
                     />
                   </div>
+                  {/* Current URL + company stage */}
                   <div className="grid auto-cols-fr grid-cols-2 gap-8 max-[767px]:grid-cols-1">
                     <div className="relative">
                       <label
@@ -282,6 +304,7 @@ export default function ContactForm() {
                       </select>
                     </div>
                   </div>
+                  {/* Deadline + budget */}
                   <div className="grid auto-cols-fr grid-cols-2 gap-8 max-[767px]:grid-cols-1">
                     <div className="relative">
                       <label
@@ -338,6 +361,7 @@ export default function ContactForm() {
                       </div>
                     </div>
                   </div>
+                  {/* "How did you hear about me" pill radios */}
                   <div className="relative">
                     <label
                       htmlFor="Source"
@@ -352,6 +376,8 @@ export default function ContactForm() {
                           className="relative mb-0 flex w-radio items-center justify-center p-[0.5rem_1rem]"
                         >
                           <div className="form_pill-check w-radio-input absolute inset-0 z-2 m-0 h-full w-full rounded border border-white-20 bg-white-10 transition-all duration-200" />
+                          {/* Real radio is invisible; the pill element is
+                              layered behind it and toggled via handleRadioChange */}
                           <input
                             type="radio"
                             data-name="Source"
@@ -370,6 +396,7 @@ export default function ContactForm() {
                       ))}
                     </div>
                   </div>
+                  {/* Submit */}
                   <div className="flex flex-col items-start justify-start gap-4 pt-6">
                     <input
                       type="submit"
@@ -380,6 +407,7 @@ export default function ContactForm() {
                     />
                   </div>
                 </form>
+                {/* Success / failure panels, hidden until submit */}
                 <div className="relative h-full w-form-done bg-transparent p-[10vw_0]">
                   <div className="mx-auto flex h-full w-[40vw] flex-col items-center justify-center bg-transparent">
                     <div className="success-text">{contactForm.success}</div>

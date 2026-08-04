@@ -4,6 +4,16 @@ import { useLayoutEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
 import { logosBannerText } from "@/data/home";
 
+/**
+ * Infinite scrolling marquee banner (two rows, opposite directions).
+ *
+ * The template's Webflow approach relied on duplicated markup; here a single
+ * `BannerLayout` unit is cloned enough times to always cover the viewport,
+ * then the whole row is tweened linearly forever. Also runs a recurring
+ * binary "scramble" on the number element when one is provided.
+ */
+
+/** One self-contained marquee unit: line grid + label + line grid [+ number]. */
 function BannerLayout({ text, number }: { text: string; number?: string }) {
   const line = "logos_banner-line h-3 w-[0.094rem] rotate-[15deg] bg-brand-white max-[767px]:h-2";
   const row = "logos_banner-wrapper flex gap-[0.3rem] overflow-hidden px-[0.15rem] max-[767px]:gap-[0.2rem]";
@@ -30,6 +40,9 @@ export default function LogosBanner({ text = logosBannerText, number }: { text?:
   const bottomRef = useRef<HTMLDivElement>(null);
   const rootRef = useRef<HTMLDivElement>(null);
 
+  // Set up the two marquee rows. Each row clones its layout until the row is
+  // guaranteed wider than the screen; the tween translates by 101% of the
+  // clone width so the loop is seamless (clone wraps back to the start).
   useLayoutEffect(() => {
     const init = (component: HTMLElement, direction: "left" | "right"): (() => void) => {
       const layout = component.querySelector<HTMLElement>(".logos_banner-layout");
@@ -46,6 +59,7 @@ export default function LogosBanner({ text = logosBannerText, number }: { text?:
         duration: 50,
         ease: "linear",
       });
+      // Pause while hovering so the text stays readable.
       const onEnter = () => tween.pause();
       const onLeave = () => tween.resume();
       component.addEventListener("mouseenter", onEnter);
@@ -63,6 +77,8 @@ export default function LogosBanner({ text = logosBannerText, number }: { text?:
     return () => cleanups.forEach((fn) => fn());
   }, []);
 
+  // Every few seconds, briefly scramble the number element as random bits
+  // before snapping back to its real value.
   useLayoutEffect(() => {
     const root = rootRef.current;
     if (!root) return;
@@ -86,6 +102,7 @@ export default function LogosBanner({ text = logosBannerText, number }: { text?:
           },
           onComplete: () => {
             el.textContent = originalText;
+            // Re-schedule the next scramble after a 3s pause.
             timers.push(window.setTimeout(scrambleAnimation, 3000));
           },
         });

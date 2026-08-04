@@ -6,6 +6,14 @@ import LogosElement from "../LogosElement";
 import AutoVideo from "../media/AutoVideo";
 import Reveal from "../Reveal";
 
+/**
+ * "Why me?" section: two-line heading, a highlighted statement, and a grid
+ * of video cards linking out to experiments. The heading uses the shared
+ * `useSectionHeadings`/`LogosElement` reveal utilities, the statement fades
+ * in via `Reveal`, and each card's video is auto-played by `AutoVideo`.
+ */
+
+/** Diagonal arrow icon used inside the card buttons. */
 function ArrowIcon() {
   return (
     <div className="btn__icon" aria-hidden="true">
@@ -35,6 +43,8 @@ export default function WhySection() {
       <div className="padding-global is-bigger">
         <div className="container-large">
           <div className="flex flex-col">
+            {/* Header row: heading + LogosElement; `header-animation-type`
+                attributes are consumed by useSectionHeadings. */}
             <div
               header-animation-type="container"
               className="grid auto-cols-fr grid-cols-[1fr_0.7fr] justify-between gap-0 border-b border-r border-b-border-tertiary border-r-white-20 max-[991px]:grid-cols-1 max-[991px]:place-items-start"
@@ -60,6 +70,8 @@ export default function WhySection() {
                 </h3>
               </div>
             </Reveal>
+            {/* Video cards: gradient overlay, background video, and a button
+                positioned on alternating corners. */}
             <div className="grid grid-cols-2 flex-none flex-wrap gap-10 border-l border-white-20 pl-8 pt-8 max-[991px]:grid-cols-1 max-[767px]:gap-6 max-[767px]:pl-6 max-[767px]:pt-6">
               {whyCards.map((card, i) => (
                 <div
@@ -67,6 +79,7 @@ export default function WhySection() {
                   className="relative aspect-video h-full w-full max-h-88 max-[991px]:max-h-240"
                 >
                   <div className="relative z-1 flex h-full w-full items-center justify-center overflow-hidden rounded-lg border border-white-20 max-[479px]:rounded">
+                    {/* Diagonal gradient overlay; direction alternates per card. */}
                     <div
                       className={`absolute inset-0 z-2 h-full w-full opacity-30 ${i % 2 === 1 ? "bg-[linear-gradient(-45deg,#000,#000_0%,#0000)]" : "bg-[linear-gradient(45deg,#000,#000_0%,#0000)]"}`}
                     />
@@ -93,6 +106,7 @@ export default function WhySection() {
                       <div className="btn__text">{card.buttonLabel}</div>
                       <ArrowIcon />
                     </a>
+                    {/* Vertical caption label on the card's side edge. */}
                     <div className="absolute bottom-[2.2rem] left-[-2.3rem] transform-[rotate(-90deg)_translateY(-50%)] max-[767px]:bottom-[1.8rem] max-[767px]:left-[-1.8rem] max-[479px]:-left-8">
                       <div className="text-caption-2 text-color-teritary">
                         {card.caption}

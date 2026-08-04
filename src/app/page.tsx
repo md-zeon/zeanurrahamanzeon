@@ -7,6 +7,10 @@ import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import LabSection from "@/components/sections/LabSection";
 import CtaSection from "@/components/sections/CtaSection";
 
+/**
+ * Home page: composes the landing sections in order — hero, project
+ * carousel, marquee, why, services, testimonials, labs, and final CTA.
+ */
 export default function Home() {
   return (
     <main className="main-wrapper background-color-black">

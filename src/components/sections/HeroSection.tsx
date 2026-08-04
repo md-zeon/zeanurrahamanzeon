@@ -6,15 +6,28 @@ import { brand, socials } from "@/data/site";
 import { Button, WebflowBadge, Asterisk } from "../shared";
 import AutoVideo from "../media/AutoVideo";
 
+// Elements animated by the final fade-in step (name/header blocks, video,
+// CTA). Everything else (the per-character heading) is timed separately.
 const HEADER_FADE =
   '[data-hero-fade="header"],[data-hero-fade="video"],[data-hero-fade="cta"]';
 
+// Responsive layout wrappers for the three hero headline lines. The exact
+// offsets/padding are tuned to make the three lines interlock across
+// breakpoints (a Webflow template pattern).
 const headerWrapperBase =
   "flex flex-col items-center gap-4 desktop:flex-row desktop:items-end desktop:justify-center max-[991px]:relative max-[991px]:items-end max-[991px]:justify-start max-[991px]:pr-[24.5vw] max-[767px]:gap-y-2";
 const headerWrapperFirst = `${headerWrapperBase} gap-0 desktop:pr-[1.8rem] max-[991px]:pt-8`;
 const headerWrapperMiddle = `${headerWrapperBase} -mt-2 -mr-[0.2rem] pr-[17vw] desktop:pr-[0.6rem] max-[991px]:pl-0 max-[991px]:pr-[34vw] max-[767px]:-mt-[0.3rem] max-[479px]:-mt-[0.3rem]`;
 const headerWrapperLast = `${headerWrapperBase} -mt-2 pl-[23vw] desktop:pl-[32.6rem] desktop:pr-0 max-[991px]:justify-end max-[991px]:pr-[7vw] max-[767px]:-mt-[0.3rem] max-[479px]:-mt-[0.3rem]`;
 
+/**
+ * Home page hero: staggered intro animation on load.
+ *
+ * The greeting name and the three headline lines are split into characters
+ * which slide up from below in sequence, while the video + badge + CTA
+ * blocks fade in shortly after. No scroll dependency — it plays once on
+ * mount.
+ */
 export default function HeroSection() {
   const ref = useRef<HTMLElement>(null);
 
@@ -23,6 +36,7 @@ export default function HeroSection() {
     if (!el) return;
 
     const ctx = gsap.context(() => {
+      // Everything hidden until its tween starts.
       gsap.set(HEADER_FADE, { autoAlpha: 0, y: 40 });
 
       const name = new SplitText("#home-hero-name", { type: "chars" });
@@ -30,6 +44,8 @@ export default function HeroSection() {
       const split2 = new SplitText("#home-hero-header-2", { type: "chars" });
       const split3 = new SplitText("#home-hero-header-3", { type: "chars" });
 
+      // Name first, then the three headline lines in sequence, each with a
+      // slightly later start so the text cascades top-to-bottom.
       gsap.from(name.chars, {
         yPercent: 110,
         opacity: 0,
@@ -63,6 +79,7 @@ export default function HeroSection() {
         delay: 0.65,
       });
 
+      // Fade the video, badge and CTA in after the headline settles.
       gsap.to(HEADER_FADE, {
         autoAlpha: 1,
         y: 0,

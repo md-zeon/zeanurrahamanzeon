@@ -2,6 +2,12 @@
 
 import { useEffect, useState } from "react";
 
+/**
+ * Live 24-hour clock (HH:MM) used in the navbar.
+ *
+ * Renders a plain div so the label is purely presentational; time updates
+ * every second via a self-cleaning interval.
+ */
 export default function Clock({ className }: { className?: string }) {
   const [time, setTime] = useState("");
 

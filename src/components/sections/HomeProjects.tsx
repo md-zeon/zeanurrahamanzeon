@@ -6,6 +6,15 @@ import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { featuredProjects } from "@/data/home";
 import AutoVideo from "../media/AutoVideo";
 
+/**
+ * Home page "featured projects" pinned 3D carousel.
+ *
+ * While the section is pinned, the project cards tilt back and forth on the
+ * X axis (a "cards fan" effect), the track and background animate between
+ * dark and brand colors, and a floating banner is scramble-text updated to
+ * match whichever card is currently centered. The right-hand nav thumbnails
+ * let the visitor jump straight to a specific card.
+ */
 export default function HomeProjects() {
   const ref = useRef<HTMLElement>(null);
 
@@ -30,10 +39,13 @@ export default function HomeProjects() {
       const track = el.querySelector(".home-projects_track");
       const section = el;
 
+      // Project cards live in one grid cell, so they stack. `preserve-3d`
+      // + a shared perspective makes the rotationX fan look dimensional.
       gsap.set(projects, {
         transformStyle: "preserve-3d",
         transformPerspective: 800,
       });
+      // The "middle" cards start below the viewport, rotated away.
       gsap.set(
         projects.filter((p) => p.classList.contains("middle")),
         {
@@ -43,6 +55,8 @@ export default function HomeProjects() {
           scale: 1.1,
         },
       );
+      // Pre-paint the (dark) background so there's no flash of white before
+      // the first scrub tween fires.
       gsap.set(
         [
           track,
@@ -51,12 +65,14 @@ export default function HomeProjects() {
         ],
         { backgroundColor: "#0A090F" },
       );
+      // First card is hidden until its scroll-in trigger.
       gsap.set(el.querySelector(".home-projects_project.first"), {
         transformOrigin: "center top",
         yPercent: 20,
         opacity: 0,
       });
 
+      // Fade the first card up when the section scrolls into view.
       ScrollTrigger.create({
         trigger: el.querySelector(".home-projects_project.first"),
         start: "top 85%",
@@ -71,6 +87,9 @@ export default function HomeProjects() {
         },
       });
 
+      // The core pinned scroll. Pins the section for 300% of scroll; as you
+      // scrub, cards fan from front to back. Background shifts to brand
+      // purple while pinned and back when leaving.
       const timeline = gsap.timeline({
         scrollTrigger: {
           id: "projectsScroll",
@@ -123,6 +142,8 @@ export default function HomeProjects() {
         },
       });
 
+      // Fan sequence: the current card tips away (back), the next cards
+      // stand up, then they all tip forward again so the next one leads.
       timeline
         .to(".home-projects_project.first", {
           rotationX: -40,
@@ -154,6 +175,9 @@ export default function HomeProjects() {
           "<+=0.5",
         );
 
+      // During scrubbing, derive which project is "active" from scroll
+      // progress and update the banner (title/description via scramble,
+      // button href, and the active nav thumbnail) whenever it changes.
       let lastActiveIndex = -1;
       const updateActiveProject = () => {
         const st = ScrollTrigger.getById("projectsScroll");
@@ -207,6 +231,8 @@ export default function HomeProjects() {
         }
       };
 
+      // Slide the floating banner in/out as the pinned section is entered
+      // and left.
       const bannerFade = (state: "in" | "out") => {
         gsap.to(".home-projects_banner-component", {
           opacity: state === "in" ? 1 : 0,
@@ -231,6 +257,7 @@ export default function HomeProjects() {
       });
 
       gsap.set(".home-projects_banner-component", { opacity: 0, yPercent: 20 });
+      // Nav thumbnails slide in from the right once, when scrolled to.
       gsap.set(navButtons, { x: "100%", opacity: 0, visibility: "hidden" });
       gsap.fromTo(
         navButtons,
@@ -251,6 +278,10 @@ export default function HomeProjects() {
     return () => ctx.revert();
   }, []);
 
+  // Jump to a specific project card from the nav thumbnails. The pinned
+  // section lives inside ScrollTrigger's generated `.pin-spacer`, so we
+  // compute the target scroll position from that spacer's offset plus an
+  // estimated per-card distance.
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
     index: number,

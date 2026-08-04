@@ -6,6 +6,7 @@ import { experimentsStack } from "@/data/experiments";
 import { audio } from "@/data/site";
 import AutoVideo from "../media/AutoVideo";
 
+/** Arrow glyph used in the banner's "View clonable" button. */
 function ArrowIcon() {
   return (
     <div className="btn__icon w-embed">
@@ -27,6 +28,13 @@ function ArrowIcon() {
   );
 }
 
+/**
+ * Full-screen pinned 3D carousel of experiment projects. The stacked
+ * projects tilt/flip forward one by one as the user scrolls (GSAP timeline
+ * scrubbed over a pinned 300% scroll distance), while a side nav of video
+ * thumbnails lets users jump straight to a project. The banner's title
+ * scrambles between the active project's title and its link follows along.
+ */
 export default function ExperimentsProjects() {
   const ref = useRef<HTMLElement>(null);
 
@@ -46,6 +54,8 @@ export default function ExperimentsProjects() {
       const track = el.querySelector(".home-projects_track");
       const section = el;
 
+      // Stack every project in 3D space; the middle ones start "behind" the
+      // first (tilted back), the first starts slightly below and faded out.
       gsap.set(projects, {
         transformStyle: "preserve-3d",
         transformPerspective: 800,
@@ -59,6 +69,8 @@ export default function ExperimentsProjects() {
           scale: 1.1,
         },
       );
+      // Keep the dark backdrop behind the whole pinned section (the section
+      // and experiments grid below it share the same bg).
       gsap.set(
         [
           track,
@@ -73,6 +85,7 @@ export default function ExperimentsProjects() {
         opacity: 0,
       });
 
+      // Fade the first project in once it enters the viewport.
       ScrollTrigger.create({
         trigger: el.querySelector(".home-projects_project.first"),
         start: "top 85%",
@@ -87,6 +100,9 @@ export default function ExperimentsProjects() {
         },
       });
 
+      // Pin the section and drive the flip sequence with scroll progress.
+      // Background flips to the brand purple while pinned, back to dark on
+      // leave.
       const timeline = gsap.timeline({
         scrollTrigger: {
           id: "projectsScroll",
@@ -139,6 +155,9 @@ export default function ExperimentsProjects() {
         },
       });
 
+      // Flip the front card down/away, then bring the next cards up into
+      // place one at a time (staggered), then tilt the set back for the next
+      // iteration.
       timeline
         .to(".home-projects_project.first", {
           rotationX: -40,
@@ -170,6 +189,8 @@ export default function ExperimentsProjects() {
           "<+=0.5",
         );
 
+      // Keep banner title, CTA href, and the side nav highlight in sync with
+      // whichever project is front-and-center during the scrub.
       let lastActiveIndex = -1;
       const updateActiveProject = () => {
         const st = ScrollTrigger.getById("projectsScroll");
@@ -221,6 +242,7 @@ export default function ExperimentsProjects() {
         },
       });
 
+      // Banner and side nav slide/fade in once the section scrolls in.
       gsap.set(".home-projects_banner-component", { opacity: 0, yPercent: 20 });
       gsap.set(navButtons, { x: "100%", opacity: 0, visibility: "hidden" });
       gsap.fromTo(
@@ -238,6 +260,8 @@ export default function ExperimentsProjects() {
         },
       );
 
+      // Banner visibility follows the pinned phase (in while pinned, out
+      // when the section is fully scrolled past).
       const bannerFade = (state: "in" | "out") => {
         gsap.to(".home-projects_banner-component", {
           opacity: state === "in" ? 1 : 0,
@@ -255,6 +279,8 @@ export default function ExperimentsProjects() {
     return () => ctx.revert();
   }, []);
 
+  // Jump-scroll to a specific project's position within the pinned scrub.
+  // Approximates each project's scroll offset by its index within the pin.
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
     index: number,
@@ -283,6 +309,7 @@ export default function ExperimentsProjects() {
       ref={ref}
     >
       <div className="home-projects_track relative h-[600vh] w-full overflow-hidden">
+        {/* Stacked project frames, all occupying the same grid cell */}
         <div className="relative grid h-full w-full max-h-screen auto-cols-fr grid-cols-1 grid-rows-1 content-start items-center justify-center justify-items-center gap-0 py-8 transform-3d max-[767px]:pb-32">
           {experimentsStack.map((project, i) => (
             <div
@@ -290,9 +317,11 @@ export default function ExperimentsProjects() {
               data-index={i + 1}
               className={`home-projects_project ${i === 0 ? "first" : "middle"} relative z-2 flex h-[54vw] w-[90%] [grid-area:1/1/2/2] origin-[50%_0] transform-3d desktop:h-full desktop:transform-[perspective(100vh)]`}
             >
+              {/* Vertical index label on the left edge */}
               <div className="absolute left-[-2.7rem] top-1/2 transform-[rotate(-90deg)_translateY(-50%)] max-[767px]:left-[-2.3rem] max-[479px]:-left-8">
                 <div className="text-caption-2">{project.index}</div>
               </div>
+              {/* Project video, fill the frame */}
               <div className="relative inset-0 z-2 aspect-16/9.5 h-full w-full max-h-[93.5vh] overflow-hidden rounded-lg max-[767px]:rounded w-embed">
                 <AutoVideo src={project.video} />
               </div>
@@ -301,6 +330,7 @@ export default function ExperimentsProjects() {
         </div>
       </div>
 
+      {/* Side nav: video thumbnails to jump to each project (desktop only) */}
       <div className="absolute top-1/2 right-[-7rem] z-3 hidden -translate-y-1/2 flex-col items-stretch justify-end gap-2 desktop:flex wide:right-[-6rem]">
         {experimentsStack.map((project, i) => (
           <a
@@ -321,6 +351,7 @@ export default function ExperimentsProjects() {
         ))}
       </div>
 
+      {/* Floating banner: current project title (scrambles on change) + CTA */}
       <div className="home-projects_banner-component is-experiments absolute bottom-8 left-8 z-3 flex w-full max-w-[16rem] max-h-40 flex-col gap-4 rounded border border-white-20 bg-black-30 p-6 shadow-[inset_0_0_0_1000px_#0a090e33] backdrop-blur-[100px] max-[767px]:bottom-16 max-[767px]:gap-6 max-[767px]:p-4 max-[479px]:bottom-[12%] max-[479px]:left-[4%] max-[479px]:w-[90%]">
         <div className="flex-none">
           <div className="heading-style-h3 block max-w-full max-h-24 overflow-hidden whitespace-normal wrap-break-word min-[992px]:max-h-16">

@@ -7,9 +7,18 @@ type AutoVideoProps = {
   poster?: string;
   className?: string;
   preload?: "auto" | "metadata" | "none";
+  /** If true, play only while the video is on screen (via IntersectionObserver). */
   playsOnScroll?: boolean;
 };
 
+/**
+ * Cover-filling `<video>` that auto-plays.
+ *
+ * By default playback is driven by an IntersectionObserver: it plays when at
+ * least 15% is visible and pauses when scrolled out. With `playsOnScroll`
+ * false it simply plays on mount. Videos are muted/inline/looping because
+ * browsers block unmuted autoplay without user interaction.
+ */
 export default function AutoVideo({ src, poster, className, preload = "metadata", playsOnScroll = true }: AutoVideoProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
 

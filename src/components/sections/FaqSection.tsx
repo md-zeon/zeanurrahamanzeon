@@ -7,6 +7,7 @@ import { audio } from "@/data/site";
 import { useSectionHeadings } from "@/lib/useHeaderReveal";
 import LogosElement from "../LogosElement";
 
+/** Plus glyph shown at the right of each FAQ question (rotates to an x). */
 function PlusIcon() {
   return (
     <div className="icon-embed-small w-embed">
@@ -28,6 +29,12 @@ function PlusIcon() {
   );
 }
 
+/**
+ * Converts a stored answer into mixed paragraphs and bullet lists. Source
+ * text is split on newlines: lines starting with "- " collect into a <ul>,
+ * blank lines flush the current list, everything else becomes a <p>. A
+ * zero-width space paragraph keeps the panel from collapsing when empty.
+ */
 function Answer({ answer }: { answer: string[] }) {
   const lines: string[] = [];
   answer.forEach((p) => lines.push(...p.split("\n")));
@@ -69,6 +76,12 @@ function Answer({ answer }: { answer: string[] }) {
   return <>{elements}</>;
 }
 
+/**
+ * FAQ accordion. One item open at a time: answers animate between height 0
+ * and their scrollHeight via GSAP while the plus icon rotates to an x, and
+ * ARIA expanded/hidden attributes track state for screen readers. On desktop
+ * the question row also nudges right on hover.
+ */
 export default function FaqSection() {
   const ref = useRef<HTMLElement>(null);
 
@@ -79,6 +92,7 @@ export default function FaqSection() {
     if (!el) return;
 
     const ctx = gsap.context(() => {
+      // Answers start collapsed; icons start un-rotated.
       gsap.set(".faq_answer", { height: 0, overflow: "hidden" });
       gsap.set(".faq_icon-wrapper .icon-embed-small", { rotate: 0 });
 
@@ -87,6 +101,8 @@ export default function FaqSection() {
           ".faq_question",
         ) as HTMLElement;
         const wrapper = question.closest(".faq_wrapper") as HTMLElement;
+        // Only items sharing the same faq_content/faq_component scope are
+        // treated as siblings (so only one can be open at a time).
         const scope = (question.closest(".faq_content, .faq_component") ??
           el) as HTMLElement;
         const currentAnswer = wrapper.querySelector<HTMLElement>(".faq_answer");
@@ -99,6 +115,7 @@ export default function FaqSection() {
         const isOpen = currentAnswer.classList.contains("open");
 
         if (isOpen) {
+          // Close: collapse the answer and straighten the icon.
           currentAnswer.classList.remove("open");
           currentAnswer.setAttribute("aria-hidden", "true");
           question.setAttribute("aria-expanded", "false");
@@ -113,6 +130,7 @@ export default function FaqSection() {
             ease: "expo.inOut",
           });
         } else {
+          // Close any other open answer in the same scope first.
           scope
             .querySelectorAll<HTMLElement>(".faq_answer.open")
             .forEach((openAnswer) => {
@@ -141,6 +159,7 @@ export default function FaqSection() {
               });
             });
 
+          // Open: measure the natural height, then animate from 0 up to it.
           gsap.set(currentAnswer, { height: "auto" });
           const fullHeight = currentAnswer.scrollHeight;
           gsap.set(currentAnswer, { height: 0 });
@@ -166,6 +185,7 @@ export default function FaqSection() {
       const questions = el.querySelectorAll<HTMLElement>(".faq_question");
       questions.forEach((q) => {
         q.addEventListener("click", handleClick);
+        // Desktop-only hover nudge of the question row.
         if (window.matchMedia("(min-width: 1280px)").matches) {
           const handleEnter = () =>
             gsap.to(q.querySelector(".faq_question-wrapper"), {
@@ -193,6 +213,7 @@ export default function FaqSection() {
       <div className="padding-global is-bigger">
         <div className="container-large">
           <div className="faq_component flex flex-col pt-30 max-[991px]:pt-22">
+            {/* Stacked oversized "FAQ" heading + corner caption chip */}
             <div
               header-animation-type="container"
               className="grid auto-cols-fr grid-cols-[auto_1fr] justify-between gap-0 pl-4 max-[991px]:grid-cols-1 max-[991px]:place-items-start"
@@ -228,6 +249,7 @@ export default function FaqSection() {
               </div>
               <LogosElement caption={faq.caption} extraClasses="is-faq" />
             </div>
+            {/* Question/answer list with a sticky "get in touch" hint */}
             <div className="relative grid auto-cols-fr grid-cols-[1fr_0.33fr] items-start justify-between gap-0 wide:grid-cols-[1fr_0.485fr] ultrawide:grid-cols-[1fr_24.3rem] max-[991px]:grid-cols-1">
               <div className="faq_content flex w-full flex-col border-t border-l border-white-20 pb-40 max-[767px]:pb-28">
                 {faq.items.map((item, i) => (
@@ -258,6 +280,7 @@ export default function FaqSection() {
                     </div>
                   </div>
                 ))}
+                {/* Sticky contact prompt beside the list on desktop */}
                 <div className="sticky top-24 w-full max-w-104 py-6 pl-6 max-[991px]:static max-[991px]:hidden">
                   <div className="text-size-regular">{faq.contactText}</div>
                 </div>

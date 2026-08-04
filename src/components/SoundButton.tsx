@@ -11,11 +11,22 @@ import {
   getSoundServerSnapshot,
 } from "@/lib/sound";
 
+/**
+ * Navbar sound toggle.
+ *
+ * State lives in the shared sound store (see `@/lib/sound`), consumed via
+ * `useSyncExternalStore`. The lottie animation plays forward when sound is
+ * turned on and in reverse when turned off. Clicking also toggles background
+ * music.
+ */
 export default function SoundButton() {
+  // React 18 pattern: subscribe to the sound store on the client while the
+  // server snapshot (always `true`) keeps hydration deterministic.
   const on = useSyncExternalStore(subscribeSound, getSoundSnapshot, getSoundServerSnapshot);
   const wrapRef = useRef<HTMLDivElement>(null);
   const animRef = useRef<AnimationItem | null>(null);
 
+  // Load the sound-wave lottie animation once; destroy it on unmount.
   useEffect(() => {
     if (wrapRef.current) {
       animRef.current = lottie.loadAnimation({

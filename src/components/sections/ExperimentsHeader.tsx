@@ -4,6 +4,13 @@ import { audio } from "@/data/site";
 import Link from "next/link";
 import { Asterisk, WebflowLogo } from "../shared";
 
+/**
+ * Experiments page hero: stacked two-line title, intro paragraph, and two
+ * CTAs (primary to /contact, secondary to /work), plus the badge link.
+ * `header-content-type` attributes drive the intro reveal animation.
+ * `data-projects-section="first"` marks it as the first of the two
+ * projects-style sections on the page.
+ */
 export default function ExperimentsHeader() {
   return (
     <header data-projects-section="first">
@@ -13,6 +20,7 @@ export default function ExperimentsHeader() {
             <div className="padding-top padding-section-large max-width-full">
               <div className="relative flex min-w-full flex-col gap-8 pb-12 max-[991px]:pt-12">
                 <div className="grid min-w-full grid-cols-[1.1fr_1fr] items-start gap-4 max-[991px]:grid-cols-1 max-[991px]:grid-flow-row max-[991px]:items-start max-[991px]:justify-items-center max-[991px]:gap-12 max-[767px]:gap-6 max-[479px]:max-w-[97%]">
+                  {/* Left: stacked two-line title */}
                   <div className="relative z-2 flex w-full flex-col gap-8 max-[991px]:gap-4 max-[767px]:gap-2">
                     <div className="flex w-full flex-col gap-6">
                       <div className="pl-4 max-[991px]:pl-0">
@@ -37,6 +45,7 @@ export default function ExperimentsHeader() {
                       </div>
                     </div>
                   </div>
+                  {/* Right: paragraph, CTAs, and badge link */}
                   <div className="relative z-1 flex w-full justify-between gap-x-[4vw] gap-y-[4vw] max-[991px]:flex-col max-[991px]:gap-12 max-[991px]:px-16 max-[767px]:px-8 max-[479px]:px-[1.3rem]">
                     <div className="relative flex flex-wrap items-start justify-start gap-[3.7rem] desktop:pr-16 max-[991px]:gap-12">
                       <div className="flex w-full flex-col gap-10 pl-8 desktop:pl-16 max-[991px]:gap-8 max-[991px]:pl-0 max-[767px]:gap-6">
@@ -72,10 +81,12 @@ export default function ExperimentsHeader() {
                           </Link>
                         </div>
                       </div>
+                      {/* Vertical divider between text and badge */}
                       <div
                         header-content-type="border"
                         className="absolute inset-y-0 left-0 z-2 h-full w-px bg-white-20 max-[991px]:hidden"
                       />
+                      {/* Badge with animated asterisk */}
                       <div className="badge">
                         <div className="badge__icon-wrapper">
                           <div
@@ -107,6 +118,7 @@ export default function ExperimentsHeader() {
                     </div>
                   </div>
                 </div>
+                {/* Bottom frame lines */}
                 <div header-content-type="border" className="frame" />
                 <div header-content-type="border" className="frame is-right" />
               </div>
