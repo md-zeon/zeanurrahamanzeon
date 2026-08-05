@@ -8,7 +8,7 @@ export const brand = {
   heroLine2: "Software",
   heroLine3: "Engineer",
   heroIntro:
-    "I am a passionate web designer and developer with a knack for creating visually stunning and user-friendly websites. With a strong foundation in both design principles and coding languages, I bring ideas to life on the web.",
+    "Full Stack Software Engineer specializing in React, Next.js, TypeScript, Node.js, and scalable web applications. I enjoy building performant products, solving real-world problems, and creating intuitive user experiences.",
   heroVideo: "/assets/videos/hero-clip-vid.mp4",
   heroVideoCaption: "VIDEO_459",
 };
@@ -49,12 +49,12 @@ export const navLinks = [
 /** External social/profile links used across headers and footer. */
 export const socials = {
   linkedin: "https://www.linkedin.com/in/zeanur-rahaman-zeon/",
-  youtube: "https://www.youtube.com/@zeanurrahamanzeon",
-  instagram: "https://www.instagram.com/zeanurrahamanzeon/",
+  youtube: "https://www.youtube.com/@",
+  instagram: "https://www.instagram.com/",
   twitter: "https://x.com/developer_zeon",
-  webflowPartner: "https://webflow.com/@zeanurrahamanzeon",
-  webflowClonables: "https://webflow.com/@zeanurrahamanzeon",
-  awwwards: "https://www.awwwards.com/bjornflow/",
+  webflowPartner: "https://webflow.com/",
+  webflowClonables: "https://webflow.com/@zeon",
+  awwwards: "https://www.awwwards.com/",
 };
 
 /** Footer link groups: overview, case studies, and connect lists. */

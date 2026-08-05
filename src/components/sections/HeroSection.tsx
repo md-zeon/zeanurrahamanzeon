@@ -196,35 +196,31 @@ export default function HeroSection() {
                         <div className="badge__icon-wrapper">
                           <div
                             id="home-hero-asterisk"
-                            className="badge__icon w-embed"
+                            className="badge__icon"
                           >
                             <Asterisk />
                           </div>
                         </div>
-                        <div className="flex flex-col">
-                          <div className="flex items-center gap-1">
-                            <div className="badge__line">
-                              <div className="badge__line-bg" />
-                            </div>
-                            <WebflowBadge href={socials.webflowPartner} />
-                          </div>
-                          <div
-                            data-hero-fade="cta"
-                            className="flex w-full max-w-148 flex-col gap-10 desktop:pl-16 max-[991px]:mt-0 max-[991px]:max-w-none max-[991px]:gap-8 max-[991px]:pl-0 max-[767px]:gap-6"
-                          >
-                            <div id="home-header-p" className="text-size-large">
-                              {brand.heroIntro}
-                            </div>
-                            <div className="btn-group btn-group--grid">
-                              <Button href="/contact">Get in touch</Button>
-                              <Button href="/work" variant="secondary">
-                                See work
-                              </Button>
-                            </div>
-                          </div>
+                        <div className="badge__line">
+                          <div className="badge__line-bg" />
                         </div>
-                        <div className="absolute bottom-0 left-2 top-8 z-2 hidden h-[170%] w-px bg-white-20 desktop:block desktop:top-24 max-[991px]:hidden" />
+                        <WebflowBadge href={socials.webflowPartner} />
                       </div>
+                      <div
+                        data-hero-fade="cta"
+                        className="flex w-full max-w-148 flex-col gap-10 desktop:pl-16 max-[991px]:mt-0 max-[991px]:max-w-none max-[991px]:gap-8 max-[991px]:pl-0 max-[767px]:gap-6"
+                      >
+                        <div id="home-header-p" className="text-size-large">
+                          {brand.heroIntro}
+                        </div>
+                        <div className="btn-group btn-group--grid">
+                          <Button href="/contact">Get in touch</Button>
+                          <Button href="/work" variant="secondary">
+                            See work
+                          </Button>
+                        </div>
+                      </div>
+                      <div className="absolute bottom-0 left-2 top-8 z-2 hidden h-[170%] w-px bg-white-20 desktop:block desktop:top-24 max-[991px]:hidden" />
                     </div>
                   </div>
                 </div>

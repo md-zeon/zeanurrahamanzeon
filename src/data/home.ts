@@ -1,7 +1,7 @@
 import { photos } from "./site";
 
 /** Text for the animated collaboration marquee. */
-export const logosBannerText = "Collaborations & Brand Experience";
+export const logosBannerText = "Projects & Open Source";
 
 /** Featured projects shown in the home hero carousel. */
 export const featuredProjects = [

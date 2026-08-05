@@ -90,17 +90,13 @@ export function Button({
         data-audio={dataAudio}
         className={className}
       >
-        <div className="btn__text">
-          {children}
-        </div>
+        <div className="btn__text">{children}</div>
       </a>
     );
   }
   return (
     <Link href={href} data-audio={dataAudio} className={className}>
-      <div className="btn__text">
-        {children}
-      </div>
+      <div className="btn__text">{children}</div>
     </Link>
   );
 }
@@ -111,7 +107,7 @@ type WebflowBadgeProps = {
   label?: string;
 };
 
-/** Small link + Webflow logo pairing, e.g. "Webflow Certified Partner". */
+/** Small link + Webflow logo pairing, e.g. "webflow certified partner", . */
 export function WebflowBadge({
   text = "Webflow Certified Partner",
   href,
