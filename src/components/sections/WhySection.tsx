@@ -4,13 +4,14 @@ import { useRef } from "react";
 import { whyHeader, whyCards } from "@/data/home";
 import LogosElement from "../LogosElement";
 import AutoVideo from "../media/AutoVideo";
-import Reveal from "../Reveal";
+import { useScrubbedHighlight } from "@/lib/useHeaderReveal";
 
 /**
  * "Why me?" section: two-line heading, a highlighted statement, and a grid
  * of video cards linking out to experiments. The heading uses the shared
- * `useSectionHeadings`/`LogosElement` reveal utilities, the statement fades
- * in via `Reveal`, and each card's video is auto-played by `AutoVideo`.
+ * `useSectionHeadings`/`LogosElement` reveal utilities, the statement's words
+ * brighten progressively as they scroll into view, and each card's video is
+ * auto-played by `AutoVideo`.
  */
 
 /** Diagonal arrow icon used inside the card buttons. */
@@ -38,6 +39,9 @@ function ArrowIcon() {
 export default function WhySection() {
   const ref = useRef<HTMLElement>(null);
 
+  // The statement brightens word-by-word as it scrolls through the viewport.
+  useScrubbedHighlight(ref);
+
   return (
     <section className="relative z-2" ref={ref}>
       <div className="padding-global is-bigger">
@@ -63,13 +67,11 @@ export default function WhySection() {
               </div>
               <LogosElement caption={whyHeader.caption} />
             </div>
-            <Reveal>
-              <div className="border-b border-l border-r border-white-20 px-[7.3vw] py-20 desktop:px-24 max-[991px]:py-12 max-[767px]:px-6 max-[767px]:py-8">
-                <h3 id="highlighted-text" className="heading-style-h3">
-                  {whyHeader.highlight}
-                </h3>
-              </div>
-            </Reveal>
+            <div className="border-b border-l border-r border-white-20 px-[7.3vw] py-20 desktop:px-24 max-[991px]:py-12 max-[767px]:px-6 max-[767px]:py-8">
+              <h3 id="highlighted-text" className="heading-style-h3">
+                {whyHeader.highlight}
+              </h3>
+            </div>
             {/* Video cards: gradient overlay, background video, and a button
                 positioned on alternating corners. */}
             <div className="grid grid-cols-2 flex-none flex-wrap gap-10 border-l border-white-20 pl-8 pt-8 max-[991px]:grid-cols-1 max-[767px]:gap-6 max-[767px]:pl-6 max-[767px]:pt-6">

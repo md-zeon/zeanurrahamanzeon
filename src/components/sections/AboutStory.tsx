@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { gsap, SplitText, ScrollTrigger } from "@/lib/gsap";
+import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { useScrubbedHighlight } from "@/lib/useHeaderReveal";
 import { aboutStory } from "@/data/about";
 
 /**
@@ -69,44 +70,15 @@ function StoryBody() {
 export default function AboutStory() {
   const ref = useRef<HTMLElement>(null);
 
+  // Story text brightens word-by-word as it scrolls through the viewport.
+  useScrubbedHighlight(ref);
+
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
 
     const ctx = gsap.context(() => {
       const element = el.querySelector<HTMLElement>("#highlighted-text");
-      if (element) {
-        // Split into words then characters (chars are easier to stagger
-        // across a scrub), and brighten each char from 20% to 100% as the
-        // text scrolls through the viewport.
-        const splitWords = new SplitText(element, { type: "words" });
-        const allChars: Element[] = [];
-        splitWords.words.forEach((word) => {
-          const wrapper = document.createElement("span");
-          wrapper.style.display = "inline-block";
-          const wordClone = word.cloneNode(true);
-          wrapper.appendChild(wordClone);
-          word.parentNode?.replaceChild(wrapper, word);
-          const splitChars = new SplitText(wordClone as HTMLElement, {
-            type: "chars",
-          });
-          allChars.push(...splitChars.chars);
-        });
-        gsap.fromTo(
-          allChars,
-          { opacity: 0.2 },
-          {
-            opacity: 1,
-            stagger: 0.05,
-            scrollTrigger: {
-              trigger: element,
-              start: "top 80%",
-              end: "bottom 50%",
-              scrub: 0.3,
-            },
-          },
-        );
-      }
 
       // Keep the year number in place while the section scrolls.
       ScrollTrigger.create({
