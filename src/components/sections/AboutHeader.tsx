@@ -205,7 +205,7 @@ export default function AboutHeader() {
                           data-audio={audio.scramble}
                           href={aboutHeader.badgeLink}
                           target="_blank"
-                          className="badge-link w-inline-block"
+                          className="badge-link"
                         >
                           <CredentialIcon />
                           <div className="text-size-small text-weight-medium text-style-allcaps">

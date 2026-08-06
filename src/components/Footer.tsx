@@ -156,7 +156,7 @@ export default function Footer() {
                           <a
                             href={socials.github}
                             target="_blank"
-                            className="badge-link w-inline-block"
+                            className="badge-link"
                             data-audio={audio.scramble}
                           >
                             <CredentialIcon />

@@ -118,6 +118,7 @@ export function CredentialBadge({
       target="_blank"
       aria-label={label}
       className="badge-link"
+      style={{ display: "flex", flexDirection: "row", alignItems: "center" }}
     >
       <CredentialIcon />
       <div className="text-size-small text-weight-medium text-style-allcaps">

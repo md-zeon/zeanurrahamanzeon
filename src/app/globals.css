@@ -427,7 +427,7 @@ input[type="file"]:focus-visible {
   }
 
   .badge-link {
-    @apply flex flex-none items-center justify-start gap-1 py-1 text-brand-white no-underline;
+    @apply flex flex-row flex-none items-center justify-start gap-1 py-1 text-brand-white no-underline;
   }
 
   .frame {

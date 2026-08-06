@@ -123,7 +123,7 @@ export default function CaseStudyHeader({
                           data-audio={audio.scramble}
                           href={badgeLink}
                           target="_blank"
-                          className="badge-link w-inline-block"
+                          className="badge-link"
                         >
                           <CredentialIcon />
                           <div className="text-caption-1">{badge}</div>

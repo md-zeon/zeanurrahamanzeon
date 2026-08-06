@@ -86,7 +86,7 @@ export default function WorkHeader() {
                           data-audio={audio.scramble}
                           href={workHeader.badgeLink}
                           target="_blank"
-                          className="badge-link w-inline-block"
+                          className="badge-link"
                         >
                           <CredentialIcon />
                           <div className="text-caption-1">
