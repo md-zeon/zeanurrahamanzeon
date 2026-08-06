@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { gsap, SplitText } from "@/lib/gsap";
 import { testimonials } from "@/data/home";
+import { audio } from "@/data/site";
 import LogosElement from "../LogosElement";
 
 /**
@@ -276,7 +277,7 @@ export default function TestimonialsSection() {
                 {testimonials.map((item, i) => (
                   <a
                     key={i}
-                    data-audio="https://bjornflow-assets.b-cdn.net/Audio/secondary%20hover%20sound.wav"
+                    data-audio={audio.secondaryHover}
                     href="#"
                     className={`testimonial_nav-wrapper flex aspect-[1.3] items-center justify-center border border-white-20 bg-[#efefe600] backdrop-blur-[100px] transition-all duration-200 max-[991px]:min-h-28 max-[767px]:min-h-24 max-[479px]:min-h-[30vw] ${i === 0 ? "rounded-l is-first is-active" : i === testimonials.length - 1 ? "rounded-r is-last" : ""} w-inline-block`}
                   >

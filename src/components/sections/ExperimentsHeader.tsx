@@ -2,7 +2,7 @@ import { experimentsHeader } from "@/data/experiments";
 import { workHeader } from "@/data/work";
 import { audio } from "@/data/site";
 import Link from "next/link";
-import { Asterisk, WebflowLogo } from "../shared";
+import { Asterisk, CredentialIcon } from "../shared";
 
 /**
  * Experiments page hero: stacked two-line title, intro paragraph, and two
@@ -109,7 +109,7 @@ export default function ExperimentsHeader() {
                           target="_blank"
                           className="badge-link w-inline-block"
                         >
-                          <WebflowLogo />
+                          <CredentialIcon />
                           <div className="text-size-small text-weight-medium text-style-allcaps">
                             {workHeader.badge}
                           </div>

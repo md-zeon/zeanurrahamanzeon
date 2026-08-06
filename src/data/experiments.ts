@@ -1,9 +1,9 @@
 /** Copy for the experiments page hero header. */
 export const experimentsHeader = {
   title1: "Experiments",
-  title2: "& Clonables",
+  title2: "& Side Projects",
   paragraph:
-    "A growing collection of Webflow experiments and clonables built to test ideas, push animation boundaries, and share new techniques with the community.",
+    "A growing collection of side projects, open-source tools, and motion experiments — exploring full-stack patterns, real-time features, and creative interactions.",
   button1: "Get in touch",
   button2: "See case studies",
 };
@@ -12,50 +12,50 @@ export const experimentsHeader = {
 export const experimentsStack = [
   {
     index: "Experiment_001",
-    title: "Spaceman",
+    title: "DevTrack",
     video: "/assets/videos/Videos/Experiments/spaceman-gsap---new-thumbnail.mp4",
-    href: "https://spaceman-gsap.webflow.io/",
+    href: "https://devtrack-gamma.vercel.app",
   },
   {
     index: "Experiment_002",
-    title: "Noirve",
+    title: "HistoTrack",
     video: "/assets/videos/Videos/Experiments/noirve---new-thumbnail.mp4",
-    href: "https://noirve.webflow.io/",
+    href: "https://histo-track.web.app",
   },
   {
     index: "Experiment_003",
-    title: "Pitch",
+    title: "Taskero",
     video: "/assets/videos/Videos/Experiments/pitch---new-thumbnail.mp4",
-    href: "https://pitch-rebuild.webflow.io/",
+    href: "https://github.com/md-zeon",
   },
   {
     index: "Experiment_004",
-    title: "Plink",
+    title: "MicroEarn",
     video: "/assets/videos/Videos/Experiments/plink---new-thumbnail.mp4",
-    href: "https://plink-rebuild.webflow.io/",
+    href: "https://micro-earn-7be08.web.app",
   },
 ];
 
-/** Clonable cards (project_005..007) shown in the "Clonables" grid. */
+/** Side-project cards (project_005..007) shown in the "Side projects" grid. */
 export const experimentsCards = [
   {
     index: "project_005",
-    title: "Bertani",
-    href: "https://bertani-rebuild.webflow.io/",
+    title: "GSAP Scroll Lab",
+    href: "https://github.com/md-zeon",
     poster: "/assets/videos/Videos/Experiments/thumbnails/bertani---new-thumbnail.webp",
     video: "/assets/videos/Videos/Experiments/bertani---new-thumbnail.mp4",
   },
   {
     index: "project_006",
-    title: "Battlefield 4",
-    href: "https://battlefield-4-webflow-rebuild.webflow.io/",
+    title: "Motion Playground",
+    href: "https://github.com/md-zeon",
     poster: "/assets/videos/Videos/Experiments/thumbnails/battlefield---new-thumbnail.webp",
     video: "/assets/videos/Videos/Experiments/battlefield-4---new-thumbnail.mp4",
   },
   {
     index: "project_007",
-    title: "Scrambled Pizza Chaos",
-    href: "https://scrambled-pizza-chaos.webflow.io/",
+    title: "Scramble Text Demo",
+    href: "https://github.com/md-zeon",
     poster: "/assets/videos/Videos/Experiments/thumbnails/pizza---new-thumbnail.webp",
     video: "/assets/videos/Videos/Experiments/scramble-pizza-chaos---new-thumbnail.mp4",
   },

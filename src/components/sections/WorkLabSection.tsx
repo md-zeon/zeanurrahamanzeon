@@ -9,7 +9,7 @@ import LogosElement from "../LogosElement";
 import AutoVideo from "../media/AutoVideo";
 import { Button } from "../shared";
 
-/** Arrow glyph used in the "View clonable" buttons. */
+/** Arrow glyph used in the "View project" buttons. */
 function ArrowIcon() {
   return (
     <div className="btn__icon w-embed">
@@ -32,10 +32,10 @@ function ArrowIcon() {
 }
 
 /**
- * "From the labs" slider on the work page — a 2-up carousel of clonables
+ * "From the labs" slider on the work page — a 2-up carousel of side projects
  * driven by `useLabSlider` via the `data-slider="list" / slide /
  * button-prev / button-next` attributes, with a step/total counter. Each
- * slide links out to the live clonable with a looped video preview.
+ * slide links out to the live project with a looped video preview.
  */
 export default function WorkLabSection() {
   const ref = useRef<HTMLElement>(null);
@@ -167,7 +167,7 @@ export default function WorkLabSection() {
                 </div>
               </div>
             </div>
-            {/* Slide track: two clonable slides side-by-side per page */}
+              {/* Slide track: two side-project slides side-by-side per page */}
             <div
               data-slider="list"
               className="relative flex border-x border-border-tertiary"
@@ -198,7 +198,7 @@ export default function WorkLabSection() {
                         </div>
                       </div>
                     </a>
-                    {/* Overlay: title + "View clonable" action */}
+                    {/* Overlay: title + "View project" action */}
                     <div className="absolute inset-0 z-2 flex items-end justify-start p-4">
                       <h3 className="heading-style-h4">{slide.title}</h3>
                       <a
@@ -208,7 +208,7 @@ export default function WorkLabSection() {
                         rel="noopener noreferrer"
                         className="btn btn-secondary btn-small btn-icon"
                       >
-                        <div className="btn__text">View clonable</div>
+                        <div className="btn__text">View project</div>
                         <ArrowIcon />
                       </a>
                     </div>

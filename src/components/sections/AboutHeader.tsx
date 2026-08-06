@@ -5,7 +5,7 @@ import Link from "next/link";
 import { gsap, SplitText } from "@/lib/gsap";
 import { aboutHeader } from "@/data/about";
 import { audio } from "@/data/site";
-import { Asterisk, WebflowLogo } from "../shared";
+import { Asterisk, CredentialIcon } from "../shared";
 import AutoVideo from "../media/AutoVideo";
 
 /**
@@ -203,11 +203,11 @@ export default function AboutHeader() {
                         </div>
                         <a
                           data-audio={audio.scramble}
-                          href="https://webflow.com/@bjorn-encutescu"
+                          href={aboutHeader.badgeLink}
                           target="_blank"
                           className="badge-link w-inline-block"
                         >
-                          <WebflowLogo />
+                          <CredentialIcon />
                           <div className="text-size-small text-weight-medium text-style-allcaps">
                             {aboutHeader.badge}
                           </div>

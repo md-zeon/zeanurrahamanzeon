@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { featuredProjects } from "@/data/home";
+import { audio } from "@/data/site";
 import AutoVideo from "../media/AutoVideo";
 
 /**
@@ -331,7 +332,7 @@ export default function HomeProjects() {
         {featuredProjects.map((project, i) => (
           <a
             key={project.index}
-            data-audio="https://bjornflow-assets.b-cdn.net/Audio/secondary%20hover%20sound.wav"
+            data-audio={audio.secondaryHover}
             data-project={i + 1}
             href="#"
             className={`home-projects_nav-wrapper is-${i + 1} w-inline-block flex flex-col items-start justify-start gap-1 text-brand-white no-underline`}
@@ -350,11 +351,11 @@ export default function HomeProjects() {
       <div className="home-projects_banner-component absolute bottom-8 left-8 z-3 flex w-full max-w-100 flex-col gap-4 rounded border border-white-20 bg-black-30 p-6 shadow-[inset_0_0_0_1000px_#0a090e33] backdrop-blur-[100px] max-[767px]:bottom-16 max-[767px]:gap-6 max-[767px]:p-4 max-[479px]:bottom-[12%] max-[479px]:left-[4%] max-[479px]:w-[90%]">
         <div className="flex-none">
           <div className="heading-style-h3 block max-w-full max-h-24 overflow-hidden whitespace-normal wrap-break-word min-[992px]:max-h-16">
-            Plus X Innovation
+            Smart NUB Campus
           </div>
           <div className="text-size-regular block max-w-full max-h-24 overflow-hidden whitespace-normal wrap-break-word min-[992px]:max-h-16">
-            Helped the marketing team migrate to Webflow, optimise SEO, and
-            scale their site with a flexible CMS.
+            A real-time academic collaboration network — messaging, study
+            groups, gamified learning, and an AI assistant for campus life.
           </div>
         </div>
         <div className="btn-group">

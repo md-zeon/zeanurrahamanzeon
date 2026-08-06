@@ -4,10 +4,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { gsap, Observer } from "@/lib/gsap";
-import { navLinks, brand, socials } from "@/data/site";
+import { navLinks, brand, socials, audio } from "@/data/site";
 import SoundButton from "./SoundButton";
 import Clock from "./Clock";
-import { WebflowBadge } from "./shared";
+import { CredentialBadge } from "./shared";
 
 /**
  * Fixed site header with two distinct states:
@@ -380,7 +380,7 @@ export default function Navbar() {
                 <Link
                   href="/"
                   aria-current={isActive("/") ? "page" : undefined}
-                  data-audio="https://bjornflow-assets.b-cdn.net/Audio/buttons%20scramble.wav"
+                  data-audio={audio.scramble}
                   className="navbar_logo-link flex w-nav-brand flex-row pl-0"
                 >
                   <Logo />
@@ -398,7 +398,7 @@ export default function Navbar() {
                     href={link.href}
                     aria-current={isActive(link.href) ? "page" : undefined}
                     data-color="#ffffff"
-                    data-audio="https://bjornflow-assets.b-cdn.net/Audio/button%20hover.wav"
+                    data-audio={audio.hover}
                     className="navbar_link relative z-1 flex items-center justify-center gap-2 rounded-full px-5 py-[0.6rem] text-brand-white desktop:cursor-pointer desktop:px-6 desktop:static max-[991px]:py-3 max-[991px]:text-center max-[991px]:text-[1.125rem] w-inline-block"
                   >
                     <div className="text-size-small text-weight-normal text-style-allcaps">
@@ -430,8 +430,8 @@ export default function Navbar() {
 
         <a
           href="#"
-          data-audio-click="https://bjornflow-assets.b-cdn.net/Audio/close-menu.wav"
-          data-audio="https://bjornflow-assets.b-cdn.net/Audio/button%20hover.wav"
+          data-audio-click={audio.closeMenu}
+          data-audio={audio.hover}
           className="navbar_h-menu-button fixed right-6 top-3 z-9999 flex items-center justify-center rounded-full border border-white-20 bg-black-30 p-2 shadow-[inset_0_0_0_1000px_#0a090e33] backdrop-blur-[100px] desktop:hidden desktop:top-6 max-[767px]:right-4 max-[767px]:top-[0.8rem] w-inline-block"
           onClick={toggleMenu}
           aria-label={menuOpen ? "Close menu" : "Open menu"}
@@ -461,7 +461,7 @@ export default function Navbar() {
             <div className="absolute left-6 top-6 flex flex-col overflow-hidden pb-[0.2rem]">
               <Link
                 href="/"
-                data-audio="https://bjornflow-assets.b-cdn.net/Audio/buttons%20scramble.wav"
+                data-audio={audio.scramble}
                 className="navbar_logo-link flex w-nav-brand flex-row pl-0"
               >
                 <Logo />
@@ -476,7 +476,7 @@ export default function Navbar() {
                   onClick={closeMenu}
                   data-menu-tab={link.href.replace("/", "")}
                   data-color="#ffffff"
-                  data-audio="https://bjornflow-assets.b-cdn.net/Audio/button%20hover.wav"
+                  data-audio={audio.hover}
                   className="navbar_h-link relative z-1 flex items-start justify-start gap-3 overflow-hidden px-0 py-0 text-brand-white font-features-['ss01'_on] max-[991px]:pr-1 w-inline-block"
                 >
                   <div
@@ -519,7 +519,7 @@ export default function Navbar() {
                 </div>
               </div>
               <div menu-link="misc">
-                <WebflowBadge href={socials.webflowPartner} />
+                <CredentialBadge href={socials.github} />
               </div>
               <div
                 menu-link="misc"

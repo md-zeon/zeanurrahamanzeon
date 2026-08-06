@@ -18,7 +18,7 @@ import { Button } from "../shared";
  * `useSectionHeadings` animates the heading.
  */
 
-/** Diagonal arrow used on the "View clonable" buttons. */
+/** Diagonal arrow used on the "View project" buttons. */
 function ArrowIcon() {
   return (
     <div className="btn__icon w-embed">
@@ -211,7 +211,7 @@ export default function LabSection() {
                           rel="noopener noreferrer"
                           className="btn btn-secondary btn-small btn-icon"
                         >
-                          <div className="btn__text">View clonable</div>
+                          <div className="btn__text">View project</div>
                           <ArrowIcon />
                         </a>
                       </div>

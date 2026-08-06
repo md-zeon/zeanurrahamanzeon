@@ -5,13 +5,13 @@ import ExperimentsCards from "@/components/sections/ExperimentsCards";
 import CtaSection from "@/components/sections/CtaSection";
 
 export const metadata: Metadata = {
-  title: "Experiments & Clonables",
+  title: "Experiments & Side Projects",
   description:
-    "A curated collection of experiments, creative coding, and Webflow clonables where I push the limits of interactions, motion, and the web platform.",
+    "A growing collection of side projects, open-source tools, and motion experiments exploring full-stack patterns, real-time features, and creative interactions.",
 };
 
 /**
- * Experiments page: hero, pinned 3D carousel of experiments, clonables
+ * Experiments page: hero, pinned 3D carousel of side projects, side-project
  * grid, and closing CTA.
  */
 export default function Experiments() {

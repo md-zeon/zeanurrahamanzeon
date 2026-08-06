@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import { gsap, SplitText } from "@/lib/gsap";
 import { brand, socials } from "@/data/site";
-import { Button, WebflowBadge, Asterisk } from "../shared";
+import { Button, CredentialBadge, Asterisk } from "../shared";
 import AutoVideo from "../media/AutoVideo";
 
 // Elements animated by the final fade-in step (name/header blocks, video,
@@ -204,7 +204,7 @@ export default function HeroSection() {
                         <div className="badge__line">
                           <div className="badge__line-bg" />
                         </div>
-                        <WebflowBadge href={socials.webflowPartner} />
+                        <CredentialBadge href={socials.github} />
                       </div>
                       <div
                         data-hero-fade="cta"

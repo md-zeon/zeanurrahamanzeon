@@ -7,7 +7,7 @@ import WorkLabSection from "@/components/sections/WorkLabSection";
 export const metadata: Metadata = {
   title: "Work",
   description:
-    "A curated collection of web design and Webflow development projects crafted with strategy, design, and development in one process.",
+    "Full-stack projects built with Next.js, React, TypeScript, and Node.js — from developer tools and health marketplaces to real-time campus networks.",
 };
 
 /** Work page: hero, project grid, CTA, and "from the labs" slider. */

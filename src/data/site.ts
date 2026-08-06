@@ -4,13 +4,13 @@ export const brand = {
   logoStart: "zeanur",
   logoEnd: "rahaman",
   heroName: "Hi, I'm Zeanur Rahaman Zeon",
-  heroLine1: "Strategic",
+  heroLine1: "Full-Stack",
   heroLine2: "Software",
   heroLine3: "Engineer",
   heroIntro:
     "Full Stack Software Engineer specializing in React, Next.js, TypeScript, Node.js, and scalable web applications. I enjoy building performant products, solving real-world problems, and creating intuitive user experiences.",
   heroVideo: "/assets/videos/hero-clip-vid.mp4",
-  heroVideoCaption: "VIDEO_459",
+  heroVideoCaption: "HELLO_ZEON",
 };
 
 /** Sound-effect URLs referenced by `data-audio` attributes site-wide. */
@@ -49,32 +49,32 @@ export const navLinks = [
 /** External social/profile links used across headers and footer. */
 export const socials = {
   linkedin: "https://www.linkedin.com/in/zeanur-rahaman-zeon/",
+  github: "https://github.com/md-zeon",
   youtube: "https://www.youtube.com/@",
   instagram: "https://www.instagram.com/",
   twitter: "https://x.com/developer_zeon",
-  webflowPartner: "https://webflow.com/",
-  webflowClonables: "https://webflow.com/@zeon",
-  awwwards: "https://www.awwwards.com/",
+  email: "mailto:zeon.cse@gmail.com",
+  oldPortfolio: "https://zeon-portfolio.netlify.app/",
 };
 
 /** Footer link groups: overview, case studies, and connect lists. */
 export const footer = {
   overview: navLinks,
   caseStudies: [
-    { label: "Plus x Innovation", href: "/work/plus-x-innovation" },
-    { label: "Appetite", href: "/work/appetite" },
-    { label: "Lendhub", href: "/work/lendhub" },
-    { label: "upkeep", href: "/work/upkeep" },
+    { label: "Smart NUB Campus", href: "/work/smart-nub-campus" },
+    { label: "DevQnA", href: "/work/devqna" },
+    { label: "Oshudpati Marketplace", href: "/work/oshudpati-marketplace" },
+    { label: "MicroEarn", href: "/work/microearn" },
   ],
   connect: [
     { label: "linkedin", href: socials.linkedin },
-    { label: "YouTube", href: socials.youtube },
-    { label: "instagram", href: socials.instagram },
+    { label: "GitHub", href: socials.github },
     { label: "Twitter", href: socials.twitter },
+    { label: "email", href: socials.email },
   ],
   connectMore: [
-    { label: "webflow partner", href: socials.webflowPartner },
-    { label: "webflow clonables", href: socials.webflowClonables },
-    { label: "AWWWARDS", href: socials.awwwards },
+    { label: "old portfolio", href: socials.oldPortfolio },
+    { label: "YouTube", href: socials.youtube },
+    { label: "instagram", href: socials.instagram },
   ],
 };

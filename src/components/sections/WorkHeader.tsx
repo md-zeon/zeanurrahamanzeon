@@ -1,6 +1,6 @@
 import { workHeader } from "@/data/work";
 import { audio } from "@/data/site";
-import { Asterisk, WebflowLogo } from "../shared";
+import { Asterisk, CredentialIcon } from "../shared";
 
 /**
  * Work page hero: oversized title (with italic word), intro paragraph, a
@@ -88,7 +88,7 @@ export default function WorkHeader() {
                           target="_blank"
                           className="badge-link w-inline-block"
                         >
-                          <WebflowLogo />
+                          <CredentialIcon />
                           <div className="text-caption-1">
                             {workHeader.badge}
                           </div>

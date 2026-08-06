@@ -7,30 +7,29 @@ import { audio, brand, footer, socials } from "@/data/site";
 import Clock from "./Clock";
 
 /**
- * Site footer: link columns, logo, Webflow badge, copyright + live clock.
+ * Site footer: link columns, logo, credential badge, copyright + live clock.
  *
  * Two behaviours live here: the copyright year is kept current, and every
  * `.footer_link` label scrambles between binary text on hover (left-to-right
  * on enter, right-to-left on leave) — same effect family as the buttons.
  */
 
-/** Inline Webflow "w" logo mark (local copy used by the badge). */
-function WebflowLogo() {
+/** Inline credential mark (neutral asterisk glyph, local copy). */
+function CredentialIcon() {
   return (
     <div className="icon-embed-xxsmall" aria-hidden="true">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="100%"
         height="100%"
-        viewBox="0 0 16 10"
+        viewBox="0 0 16 17"
         fill="none"
         preserveAspectRatio="xMidYMid meet"
       >
         <path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M16.0004 0L10.9622 10H6.22988L8.33836 5.85558H8.24379C6.50429 8.14825 3.90892 9.6575 0.210938 10V5.91292C0.210938 5.91292 2.57662 5.77108 3.96735 4.2865H0.210938V7.51019e-05H4.43273V3.52558L4.5275 3.52525L6.25266 7.51019e-05H9.44554V3.50325L9.54027 3.50308L11.3302 0H16.0004Z"
-          fill="currentColor"
+          d="M2.41002 14.2237L13.7237 2.91001M0 8.54529H16M8.0453 16.5V0.5M2.36688 2.91001L13.6806 14.2237"
+          stroke="currentColor"
+          strokeWidth="1.5"
         />
       </svg>
     </div>
@@ -154,14 +153,14 @@ export default function Footer() {
                     <div className="flex w-full max-w-104 flex-col items-stretch justify-end gap-1 pr-[0.2rem] max-[991px]:w-[28vw] max-[767px]:w-auto max-[767px]:max-w-none">
                       <div className="text-right">
                         <a
-                          href={socials.webflowPartner}
+                          href={socials.github}
                           target="_blank"
                           className="badge-link w-inline-block"
                           data-audio={audio.scramble}
                         >
-                          <WebflowLogo />
+                          <CredentialIcon />
                           <div className="text-size-small text-weight-medium text-style-allcaps">
-                            Webflow Certified Partner
+                            Open to Work
                           </div>
                         </a>
                       </div>

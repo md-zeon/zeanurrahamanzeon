@@ -6,7 +6,7 @@ import { experimentsStack } from "@/data/experiments";
 import { audio } from "@/data/site";
 import AutoVideo from "../media/AutoVideo";
 
-/** Arrow glyph used in the banner's "View clonable" button. */
+/** Arrow glyph used in the banner's "View project" button. */
 function ArrowIcon() {
   return (
     <div className="btn__icon w-embed">
@@ -366,7 +366,7 @@ export default function ExperimentsProjects() {
             rel="noopener noreferrer"
             className="btn btn-small btn-icon"
           >
-            <div className="btn__text">View clonable</div>
+            <div className="btn__text">View project</div>
             <ArrowIcon />
           </a>
         </div>

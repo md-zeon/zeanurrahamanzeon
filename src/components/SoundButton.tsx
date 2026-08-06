@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useSyncExternalStore } from "react";
 import lottie, { type AnimationItem } from "lottie-web";
-import { soundWaves } from "@/data/site";
+import { soundWaves, audio } from "@/data/site";
 import {
   setSoundEnabled,
   toggleMusic,
@@ -59,7 +59,7 @@ export default function SoundButton() {
 
   return (
     <a
-      data-audio="https://bjornflow-assets.b-cdn.net/Audio/button%20hover.wav"
+      data-audio={audio.hover}
       href="#"
       onClick={handleClick}
       className="navbar_sound-button relative flex items-center justify-start gap-1 rounded-[0.25rem] border border-transparent pl-3 no-underline w-inline-block"

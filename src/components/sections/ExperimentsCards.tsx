@@ -2,7 +2,7 @@ import { experimentsCards } from "@/data/experiments";
 import { audio } from "@/data/site";
 import AutoVideo from "../media/AutoVideo";
 
-/** Small arrow glyph used in the "View clonable" buttons. */
+/** Small arrow glyph used in the "View project" buttons. */
 function ArrowIcon() {
   return (
     <div className="btn__icon w-embed">
@@ -24,16 +24,16 @@ function ArrowIcon() {
   );
 }
 
-// Only the "clonable" experiment cards (project_005..007) appear on the
-// experiments page; the rest belong to the work page grid.
-const clonableCards = experimentsCards.filter(
+// Only the side-project cards (project_005..007) appear on the experiments
+// page; the rest belong to the work page grid.
+const sideProjectCards = experimentsCards.filter(
   (card) => card.index >= "project_005" && card.index <= "project_007",
 );
 
 /**
- * "Clonables" grid — two-column row of experiment cards. Each card shows a
+ * "Side projects" grid — two-column row of experiment cards. Each card shows a
  * looped video (with a page-parallax target on the asset) and a "View
- * clonable" button linking out.
+ * project" button linking out.
  */
 export default function ExperimentsCards() {
   return (
@@ -49,7 +49,7 @@ export default function ExperimentsCards() {
             <div className="work-projects_content relative grid auto-cols-fr grid-cols-2 gap-0 border-x border-t border-white-20 max-[767px]:grid-cols-1">
               {/* Center hairline splitting the two columns */}
               <div className="work-projects_content-divider absolute left-1/2 z-3 h-full w-px -ml-px bg-white-20 max-[767px]:hidden" />
-              {clonableCards.map((card) => (
+              {sideProjectCards.map((card) => (
                 <div
                   key={card.index}
                   className="work-projects_card-layout relative z-1 flex w-full flex-none flex-col gap-4 border-b border-white-20 p-[2rem_1rem] max-[767px]:py-4"
@@ -81,7 +81,7 @@ export default function ExperimentsCards() {
                           rel="noopener noreferrer"
                           className="btn btn-secondary btn-small btn-icon"
                         >
-                          <div className="btn__text">View clonable</div>
+                          <div className="btn__text">View project</div>
                           <ArrowIcon />
                         </a>
                       </div>

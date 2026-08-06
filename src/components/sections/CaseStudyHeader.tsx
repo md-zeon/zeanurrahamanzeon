@@ -1,5 +1,5 @@
 import { audio } from "@/data/site";
-import { Asterisk, WebflowLogo } from "../shared";
+import { Asterisk, CredentialIcon } from "../shared";
 
 type CaseStudyHeaderProps = {
   title: string;
@@ -125,7 +125,7 @@ export default function CaseStudyHeader({
                           target="_blank"
                           className="badge-link w-inline-block"
                         >
-                          <WebflowLogo />
+                          <CredentialIcon />
                           <div className="text-caption-1">{badge}</div>
                         </a>
                       </div>

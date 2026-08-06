@@ -1,4 +1,5 @@
 import type { CaseBlock, CaseMedia, CaseStudy } from "@/data/caseStudies";
+import { audio } from "@/data/site";
 import AutoVideo from "../media/AutoVideo";
 
 type CaseStudyBlocksProps = {
@@ -156,7 +157,7 @@ function Info({ study }: { study: CaseStudy }) {
                 </div>
               </div>
               <a
-                data-audio="https://bjornflow-assets.b-cdn.net/Audio/button%20hover.wav"
+                data-audio={audio.hover}
                 href={study.info.websiteUrl}
                 target="_blank"
                 className="btn btn-secondary btn-icon"

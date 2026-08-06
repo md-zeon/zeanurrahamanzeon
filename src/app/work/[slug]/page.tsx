@@ -13,7 +13,12 @@ type Props = {
 
 /** Statically pre-renders the known case study slugs at build time. */
 export function generateStaticParams() {
-  return [{ slug: "plus-x-innovation" }];
+  return [
+    { slug: "smart-nub-campus" },
+    { slug: "devqna" },
+    { slug: "oshudpati-marketplace" },
+    { slug: "microearn" },
+  ];
 }
 
 /** Page metadata comes from the matched case study. */

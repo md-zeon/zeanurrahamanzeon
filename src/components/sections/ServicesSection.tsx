@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { services } from "@/data/home";
+import { audio } from "@/data/site";
 import { useSectionHeadings } from "@/lib/useHeaderReveal";
 import LogosElement from "../LogosElement";
 
@@ -62,7 +63,7 @@ export default function ServicesSection() {
               {services.map((service, i) => (
                 <div
                   key={service.index}
-                  data-audio="https://bjornflow-assets.b-cdn.net/Audio/Card%20Hover.wav"
+                  data-audio={audio.cardHover}
                   className="relative flex h-146.5 flex-col items-stretch justify-between overflow-hidden rounded-lg border border-white-20 bg-[#efefe60d] p-[2.5rem_2.5rem_2.5rem_2rem] backdrop-blur-[100px] transform-3d transition-all duration-200 ease-out max-[991px]:h-auto max-[991px]:gap-16 max-[991px]:px-0 max-[991px]:py-8 max-[767px]:gap-8"
                 >
                   <div className="relative z-2 flex flex-col gap-2 max-[991px]:px-8 max-[767px]:px-6 max-[767px]:gap-y-[0.3rem]">
@@ -91,7 +92,6 @@ export default function ServicesSection() {
                   <div className="absolute inset-y-0 right-0 z-1 flex w-[40%] items-center justify-center overflow-hidden max-[991px]:relative max-[991px]:inset-auto max-[991px]:bottom-0 max-[991px]:hidden max-[991px]:w-full">
                     <div
                       data-us-lazyload="true"
-                      data-us-project={service.usProject}
                       className="z-2 h-[110%] w-[110%] flex-none object-cover object-[0%_0%]"
                     >
                       <video
