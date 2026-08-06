@@ -20,7 +20,7 @@ export default function SiteShell({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const rootRef = useRef<HTMLDivElement>(null);
 
-  // Button scramble/magnetic effects for all `.btn` elements (dynamic too).
+  // Scramble/magnetic effects for `.btn` and `.badge-link` elements (dynamic too).
   useButtonEffects();
 
   // Global sound delegation: any element with `data-audio` plays a hover

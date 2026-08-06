@@ -51,6 +51,25 @@ export default function Footer() {
     if (!el) return;
 
     const ctx = gsap.context(() => {
+      // Scramble the logo's second word ("rahamanzeon") on hover, matching
+      // the navbar behaviour.
+      el.querySelectorAll<HTMLElement>(".navbar_logo-link").forEach((link) => {
+        const logo = link.querySelector<HTMLElement>(".navbar_logo.is-animation");
+        if (!logo) return;
+        const onEnter = () =>
+          gsap.to(logo, {
+            duration: 0.5,
+            scrambleText: { text: brand.logoEnd, chars: "1101011101", speed: 0.3 },
+          });
+        const onLeave = () =>
+          gsap.to(logo, {
+            duration: 0.5,
+            scrambleText: { text: brand.logoEnd, chars: "1101011101", speed: 0.3 },
+          });
+        link.addEventListener("mouseenter", onEnter);
+        link.addEventListener("mouseleave", onLeave);
+      });
+
       el.querySelectorAll<HTMLElement>(".footer_link").forEach((link) => {
         const textElement = link.querySelector<HTMLElement>(".text-size-small");
         if (!textElement) return;
