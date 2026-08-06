@@ -12,8 +12,9 @@ import LogosElement from "../LogosElement";
  *
  * On scroll the quote reveals line-by-line (each line wrapped in an
  * overflow-hidden box), the photo/name/role scramble-fade in, and the nav
- * slides up. Clicking a logo swaps the quote/name/role/photo with a
- * slide-out + slide-in transition.
+ * slides up. Clicking a logo tile, the prev/next arrows, or letting the
+ * 6s auto-advance tick swaps the quote/name/role/photo with a slide-out +
+ * slide-in transition.
  */
 export default function TestimonialsSection() {
   const ref = useRef<HTMLElement>(null);
@@ -25,6 +26,7 @@ export default function TestimonialsSection() {
     if (!el) return;
 
     const ctx = gsap.context(() => {
+      const cleanups: Array<() => void> = [];
       const quoteElement = el.querySelector<HTMLElement>("#testimonial-quote");
       const marksElement = el.querySelector<HTMLElement>("#testimonial-marks");
       const nameElement = el.querySelector<HTMLElement>("#testimonial-name");
@@ -191,10 +193,15 @@ export default function TestimonialsSection() {
       };
 
       el.querySelectorAll(".testimonial_nav-wrapper").forEach((nav, index) => {
-        nav.addEventListener("click", (event) => {
+        const onClick = (event: Event) => {
           event.preventDefault();
-          switchTo(index);
-        });
+          if (index !== currentIndexRef.current) {
+            switchTo(index);
+            resetTimer();
+          }
+        };
+        nav.addEventListener("click", onClick);
+        cleanups.push(() => nav.removeEventListener("click", onClick));
         // Hover feedback: brighten the logo tile, restoring the active state
         // on leave.
         const onEnter = () =>
@@ -213,7 +220,82 @@ export default function TestimonialsSection() {
           });
         nav.addEventListener("mouseenter", onEnter);
         nav.addEventListener("mouseleave", onLeave);
+        cleanups.push(() => {
+          nav.removeEventListener("mouseenter", onEnter);
+          nav.removeEventListener("mouseleave", onLeave);
+        });
       });
+
+      // Prev/next arrows wrap around the testimonial list.
+      const total = testimonials.length;
+      const prevButton = el.querySelector<HTMLElement>(
+        "[data-testimonial-prev]",
+      );
+      const nextButton = el.querySelector<HTMLElement>(
+        "[data-testimonial-next]",
+      );
+      const goTo = (delta: number) => {
+        const next = (currentIndexRef.current + delta + total) % total;
+        if (next === currentIndexRef.current) return;
+        switchTo(next);
+        resetTimer();
+      };
+      const onPrev = (e: Event) => {
+        e.preventDefault();
+        goTo(-1);
+      };
+      const onNext = (e: Event) => {
+        e.preventDefault();
+        goTo(1);
+      };
+      prevButton?.addEventListener("click", onPrev);
+      nextButton?.addEventListener("click", onNext);
+      cleanups.push(() => {
+        prevButton?.removeEventListener("click", onPrev);
+        nextButton?.removeEventListener("click", onNext);
+      });
+      // Light hover feedback on the arrows, matching the slider controls.
+      [prevButton, nextButton].forEach((btn) => {
+        if (!btn) return;
+        const onEnter = () =>
+          gsap.to(btn, {
+            scale: 1.15,
+            opacity: 0.8,
+            duration: 0.25,
+            ease: "expo.out",
+          });
+        const onLeave = () =>
+          gsap.to(btn, {
+            scale: 1,
+            opacity: 1,
+            duration: 0.25,
+            ease: "expo.out",
+          });
+        btn.addEventListener("mouseenter", onEnter);
+        btn.addEventListener("mouseleave", onLeave);
+        cleanups.push(() => {
+          btn.removeEventListener("mouseenter", onEnter);
+          btn.removeEventListener("mouseleave", onLeave);
+        });
+      });
+
+      // Auto-advance every 6s, paused while the section is hovered.
+      let timer = window.setInterval(() => goTo(1), 6000);
+      const resetTimer = () => {
+        window.clearInterval(timer);
+        timer = window.setInterval(() => goTo(1), 6000);
+      };
+      const pause = () => window.clearInterval(timer);
+      const resume = () => resetTimer();
+      el.addEventListener("mouseenter", pause);
+      el.addEventListener("mouseleave", resume);
+      cleanups.push(() => {
+        el.removeEventListener("mouseenter", pause);
+        el.removeEventListener("mouseleave", resume);
+        window.clearInterval(timer);
+      });
+
+      return () => cleanups.forEach((fn) => fn());
     }, el);
 
     return () => ctx.revert();
@@ -288,10 +370,82 @@ export default function TestimonialsSection() {
                         </div>
                       </div>
                     </div>
+                    <div className="ml-auto flex items-center gap-2">
+                      <a
+                        data-testimonial-prev
+                        data-audio={audio.hover}
+                        href="#"
+                        aria-label="Previous testimonial"
+                        className="w-inline-block"
+                      >
+                        <div className="icon-embed-medium w-embed">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="100%"
+                            height="100%"
+                            viewBox="0 0 48 49"
+                            fill="none"
+                            preserveAspectRatio="xMidYMid meet"
+                            aria-hidden="true"
+                            role="img"
+                          >
+                            <path
+                              d="M38 24.7002H10"
+                              stroke="currentColor"
+                              strokeWidth="1.5"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                            <path
+                              d="M24 38.7002L10 24.7002L24 10.7002"
+                              stroke="currentColor"
+                              strokeWidth="1.5"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        </div>
+                      </a>
+                      <a
+                        data-testimonial-next
+                        data-audio={audio.hover}
+                        href="#"
+                        aria-label="Next testimonial"
+                        className="w-inline-block"
+                      >
+                        <div className="icon-embed-medium w-embed">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="100%"
+                            height="100%"
+                            viewBox="0 0 48 49"
+                            fill="none"
+                            preserveAspectRatio="xMidYMid meet"
+                            aria-hidden="true"
+                            role="img"
+                          >
+                            <path
+                              d="M10 24.7002H38"
+                              stroke="currentColor"
+                              strokeWidth="1.5"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                            <path
+                              d="M24 10.7002L38 24.7002L24 38.7002"
+                              stroke="currentColor"
+                              strokeWidth="1.5"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        </div>
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div className="testimonial_nav-component no-scrollbar hidden max-[991px]:overflow-auto max-[991px]:rounded-r max-[991px]:border-r max-[991px]:border-white-20">
+              <div className="testimonial_nav-component no-scrollbar hidden max-[991px]:flex max-[991px]:overflow-auto max-[991px]:rounded-r max-[991px]:border-r max-[991px]:border-white-20">
                 {testimonials.map((item, i) => (
                   <a
                     key={i}

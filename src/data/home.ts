@@ -165,6 +165,30 @@ export const testimonials = [
     image: photos.ellipseLight,
     logo: "/assets/images/about/zeon-monogram.svg",
   },
+  {
+    quote:
+      "Zeanur took a rough idea and turned it into a product we actually ship — clean APIs, thoughtful UI, and real-time features that just work. Handover was smooth and the code was easy to pick up.",
+    name: "Product Partner",
+    role: "Startup Founder",
+    image: photos.dscf,
+    logo: "/assets/images/677056164bccc35aba788abc_d9743b34182def9321b08034b660e0ae_altiverse.svg",
+  },
+  {
+    quote:
+      "The interface work was excellent — responsive, animated, and genuinely pleasant to use. He balanced the visual polish with performance, which is rare.",
+    name: "Design Collaborator",
+    role: "Product Designer",
+    image: photos.img6121,
+    logo: "/assets/images/677056168e060f50417adc2b_mindsum.svg",
+  },
+  {
+    quote:
+      "We needed authentication, payments, and real-time messaging shipped on a deadline. Zeanur handled the hard parts and kept everything secure and observable.",
+    name: "Engineering Peer",
+    role: "Backend Engineer",
+    image: photos.farSocial,
+    logo: "/assets/images/68a467ad9cb5817976d878b6_plus-x.webp",
+  },
 ];
 
 /** "From the labs" side-project slides for the home lab slider. */
