@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { gsap, Observer } from "@/lib/gsap";
 import { navLinks, brand, socials, audio } from "@/data/site";
 import SoundButton from "./SoundButton";
@@ -12,13 +12,15 @@ import { CredentialBadge } from "./shared";
 /**
  * Fixed site header with two distinct states:
  *  - Desktop/wide: logo + inline nav with a moving "pill" highlight on hover.
- *  - Mobile: hamburger button that opens a full-screen overlay menu (yellow
- *    panels slide in, links stagger up, icon morphs into an X).
+ *  - Mobile: hamburger button that opens a right-side drawer (slides in from
+ *    the right, links stagger up, icon morphs into an X). The drawer sits
+ *    above the header bar, and the header's own logo/clock/sound are
+ *    duplicated inside it, so the drawer is self-contained.
  *
  * Other behaviours: the logo's second word scrambles on hover, the navbar
  * hides on scroll-down and reappears on scroll-up, its shape/border changes
- * once the page is scrolled, and body scroll is locked while the menu is
- * open.
+ * once the page is scrolled, and body scroll is locked for as long as the
+ * drawer is animating open/closed (unlocked only once it fully closes).
  */
 
 /** One half of the two-tone logo (start = first word, is-animation = second). */
@@ -35,76 +37,101 @@ function Logo({ className }: { className?: string }) {
 
 const menuIconLine = "h-[0.125rem] w-[1.2rem]";
 
+/** Focusable elements inside the sheet, used by the Tab focus trap. */
+const SHEET_FOCUSABLE =
+  'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
 export default function Navbar() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
-  // Paused timeline built once and (re)played/reversed by the open/close logic.
+  const menuButtonRef = useRef<HTMLAnchorElement>(null);
+  // Paused timelines built once and (re)played/reversed by the open/close logic.
   const tlRef = useRef<gsap.core.Timeline | null>(null);
+  const iconTlRef = useRef<gsap.core.Timeline | null>(null);
   // Mirror of `menuOpen` so imperative handlers don't read stale state.
   const openRef = useRef(false);
 
-  // Build the mobile menu animation timeline once. Panels slide in, then the
-  // links stagger up, and the hamburger lines morph into a close "X". The
-  // overlay is display:none until the timeline starts and hidden again after
-  // it fully reverses.
+  const prefersReducedMotion = () =>
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Build the mobile menu + hamburger-icon timelines once. The sheet is
+  // display:none until the timeline starts and hidden again after it fully
+  // reverses. The drawer slides in from the right as a single panel (the
+  // yellow/purple layers are its own background), then the links stagger up.
+  // Scroll lock is tied to the actual animation so the page only unlocks once
+  // the drawer has closed. The icon morph is a separate timeline so the X
+  // stays put until the drawer is fully closed.
   useEffect(() => {
     const root = rootRef.current;
     const overlay = overlayRef.current;
-    if (!root || !overlay) return;
-    const bg = overlay.querySelector(".navbar_h-menu-bg-wrapper");
-    const bgSecond = overlay.querySelector(".navbar_h-menu-bg.is-second");
+    const button = menuButtonRef.current;
+    if (!root || !overlay || !button) return;
+    const reduced = prefersReducedMotion();
+    const d = (n: number) => (reduced ? 0.001 : n);
+
     const menu = overlay.querySelector(".navbar_h-menu-inner");
     const links = overlay.querySelectorAll(".navbar_h-link");
     const lines = gsap.utils.toArray<HTMLElement>(
-      root.querySelectorAll(
-        ".menu-icon_line-top, .menu-icon_line-middle-inner, .menu-icon_line-bottom",
+      button.querySelectorAll(
+        ".menu-icon_line-top, .menu-icon_line-middle, .menu-icon_line-bottom",
       ),
     );
 
     const tl = gsap.timeline({ paused: true });
     tl.fromTo(
-      bg,
-      { xPercent: -100 },
-      { xPercent: 0, duration: 0.5, ease: "power2.inOut" },
-    )
-      .fromTo(
-        bgSecond,
-        { xPercent: -100 },
-        { xPercent: 0, duration: 0.5, ease: "power2.inOut" },
-        "-=0.4",
-      )
-      .fromTo(
-        menu,
-        { x: 0, xPercent: 100 },
-        { x: 0, xPercent: 0, duration: 0.6, ease: "power2.inOut" },
-        "-=0.4",
-      )
-      .fromTo(
-        links,
-        { yPercent: 110, opacity: 0 },
-        {
-          yPercent: 0,
-          opacity: 1,
-          duration: 0.5,
-          stagger: 0.06,
-          ease: "power3.out",
-        },
-        "-=0.35",
-      )
-      // Hamburger lines -> X, overlaid at the start (position 0).
-      .to(lines[0], { rotate: 45, y: 4, duration: 0.35 }, 0)
-      .to(lines[1], { scaleX: 0, duration: 0.3 }, 0)
-      .to(lines[2], { rotate: -45, y: -4, duration: 0.35 }, 0);
-    tl.eventCallback("onStart", () => gsap.set(overlay, { display: "block" }));
-    tl.eventCallback("onReverseComplete", () =>
-      gsap.set(overlay, { display: "none" }),
+      menu,
+      { xPercent: 100 },
+      { xPercent: 0, duration: d(0.6), ease: "power2.inOut" },
+    ).fromTo(
+      links,
+      { yPercent: 110, opacity: 0 },
+      {
+        yPercent: 0,
+        opacity: 1,
+        duration: d(0.5),
+        stagger: d(0.06),
+        ease: "power3.out",
+      },
+      "-=0.35",
     );
+    tl.eventCallback("onStart", () => {
+      gsap.set(overlay, { display: "block" });
+      document.body.style.overflow = "hidden";
+    });
+    tl.eventCallback("onReverseComplete", () => {
+      gsap.set(overlay, { display: "none" });
+      document.body.style.overflow = "";
+      iconTlRef.current?.reverse();
+      menuButtonRef.current?.focus();
+    });
     tlRef.current = tl;
+
+    // Hamburger lines -> X, played with a small delay so the X forms as the
+    // sheet appears; reversed only after the sheet fully closes. Each line is
+    // translated exactly one spacing unit (line height 2px + gap 4px = 6px)
+    // toward the icon center so both rotated midpoints meet at the exact
+    // center point -> a symmetric, perfectly-aligned cross.
+    const iconTl = gsap.timeline({ paused: true, delay: reduced ? 0 : 0.15 });
+    iconTl
+      .to(
+        lines[0],
+        { rotate: 45, y: 6, duration: d(0.35), ease: "expo.out" },
+        0,
+      )
+      .to(lines[1], { scaleX: 0, duration: d(0.3), ease: "expo.out" }, 0)
+      .to(
+        lines[2],
+        { rotate: -45, y: -6, duration: d(0.35), ease: "expo.out" },
+        0,
+      );
+    iconTlRef.current = iconTl;
 
     return () => {
       tl.kill();
+      iconTl.kill();
+      document.body.style.overflow = "";
     };
   }, []);
 
@@ -216,46 +243,128 @@ export default function Navbar() {
     return () => cleanup.forEach((fn) => fn());
   }, []);
 
-  // Play the menu timeline forward/backward. Closing reverses ~1.4× faster
-  // so the menu snaps shut snappier than it opened.
-  const runTimeline = (open: boolean) => {
-    const tl = tlRef.current;
-    if (!tl) return;
-    if (open) tl.timeScale(1).play();
-    else tl.timeScale(1.4).reverse();
-  };
+  const openMenu = useCallback(() => {
+    openRef.current = true;
+    setMenuOpen(true);
+    tlRef.current?.timeScale(1).play();
+    iconTlRef.current?.timeScale(1).play();
+    requestAnimationFrame(() => {
+      overlayRef.current?.focus();
+    });
+  }, []);
 
-  const toggleMenu = (e: React.MouseEvent) => {
-    e.preventDefault();
-    const next = !openRef.current;
-    openRef.current = next;
-    setMenuOpen(next);
-    runTimeline(next);
-  };
-
-  const closeMenu = () => {
+  // Closing only reverses the sheet; the icon reverts and focus returns once
+  // the sheet has fully slid out (see onReverseComplete above).
+  const closeMenu = useCallback(() => {
     if (!openRef.current) return;
     openRef.current = false;
     setMenuOpen(false);
-    runTimeline(false);
-  };
+    tlRef.current?.timeScale(1.4).reverse();
+  }, []);
+
+  const toggleMenu = useCallback(
+    (e: React.MouseEvent) => {
+      e.preventDefault();
+      if (openRef.current) closeMenu();
+      else openMenu();
+    },
+    [closeMenu, openMenu],
+  );
 
   // Close the menu automatically whenever navigation happens.
   useEffect(() => {
-    if (!openRef.current) return;
-    openRef.current = false;
-    tlRef.current?.timeScale(1.4).reverse();
-  }, [pathname]);
+    if (openRef.current) closeMenu();
+  }, [pathname, closeMenu]);
+
+  // Escape closes the sheet; Tab is trapped inside it while it is open.
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (!openRef.current) return;
+      if (e.key === "Escape") {
+        e.preventDefault();
+        closeMenu();
+        return;
+      }
+      if (e.key !== "Tab") return;
+      const overlay = overlayRef.current;
+      if (!overlay) return;
+      const focusables = Array.from(
+        overlay.querySelectorAll<HTMLElement>(SHEET_FOCUSABLE),
+      ).filter((el) => el.offsetParent !== null);
+      if (focusables.length === 0) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      const active = document.activeElement;
+      // If focus isn't on one of the sheet's own focusables (e.g. the dialog
+      // itself, right after opening), pull it back inside.
+      const insideList = focusables.includes(active as HTMLElement);
+      if (e.shiftKey && (active === first || !insideList)) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && (active === last || !insideList)) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [closeMenu]);
+
+  // Rolling text hover on the sheet links: two stacked copies of the label
+  // inside an overflow-hidden mask; on hover/focus the top copy slides up and
+  // the bottom copy slides in from below.
+  useEffect(() => {
+    const overlay = overlayRef.current;
+    if (!overlay) return;
+    if (prefersReducedMotion()) return;
+
+    const links = overlay.querySelectorAll<HTMLElement>(".navbar_h-link");
+    const cleanup: Array<() => void> = [];
+
+    links.forEach((link) => {
+      const copies = link.querySelectorAll<HTMLElement>(
+        ".navbar_h-link-text-copy",
+      );
+      if (copies.length < 2) return;
+      const [top, bottom] = copies;
+
+      const tl = gsap.timeline({ paused: true });
+      tl.to(top, { yPercent: -100, duration: 0.5, ease: "expo.out" }, 0).fromTo(
+        bottom,
+        { yPercent: 0 },
+        { yPercent: -100, duration: 0.5, ease: "expo.out" },
+        0,
+      );
+
+      const play = () => tl.timeScale(1).play();
+      const replay = () => tl.timeScale(1).reverse();
+
+      link.addEventListener("mouseenter", play);
+      link.addEventListener("mouseleave", replay);
+      link.addEventListener("focusin", play);
+      link.addEventListener("focusout", replay);
+      cleanup.push(() => {
+        link.removeEventListener("mouseenter", play);
+        link.removeEventListener("mouseleave", replay);
+        link.removeEventListener("focusin", play);
+        link.removeEventListener("focusout", replay);
+        tl.kill();
+      });
+    });
+
+    return () => cleanup.forEach((fn) => fn());
+  }, []);
 
   // Hide-on-scroll-down / reveal-on-scroll-up for the header bar. On wide
   // screens the hamburger button pops in while hidden so the menu stays
-  // reachable.
+  // reachable. Skipped entirely while the sheet is open or when reduced
+  // motion is requested.
   useEffect(() => {
     const root = rootRef.current;
-    if (!root) return;
-    const menuButton = root.querySelector<HTMLElement>(".navbar_h-menu-button");
-    const navbarInner = root.querySelector<HTMLElement>(".navbar_inner");
-    if (!menuButton || !navbarInner) return;
+    const menuButton = menuButtonRef.current;
+    const navbarInner = root?.querySelector<HTMLElement>(".navbar_inner");
+    if (!root || !menuButton || !navbarInner) return;
+    if (prefersReducedMotion()) return;
 
     navbarInner.style.willChange = "transform";
     let isNavbarHidden = false;
@@ -299,6 +408,7 @@ export default function Navbar() {
       target: window,
       type: "wheel,touch",
       onDown: () => {
+        if (openRef.current) return;
         if (!isNavbarHidden) {
           currentTimeline?.kill();
           downTimeline.restart();
@@ -307,6 +417,7 @@ export default function Navbar() {
         }
       },
       onUp: () => {
+        if (openRef.current) return;
         if (isNavbarHidden) {
           currentTimeline?.kill();
           upTimeline.restart();
@@ -358,14 +469,6 @@ export default function Navbar() {
     window.addEventListener("scroll", updateNavbarStyle);
     return () => window.removeEventListener("scroll", updateNavbarStyle);
   }, []);
-
-  // Lock page scroll while the full-screen menu is open.
-  useEffect(() => {
-    document.body.style.overflow = menuOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [menuOpen]);
 
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
@@ -427,37 +530,47 @@ export default function Navbar() {
             </div>
           </div>
         </div>
-
-        <a
-          href="#"
-          data-audio-click={audio.closeMenu}
-          data-audio={audio.hover}
-          className="navbar_h-menu-button fixed right-6 top-3 z-9999 flex items-center justify-center rounded-full border border-white-20 bg-black-30 p-2 shadow-[inset_0_0_0_1000px_#0a090e33] backdrop-blur-[100px] desktop:hidden desktop:top-6 max-[767px]:right-4 max-[767px]:top-[0.8rem] w-inline-block"
-          onClick={toggleMenu}
-          aria-label={menuOpen ? "Close menu" : "Open menu"}
-        >
-          <div className="relative z-1 flex h-8 w-8 flex-col items-center justify-center gap-1 max-[767px]:h-[1.7rem] max-[767px]:w-[1.7rem]">
-            <div
-              className={`${menuIconLine} menu-icon_line-top bg-neutral-white`}
-            />
-            <div
-              className={`${menuIconLine} menu-icon_line-middle flex items-center justify-center bg-brand-white`}
-            >
-              <div className="menu-icon_line-middle-inner h-0 w-1" />
-            </div>
-            <div
-              className={`${menuIconLine} menu-icon_line-bottom bg-neutral-white`}
-            />
-          </div>
-        </a>
       </div>
+
+      <a
+        ref={menuButtonRef}
+        href="#"
+        data-audio-click={audio.closeMenu}
+        data-audio={audio.hover}
+        aria-label={menuOpen ? "Close menu" : "Open menu"}
+        aria-expanded={menuOpen}
+        aria-controls="mobile-menu"
+        className="navbar_h-menu-button fixed right-6 top-3 z-10001 flex items-center justify-center rounded-full border border-white-20 bg-black-30 p-2 shadow-[inset_0_0_0_1000px_#0a090e33] backdrop-blur-[100px] desktop:hidden desktop:top-6 max-[767px]:right-4 max-[767px]:top-[0.8rem] w-inline-block"
+        onClick={toggleMenu}
+      >
+        <div className="relative z-1 flex h-8 w-8 flex-col items-center justify-center gap-1 max-[767px]:h-[1.7rem] max-[767px]:w-[1.7rem]">
+          <div
+            className={`${menuIconLine} menu-icon_line-top bg-neutral-white`}
+          />
+          <div
+            className={`${menuIconLine} menu-icon_line-middle bg-brand-white`}
+          />
+          <div
+            className={`${menuIconLine} menu-icon_line-bottom bg-neutral-white`}
+          />
+        </div>
+      </a>
 
       <div
         ref={overlayRef}
-        className="fixed inset-0 z-9998 hidden h-screen w-screen overflow-hidden"
+        id="mobile-menu"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Menu"
+        tabIndex={-1}
+        className="fixed inset-0 z-10000 hidden h-screen w-screen overflow-hidden focus:outline-none"
       >
-        <div className="navbar_h-menu-inner absolute inset-y-0 right-0 z-2 h-screen w-full max-w-180 transform-[translate(100%)] max-[991px]:max-w-120 max-[767px]:max-w-[20rem]">
-          <div className="relative z-2 flex h-screen flex-col items-start justify-start gap-4 pb-6 pl-14 pr-10 pt-[9.1rem] max-[767px]:px-6">
+        <div className="navbar_h-menu-inner absolute inset-y-0 right-0 z-2 h-screen w-full max-w-180 overflow-hidden max-[991px]:max-w-120 max-[767px]:max-w-[20rem]">
+          <div className="navbar_h-menu-bg-wrapper absolute inset-0 z-0 overflow-hidden">
+            <div className="navbar_h-menu-bg absolute inset-0 z-0 bg-brand-yellow [clip-path:polygon(100%_0,100%_100%,4%_100%,4%_85%,0_82%,0_0)]" />
+            <div className="navbar_h-menu-bg is-second absolute inset-0 z-0 bg-brand-purple [clip-path:polygon(100%_0,100%_100%,4%_100%,4%_85%,0_82%,0_0)]" />
+          </div>
+          <div className="relative z-2 flex h-screen flex-col items-start justify-start gap-4 overflow-y-auto pb-40 pl-14 pr-10 pt-[7rem] max-[767px]:px-6 max-[767px]:pb-44 max-[479px]:pt-[5.5rem]">
             <div className="absolute left-6 top-6 flex flex-col overflow-hidden pb-[0.2rem]">
               <Link
                 href="/"
@@ -485,37 +598,27 @@ export default function Navbar() {
                   >
                     <div className="text-caption-2">{link.index}</div>
                   </div>
-                  <div menu-link="text" className="heading-style-h1">
-                    {link.label}
+                  <div
+                    menu-link="text"
+                    className="navbar_h-link-text relative overflow-hidden"
+                  >
+                    <span className="navbar_h-link-text-copy block whitespace-nowrap heading-style-h1">
+                      {link.label}
+                    </span>
+                    <span
+                      aria-hidden="true"
+                      className="navbar_h-link-text-copy absolute left-0 top-full block whitespace-nowrap heading-style-h1"
+                    >
+                      {link.label}
+                    </span>
                   </div>
                 </Link>
               ))}
             </div>
-            <div className="navbar_h-bottom absolute bottom-6 left-20 right-10 z-2 grid grid-cols-2 items-end justify-between gap-2 max-[991px]:flex max-[991px]:flex-col max-[991px]:items-stretch max-[767px]:flex max-[767px]:flex-wrap max-[767px]:items-stretch max-[767px]:left-12 max-[479px]:bottom-24 max-[479px]:left-12">
+            <div className="navbar_h-bottom absolute bottom-6 left-20 right-10 z-2 grid grid-cols-2 items-end justify-between gap-2 max-[991px]:flex max-[991px]:flex-col max-[991px]:items-stretch max-[767px]:flex max-[767px]:flex-wrap max-[767px]:items-stretch max-[767px]:left-12 max-[479px]:left-12">
               <div className="badge">
                 <div className="relative h-[0.06rem] w-full overflow-hidden">
                   <div className="absolute inset-0 bg-brand-white" />
-                </div>
-                <div className="py-1">
-                  <div
-                    className="flex h-4 w-4 flex-col items-center justify-center w-embed"
-                    aria-hidden="true"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="100%"
-                      height="100%"
-                      viewBox="0 0 16 17"
-                      fill="none"
-                      preserveAspectRatio="xMidYMid meet"
-                    >
-                      <path
-                        d="M2.41002 14.2237L13.7237 2.91001M0 8.54529H16M8.0453 16.5V0.5M2.36688 2.91001L13.6806 14.2237"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                      />
-                    </svg>
-                  </div>
                 </div>
               </div>
               <div menu-link="misc">
@@ -537,10 +640,6 @@ export default function Navbar() {
               </div>
             </div>
           </div>
-        </div>
-        <div className="navbar_h-menu-bg-wrapper absolute inset-y-0 right-0 z-1 w-full">
-          <div className="navbar_h-menu-bg absolute inset-0 z-0 bg-brand-yellow [clip-path:polygon(100%_0,100%_100%,4%_100%,4%_85%,0_82%,0_0)]" />
-          <div className="navbar_h-menu-bg is-second absolute inset-0 z-0 bg-brand-purple [clip-path:polygon(100%_0,100%_100%,4%_100%,4%_85%,0_82%,0_0)]" />
         </div>
         <div
           className="navbar_h-bg-close absolute inset-0 z-1 h-full w-full bg-[#0000001a] backdrop-blur-[5px]"
