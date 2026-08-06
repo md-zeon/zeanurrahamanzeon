@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 import Link from "next/link";
 import { gsap, SplitText } from "@/lib/gsap";
+import { HERO_ENTRANCE_COMPLETE } from "@/lib/utils";
 import { aboutHeader } from "@/data/about";
 import { audio } from "@/data/site";
 import { Asterisk, CredentialIcon } from "../shared";
@@ -19,7 +20,7 @@ import AutoVideo from "../media/AutoVideo";
 export default function AboutHeader() {
   const ref = useRef<HTMLElement>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const el = ref.current;
     if (!el) return;
 
@@ -58,7 +59,12 @@ export default function AboutHeader() {
 
       // One timeline with labeled positions so every step's relative timing
       // is explicit ("headings+=0.6" = 0.6s after the headline finishes).
-      const tl = gsap.timeline({ defaults: { ease: "expo.out" } });
+      // When it settles it signals the navbar to drop in.
+      const tl = gsap.timeline({
+        defaults: { ease: "expo.out" },
+        onComplete: () =>
+          window.dispatchEvent(new CustomEvent(HERO_ENTRANCE_COMPLETE)),
+      });
       tl.add("headings");
       tl.to(
         header1.chars,

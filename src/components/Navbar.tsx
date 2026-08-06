@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { gsap, Observer } from "@/lib/gsap";
 import { getLenis } from "@/lib/lenis";
+import { HERO_ENTRANCE_COMPLETE } from "@/lib/utils";
 import { navLinks, brand, socials, audio } from "@/data/site";
 import SoundButton from "./SoundButton";
 import Clock from "./Clock";
@@ -138,6 +139,58 @@ export default function Navbar() {
       iconTl.kill();
       document.body.style.overflow = "";
       getLenis()?.start();
+    };
+  }, []);
+
+  // Entrance animation: the header waits for the page hero's entrance to
+  // finish — every page dispatches HERO_ENTRANCE_COMPLETE when its hero
+  // settles (HeroSection on home, AboutHeader, and the shared
+  // usePageHeaderEntrance on the rest) — and only then drops in from the
+  // top (curtain reveal), with the logo, nav, and clock/sound cluster fading
+  // in sequentially. Skipped for reduced motion — the SiteShell page
+  // fade-in covers that case.
+  useEffect(() => {
+    const root = rootRef.current;
+    const menuButton = menuButtonRef.current;
+    if (!root || !menuButton) return;
+    if (prefersReducedMotion()) return;
+
+    let onEntranceComplete: (() => void) | undefined;
+
+    const ctx = gsap.context(() => {
+      const bar = root.querySelector<HTMLElement>(".navbar_inner");
+      const row = root.querySelector<HTMLElement>(".padding-global > div");
+      if (!bar || !row) return;
+      const parts = Array.from(row.children) as HTMLElement[];
+
+      gsap.set(bar, { yPercent: -100 });
+      gsap.set(parts, { autoAlpha: 0 });
+      gsap.set(menuButton, { scale: 0, autoAlpha: 0 });
+
+      const tl = gsap.timeline({ paused: true });
+      tl.to(bar, { yPercent: 0, duration: 0.6, ease: "expo.out" })
+        .to(
+          parts,
+          { autoAlpha: 1, duration: 0.5, stagger: 0.08, ease: "power2.out" },
+          0.2,
+        )
+        .to(
+          menuButton,
+          { scale: 1, autoAlpha: 1, duration: 0.4, ease: "expo.out" },
+          0.55,
+        );
+
+      onEntranceComplete = () => tl.play();
+      window.addEventListener(HERO_ENTRANCE_COMPLETE, onEntranceComplete, {
+        once: true,
+      });
+    }, root);
+
+    return () => {
+      if (onEntranceComplete) {
+        window.removeEventListener(HERO_ENTRANCE_COMPLETE, onEntranceComplete);
+      }
+      ctx.revert();
     };
   }, []);
 

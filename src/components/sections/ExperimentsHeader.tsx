@@ -1,3 +1,7 @@
+"use client";
+
+import { useRef } from "react";
+import { usePageHeaderEntrance } from "@/lib/useHeaderReveal";
 import { experimentsHeader } from "@/data/experiments";
 import { workHeader } from "@/data/work";
 import { audio } from "@/data/site";
@@ -7,13 +11,16 @@ import { Asterisk, CredentialIcon } from "../shared";
 /**
  * Experiments page hero: stacked two-line title, intro paragraph, and two
  * CTAs (primary to /contact, secondary to /work), plus the badge link.
- * `header-content-type` attributes drive the intro reveal animation.
- * `data-projects-section="first"` marks it as the first of the two
- * projects-style sections on the page.
+ * `header-content-type` attributes drive the load-in entrance (via
+ * usePageHeaderEntrance). `data-projects-section="first"` marks it as the
+ * first of the two projects-style sections on the page.
  */
 export default function ExperimentsHeader() {
+  const ref = useRef<HTMLElement>(null);
+  usePageHeaderEntrance(ref);
+
   return (
-    <header data-projects-section="first">
+    <header data-projects-section="first" ref={ref}>
       <div className="padding-global is-bigger">
         <div className="container-large">
           <div className="relative flex w-full items-center justify-center">

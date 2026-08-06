@@ -1,3 +1,7 @@
+"use client";
+
+import { useRef } from "react";
+import { usePageHeaderEntrance } from "@/lib/useHeaderReveal";
 import { workHeader } from "@/data/work";
 import { audio } from "@/data/site";
 import { Asterisk, CredentialIcon } from "../shared";
@@ -5,13 +9,16 @@ import { Asterisk, CredentialIcon } from "../shared";
 /**
  * Work page hero: oversized title (with italic word), intro paragraph, a
  * primary CTA to /contact, and the badge link. `header-content-type`
- * attributes drive the intro reveal animation;
+ * attributes drive the load-in entrance (via usePageHeaderEntrance);
  * `data-projects-section="first"` marks it as the first projects-style
  * section on the page (the pinned carousel below is the second).
  */
 export default function WorkHeader() {
+  const ref = useRef<HTMLElement>(null);
+  usePageHeaderEntrance(ref);
+
   return (
-    <header data-projects-section="first">
+    <header data-projects-section="first" ref={ref}>
       <div className="padding-global is-bigger">
         <div className="container-large">
           <div className="relative flex w-full items-center justify-center">

@@ -1,13 +1,21 @@
+"use client";
+
+import { useRef } from "react";
+import { usePageHeaderEntrance } from "@/lib/useHeaderReveal";
 import { contactHeader } from "@/data/contact";
 
 /**
  * Contact page hero. Title is stacked in two oversized lines (title1/title2)
  * with the paragraph on the right; `header-content-type` attributes drive the
- * intro reveal animation on load. Frame lines draw the layout grid.
+ * load-in entrance (via usePageHeaderEntrance). Frame lines draw the layout
+ * grid.
  */
 export default function ContactHeader() {
+  const ref = useRef<HTMLElement>(null);
+  usePageHeaderEntrance(ref);
+
   return (
-    <header>
+    <header ref={ref}>
       <div className="padding-global is-bigger">
         <div className="container-large">
           <div className="relative flex w-full items-center justify-center">

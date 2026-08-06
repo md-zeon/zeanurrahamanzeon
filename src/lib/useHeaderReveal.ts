@@ -1,16 +1,20 @@
 "use client";
 
-import { useEffect, type RefObject } from "react";
+import { useEffect, useLayoutEffect, type RefObject } from "react";
 import { gsap, SplitText } from "@/lib/gsap";
+import { HERO_ENTRANCE_COMPLETE } from "@/lib/utils";
 
 /**
- * Shared scroll-triggered reveal utilities used by most page headers.
+ * Shared header reveal utilities.
  *
- * The markup uses `header-animation-type` attributes to signal *how* an
- * element should animate (container fade, grid of lines scaling up, single
- * line scaling out, plain text fading). Components that render such headers
- * call `useHeaderReveal`; `useSectionHeadings` handles the extra
- * per-character slide-in used on some headings.
+ * Two marker conventions:
+ *  - `header-animation-type` drives the scroll-triggered reveals used by
+ *    most inner sections (container fade, grid of lines scaling up, single
+ *    line scaling out, plain text fading). `useHeaderReveal` plays those;
+ *    `useSectionHeadings` handles the extra per-character slide-in.
+ *  - `header-content-type` marks the elements of a *page* hero (the big
+ *    headline, paragraph, CTAs, frames) so `usePageHeaderEntrance` can run
+ *    the choreographed load-in animation on page mount.
  */
 
 // Classes appended to decorative line placeholders by `linesFor`, so those
@@ -216,6 +220,149 @@ export function useScrubbedHighlight(
           },
         },
       );
+    }, el);
+
+    return () => ctx.revert();
+    // Runs once on mount; `container` is stable so it's safe to ignore.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+}
+
+/**
+ * Plays a page hero's load-in entrance on mount.
+ *
+ * Mirrors the About header's choreography, driven by the
+ * `header-content-type` markers that page heroes carry:
+ *   - heading-1 / heading-2 → characters slide in from the left behind masks
+ *   - asterisk               → spins + fades in (with the border lines)
+ *   - line-bg                → grows out from the left
+ *   - badge-link             → fades in
+ *   - paragraph              → reveals line-by-line through masks as the finale
+ *   - button                 → never hidden; the CTAs stay on screen, matching
+ *                              the About header
+ *
+ * Dispatches HERO_ENTRANCE_COMPLETE when it finishes so the navbar can time
+ * its own reveal; reduced-motion users get a calm branch that dispatches
+ * immediately without animating.
+ *
+ * Runs in a layout effect so the initial hidden state, character wrapping and
+ * line masks are applied before the browser paints the new page — without
+ * this, content is visible for a moment after a client-side navigation before
+ * the entrance kicks in (a flash that reads as lag).
+ */
+export function usePageHeaderEntrance(
+  container: RefObject<HTMLElement | null>,
+) {
+  useLayoutEffect(() => {
+    const el = container.current;
+    if (!el) return;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      window.dispatchEvent(new CustomEvent(HERO_ENTRANCE_COMPLETE));
+      return;
+    }
+
+    const ctx = gsap.context(() => {
+      const headings = Array.from(
+        el.querySelectorAll<HTMLElement>(
+          '[header-content-type="heading-1"], [header-content-type="heading-2"]',
+        ),
+      );
+      if (!headings.length) {
+        window.dispatchEvent(new CustomEvent(HERO_ENTRANCE_COMPLETE));
+        return;
+      }
+
+      // Hide the secondary elements until their timeline step plays. The
+      // CTA buttons (header-content-type="button") deliberately stay visible.
+      gsap.set(
+        [
+          '[header-content-type="paragraph"]',
+          '[header-content-type="border"]',
+          '[header-content-type="asterisk"]',
+          '[header-content-type="line-bg"]',
+          ".badge-link",
+        ],
+        { autoAlpha: 0 },
+      );
+      gsap.set('[header-content-type="line-bg"]', { xPercent: -100 });
+
+      // Wrap each character in an overflow-hidden box so the slide-in masks
+      // cleanly; the small padding/margin pair keeps descenders from
+      // clipping. The splits are kept so the timeline animates the same
+      // char elements that were wrapped.
+      const splits = headings.map((heading) => {
+        const split = new SplitText(heading, { type: "chars" });
+        split.chars.forEach((char) => {
+          const wrapper = document.createElement("div");
+          wrapper.classList.add("char-wrapper");
+          wrapper.style.overflow = "hidden";
+          wrapper.style.display = "inline-block";
+          wrapper.style.position = "relative";
+          wrapper.style.padding = "0.3vw";
+          wrapper.style.margin = "-0.3vw";
+          char.parentNode?.insertBefore(wrapper, char);
+          wrapper.appendChild(char);
+        });
+        gsap.set(split.chars, { xPercent: -120 });
+        return split;
+      });
+
+      // Paragraph reveals line-by-line through masks as the finale, exactly
+      // like the About header. Lines are hidden at commit (pre-paint) so
+      // nothing flashes before the reveal.
+      const lineWrappers: HTMLElement[] = [];
+      const paragraph = el.querySelector(
+        '[header-content-type="paragraph"]',
+      );
+      if (paragraph) {
+        const splitText = new SplitText(paragraph, { type: "lines" });
+        splitText.lines.forEach((line) => {
+          const wrapper = document.createElement("div");
+          wrapper.classList.add("line-wrapper");
+          wrapper.style.overflow = "hidden";
+          line.parentNode?.insertBefore(wrapper, line);
+          wrapper.appendChild(line);
+          lineWrappers.push(wrapper);
+        });
+        gsap.set(paragraph, { autoAlpha: 1 });
+        gsap.set(lineWrappers, { yPercent: 100, opacity: 0 });
+      }
+
+      const tl = gsap.timeline({
+        defaults: { ease: "expo.out" },
+        onComplete: () =>
+          window.dispatchEvent(new CustomEvent(HERO_ENTRANCE_COMPLETE)),
+      });
+      tl.add("headings");
+      splits.forEach((split, i) => {
+        tl.to(
+          split.chars,
+          { xPercent: 0, duration: 0.6, stagger: 0.04 },
+          i === 0 ? "headings" : "headings+=0.04",
+        );
+      });
+
+      tl.to(
+        '[header-content-type="asterisk"], [header-content-type="border"]',
+        { autoAlpha: 1, duration: 0.1 },
+        "headings+=0.6",
+      );
+      tl.to('[header-content-type="asterisk"]', { rotate: 90, duration: 0.3 }, "<");
+      tl.to(
+        '[header-content-type="line-bg"]',
+        { xPercent: 0, autoAlpha: 1, duration: 0.3 },
+        "headings+=0.8",
+      );
+      tl.to(".badge-link", { autoAlpha: 1, duration: 0.1 }, "headings+=1.1");
+
+      if (lineWrappers.length) {
+        tl.to(
+          lineWrappers,
+          { yPercent: 0, opacity: 1, duration: 0.6, stagger: 0.04 },
+          "headings+=1.2",
+        );
+      }
     }, el);
 
     return () => ctx.revert();

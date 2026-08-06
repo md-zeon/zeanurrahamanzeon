@@ -1,3 +1,7 @@
+"use client";
+
+import { useRef } from "react";
+import { usePageHeaderEntrance } from "@/lib/useHeaderReveal";
 import { audio } from "@/data/site";
 import { Asterisk, CredentialIcon } from "../shared";
 
@@ -15,8 +19,8 @@ type CaseStudyHeaderProps = {
 
 /**
  * Case study page header. The `header-content-type` attributes mark the
- * title/paragraph/button/border/asterisk elements that the site's header
- * reveal animation targets, so the intro animates in on page load.
+ * title/paragraph/button/border/asterisk elements that the shared load-in
+ * entrance (usePageHeaderEntrance) animates on page mount.
  */
 export default function CaseStudyHeader({
   title,
@@ -29,8 +33,11 @@ export default function CaseStudyHeader({
   badge,
   badgeLink,
 }: CaseStudyHeaderProps) {
+  const ref = useRef<HTMLElement>(null);
+  usePageHeaderEntrance(ref);
+
   return (
-    <header>
+    <header ref={ref}>
       <div className="padding-global is-bigger">
         <div className="container-large">
           <div className="relative flex w-full items-center justify-center">
