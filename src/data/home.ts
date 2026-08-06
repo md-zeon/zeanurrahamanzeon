@@ -12,7 +12,8 @@ export const featuredProjects = [
       "A real-time academic collaboration network — messaging, study groups, gamified learning, and an AI assistant for campus life.",
     link: "/work/smart-nub-campus",
     video: "/assets/videos/Videos/Work/smart-nub-campus/Smart-NUB-Campus.mp4",
-    navVideo: "/assets/videos/Videos/Work/smart-nub-campus/Smart-NUB-Campus.mp4",
+    navVideo:
+      "/assets/videos/Videos/Work/smart-nub-campus/Smart-NUB-Campus.mp4",
   },
   {
     index: "002",
@@ -29,8 +30,10 @@ export const featuredProjects = [
     description:
       "A medicine and healthcare marketplace for Bangladesh — product discovery, orders, and delivery built for the local market.",
     link: "/work/oshudpati-marketplace",
-    video: "/assets/videos/Videos/Work/oshudpati-marketplace/Oshudpati-Marketplace.mp4",
-    navVideo: "/assets/videos/Videos/Work/oshudpati-marketplace/Oshudpati-Marketplace.mp4",
+    video:
+      "/assets/videos/Videos/Work/oshudpati-marketplace/Oshudpati-Marketplace.mp4",
+    navVideo:
+      "/assets/videos/Videos/Work/oshudpati-marketplace/Oshudpati-Marketplace.mp4",
   },
   {
     index: "004",
@@ -107,8 +110,8 @@ export const services = [
       "Deployment & Monitoring",
       "TypeScript",
       "Next.js",
-      "React",
       "Node.js",
+      "React",
       "PostgreSQL",
       "MongoDB",
     ],
@@ -140,9 +143,9 @@ export const services = [
     items: [
       "API Design & Validation",
       "Auth & Role-Based Access",
-      "Secure & Observed Systems",
       "Real-time Communication",
       "File Uploads & Media",
+      "Secure & Observed Systems",
       "Payment Integration",
       "Testing & CI",
       "Cloud Deployment",
@@ -228,7 +231,8 @@ export const labSlides = [
     caption: "Project_006",
     title: "Motion Playground",
     href: "/experiments",
-    video: "/assets/videos/Videos/Experiments/battlefield-4---new-thumbnail.mp4",
+    video:
+      "/assets/videos/Videos/Experiments/battlefield-4---new-thumbnail.mp4",
   },
   {
     caption: "Project_007",

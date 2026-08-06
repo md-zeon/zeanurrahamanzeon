@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { getLenis } from "@/lib/lenis";
 import { experimentsStack } from "@/data/experiments";
 import { audio } from "@/data/site";
 import AutoVideo from "../media/AutoVideo";
@@ -334,11 +335,16 @@ export default function ExperimentsProjects() {
       projectHeight -= window.innerHeight * 0.01;
     }
     const targetScrollY = pinSpacer.offsetTop + index * projectHeight;
-    gsap.to(window, {
-      duration: 1.5,
-      scrollTo: targetScrollY,
-      ease: "expo.out",
-    });
+    const lenis = getLenis();
+    if (lenis) {
+      lenis.scrollTo(targetScrollY, { duration: 1.5 });
+    } else {
+      gsap.to(window, {
+        duration: 1.5,
+        scrollTo: targetScrollY,
+        ease: "expo.out",
+      });
+    }
   };
 
   return (

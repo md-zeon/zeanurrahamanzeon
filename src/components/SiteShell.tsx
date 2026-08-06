@@ -3,6 +3,7 @@
 import { useEffect, useRef, type ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { destroyLenis, getLenis, initLenis } from "@/lib/lenis";
 import { initSound, playSound } from "@/lib/sound";
 import { useButtonEffects } from "@/lib/useButtonEffects";
 import Navbar from "./Navbar";
@@ -59,10 +60,23 @@ export default function SiteShell({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  // On route change: reset scroll and recompute ScrollTrigger positions after
-  // the new page has had a moment to lay out.
+  // Boot smooth scroll once and tear it down when the shell unmounts.
   useEffect(() => {
-    window.scrollTo(0, 0);
+    initLenis();
+    return () => destroyLenis();
+  }, []);
+
+  // On route change: reset scroll and recompute ScrollTrigger positions after
+  // the new page has had a moment to lay out. Uses Lenis when active so the
+  // reset is instant (not a slow animated scroll), otherwise falls back to
+  // the native API.
+  useEffect(() => {
+    const lenis = getLenis();
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: true, force: true });
+    } else {
+      window.scrollTo(0, 0);
+    }
     const t = setTimeout(() => {
       ScrollTrigger.refresh();
     }, 120);

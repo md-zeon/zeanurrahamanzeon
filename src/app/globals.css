@@ -97,6 +97,24 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+/* Lenis smooth scroll base styles (recommended by lenis.dev) */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
 @media (min-width: 1440px) {
   html {
     font-size: 1vw;

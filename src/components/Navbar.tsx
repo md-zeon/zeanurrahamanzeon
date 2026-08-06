@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { gsap, Observer } from "@/lib/gsap";
+import { getLenis } from "@/lib/lenis";
 import { navLinks, brand, socials, audio } from "@/data/site";
 import SoundButton from "./SoundButton";
 import Clock from "./Clock";
@@ -99,10 +100,14 @@ export default function Navbar() {
     tl.eventCallback("onStart", () => {
       gsap.set(overlay, { display: "block" });
       document.body.style.overflow = "hidden";
+      // Lenis bypasses body overflow locking, so pause smooth scroll too or
+      // the page keeps scrolling behind the open sheet.
+      getLenis()?.stop();
     });
     tl.eventCallback("onReverseComplete", () => {
       gsap.set(overlay, { display: "none" });
       document.body.style.overflow = "";
+      getLenis()?.start();
       iconTlRef.current?.reverse();
       menuButtonRef.current?.focus();
     });
@@ -132,6 +137,7 @@ export default function Navbar() {
       tl.kill();
       iconTl.kill();
       document.body.style.overflow = "";
+      getLenis()?.start();
     };
   }, []);
 
@@ -570,7 +576,10 @@ export default function Navbar() {
             <div className="navbar_h-menu-bg absolute inset-0 z-0 bg-brand-yellow [clip-path:polygon(100%_0,100%_100%,4%_100%,4%_85%,0_82%,0_0)]" />
             <div className="navbar_h-menu-bg is-second absolute inset-0 z-0 bg-brand-purple [clip-path:polygon(100%_0,100%_100%,4%_100%,4%_85%,0_82%,0_0)]" />
           </div>
-          <div className="relative z-2 flex h-screen flex-col items-start justify-start gap-4 overflow-y-auto pb-40 pl-14 pr-10 pt-[7rem] max-[767px]:px-6 max-[767px]:pb-44 max-[479px]:pt-[5.5rem]">
+          <div
+            data-lenis-prevent
+            className="relative z-2 flex h-screen flex-col items-start justify-start gap-4
+           overflow-y-auto pb-40 pl-14 pr-10 pt-[7rem] max-[767px]:px-6 max-[767px]:pb-44 max-[479px]:pt-[5.5rem]">
             <div className="absolute left-6 top-6 flex flex-col overflow-hidden pb-[0.2rem]">
               <Link
                 href="/"

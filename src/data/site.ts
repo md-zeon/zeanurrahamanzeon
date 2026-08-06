@@ -30,8 +30,8 @@ export const soundWaves = {
 
 /** Shared image assets referenced by content across the site. */
 export const photos = {
-  ellipseLight: "/assets/images/688cdf4c6797ca96923a1b7a_Ellipse-4.png",
-  ellipseBlack: "/assets/images/67b5046fa617fafb44539f31_Ellipse-4.png",
+  ellipseLight: "/assets/images/zeon.webp",
+  ellipseBlack: "/assets/images/zeon.webp",
   dscf: "/assets/images/68a45a760cd92325bdbe6e29_DSCF1373.webp",
   img6121: "/assets/images/68a45d04c04a2d5dfbf53d01_IMG_6121.webp",
   farSocial:
