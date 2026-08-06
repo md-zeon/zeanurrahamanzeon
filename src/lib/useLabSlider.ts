@@ -53,13 +53,40 @@ export function useLabSlider(container: RefObject<HTMLElement | null>) {
         updateSlides();
       };
 
+      const cleanups: Array<() => void> = [];
       nextButton?.addEventListener("click", onNext);
       prevButton?.addEventListener("click", onPrev);
-
-      return () => {
+      cleanups.push(() => {
         nextButton?.removeEventListener("click", onNext);
         prevButton?.removeEventListener("click", onPrev);
-      };
+      });
+
+      // Light hover feedback on the arrow controls.
+      [nextButton, prevButton].forEach((btn) => {
+        if (!btn) return;
+        const onEnter = () =>
+          gsap.to(btn, {
+            scale: 1.15,
+            opacity: 0.8,
+            duration: 0.25,
+            ease: "expo.out",
+          });
+        const onLeave = () =>
+          gsap.to(btn, {
+            scale: 1,
+            opacity: 1,
+            duration: 0.25,
+            ease: "expo.out",
+          });
+        btn.addEventListener("mouseenter", onEnter);
+        btn.addEventListener("mouseleave", onLeave);
+        cleanups.push(() => {
+          btn.removeEventListener("mouseenter", onEnter);
+          btn.removeEventListener("mouseleave", onLeave);
+        });
+      });
+
+      return () => cleanups.forEach((fn) => fn());
     }, el);
 
     return () => ctx.revert();

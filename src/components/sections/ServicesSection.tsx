@@ -64,7 +64,7 @@ export default function ServicesSection() {
                 <div
                   key={service.index}
                   data-audio={audio.cardHover}
-                  className="relative flex h-146.5 flex-col items-stretch justify-between overflow-hidden rounded-lg border border-white-20 bg-[#efefe60d] p-[2.5rem_2.5rem_2.5rem_2rem] backdrop-blur-[100px] transform-3d transition-all duration-200 ease-out max-[991px]:h-auto max-[991px]:gap-16 max-[991px]:px-0 max-[991px]:py-8 max-[767px]:gap-8"
+                  className="relative flex h-146.5 flex-col items-stretch justify-between overflow-hidden rounded-lg border border-white-20 bg-[#efefe60d] p-[2.5rem_2.5rem_2.5rem_2rem] backdrop-blur-[100px] transform-3d transition-all duration-200 ease-out hover:border-white-30 hover:bg-white-10 max-[991px]:h-auto max-[991px]:gap-16 max-[991px]:px-0 max-[991px]:py-8 max-[767px]:gap-8"
                 >
                   <div className="relative z-2 flex flex-col gap-2 max-[991px]:px-8 max-[767px]:px-6 max-[767px]:gap-y-[0.3rem]">
                     <div className="flex gap-2 overflow-hidden max-[991px]:flex-col max-[767px]:gap-1">

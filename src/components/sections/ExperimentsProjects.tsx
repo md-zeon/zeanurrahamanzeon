@@ -43,6 +43,7 @@ export default function ExperimentsProjects() {
     if (!el) return;
 
     const ctx = gsap.context(() => {
+      const cleanups: Array<() => void> = [];
       const projects = gsap.utils.toArray<HTMLElement>(
         ".home-projects_project",
       );
@@ -274,6 +275,44 @@ export default function ExperimentsProjects() {
       bannerTrigger.vars.onLeave = () => bannerFade("out");
       bannerTrigger.vars.onEnterBack = () => bannerFade("in");
       bannerTrigger.vars.onLeaveBack = () => bannerFade("out");
+
+      // Hover feedback on the thumbnails: brighten the border and indent the
+      // thumbnail, restoring the scroll-driven active state on leave.
+      navButtons.forEach((b, index) => {
+        const imgWrap = b.querySelector(".home-projects_nav-image-wrapper");
+        const isActive = () => index === Math.max(0, lastActiveIndex);
+        const onEnter = () => {
+          gsap.to(b, {
+            marginLeft: isActive() ? "-0.7rem" : "-0.35rem",
+            opacity: 1,
+            duration: 0.25,
+            ease: "expo.out",
+          });
+          if (imgWrap)
+            gsap.to(imgWrap, { borderColor: "#EFEFE6", duration: 0.25 });
+        };
+        const onLeave = () => {
+          gsap.to(b, {
+            marginLeft: isActive() ? "-0.7rem" : "0rem",
+            opacity: isActive() ? 1 : 0.9,
+            duration: 0.25,
+            ease: "expo.out",
+          });
+          if (imgWrap)
+            gsap.to(imgWrap, {
+              borderColor: isActive() ? "#EFEFE6" : "transparent",
+              duration: 0.25,
+            });
+        };
+        b.addEventListener("mouseenter", onEnter);
+        b.addEventListener("mouseleave", onLeave);
+        cleanups.push(() => {
+          b.removeEventListener("mouseenter", onEnter);
+          b.removeEventListener("mouseleave", onLeave);
+        });
+      });
+
+      return () => cleanups.forEach((fn) => fn());
     }, el);
 
     return () => ctx.revert();

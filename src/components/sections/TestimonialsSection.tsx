@@ -195,6 +195,24 @@ export default function TestimonialsSection() {
           event.preventDefault();
           switchTo(index);
         });
+        // Hover feedback: brighten the logo tile, restoring the active state
+        // on leave.
+        const onEnter = () =>
+          gsap.to(nav, {
+            opacity: 1,
+            borderColor: "#efefe680",
+            duration: 0.25,
+            ease: "power2.out",
+          });
+        const onLeave = () =>
+          gsap.to(nav, {
+            opacity: index === currentIndexRef.current ? 1 : 0.5,
+            borderColor: "rgba(239, 239, 230, 0.2)",
+            duration: 0.25,
+            ease: "power2.out",
+          });
+        nav.addEventListener("mouseenter", onEnter);
+        nav.addEventListener("mouseleave", onLeave);
       });
     }, el);
 
