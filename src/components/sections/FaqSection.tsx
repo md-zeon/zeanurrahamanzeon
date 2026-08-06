@@ -96,6 +96,12 @@ export default function FaqSection() {
       gsap.set(".faq_answer", { height: 0, overflow: "hidden" });
       gsap.set(".faq_icon-wrapper .icon-embed-small", { rotate: 0 });
 
+      // `ctx.revert()` only runs cleanup functions this callback returns, so
+      // native listeners are tracked here and detached on revert — otherwise
+      // StrictMode's effect double-mount leaves duplicate click handlers that
+      // cancel each other out (item opens then instantly closes).
+      const cleanups: Array<() => void> = [];
+
       const handleClick = (e: MouseEvent) => {
         const question = (e.currentTarget as HTMLElement).closest(
           ".faq_question",
@@ -185,6 +191,7 @@ export default function FaqSection() {
       const questions = el.querySelectorAll<HTMLElement>(".faq_question");
       questions.forEach((q) => {
         q.addEventListener("click", handleClick);
+        cleanups.push(() => q.removeEventListener("click", handleClick));
         // Desktop-only hover nudge of the question row.
         if (window.matchMedia("(min-width: 1280px)").matches) {
           const handleEnter = () =>
@@ -201,8 +208,14 @@ export default function FaqSection() {
             });
           q.addEventListener("mouseenter", handleEnter);
           q.addEventListener("mouseleave", handleLeave);
+          cleanups.push(() => {
+            q.removeEventListener("mouseenter", handleEnter);
+            q.removeEventListener("mouseleave", handleLeave);
+          });
         }
       });
+
+      return () => cleanups.forEach((fn) => fn());
     }, el);
 
     return () => ctx.revert();
