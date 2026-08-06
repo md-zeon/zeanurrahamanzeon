@@ -2,7 +2,7 @@
 export const brand = {
   name: "Zeanur Rahaman Zeon",
   logoStart: "zeanur",
-  logoEnd: "rahaman",
+  logoEnd: "rahamanzeon",
   heroName: "Hi, I'm Zeanur Rahaman Zeon",
   heroLine1: "Aspiring",
   heroLine2: "Software",

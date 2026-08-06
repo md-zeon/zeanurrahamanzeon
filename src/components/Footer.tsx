@@ -135,37 +135,39 @@ export default function Footer() {
             <div className="flex flex-col justify-between gap-[3.38rem] max-[767px]:gap-12">
               <div>
                 <div className="flex w-full flex-col items-start justify-between gap-[3.38rem] max-[767px]:gap-12">
-                  <div className="flex w-full flex-none items-end justify-between gap-16 border-b border-white-20 max-[767px]:gap-8 max-[479px]:flex-wrap max-[479px]:gap-4">
-                    <div className="mb-[0.8rem] overflow-hidden">
-                      <Link
-                        href="/"
-                        className="navbar_logo-link flex w-nav-brand flex-row pl-0"
-                        data-audio={audio.scramble}
-                      >
-                        <div className="navbar_logo font-brockmann text-[1.5rem] font-normal leading-[100%] text-brand-white no-underline">
-                          {brand.logoStart}
-                        </div>
-                        <div className="navbar_logo is-animation font-brockmann text-[1.5rem] font-normal leading-[100%] text-brand-white no-underline">
-                          {brand.logoEnd}
-                        </div>
-                      </Link>
-                    </div>
-                    <div className="flex w-full max-w-104 flex-col items-stretch justify-end gap-1 pr-[0.2rem] max-[991px]:w-[28vw] max-[767px]:w-auto max-[767px]:max-w-none">
-                      <div className="text-right">
-                        <a
-                          href={socials.github}
-                          target="_blank"
-                          className="badge-link w-inline-block"
+                  <div className="flex w-full flex-none flex-col items-start justify-between gap-[3.38rem] max-[767px]:gap-12">
+                    <div className="flex w-full flex-none items-end justify-between gap-8 border-b border-white-20 max-[479px]:flex-wrap max-[479px]:gap-4">
+                      <div className="mb-[0.8rem] overflow-hidden">
+                        <Link
+                          href="/"
+                          className="navbar_logo-link flex w-nav-brand flex-row pl-0"
                           data-audio={audio.scramble}
                         >
-                          <CredentialIcon />
-                          <div className="text-size-small text-weight-medium text-style-allcaps">
-                            Open to Work
+                          <div className="navbar_logo font-brockmann text-[1.5rem] font-normal leading-[100%] text-brand-white no-underline">
+                            {brand.logoStart}
                           </div>
-                        </a>
+                          <div className="navbar_logo is-animation font-brockmann text-[1.5rem] font-normal leading-[100%] text-brand-white no-underline">
+                            {brand.logoEnd}
+                          </div>
+                        </Link>
                       </div>
-                      <div className="relative h-px w-full overflow-hidden">
-                        <div className="absolute inset-0 bg-brand-white" />
+                      <div className="flex w-full max-w-104 flex-col items-stretch justify-end gap-1 pr-[0.2rem] max-[991px]:w-[28vw] max-[767px]:w-auto max-[767px]:max-w-none">
+                        <div className="text-right">
+                          <a
+                            href={socials.github}
+                            target="_blank"
+                            className="badge-link w-inline-block"
+                            data-audio={audio.scramble}
+                          >
+                            <CredentialIcon />
+                            <div className="text-size-small text-weight-medium text-style-allcaps">
+                              Open to Work
+                            </div>
+                          </a>
+                        </div>
+                        <div className="relative h-px w-full overflow-hidden">
+                          <div className="absolute inset-0 bg-brand-white" />
+                        </div>
                       </div>
                     </div>
                     <div className="grid w-full grid-cols-[minmax(auto,10rem)_minmax(200px,14rem)_.7fr] items-start justify-between gap-x-12 gap-y-4 max-[991px]:grid-cols-2 max-[991px]:justify-start max-[991px]:[place-items:start_stretch] max-[991px]:gap-24 max-[991px]:flex-wrap max-[767px]:gap-6 max-[479px]:flex max-[479px]:flex-wrap max-[479px]:items-start max-[479px]:justify-start max-[479px]:gap-12">

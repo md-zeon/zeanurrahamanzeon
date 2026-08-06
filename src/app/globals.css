@@ -215,7 +215,7 @@ input[type="file"]:focus-visible {
   }
 
   .heading-style-h0.is-faq {
-    @apply text-[9.5vw] tracking-[-0.6vw];
+    @apply text-[7.6vw] tracking-[-0.6vw];
   }
 
   .heading-style-h0.is-career {
