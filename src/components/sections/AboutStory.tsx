@@ -139,7 +139,7 @@ export default function AboutStory() {
           { year: 2021, start: "top 55%" },
           { year: 2022, start: "top 35%" },
           { year: 2023, start: "top 10%" },
-          { year: 2025, start: "top 0%" },
+          { year: 2026, start: "top 0%" },
         ];
 
         let currentTween: gsap.core.Tween | null = null;

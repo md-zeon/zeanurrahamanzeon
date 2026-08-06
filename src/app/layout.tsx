@@ -13,14 +13,46 @@ import SiteShell from "@/components/SiteShell";
 /** Local display font (Brockmann) with its weights/italics preloaded. */
 export const brockmann = localFont({
   src: [
-    { path: "./fonts/brockmann/brockmann-400.woff2", weight: "400", style: "normal" },
-    { path: "./fonts/brockmann/brockmann-400i.woff2", weight: "400", style: "italic" },
-    { path: "./fonts/brockmann/brockmann-500.woff2", weight: "500", style: "normal" },
-    { path: "./fonts/brockmann/brockmann-500i.woff2", weight: "500", style: "italic" },
-    { path: "./fonts/brockmann/brockmann-600.woff2", weight: "600", style: "normal" },
-    { path: "./fonts/brockmann/brockmann-600i.woff2", weight: "600", style: "italic" },
-    { path: "./fonts/brockmann/brockmann-700.woff2", weight: "700", style: "normal" },
-    { path: "./fonts/brockmann/brockmann-700i.woff2", weight: "700", style: "italic" },
+    {
+      path: "./fonts/brockmann/brockmann-400.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "./fonts/brockmann/brockmann-400i.woff2",
+      weight: "400",
+      style: "italic",
+    },
+    {
+      path: "./fonts/brockmann/brockmann-500.woff2",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "./fonts/brockmann/brockmann-500i.woff2",
+      weight: "500",
+      style: "italic",
+    },
+    {
+      path: "./fonts/brockmann/brockmann-600.woff2",
+      weight: "600",
+      style: "normal",
+    },
+    {
+      path: "./fonts/brockmann/brockmann-600i.woff2",
+      weight: "600",
+      style: "italic",
+    },
+    {
+      path: "./fonts/brockmann/brockmann-700.woff2",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "./fonts/brockmann/brockmann-700i.woff2",
+      weight: "700",
+      style: "italic",
+    },
   ],
   variable: "--font-brockmann",
   display: "swap",
@@ -43,13 +75,17 @@ export const metadata: Metadata = {
     template: "%s | Zeanur Rahaman Zeon",
   },
   description:
-    "Software Engineer specializing in Next.js, React, TypeScript, Node.js, and scalable web applications. Explore my projects, experience, and technical expertise.",
+    "Software Engineer who solves real problems end-to-end with clean architecture and solid fundamentals — comfortable across stacks and quick to adapt. Explore projects, case studies, and open source.",
   keywords: [
     "Zeanur Rahaman Zeon",
     "Software Engineer",
     "Software Developer",
     "Full Stack Developer",
-    "Frontend Developer",
+    "Problem Solver",
+    "Web Developer",
+    "Portfolio",
+    "Open to Work",
+    "JavaScript",
     "Next.js",
     "React",
     "TypeScript",

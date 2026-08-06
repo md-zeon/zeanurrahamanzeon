@@ -18,7 +18,7 @@ export const featuredProjects = [
     index: "002",
     title: "DevQnA",
     description:
-      "A full-featured developer Q&A platform built from scratch — voting, rich MDX authoring, and AI-assisted answers on Next.js and MongoDB.",
+      "A developer Q&A platform built from scratch — voting, rich authoring, and AI-assisted answers that help developers learn faster.",
     link: "/work/devqna",
     video: "/assets/videos/Videos/Work/devqna/DevQnA.mp4",
     navVideo: "/assets/videos/Videos/Work/devqna/DevQnA.mp4",
@@ -27,7 +27,7 @@ export const featuredProjects = [
     index: "003",
     title: "Oshudpati Marketplace",
     description:
-      "A medicine and healthcare marketplace for Bangladesh — Next.js storefront with a dedicated Express and PostgreSQL API.",
+      "A medicine and healthcare marketplace for Bangladesh — product discovery, orders, and delivery built for the local market.",
     link: "/work/oshudpati-marketplace",
     video: "/assets/videos/Videos/Work/oshudpati-marketplace/Oshudpati-Marketplace.mp4",
     navVideo: "/assets/videos/Videos/Work/oshudpati-marketplace/Oshudpati-Marketplace.mp4",
@@ -36,7 +36,7 @@ export const featuredProjects = [
     index: "004",
     title: "MicroEarn",
     description:
-      "A micro-task marketplace where users complete tasks and earn digital coins — real-time feeds, wallets, and rewards on the MERN stack.",
+      "A micro-task marketplace with a real economy — users post tasks, complete them, and get paid through wallets and rewards.",
     link: "/work/microearn",
     video: "/assets/videos/Videos/Work/microearn/MicroEarn.mp4",
     navVideo: "/assets/videos/Videos/Work/microearn/MicroEarn.mp4",
@@ -49,7 +49,7 @@ export const whyHeader = {
   line2: "with me?",
   caption: "ABOUT ME",
   highlight:
-    "I build full-stack web applications with Next.js, React, TypeScript, and Node.js — focused on clean architecture, real-time features, and interfaces that feel fast and intuitive from the first click.",
+    "I'm a problem solver first: I focus on understanding what needs to be built, then choose the tools that fit — rather than forcing a favorite stack. Clean architecture, real-time features, and interfaces that feel fast and intuitive from the first click.",
 };
 
 /** Credibility cards in the "Why partner with me?" section. */
@@ -89,39 +89,47 @@ export const whyCards = [
   },
 ];
 
-/** The three service offerings (development, frontend, backend/infrastructure). */
+/** The three service offerings (product, interface, systems). */
 export const services = [
   {
     index: "01",
-    title: "Full-Stack Web Development",
+    title: "Product Engineering",
     description:
-      "Building complete web applications end-to-end — from database schema and APIs to the user interface — with modern, type-safe tooling that scales as the product grows.",
+      "Turning a problem into a shipped product end-to-end — from data modeling and APIs to the interface users touch — with clean, maintainable architecture that scales as the product grows.",
     items: [
-      "Next.js App Router",
-      "React & TypeScript",
-      "Node.js / Express",
-      "REST API Design",
-      "PostgreSQL & Prisma",
-      "MongoDB & Mongoose",
-      "Tailwind CSS",
-      "shadcn/ui",
-      "SEO-Ready Structure",
+      "Problem Discovery",
+      "Product Architecture",
+      "API Design & Integration",
+      "Database Modeling",
+      "Authentication & Authorization",
+      "Real-time Features",
+      "Testing & Reliability",
+      "Deployment & Monitoring",
+      "TypeScript",
+      "Next.js",
+      "React",
+      "Node.js",
+      "PostgreSQL",
+      "MongoDB",
     ],
   },
   {
     index: "02",
-    title: "Frontend Engineering & UI",
+    title: "Interface Engineering & UI",
     description:
       "Crafting responsive, interactive interfaces where structure, motion, and usability work together — from component systems to buttery-smooth animations.",
     items: [
       "Responsive & Interactive UI",
-      "GSAP & Framer Motion",
       "Design Systems",
       "Component Architecture",
+      "Motion & Interaction Design",
       "Accessibility",
       "Performance Optimization",
       "Dark Mode",
       "Micro-interactions",
+      "Tailwind CSS",
+      "GSAP",
+      "Framer Motion",
     ],
   },
   {
@@ -131,13 +139,18 @@ export const services = [
       "Designing robust APIs, authentication, and real-time systems — secure, observable, and deployed with confidence on modern cloud platforms.",
     items: [
       "API Design & Validation",
-      "NextAuth / Better-Auth",
-      "JWT & RBAC",
-      "Real-time with Socket.IO",
-      "File Uploads (Cloudinary)",
+      "Auth & Role-Based Access",
+      "Secure & Observed Systems",
+      "Real-time Communication",
+      "File Uploads & Media",
       "Payment Integration",
       "Testing & CI",
-      "Deployment (Vercel, Netlify, Firebase)",
+      "Cloud Deployment",
+      "Express",
+      "Socket.IO",
+      "Prisma",
+      "Vercel",
+      "Firebase",
     ],
   },
 ];
@@ -146,9 +159,9 @@ export const services = [
 export const testimonials = [
   {
     quote:
-      "I treat every project as an end-to-end product problem — from data models and authentication to the pixels people actually touch. I build full-stack, ship clean code, and stay open to collaboration on anything that solves a real problem.",
+      "I treat every project as an end-to-end product problem — from data models and authentication to the pixels people actually touch. I choose the right tools for the job, ship clean code, and stay open to collaboration on anything that solves a real problem.",
     name: "Zeanur Rahaman Zeon",
-    role: "Full-Stack Software Engineer",
+    role: "Software Engineer",
     image: photos.ellipseLight,
     logo: "/assets/images/about/zeon-monogram.svg",
   },
@@ -224,12 +237,12 @@ export const cta = {
     name: "Zeanur Rahaman Zeon",
     firstMessage: "What are you building?",
     partnerMessages: [
-      "I need a full-stack developer for a web app.",
-      "I have an idea and want to bring it to life.",
+      "I need help turning an idea into a working product.",
+      "I have a problem and want to bring it to life.",
     ],
     myMessages: [
-      "Awesome — let's talk stack and scope.",
-      "I'm in! Next.js, Node, or the MERN stack — let's build.",
+      "Awesome — let's talk about the problem and the goals.",
+      "I'm in — let's find the right tools for what you're building.",
     ],
     buttons: ["Let's build together!", "Tell me about your idea!"],
   },

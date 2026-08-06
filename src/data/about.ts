@@ -1,9 +1,9 @@
 /** Copy for the About page hero header. */
 export const aboutHeader = {
   title1: "Hi, I'm",
-  title2: "Zeanur",
+  title2: "Zeanur Rahaman",
   paragraph:
-    "I'm a full-stack software engineer building with Next.js, React, TypeScript, and Node.js — focused on real-world products, clean architecture, and user experiences that feel fast and intuitive.",
+    "I'm a software engineer who cares about solving problems, not just shipping code. I focus on clean architecture, solid fundamentals, and experiences that feel fast and intuitive — and I pick the right tool for each job rather than relying on a favorite stack.",
   button1: "Get in touch",
   button2: "See work",
   badge: "Open to Work",
@@ -13,7 +13,7 @@ export const aboutHeader = {
 };
 
 /** Marquee strip label for the "Career story" divider. */
-export const aboutDividerText = "Full-Stack Software Engineer";
+export const aboutDividerText = "Software Engineer";
 
 /**
  * Career story content: the body paragraphs with inline link fragments
@@ -24,10 +24,9 @@ export const aboutStory = {
   year: "2023",
   body: [
     "I'm a Computer Science & Engineering student at Northern University Bangladesh, graduating in 2027 — and I've been building for the web since 2023.",
-    "My journey started with the MERN stack — React, Node.js, Express, and MongoDB — where I learned to ship complete products rather than just pages.",
-    "Since then I've focused on the modern full-stack toolkit: Next.js, TypeScript, PostgreSQL with Prisma, real-time systems with Socket.IO, and authentication with NextAuth and Better-Auth.",
-    "I've built products end-to-end — a developer Q&A platform, a medicine marketplace for Bangladesh, and a real-time campus collaboration network.",
-    "I publish open source, and I'm always experimenting with GSAP, Framer Motion, and AI integrations.",
+    "I learned by shipping complete products rather than just pages: a developer Q&A platform, a medicine marketplace for Bangladesh, and a real-time campus collaboration network.",
+    "I don't tie myself to a single stack. Frameworks change, but fundamentals don't — data modeling, API design, authentication, and clean architecture transfer across tools. When I meet a new stack, I map its core concepts onto patterns I already know instead of starting from zero.",
+    "I publish open source, and I'm always experimenting with motion, AI integrations, and whatever idea catches my interest.",
     "I'm currently open to internships, freelance work, and open-source collaboration.",
   ],
   links: [
@@ -40,14 +39,12 @@ export const aboutStory = {
       text: "real-time campus collaboration network",
       href: "https://github.com/smart-nub-campus-client",
     },
-    { text: "Next.js", href: "https://nextjs.org" },
-    { text: "TypeScript", href: "https://www.typescriptlang.org" },
     { text: "open source", href: "https://github.com/md-zeon" },
   ],
   quote:
     "A dedicated builder who turns ideas into shipped products — clean code, real features, and attention to the details users actually notice.",
-  quoteName: "Collaborator",
-  quoteRole: "Open source community",
+  quoteName: "Zeanur Rahaman Zeon",
+  quoteRole: "Aspiring Software Engineer",
   images: [
     {
       src: "/assets/images/about/zeon-1.webp",
@@ -101,14 +98,14 @@ export const aboutFacts: { caption: string; slides: FactSlide[] } = {
       text: "I'm based in Tongi, Gazipur — building for teams and users around the world, working in UTC+06.",
     },
     {
-      caption: "MY STACK",
-      title: "Full-Stack",
+      caption: "MY APPROACH",
+      title: "Tool-Agnostic",
       video: "/assets/videos/Videos/Experiments/pitch---new-thumbnail.mp4",
       videoCaption: "FUN_FCT_003",
       elementCaption: "FUN_FCT_003",
       ctaLabel: "See GitHub",
       ctaHref: "https://github.com/md-zeon",
-      text: "Next.js, React, TypeScript, Node.js, Express, PostgreSQL + Prisma, MongoDB + Mongoose, and Tailwind — the tools I use to ship products end-to-end.",
+      text: "I don't bind myself to a single stack. I pick the right tools for each problem, and when a new framework comes up I map it onto fundamentals I already know — so I'm productive fast in any codebase.",
     },
     {
       caption: "DRIVEN BY",

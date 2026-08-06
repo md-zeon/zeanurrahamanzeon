@@ -223,24 +223,6 @@ export default function Footer() {
                               </a>
                             ))}
                           </div>
-                          <div className="flex flex-col">
-                            {footer.connectMore.map((link, i) => (
-                              <a
-                                key={link.href}
-                                href={link.href}
-                                target="_blank"
-                                className="footer_link flex gap-1 overflow-hidden py-2 text-[0.875rem] leading-[150%] text-brand-white no-underline"
-                                data-audio={audio.scramble}
-                              >
-                                <div className="text-caption-2 text-color-teritary">
-                                  [{String(13 + i).padStart(2, "0")}]
-                                </div>
-                                <div className="text-size-small text-style-allcaps">
-                                  {link.label}
-                                </div>
-                              </a>
-                            ))}
-                          </div>
                         </div>
                       </div>
                     </div>

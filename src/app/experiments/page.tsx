@@ -7,7 +7,7 @@ import CtaSection from "@/components/sections/CtaSection";
 export const metadata: Metadata = {
   title: "Experiments & Side Projects",
   description:
-    "A growing collection of side projects, open-source tools, and motion experiments exploring full-stack patterns, real-time features, and creative interactions.",
+    "A growing collection of side projects, open-source tools, and motion experiments exploring engineering patterns, real-time features, and creative interactions.",
 };
 
 /**

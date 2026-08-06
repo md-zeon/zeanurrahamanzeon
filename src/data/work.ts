@@ -3,7 +3,7 @@ export const workHeader = {
   title1: "Selected",
   title2: "projects",
   paragraph:
-    "Full-stack projects built with Next.js, React, TypeScript, and Node.js — from developer tools and health marketplaces to real-time campus networks.",
+    "Projects built to solve real problems — from developer tools and health marketplaces to real-time campus networks and a micro-task economy.",
   buttonLabel: "Get in touch",
   badge: "Open to Work",
   badgeLink: "https://github.com/md-zeon",

@@ -4,11 +4,11 @@ export const brand = {
   logoStart: "zeanur",
   logoEnd: "rahaman",
   heroName: "Hi, I'm Zeanur Rahaman Zeon",
-  heroLine1: "Full-Stack",
+  heroLine1: "Aspiring",
   heroLine2: "Software",
   heroLine3: "Engineer",
   heroIntro:
-    "Full Stack Software Engineer specializing in React, Next.js, TypeScript, Node.js, and scalable web applications. I enjoy building performant products, solving real-world problems, and creating intuitive user experiences.",
+    "Full-stack software engineer building with TypeScript, React, Next.js, and Node.js. I start with the problem, pick the right tools to solve it, and build end-to-end products with clean architecture and solid fundamentals. When a new stack comes up, I don't relearn from scratch — I map its core concepts onto patterns I already know.",
   heroVideo: "/assets/videos/hero-clip-vid.mp4",
   heroVideoCaption: "HELLO_ZEON",
 };
@@ -50,14 +50,11 @@ export const navLinks = [
 export const socials = {
   linkedin: "https://www.linkedin.com/in/zeanur-rahaman-zeon/",
   github: "https://github.com/md-zeon",
-  youtube: "https://www.youtube.com/@",
-  instagram: "https://www.instagram.com/",
   twitter: "https://x.com/developer_zeon",
   email: "mailto:zeon.cse@gmail.com",
-  oldPortfolio: "https://zeon-portfolio.netlify.app/",
 };
 
-/** Footer link groups: overview, case studies, and connect lists. */
+/** Footer link groups: overview and connect lists. */
 export const footer = {
   overview: navLinks,
   caseStudies: [
@@ -71,10 +68,5 @@ export const footer = {
     { label: "GitHub", href: socials.github },
     { label: "Twitter", href: socials.twitter },
     { label: "email", href: socials.email },
-  ],
-  connectMore: [
-    { label: "old portfolio", href: socials.oldPortfolio },
-    { label: "YouTube", href: socials.youtube },
-    { label: "instagram", href: socials.instagram },
   ],
 };

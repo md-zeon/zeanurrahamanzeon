@@ -3,7 +3,7 @@ export const contactHeader = {
   title1: "Let's work",
   title2: "together",
   paragraph:
-    "Get in touch today if you're building a web app, need a full-stack engineer, or want to discuss a collaboration — let's find a solution together.",
+    "Have an idea you want to build? Looking for a developer who ships real products, not just concepts? Send a message — let's find a solution together.",
 };
 
 /**
@@ -14,28 +14,64 @@ export const contactHeader = {
 export const contactForm = {
   email: "zeon.cse@gmail.com",
   sections: [
-    { label: "[for collaborations]", text: "I'm always open to partnering up with developers, designers, agencies, and anyone working on interesting problems. Send me an email and let's discuss." },
-    { label: "[for questions]", text: "Have questions about a project or my stack? Check out the FAQ below or feel free to contact me." },
+    {
+      label: "[for collaborations]",
+      text: "I'm always open to partnering up with developers, designers, agencies, and anyone working on interesting problems. Send me an email and let's discuss.",
+    },
+    {
+      label: "[for questions]",
+      text: "Have questions about a project or how I work? Check out the FAQ below or feel free to contact me.",
+    },
   ],
   companyStage: {
     label: "Company stage",
-    options: ["Early-stage startup", "Mid-stage startup", "Late-stage startup", "Scaleup", "Enterprise", "Not applicable"],
+    options: [
+      "Early-stage startup",
+      "Mid-stage startup",
+      "Late-stage startup",
+      "Scaleup",
+      "Enterprise",
+      "Not applicable",
+    ],
   },
   deadline: {
     label: "Do you have a deadline?",
-    options: ["No, no rush", "<Month", "1-3 Months", "3-6 Months", "6+ Months", "Not applicable"],
+    options: [
+      "No, no rush",
+      "<Month",
+      "1-3 Months",
+      "3-6 Months",
+      "6+ Months",
+      "Not applicable",
+    ],
   },
   budget: {
     label: "What is your Estimated budget?",
-    options: ["Under $1,000", "$1,000 - $5,000", "$5,000 - $10,000", "$10,000+", "Hourly / Retainer", "I'm not sure"],
+    options: [
+      "Under $1,000",
+      "$1,000 - $5,000",
+      "$5,000 - $10,000",
+      "$10,000+",
+      "Hourly / Retainer",
+      "I'm not sure",
+    ],
     note: "We'll confirm this together, don't worry.",
   },
   source: {
     label: "How did you hear about me?",
-    options: ["GitHub", "LinkedIn", "Search engine", "Social media", "Word of mouth", "Blog or article", "Other"],
+    options: [
+      "GitHub",
+      "LinkedIn",
+      "Search engine",
+      "Social media",
+      "Word of mouth",
+      "Blog or article",
+      "Other",
+    ],
   },
   submit: "Submit",
-  success: "Thank you for your submission. I'll get back to you within 2 business days.",
+  success:
+    "Thank you for your submission. I'll get back to you within 2 business days.",
   error: "Oops! Something went wrong while submitting the form.",
 };
 
@@ -51,8 +87,8 @@ export const faq = {
     {
       question: "What type of projects do you build?",
       answer: [
-        "I focus on full-stack web applications: developer tools, marketplaces, real-time platforms, and anything that needs a clean API and a polished interface.",
-        "My stack is Next.js, React, TypeScript, Node.js/Express, PostgreSQL with Prisma, MongoDB with Mongoose, and Tailwind CSS — with authentication, real-time features, and AI integrations when the product calls for them.",
+        "I focus on web products that solve real problems: developer tools, marketplaces, real-time platforms, and anything that needs a clean API and a polished interface.",
+        "I don't tie myself to a single stack. I pick the tools that fit each project — authentication, real-time features, and AI integrations included when the product calls for them — and I adapt quickly when a new stack is involved.",
       ],
       answerHtml: true,
     },
@@ -84,10 +120,11 @@ export const faq = {
     {
       question: "Can you work with my existing stack or infrastructure?",
       answer: [
-        "Almost certainly. I'm at home in the modern JavaScript ecosystem — Next.js, React, Node, Express, PostgreSQL/Prisma, MongoDB/Mongoose, and auth providers like NextAuth and Better-Auth.",
-        "For real-time needs I use Socket.IO, and I deploy regularly to Vercel, Netlify, Firebase, and Fly. If your stack fits that world, I can jump in and extend it safely.",
+        "Almost certainly. I'm at home in the modern JavaScript ecosystem, and I'm comfortable picking up new languages, frameworks, and services as a project requires.",
+        "When I encounter a stack I haven't used, I don't start from scratch — I map its core concepts onto fundamentals I already know, so I can contribute quickly and safely to an existing codebase.",
       ],
     },
   ],
-  contactText: "Can't find an answer to your question? Feel free to contact me.",
+  contactText:
+    "Can't find an answer to your question? Feel free to contact me.",
 };

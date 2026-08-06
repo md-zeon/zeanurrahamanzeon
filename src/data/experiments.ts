@@ -3,7 +3,7 @@ export const experimentsHeader = {
   title1: "Experiments",
   title2: "& Side Projects",
   paragraph:
-    "A growing collection of side projects, open-source tools, and motion experiments — exploring full-stack patterns, real-time features, and creative interactions.",
+    "A growing collection of side projects, open-source tools, and motion experiments — exploring engineering patterns, real-time features, and creative interactions.",
   button1: "Get in touch",
   button2: "See case studies",
 };
@@ -13,7 +13,8 @@ export const experimentsStack = [
   {
     index: "Experiment_001",
     title: "DevTrack",
-    video: "/assets/videos/Videos/Experiments/spaceman-gsap---new-thumbnail.mp4",
+    video:
+      "/assets/videos/Videos/Experiments/spaceman-gsap---new-thumbnail.mp4",
     href: "https://devtrack-gamma.vercel.app",
   },
   {
@@ -42,21 +43,26 @@ export const experimentsCards = [
     index: "project_005",
     title: "GSAP Scroll Lab",
     href: "https://github.com/md-zeon",
-    poster: "/assets/videos/Videos/Experiments/thumbnails/bertani---new-thumbnail.webp",
+    poster:
+      "/assets/videos/Videos/Experiments/thumbnails/bertani---new-thumbnail.webp",
     video: "/assets/videos/Videos/Experiments/bertani---new-thumbnail.mp4",
   },
   {
     index: "project_006",
     title: "Motion Playground",
     href: "https://github.com/md-zeon",
-    poster: "/assets/videos/Videos/Experiments/thumbnails/battlefield---new-thumbnail.webp",
-    video: "/assets/videos/Videos/Experiments/battlefield-4---new-thumbnail.mp4",
+    poster:
+      "/assets/videos/Videos/Experiments/thumbnails/battlefield---new-thumbnail.webp",
+    video:
+      "/assets/videos/Videos/Experiments/battlefield-4---new-thumbnail.mp4",
   },
   {
     index: "project_007",
     title: "Scramble Text Demo",
-    href: "https://github.com/md-zeon",
-    poster: "/assets/videos/Videos/Experiments/thumbnails/pizza---new-thumbnail.webp",
-    video: "/assets/videos/Videos/Experiments/scramble-pizza-chaos---new-thumbnail.mp4",
+    href: "https://github.com/md-zeon/react-text-scramble",
+    poster:
+      "/assets/videos/Videos/Experiments/thumbnails/pizza---new-thumbnail.webp",
+    video:
+      "/assets/videos/Videos/Experiments/scramble-pizza-chaos---new-thumbnail.mp4",
   },
 ];

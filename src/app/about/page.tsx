@@ -10,7 +10,7 @@ import CtaSection from "@/components/sections/CtaSection";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "I'm Zeanur Rahaman Zeon — a full-stack software engineer from Bangladesh building scalable, interactive, and user-friendly web applications.",
+    "I'm Zeanur Rahaman Zeon — a aspiring software engineer from Bangladesh who solves real problems end-to-end with clean architecture and solid fundamentals, and picks the right tools for each job.",
 };
 
 /**

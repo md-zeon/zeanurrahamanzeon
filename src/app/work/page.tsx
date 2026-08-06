@@ -7,7 +7,7 @@ import WorkLabSection from "@/components/sections/WorkLabSection";
 export const metadata: Metadata = {
   title: "Work",
   description:
-    "Full-stack projects built with Next.js, React, TypeScript, and Node.js — from developer tools and health marketplaces to real-time campus networks.",
+    "I build real world applications that solve real problems — from a developer Q&A platform and a medicine marketplace to a real-time campus network and a micro-task economy.",
 };
 
 /** Work page: hero, project grid, CTA, and "from the labs" slider. */
