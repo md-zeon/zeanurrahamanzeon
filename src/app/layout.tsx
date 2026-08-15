@@ -118,7 +118,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${brockmann.variable} ${robotoMono.variable} w-mod-js`}
+      className={`${brockmann.variable} ${robotoMono.variable} w-mod-js scrollbar-thin`}
     >
       <body>
         <SiteShell>{children}</SiteShell>

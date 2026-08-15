@@ -103,15 +103,16 @@ export default function ExperimentsProjects() {
       });
 
       // Pin the section and drive the flip sequence with scroll progress.
-      // Background flips to the brand purple while pinned, back to dark on
-      // leave.
+      // Four viewports of scroll (a full viewport per project) so the last
+      // card settles before the pin releases. Background flips to the brand
+      // purple while pinned, back to dark on leave.
       const timeline = gsap.timeline({
         scrollTrigger: {
           id: "projectsScroll",
           trigger: ".home-projects_track",
           pin: el,
           start: "top top",
-          end: "+=300%",
+          end: "+=400%",
           scrub: 1,
           pinSpacing: true,
           onEnter: () => {
@@ -236,7 +237,7 @@ export default function ExperimentsProjects() {
       const bannerTrigger = ScrollTrigger.create({
         trigger: el,
         start: "top top",
-        end: "+=280%",
+        end: "+=400%",
         scrub: 1,
         onUpdate: () => {
           const st = ScrollTrigger.getById("projectsScroll");
