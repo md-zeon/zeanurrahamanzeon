@@ -54,11 +54,21 @@ const attachScramble = (el: HTMLElement, label: HTMLElement): Array<() => void> 
 
   let currentTimeline: gsap.core.Timeline | null = null;
 
+  // Lock the button to its natural full-text width so the scramble doesn't
+  // cause the button to resize as character widths change.
+  const lockWidth = () => {
+    el.style.width = `${el.offsetWidth}px`;
+    el.style.flexShrink = "0";
+  };
+  const unlockWidth = () => {
+    el.style.width = "";
+    el.style.flexShrink = "";
+  };
+
   const onEnter = () => {
     if (!textArray.length) return;
-    // Kill any in-flight scramble so a fast enter/leave doesn't queue
-    // conflicting text tweens.
     currentTimeline?.kill();
+    lockWidth();
     currentTimeline = gsap.timeline();
     // Reveal left-to-right: each step scrambles one more character.
     for (let i = 0; i < textArray.length; i++) {
@@ -96,6 +106,7 @@ const attachScramble = (el: HTMLElement, label: HTMLElement): Array<() => void> 
         `+=${SCRAMBLE_STEP}`,
       );
     }
+    currentTimeline.call(unlockWidth);
   };
 
   el.addEventListener("mouseenter", onEnter);
@@ -121,7 +132,7 @@ export function useButtonEffects() {
         const label = element.querySelector<HTMLElement>(BTN_LABEL_SELECTOR);
         if (label) cleanupFns.push(...attachScramble(element, label));
 
-        if (!isTouch && !element.classList.contains("btn-chat")) {
+        if (!isTouch) {
           // Magnetic pull: translate the button by a fraction of the distance
           // from its center to the cursor. Transform-based, so it composes with
           // any existing positioning on the button.
