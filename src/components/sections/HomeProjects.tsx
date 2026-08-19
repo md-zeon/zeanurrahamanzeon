@@ -378,6 +378,7 @@ export default function HomeProjects() {
           <a
             key={project.index}
             data-audio={audio.secondaryHover}
+            data-audio-click={audio.closeMenu}
             data-project={i + 1}
             href="#"
             className={`home-projects_nav-wrapper is-${i + 1} w-inline-block flex flex-col items-start justify-start gap-1 text-brand-white no-underline`}
@@ -404,10 +405,10 @@ export default function HomeProjects() {
           </div>
         </div>
         <div className="btn-group">
-          <a href="#" className="btn btn-small">
+          <a href="#" data-audio={audio.hover} className="btn btn-small">
             <div className="btn__text">View case study</div>
           </a>
-          <Link href="/work" className="btn btn-secondary btn-small">
+          <Link href="/work" data-audio={audio.hover} className="btn btn-secondary btn-small">
             <div className="btn__text">See all work</div>
           </Link>
         </div>

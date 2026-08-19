@@ -361,6 +361,7 @@ export default function ExperimentsProjects() {
           <a
             key={project.index}
             data-audio={audio.secondaryHover}
+            data-audio-click={audio.closeMenu}
             data-project={i + 1}
             href="#"
             className={`home-projects_nav-wrapper is-${i + 1} w-inline-block flex flex-col items-start justify-start gap-1 text-brand-white no-underline`}

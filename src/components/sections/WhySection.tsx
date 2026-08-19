@@ -6,6 +6,7 @@ import LogosElement from "../LogosElement";
 import AutoVideo from "../media/AutoVideo";
 import { useScrubbedHighlight } from "@/lib/useHeaderReveal";
 import { ArrowIcon } from "../shared";
+import { audio } from "@/data/site";
 
 export default function WhySection() {
   const ref = useRef<HTMLElement>(null);
@@ -74,6 +75,7 @@ export default function WhySection() {
                     <a
                       href={card.href}
                       target="_blank"
+                      data-audio={audio.hover}
                       className="btn btn-secondary btn-icon"
                     >
                       <div className="btn__text">{card.buttonLabel}</div>

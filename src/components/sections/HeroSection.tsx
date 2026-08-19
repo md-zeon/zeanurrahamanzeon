@@ -2,7 +2,7 @@
 
 import { useLayoutEffect, useRef } from "react";
 import { gsap, SplitText } from "@/lib/gsap";
-import { brand, socials } from "@/data/site";
+import { audio, brand, socials } from "@/data/site";
 import { HERO_ENTRANCE_COMPLETE } from "@/lib/utils";
 import { Button, Badge } from "../shared";
 import AutoVideo from "../media/AutoVideo";
@@ -251,8 +251,8 @@ export default function HeroSection() {
                           {brand.heroIntro}
                         </div>
                         <div className="btn-group btn-group--grid">
-                          <Button href="/contact">Get in touch</Button>
-                          <Button href="/work" variant="secondary">
+                          <Button href="/contact" dataAudio={audio.hover}>Get in touch</Button>
+                          <Button href="/work" variant="secondary" dataAudio={audio.hover}>
                             See work
                           </Button>
                         </div>

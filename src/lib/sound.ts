@@ -27,33 +27,6 @@ try {
   /* noop */
 }
 
-// Bookkeeping for which UI sounds have been loaded, keyed by sound name.
-const cache: Record<string, boolean> = {
-  hover: true,
-  scramble: true,
-  secondary: true,
-  card: true,
-  close: true,
-};
-
-/**
- * Maps a "logical" sound URL to the real asset URL from site config.
- *
- * Design note: Webflow-exported markup references human-readable asset names
- * (e.g. "buttons scramble.mp3"); when the site was ported to Next.js those
- * assets were consolidated into a single set of files, so lookups must be
- * translated here. Unknown URLs pass through unchanged.
- */
-function resolveUrl(url: string): string {
-  const lower = url.toLowerCase();
-  if (lower.includes("button hover") || lower.includes("button%20hover")) return audio.hover;
-  if (lower.includes("buttons scramble") || lower.includes("buttons%20scramble")) return audio.scramble;
-  if (lower.includes("secondary hover") || lower.includes("secondary%20hover")) return audio.secondaryHover;
-  if (lower.includes("card hover") || lower.includes("card%20hover")) return audio.cardHover;
-  if (lower.includes("close menu") || lower.includes("close-menu") || lower.includes("close%20menu")) return audio.closeMenu;
-  return url;
-}
-
 /** Whether sound is currently enabled (non-reactive read). */
 export function isSoundEnabled() {
   return enabled;
@@ -150,10 +123,9 @@ async function getBuffer(url: string): Promise<AudioBuffer | undefined> {
  */
 export async function playSound(url: string, volume = 1) {
   if (!enabled) return;
-  const resolved = resolveUrl(url);
   const c = ensureContext();
   if (!c) return;
-  const buffer = await getBuffer(resolved);
+  const buffer = await getBuffer(url);
   if (!buffer) return;
   const source = c.createBufferSource();
   source.buffer = buffer;
@@ -164,6 +136,37 @@ export async function playSound(url: string, volume = 1) {
   source.start(0);
 }
 
+/**
+ * Eagerly fetch + decode a sound in the background so the first hover/click
+ * that uses it has zero network latency. Errors are silently swallowed.
+ */
+function preloadSound(url: string) {
+  if (!enabled) return;
+  getBuffer(url);
+}
+
+/**
+ * Preload critical UI sounds after page load. Called once from SiteShell so
+ * the most common hover sound is warm before the user interacts.
+ */
+export function preloadSounds() {
+  if (typeof window === "undefined") return;
+  // Fire-and-forget: preload after the page is idle so we don't compete
+  // with critical resources.
+  if ("requestIdleCallback" in window) {
+    (window as unknown as { requestIdleCallback: (cb: () => void) => void }).requestIdleCallback(() => {
+      preloadSound(audio.hover);
+      preloadSound(audio.scramble);
+    });
+  } else {
+    // Fallback for browsers without requestIdleCallback.
+    setTimeout(() => {
+      preloadSound(audio.hover);
+      preloadSound(audio.scramble);
+    }, 1000);
+  }
+}
+
 /** Lazily creates the looping background music element (low volume by design). */
 export function ensureMusic() {
   if (typeof window === "undefined") return;
@@ -171,6 +174,36 @@ export function ensureMusic() {
     music = new Audio(audio.backgroundMusic);
     music.loop = true;
     music.volume = 0.4;
+  }
+}
+
+/**
+ * Starts background music if sound is enabled. Called on mount for returning
+ * users so music resumes without requiring a manual toggle.
+ * Respects browser autoplay policy — silently no-ops if the user hasn't
+ * interacted with the page yet, and installs a one-time listener to start
+ * music on the first user gesture.
+ */
+export function startMusicIfEnabled() {
+  if (!enabled) return;
+  ensureMusic();
+  if (music?.paused) {
+    music.play().catch(() => {
+      // Autoplay blocked (no user gesture yet). Wait for the first gesture
+      // and try once more — both listeners auto-remove after firing.
+      let tried = false;
+      const onFirstGesture = () => {
+        if (tried) return;
+        tried = true;
+        document.removeEventListener("pointerdown", onFirstGesture);
+        document.removeEventListener("keydown", onFirstGesture);
+        if (enabled && music?.paused) {
+          music.play().catch(() => undefined);
+        }
+      };
+      document.addEventListener("pointerdown", onFirstGesture);
+      document.addEventListener("keydown", onFirstGesture);
+    });
   }
 }
 
@@ -190,5 +223,3 @@ export function toggleMusic(): boolean {
 export function stopMusic() {
   if (music) music.pause();
 }
-
-export { cache };

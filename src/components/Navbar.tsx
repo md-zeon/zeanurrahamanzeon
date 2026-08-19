@@ -652,6 +652,7 @@ export default function Navbar() {
                   data-menu-tab={link.href.replace("/", "")}
                   data-color="#ffffff"
                   data-audio={audio.hover}
+                  data-audio-click={audio.closeMenu}
                   className="navbar_h-link relative z-1 flex items-start justify-start gap-3 overflow-hidden px-0 py-0 text-brand-white font-features-['ss01'_on] max-[991px]:pr-1 w-inline-block"
                 >
                   <div
@@ -705,6 +706,7 @@ export default function Navbar() {
         </div>
         <div
           className="navbar_h-bg-close absolute inset-0 z-1 h-full w-full bg-[#0000001a] backdrop-blur-[5px]"
+          data-audio-click={audio.closeMenu}
           onClick={closeMenu}
         />
       </div>

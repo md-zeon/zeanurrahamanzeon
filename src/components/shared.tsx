@@ -154,6 +154,7 @@ export function SliderControls({ right }: SliderControlsProps) {
           <div className="flex gap-2">
             <a
               data-slider="button-prev"
+              data-audio={audio.hover}
               aria-label="previous slide"
               href="#"
               className="w-inline-block"
@@ -162,6 +163,7 @@ export function SliderControls({ right }: SliderControlsProps) {
             </a>
             <a
               data-slider="button-next"
+              data-audio={audio.hover}
               aria-label="next slide"
               href="#"
               className="w-inline-block"
@@ -458,6 +460,7 @@ export function CredentialBadge({
       href={href}
       target="_blank"
       aria-label={label}
+      data-audio={audio.scramble}
       className="badge-link"
       style={{ display: "flex", flexDirection: "row", alignItems: "center" }}
     >

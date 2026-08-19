@@ -238,6 +238,7 @@ export default function Footer() {
                   <div className="flex justify-end gap-6 max-[767px]:w-full max-[767px]:justify-start max-[767px]:gap-8 max-[479px]:order-2">
                     <Link
                       href="/privacy-policy"
+                      data-audio={audio.scramble}
                       className="text-brand-white no-underline"
                     >
                       <div className="text-size-small text-color-teritary">

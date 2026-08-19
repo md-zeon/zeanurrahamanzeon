@@ -121,7 +121,7 @@ export function useButtonEffects() {
         const label = element.querySelector<HTMLElement>(BTN_LABEL_SELECTOR);
         if (label) cleanupFns.push(...attachScramble(element, label));
 
-        if (!isTouch) {
+        if (!isTouch && !element.classList.contains("btn-chat")) {
           // Magnetic pull: translate the button by a fraction of the distance
           // from its center to the cursor. Transform-based, so it composes with
           // any existing positioning on the button.

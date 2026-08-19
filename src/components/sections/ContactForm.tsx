@@ -185,6 +185,7 @@ export default function ContactForm() {
                           {i < arr.length - 1 ? (
                             <a
                               href="#faq-section"
+                              data-audio={audio.hover}
                               className="text-color-secondary"
                             >
                               FAQ below
@@ -402,6 +403,7 @@ export default function ContactForm() {
                       type="submit"
                       data-wait="Please wait..."
                       data-audio={audio.hover}
+                      data-audio-click={audio.closeMenu}
                       className="btn btn-small cursor-pointer border-0"
                       value="Submit"
                     />

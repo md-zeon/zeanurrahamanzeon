@@ -4,7 +4,7 @@ import { useEffect, useRef, type ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { destroyLenis, getLenis, initLenis } from "@/lib/lenis";
-import { initSound, playSound } from "@/lib/sound";
+import { initSound, playSound, preloadSounds, startMusicIfEnabled } from "@/lib/sound";
 import { useButtonEffects } from "@/lib/useButtonEffects";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
@@ -29,6 +29,8 @@ export default function SiteShell({ children }: { children: ReactNode }) {
   // markup of every individual button.
   useEffect(() => {
     initSound();
+    preloadSounds();
+    startMusicIfEnabled();
 
     const onAudioOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;

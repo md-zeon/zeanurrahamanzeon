@@ -351,6 +351,7 @@ export default function TestimonialsSection() {
                         src={testimonials[0].image}
                         alt=""
                         fill
+                        sizes="56px"
                         className="testimonial_photo"
                       />
                     </div>
@@ -400,6 +401,7 @@ export default function TestimonialsSection() {
                   <a
                     key={i}
                     data-audio={audio.secondaryHover}
+                    data-audio-click={audio.closeMenu}
                     href="#"
                     className={`testimonial_nav-wrapper relative flex aspect-[1.3] items-center justify-center border border-white-20 bg-[#efefe600] backdrop-blur-[100px] transition-all duration-200 max-[991px]:min-h-28 max-[767px]:min-h-24 max-[479px]:min-h-[30vw] ${i === 0 ? "rounded-l is-first is-active" : i === testimonials.length - 1 ? "rounded-r is-last" : ""} w-inline-block`}
                   >
