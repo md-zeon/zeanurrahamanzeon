@@ -5,36 +5,7 @@ import { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
 import { audio, brand, footer, socials } from "@/data/site";
 import Clock from "./Clock";
-
-/**
- * Site footer: link columns, logo, credential badge, copyright + live clock.
- *
- * Two behaviours live here: the copyright year is kept current, and every
- * `.footer_link` label scrambles between binary text on hover (left-to-right
- * on enter, right-to-left on leave) — same effect family as the buttons.
- */
-
-/** Inline credential mark (neutral asterisk glyph, local copy). */
-function CredentialIcon() {
-  return (
-    <div className="icon-embed-xxsmall" aria-hidden="true">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="100%"
-        height="100%"
-        viewBox="0 0 16 17"
-        fill="none"
-        preserveAspectRatio="xMidYMid meet"
-      >
-        <path
-          d="M2.41002 14.2237L13.7237 2.91001M0 8.54529H16M8.0453 16.5V0.5M2.36688 2.91001L13.6806 14.2237"
-          stroke="currentColor"
-          strokeWidth="1.5"
-        />
-      </svg>
-    </div>
-  );
-}
+import { CredentialIcon } from "./shared";
 
 export default function Footer() {
   const ref = useRef<HTMLElement>(null);

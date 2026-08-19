@@ -5,36 +5,7 @@ import { whyHeader, whyCards } from "@/data/home";
 import LogosElement from "../LogosElement";
 import AutoVideo from "../media/AutoVideo";
 import { useScrubbedHighlight } from "@/lib/useHeaderReveal";
-
-/**
- * "Why me?" section: two-line heading, a highlighted statement, and a grid
- * of video cards linking out to experiments. The heading uses the shared
- * `useSectionHeadings`/`LogosElement` reveal utilities, the statement's words
- * brighten progressively as they scroll into view, and each card's video is
- * auto-played by `AutoVideo`.
- */
-
-/** Diagonal arrow icon used inside the card buttons. */
-function ArrowIcon() {
-  return (
-    <div className="btn__icon" aria-hidden="true">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="100%"
-        height="100%"
-        viewBox="0 0 14 14"
-        fill="none"
-        preserveAspectRatio="xMidYMid meet"
-        role="img"
-      >
-        <path
-          d="M0.823227 13.0732L12.8232 1.07323M12.8232 1.07323V10.9268M12.8232 1.07323H3.17677"
-          stroke="currentColor"
-        />
-      </svg>
-    </div>
-  );
-}
+import { ArrowIcon } from "../shared";
 
 export default function WhySection() {
   const ref = useRef<HTMLElement>(null);

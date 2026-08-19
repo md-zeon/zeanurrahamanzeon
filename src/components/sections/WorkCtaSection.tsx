@@ -5,10 +5,10 @@ import { useCtaChat } from "@/lib/useCtaChat";
 import { useSectionHeadings } from "@/lib/useHeaderReveal";
 import { cta } from "@/data/home";
 import { workCta } from "@/data/work";
-import { audio, photos } from "@/data/site";
+import { audio } from "@/data/site";
 import LogosElement from "../LogosElement";
 import AutoVideo from "../media/AutoVideo";
-import { Button } from "../shared";
+import { Button, ChatWidget } from "../shared";
 
 /**
  * Work page variant of the CTA section: same video + mock chat widget and
@@ -129,154 +129,7 @@ export default function WorkCtaSection() {
                   </div>
                 </div>
                 <div className="flex items-start justify-center px-4 py-24 max-[991px]:relative max-[991px]:z-4 max-[991px]:justify-end max-[991px]:items-start max-[991px]:border-x max-[991px]:border-white-20 max-[991px]:pb-12 max-[991px]:pt-0 max-[479px]:justify-center max-[479px]:items-start">
-                  <div className="flex w-full max-w-93 flex-col gap-4 overflow-hidden rounded-lg border border-white-20 p-4 backdrop-blur-[100px] bg-[#efefe60d] max-[991px]:mt-[-5.6rem] max-[991px]:mr-[3.6rem] max-[767px]:mt-[-3.1rem] max-[767px]:mr-0 max-[479px]:mt-0">
-                    <div className="flex flex-col gap-4">
-                      <div className="flex gap-2">
-                        <div className="h-2.5 w-2.5 rounded-full bg-[#ec6a5e]" />
-                        <div className="h-2.5 w-2.5 rounded-full bg-[#413c4c]" />
-                        <div className="h-2.5 w-2.5 rounded-full bg-[#61c554]" />
-                      </div>
-                      <div className="h-px w-full bg-[#ffffff1a]" />
-                    </div>
-                    <div className="flex items-center justify-start gap-2">
-                      <div className="h-8 w-8 flex-none overflow-hidden rounded-full">
-                        <img
-                          src={photos.ellipseBlack}
-                          loading="lazy"
-                          alt=""
-                          className="h-full w-full object-cover"
-                        />
-                      </div>
-                      <div>
-                        <div className="text-[0.625rem] font-light leading-[120%] text-neutral-light-grey">
-                          {cta.chat.name}
-                        </div>
-                        <div className="text-size-small">
-                          {cta.chat.firstMessage}
-                        </div>
-                      </div>
-                    </div>
-                    <div className="cta_chat-divider is-1 h-px w-full bg-[#ffffff1a]" />
-                    <div className="cta_chat-content is-client is-1 flex items-center justify-end gap-2">
-                      <div className="flex flex-col items-end justify-end">
-                        <div className="overflow-hidden">
-                          <div
-                            id="cta-chat-partner-1"
-                            className="text-[0.625rem] font-light leading-[120%] text-neutral-light-grey"
-                          >
-                            USER_1230
-                          </div>
-                        </div>
-                        <div
-                          id="cta-chat-p-1"
-                          className="text-size-small text-align-right"
-                        >
-                          {cta.chat.partnerMessages[0]}
-                        </div>
-                      </div>
-                      <div
-                        id="cta-chat-partner-photo-1"
-                        className="flex h-8 w-8 flex-none items-center justify-center overflow-hidden rounded-full bg-brand-purple"
-                      >
-                        <div className="text-size-small">U</div>
-                      </div>
-                    </div>
-                    <div className="cta_chat-content is-client is-2 flex items-center justify-end gap-2">
-                      <div className="flex flex-col items-end justify-end">
-                        <div className="overflow-hidden">
-                          <div
-                            id="cta-chat-partner-2"
-                            className="text-[0.625rem] font-light leading-[120%] text-neutral-light-grey"
-                          >
-                            USER_1230
-                          </div>
-                        </div>
-                        <div
-                          id="cta-chat-p-2"
-                          className="text-size-small text-align-right"
-                        >
-                          {cta.chat.partnerMessages[1]}
-                        </div>
-                      </div>
-                      <div
-                        id="cta-chat-partner-photo-2"
-                        className="flex h-8 w-8 flex-none items-center justify-center overflow-hidden rounded-full bg-brand-purple"
-                      >
-                        <div className="text-size-small">U</div>
-                      </div>
-                    </div>
-                    <div className="cta_chat-divider is-2 h-px w-full bg-[#ffffff1a]" />
-                    <div className="cta_chat-content is-1 flex items-center justify-start gap-2">
-                      <div
-                        id="cta-chat-me-photo-1"
-                        className="h-8 w-8 flex-none overflow-hidden rounded-full"
-                      >
-                        <img
-                          src={photos.ellipseBlack}
-                          loading="lazy"
-                          alt=""
-                          className="h-full w-full object-cover"
-                        />
-                      </div>
-                      <div>
-                        <div className="overflow-hidden">
-                          <div
-                            id="cta-chat-me-1"
-                            className="text-[0.625rem] font-light leading-[120%] text-neutral-light-grey"
-                          >
-                            {cta.chat.name}
-                          </div>
-                        </div>
-                        <div id="cta-chat-p-3" className="text-size-small">
-                          {cta.chat.myMessages[0]}
-                        </div>
-                      </div>
-                    </div>
-                    <div className="cta_chat-content is-2 flex items-center justify-start gap-2">
-                      <div
-                        id="cta-chat-me-photo-2"
-                        className="h-8 w-8 flex-none overflow-hidden rounded-full"
-                      >
-                        <img
-                          src={photos.ellipseBlack}
-                          loading="lazy"
-                          alt=""
-                          className="h-full w-full object-cover"
-                        />
-                      </div>
-                      <div>
-                        <div className="overflow-hidden">
-                          <div
-                            id="cta-chat-me-2"
-                            className="text-[0.625rem] font-light leading-[120%] text-neutral-light-grey"
-                          >
-                            {cta.chat.name}
-                          </div>
-                        </div>
-                        <div id="cta-chat-p-4" className="text-size-small">
-                          {cta.chat.myMessages[1]}
-                        </div>
-                      </div>
-                    </div>
-                    <div className="cta_chat-cta flex items-center justify-end gap-2 max-[479px]:flex-wrap">
-                      <a
-                        id="cta-chat-button-1"
-                        data-audio={audio.hover}
-                        href="#"
-                        className="btn btn-secondary btn-chat"
-                      >
-                        <div className="btn__text">{cta.chat.buttons[0]}</div>
-                      </a>
-                      <a
-                        id="cta-chat-button-2"
-                        data-audio={audio.hover}
-                        href="#"
-                        className="btn btn-secondary btn-chat"
-                      >
-                        <div className="btn__text">{cta.chat.buttons[1]}</div>
-                      </a>
-                    </div>
-                  </div>
+                <ChatWidget className="flex w-full max-w-93 flex-col gap-4 overflow-hidden rounded-lg border border-white-20 p-4 backdrop-blur-[100px] bg-[#efefe60d] max-[991px]:mt-[-5.6rem] max-[991px]:mr-[3.6rem] max-[767px]:mt-[-3.1rem] max-[767px]:mr-0 max-[479px]:mt-0" />
                 </div>
               </div>
             </div>

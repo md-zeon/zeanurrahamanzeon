@@ -6,28 +6,7 @@ import { getLenis } from "@/lib/lenis";
 import { experimentsStack } from "@/data/experiments";
 import { audio } from "@/data/site";
 import AutoVideo from "../media/AutoVideo";
-
-/** Arrow glyph used in the banner's "View project" button. */
-function ArrowIcon() {
-  return (
-    <div className="btn__icon w-embed">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="100%"
-        height="100%"
-        viewBox="0 0 14 14"
-        fill="none"
-        preserveAspectRatio="xMidYMid meet"
-        role="img"
-      >
-        <path
-          d="M0.823227 13.4736L12.8232 1.47362M12.8232 1.47362V11.3272M12.8232 1.47362H3.17677"
-          stroke="currentColor"
-        />
-      </svg>
-    </div>
-  );
-}
+import { ArrowIcon } from "../shared";
 
 /**
  * Full-screen pinned 3D carousel of experiment projects. The stacked

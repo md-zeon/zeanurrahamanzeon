@@ -8,6 +8,7 @@ import { workProjects } from "@/data/work";
 import { audio } from "@/data/site";
 import LogosElement from "../LogosElement";
 import AutoVideo from "../media/AutoVideo";
+import { SliderControls } from "../shared";
 
 /**
  * Home-page carousel of featured client projects ("Featured client
@@ -51,106 +52,17 @@ export default function CaseStudyFeatured() {
               </div>
               <LogosElement caption="WRK_CS_267" />
             </div>
-            {/* Controls bar: counter + prev/next buttons + "Visit work page" */}
-            <div className="border-x border-border-tertiary">
-              <div className="relative grid auto-cols-fr grid-cols-[1fr_1fr] items-center justify-between gap-0 border-r border-white-20 p-[1.8rem_1.5rem] max-[767px]:flex max-[767px]:flex-col max-[767px]:items-start max-[767px]:gap-4 max-[767px]:p-4 max-[479px]:flex-row max-[479px]:flex-wrap">
-                <div className="flex w-full items-center justify-between pr-6 max-[767px]:order-1 max-[767px]:pr-0">
-                  <div className="flex items-center justify-start">
-                    <div className="text-size-large">[</div>
-                    <div data-slide-count="step" className="text-size-large">
-                      01
-                    </div>
-                    <div className="text-size-large">/</div>
-                    <div data-slide-count="total" className="text-size-large">
-                      00
-                    </div>
-                    <div className="text-size-large">]</div>
-                  </div>
-                  <div className="flex gap-2">
-                    <a
-                      data-audio={audio.hover}
-                      data-slider="button-prev"
-                      aria-label="previous slide"
-                      href="#"
-                      className="w-inline-block"
-                    >
-                      <div className="icon-embed-medium w-embed">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="100%"
-                          height="100%"
-                          viewBox="0 0 48 49"
-                          fill="none"
-                          preserveAspectRatio="xMidYMid meet"
-                          aria-hidden="true"
-                          role="img"
-                        >
-                          <path
-                            d="M38 24.7002H10"
-                            stroke="currentColor"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                          <path
-                            d="M24 38.7002L10 24.7002L24 10.7002"
-                            stroke="currentColor"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                      </div>
-                    </a>
-                    <a
-                      data-audio={audio.hover}
-                      data-slider="button-next"
-                      aria-label="next slide"
-                      href="#"
-                      className="w-inline-block"
-                    >
-                      <div className="icon-embed-medium w-embed">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="100%"
-                          height="100%"
-                          viewBox="0 0 48 49"
-                          fill="none"
-                          preserveAspectRatio="xMidYMid meet"
-                          aria-hidden="true"
-                          role="img"
-                        >
-                          <path
-                            d="M10 24.7002H38"
-                            stroke="currentColor"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                          <path
-                            d="M24 10.7002L38 24.7002L24 38.7002"
-                            stroke="currentColor"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-                <div className="absolute left-1/2 z-3 -ml-px h-full w-px bg-white-20 max-[767px]:hidden" />
-                <div className="flex items-center justify-end max-[767px]:w-full max-[767px]:flex-col max-[767px]:items-stretch">
-                  <Link
-                    href="/work"
-                    data-audio={audio.hover}
-                    className="btn btn-secondary"
-                  >
-                    <div className="btn__text">Visit work page</div>
-                  </Link>
-                </div>
-              </div>
-            </div>
+            <SliderControls
+              right={
+                <Link
+                  href="/work"
+                  data-audio={audio.hover}
+                  className="btn btn-secondary"
+                >
+                  <div className="btn__text">Visit work page</div>
+                </Link>
+              }
+            />
             {/* Slide track: two project slides side-by-side per page */}
             <div
               data-slider="list"

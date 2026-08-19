@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { usePageHeaderEntrance } from "@/lib/useHeaderReveal";
 import { audio } from "@/data/site";
-import { Asterisk, CredentialIcon } from "../shared";
+import { Badge } from "../shared";
 
 type CaseStudyHeaderProps = {
   title: string;
@@ -109,33 +109,7 @@ export default function CaseStudyHeader({
                         header-content-type="border"
                         className="absolute inset-y-0 left-0 z-2 h-full w-px bg-white-20 max-[991px]:hidden"
                       />
-                      {/* Badge with animated asterisk reveal */}
-                      <div className="badge">
-                        <div className="badge__icon-wrapper">
-                          <div
-                            id="home-hero-asterisk"
-                            header-content-type="asterisk"
-                            className="badge__icon w-embed"
-                          >
-                            <Asterisk />
-                          </div>
-                        </div>
-                        <div className="badge__line">
-                          <div
-                            header-content-type="line-bg"
-                            className="badge__line-bg"
-                          />
-                        </div>
-                        <a
-                          data-audio={audio.scramble}
-                          href={badgeLink}
-                          target="_blank"
-                          className="badge-link"
-                        >
-                          <CredentialIcon />
-                          <div className="text-caption-1">{badge}</div>
-                        </a>
-                      </div>
+                      <Badge href={badgeLink} badge={badge} labelClassName="text-caption-1" />
                     </div>
                   </div>
                 </div>

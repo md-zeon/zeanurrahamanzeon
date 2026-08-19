@@ -4,7 +4,7 @@ import { useLayoutEffect, useRef } from "react";
 import { gsap, SplitText } from "@/lib/gsap";
 import { brand, socials } from "@/data/site";
 import { HERO_ENTRANCE_COMPLETE } from "@/lib/utils";
-import { Button, CredentialBadge, Asterisk } from "../shared";
+import { Button, Badge } from "../shared";
 import AutoVideo from "../media/AutoVideo";
 
 // Blocks animated by the final fade-in step. The header text is deliberately
@@ -242,20 +242,7 @@ export default function HeroSection() {
                       </div>
                     </div>
                     <div className="relative flex flex-wrap items-start justify-start gap-6 desktop:pt-16 max-[991px]:pt-0">
-                      <div className="badge">
-                        <div className="badge__icon-wrapper">
-                          <div
-                            id="home-hero-asterisk"
-                            className="badge__icon"
-                          >
-                            <Asterisk />
-                          </div>
-                        </div>
-                        <div className="badge__line">
-                          <div className="badge__line-bg" />
-                        </div>
-                        <CredentialBadge href={socials.github} />
-                      </div>
+                      <Badge href={socials.github} badge="Open to Work" />
                       <div
                         data-hero-fade="cta"
                         className="flex w-full max-w-148 flex-col gap-10 desktop:pl-16 max-[991px]:mt-0 max-[991px]:max-w-none max-[991px]:gap-8 max-[991px]:pl-0 max-[767px]:gap-6"

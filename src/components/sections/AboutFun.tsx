@@ -8,6 +8,7 @@ import "swiper/css/pagination";
 
 import { aboutFacts } from "@/data/about";
 import { audio } from "@/data/site";
+import Image from "next/image";
 import AutoVideo from "../media/AutoVideo";
 
 /**
@@ -159,26 +160,19 @@ export default function AboutFun() {
                           ) : (
                             <>
                               <div className="absolute inset-0 z-2 h-full w-full bg-[#0a090f4d]" />
-                              {slide.imageClass === "is-plants" ? (
-                                <img
+                              {slide.imageClass === "is-plants" || slide.imageClass === "is-photo" ? (
+                                <Image
                                   src={slide.image}
                                   alt={slide.caption}
-                                  loading="lazy"
-                                  className="absolute inset-0 z-1 m-0 h-full w-full max-w-full flex-none overflow-hidden object-cover object-[50%_85%]"
-                                />
-                              ) : slide.imageClass === "is-photo" ? (
-                                <img
-                                  src={slide.image}
-                                  alt={slide.caption}
-                                  loading="lazy"
-                                  className="absolute inset-0 z-1 m-0 h-full w-full max-w-full flex-none overflow-hidden object-cover object-[50%_85%]"
+                                  fill
+                                  className="z-1 m-0 flex-none overflow-hidden object-cover object-[50%_85%]"
                                 />
                               ) : (
-                                <img
+                                <Image
                                   src={slide.image}
                                   alt={slide.caption}
-                                  loading="lazy"
-                                  className="absolute inset-0 z-1 m-0 h-full w-full max-w-full flex-none overflow-hidden object-cover"
+                                  fill
+                                  className="z-1 m-0 flex-none overflow-hidden object-cover"
                                 />
                               )}
                             </>

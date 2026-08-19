@@ -4,7 +4,9 @@ import { useEffect, useRef } from "react";
 import { gsap, SplitText } from "@/lib/gsap";
 import { testimonials } from "@/data/home";
 import { audio } from "@/data/site";
+import Image from "next/image";
 import LogosElement from "../LogosElement";
+import { SliderArrow } from "../shared";
 
 /**
  * Client testimonials: quote, marks, name/role and photo, plus a strip of
@@ -344,12 +346,12 @@ export default function TestimonialsSection() {
                     </div>
                   </div>
                   <div className="testimonial_info-layout flex items-center justify-start gap-4 pl-[0.8rem] max-[767px]:pl-[0.6rem] max-[479px]:pl-0">
-                    <div className="flex h-14 w-14 flex-none items-center justify-center overflow-hidden rounded-full max-[767px]:h-10 max-[767px]:w-10">
-                      <img
+                    <div className="relative flex h-14 w-14 flex-none items-center justify-center overflow-hidden rounded-full max-[767px]:h-10 max-[767px]:w-10">
+                      <Image
                         src={testimonials[0].image}
-                        loading="lazy"
                         alt=""
-                        className="testimonial_photo h-full w-full"
+                        fill
+                        className="testimonial_photo"
                       />
                     </div>
                     <div className="testimonial_info-wrapper">
@@ -378,33 +380,7 @@ export default function TestimonialsSection() {
                         aria-label="Previous testimonial"
                         className="w-inline-block"
                       >
-                        <div className="icon-embed-medium w-embed">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="100%"
-                            height="100%"
-                            viewBox="0 0 48 49"
-                            fill="none"
-                            preserveAspectRatio="xMidYMid meet"
-                            aria-hidden="true"
-                            role="img"
-                          >
-                            <path
-                              d="M38 24.7002H10"
-                              stroke="currentColor"
-                              strokeWidth="1.5"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                            <path
-                              d="M24 38.7002L10 24.7002L24 10.7002"
-                              stroke="currentColor"
-                              strokeWidth="1.5"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                          </svg>
-                        </div>
+                        <SliderArrow direction="left" />
                       </a>
                       <a
                         data-testimonial-next
@@ -413,33 +389,7 @@ export default function TestimonialsSection() {
                         aria-label="Next testimonial"
                         className="w-inline-block"
                       >
-                        <div className="icon-embed-medium w-embed">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="100%"
-                            height="100%"
-                            viewBox="0 0 48 49"
-                            fill="none"
-                            preserveAspectRatio="xMidYMid meet"
-                            aria-hidden="true"
-                            role="img"
-                          >
-                            <path
-                              d="M10 24.7002H38"
-                              stroke="currentColor"
-                              strokeWidth="1.5"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                            <path
-                              d="M24 10.7002L38 24.7002L24 38.7002"
-                              stroke="currentColor"
-                              strokeWidth="1.5"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                          </svg>
-                        </div>
+                        <SliderArrow direction="right" />
                       </a>
                     </div>
                   </div>
@@ -451,13 +401,13 @@ export default function TestimonialsSection() {
                     key={i}
                     data-audio={audio.secondaryHover}
                     href="#"
-                    className={`testimonial_nav-wrapper flex aspect-[1.3] items-center justify-center border border-white-20 bg-[#efefe600] backdrop-blur-[100px] transition-all duration-200 max-[991px]:min-h-28 max-[767px]:min-h-24 max-[479px]:min-h-[30vw] ${i === 0 ? "rounded-l is-first is-active" : i === testimonials.length - 1 ? "rounded-r is-last" : ""} w-inline-block`}
+                    className={`testimonial_nav-wrapper relative flex aspect-[1.3] items-center justify-center border border-white-20 bg-[#efefe600] backdrop-blur-[100px] transition-all duration-200 max-[991px]:min-h-28 max-[767px]:min-h-24 max-[479px]:min-h-[30vw] ${i === 0 ? "rounded-l is-first is-active" : i === testimonials.length - 1 ? "rounded-r is-last" : ""} w-inline-block`}
                   >
-                    <img
+                    <Image
                       src={item.logo}
-                      loading="lazy"
                       alt=""
-                      className="testimonial_nav-logo h-full max-h-[2.2rem] wide:max-h-10 max-[991px]:max-h-[1.7rem] max-[479px]:max-h-[8vw]"
+                      fill
+                      className="testimonial_nav-logo object-contain"
                     />
                   </a>
                 ))}

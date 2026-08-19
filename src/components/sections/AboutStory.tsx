@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { useScrubbedHighlight } from "@/lib/useHeaderReveal";
+import Image from "next/image";
 import { aboutStory } from "@/data/about";
 
 /**
@@ -164,11 +165,11 @@ export default function AboutStory() {
                 <div className="about-story_cards-component absolute right-4 top-24 w-[80%] max-[767px]:hidden">
                   <div className="relative aspect-2/3">
                     <div className="absolute inset-0 z-1 flex h-full w-full items-center justify-center overflow-hidden rounded-lg">
-                      <img
+                      <Image
                         src={aboutStory.images[0].src}
                         alt={aboutStory.images[0].alt}
-                        loading="lazy"
-                        className="h-full w-full max-w-full flex-none object-cover"
+                        fill
+                        className="flex-none object-cover"
                       />
                     </div>
                     <div className="absolute inset-0 z-1 flex h-full w-full items-center justify-center overflow-hidden rounded-lg">
@@ -192,19 +193,19 @@ export default function AboutStory() {
                       </div>
                     </div>
                     <div className="absolute inset-0 z-1 flex h-full w-full items-center justify-center overflow-hidden rounded-lg">
-                      <img
+                      <Image
                         src={aboutStory.images[1].src}
                         alt={aboutStory.images[1].alt}
-                        loading="lazy"
-                        className="h-full w-full max-w-full flex-none object-cover"
+                        fill
+                        className="flex-none object-cover"
                       />
                     </div>
                     <div className="absolute inset-0 z-1 flex h-full w-full items-center justify-center overflow-hidden rounded-lg">
-                      <img
+                      <Image
                         src={aboutStory.images[2].src}
                         alt={aboutStory.images[2].alt}
-                        loading="lazy"
-                        className="h-full w-full max-w-full flex-none object-cover"
+                        fill
+                        className="flex-none object-cover"
                       />
                     </div>
                   </div>

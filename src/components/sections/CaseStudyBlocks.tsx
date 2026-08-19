@@ -1,5 +1,6 @@
 import type { CaseBlock, CaseMedia, CaseStudy } from "@/data/caseStudies";
 import { audio } from "@/data/site";
+import Image from "next/image";
 import AutoVideo from "../media/AutoVideo";
 
 type CaseStudyBlocksProps = {
@@ -35,11 +36,11 @@ function Media({ media, grid }: { media: CaseMedia; grid: boolean }) {
   }
   return (
     <div className={wrapperClass}>
-      <img
+      <Image
         className={VIDEO_CLASS}
         src={media.image}
         alt={media.alt}
-        loading="lazy"
+        fill
       />
     </div>
   );
