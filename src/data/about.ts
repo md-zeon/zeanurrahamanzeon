@@ -25,9 +25,6 @@ export const aboutDivider = {
   caption: "CRS_gjx1_30731",
 };
 
-/** Marquee strip label for the "Career story" divider. */
-export const aboutDividerText = "Software Engineer";
-
 /**
  * Career story content: the body paragraphs with inline link fragments
  * (`links` splice into the text by matching their `text`), the milestone
