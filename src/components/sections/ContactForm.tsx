@@ -140,7 +140,7 @@ export default function ContactForm() {
               <div className="flex h-full flex-col gap-8 border-r border-white-20 p-[4.5rem_2.5rem_3.5rem] max-[991px]:border-r-0 max-[991px]:pb-0 max-[479px]:px-[1.3rem] max-[479px]:pt-12">
                 <div className="flex flex-col gap-2">
                   <div className="text-caption-2 text-color-secondary">
-                    [Email]
+                    {contactForm.emailSectionLabel ?? "[Email]"}
                   </div>
                   <div
                     className="flex items-center justify-start gap-4"
@@ -213,14 +213,14 @@ export default function ContactForm() {
                         htmlFor="Full-Name"
                         className="mb-2 text-[0.875rem] font-normal uppercase leading-[140%] tracking-[-0.04375rem] text-brand-white"
                       >
-                        What&apos;s your name?
+                        {contactForm.nameLabel ?? "What's your name?"}
                       </label>
                       <input
                         className={textInput}
                         maxLength={256}
                         name="Full-Name"
                         data-name="Full Name"
-                        placeholder="Full Name"
+                        placeholder={contactForm.namePlaceholder ?? "Full Name"}
                         type="text"
                         id="Full-Name"
                         required
@@ -231,14 +231,14 @@ export default function ContactForm() {
                         htmlFor="Email"
                         className="mb-2 text-[0.875rem] font-normal uppercase leading-[140%] tracking-[-0.04375rem] text-brand-white"
                       >
-                        What&apos;s your email?
+                        {contactForm.emailLabel ?? "What's your email?"}
                       </label>
                       <input
                         className={textInput}
                         maxLength={256}
                         name="Email"
                         data-name="Email"
-                        placeholder="name@company.com"
+                        placeholder={contactForm.emailPlaceholder ?? "name@company.com"}
                         type="email"
                         id="Email"
                         required
@@ -251,14 +251,14 @@ export default function ContactForm() {
                       htmlFor="Message"
                       className="mb-2 text-[0.875rem] font-normal uppercase leading-[140%] tracking-[-0.04375rem] text-brand-white"
                     >
-                      What&apos;s your brief?
+                      {contactForm.briefLabel ?? "What's your brief?"}
                     </label>
                     <textarea
                       id="Message"
                       name="Message"
                       maxLength={5000}
                       data-name="Message"
-                      placeholder="Write your brief here: I need ___ with this scope, pages, specific needs ___."
+                      placeholder={contactForm.briefPlaceholder ?? "Write your brief here..."}
                       required
                       className={areaInput}
                     />
@@ -270,14 +270,14 @@ export default function ContactForm() {
                         htmlFor="Current-website-URL"
                         className="mb-2 text-[0.875rem] font-normal uppercase leading-[140%] tracking-[-0.04375rem] text-brand-white"
                       >
-                        Current website URL
+                        {contactForm.websiteUrlLabel ?? "Current website URL"}
                       </label>
                       <input
                         className={textInput}
                         maxLength={256}
                         name="Current-website-URL"
                         data-name="Current website URL"
-                        placeholder="www.example.com"
+                        placeholder={contactForm.websiteUrlPlaceholder ?? "www.example.com"}
                         type="url"
                         id="Current-website-URL"
                       />
@@ -287,7 +287,7 @@ export default function ContactForm() {
                         htmlFor="Company-Stage"
                         className="mb-2 text-[0.875rem] font-normal uppercase leading-[140%] tracking-[-0.04375rem] text-brand-white"
                       >
-                        Company stage
+                        {contactForm.companyStage.label}
                       </label>
                       <select
                         id="Company-Stage"
@@ -296,7 +296,7 @@ export default function ContactForm() {
                         required
                         className={selectInput}
                       >
-                        <option value="">Please select</option>
+                        <option value="">{contactForm.selectPlaceholder ?? "Please select"}</option>
                         {contactForm.companyStage.options.map((option) => (
                           <option key={option} value={option}>
                             {option}
@@ -312,7 +312,7 @@ export default function ContactForm() {
                         htmlFor="Deadline"
                         className="mb-2 text-[0.875rem] font-normal uppercase leading-[140%] tracking-[-0.04375rem] text-brand-white"
                       >
-                        Do you have a deadline?
+                        {contactForm.deadline.label}
                       </label>
                       <select
                         id="Deadline"
@@ -321,7 +321,7 @@ export default function ContactForm() {
                         required
                         className={selectInput}
                       >
-                        <option value="">Please select</option>
+                        <option value="">{contactForm.selectPlaceholder ?? "Please select"}</option>
                         {contactForm.deadline.options.map((option) => (
                           <option key={option} value={option}>
                             {option}
@@ -334,7 +334,7 @@ export default function ContactForm() {
                         htmlFor="Budget"
                         className="mb-2 text-[0.875rem] font-normal uppercase leading-[140%] tracking-[-0.04375rem] text-brand-white"
                       >
-                        What is your Estimated budget?
+                        {contactForm.budget.label}
                         <br />
                       </label>
                       <select
@@ -344,7 +344,7 @@ export default function ContactForm() {
                         required
                         className={selectInput}
                       >
-                        <option value="">Please select</option>
+                        <option value="">{contactForm.selectPlaceholder ?? "Please select"}</option>
                         {contactForm.budget.options.map((option) => (
                           <option key={option} value={option}>
                             {option}
@@ -368,7 +368,7 @@ export default function ContactForm() {
                       htmlFor="Source"
                       className="mb-2 text-[0.875rem] font-normal uppercase leading-[140%] tracking-[-0.04375rem] text-brand-white"
                     >
-                      How did you hear about me?
+                      {contactForm.source.label}
                     </label>
                     <div className="form_checkbox-layout flex flex-wrap gap-2">
                       {contactForm.source.options.map((option) => (
@@ -401,11 +401,11 @@ export default function ContactForm() {
                   <div className="flex flex-col items-start justify-start gap-4 pt-6">
                     <input
                       type="submit"
-                      data-wait="Please wait..."
+                      data-wait={contactForm.submitWait ?? "Please wait..."}
                       data-audio={audio.hover}
                       data-audio-click={audio.closeMenu}
                       className="btn btn-small cursor-pointer border-0"
-                      value="Submit"
+                      value={contactForm.submit ?? "Submit"}
                     />
                   </div>
                 </form>

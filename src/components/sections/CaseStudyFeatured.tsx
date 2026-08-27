@@ -4,7 +4,7 @@ import { useRef } from "react";
 import Link from "next/link";
 import { useLabSlider } from "@/lib/useLabSlider";
 import { useSectionHeadings } from "@/lib/useHeaderReveal";
-import { workProjects } from "@/data/work";
+import { workProjects, workFeaturedHeader } from "@/data/work";
 import { audio } from "@/data/site";
 import LogosElement from "../LogosElement";
 import AutoVideo from "../media/AutoVideo";
@@ -45,12 +45,12 @@ export default function CaseStudyFeatured() {
                     header-animation-type="heading-1"
                     className="heading-style-h2"
                   >
-                    <span className="header_italic-word">Featured</span> client
-                    projects
+                    <span className="header_italic-word">{workFeaturedHeader.title1}</span>{" "}
+                    {workFeaturedHeader.title2}
                   </h2>
                 </div>
               </div>
-              <LogosElement caption="WRK_CS_267" />
+              <LogosElement caption={workFeaturedHeader.caption} />
             </div>
             <SliderControls
               right={
@@ -59,7 +59,7 @@ export default function CaseStudyFeatured() {
                   data-audio={audio.hover}
                   className="btn btn-secondary"
                 >
-                  <div className="btn__text">Visit work page</div>
+                  <div className="btn__text">{workFeaturedHeader.visitButtonLabel}</div>
                 </Link>
               }
             />
@@ -105,7 +105,7 @@ export default function CaseStudyFeatured() {
                         href={project.href}
                         className="btn btn-small"
                       >
-                        <div className="btn__text">View case study</div>
+                        <div className="btn__text">{workFeaturedHeader.viewCaseStudyLabel}</div>
                       </Link>
                     </div>
                   </div>

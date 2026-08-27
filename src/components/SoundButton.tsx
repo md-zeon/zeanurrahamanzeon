@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useSyncExternalStore } from "react";
 import lottie, { type AnimationItem } from "lottie-web";
-import { soundWaves, audio } from "@/data/site";
+import { soundWaves, audio, soundLabels } from "@/data/site";
 import {
   setSoundEnabled,
   toggleMusic,
@@ -65,7 +65,7 @@ export default function SoundButton() {
       className="navbar_sound-button relative flex items-center justify-start gap-1 rounded-[0.25rem] border border-transparent pl-3 no-underline w-inline-block"
     >
       <div sound-control-type="text" className="text-caption-2">
-        {on ? "Turn off sound" : "Turn on sound"}
+        {on ? soundLabels.turnOff : soundLabels.turnOn}
       </div>
       <div className="navbar_sound relative flex h-10 w-10 items-center justify-center gap-[0.15rem] text-brand-white max-[767px]:h-8 max-[767px]:w-8">
         <div ref={wrapRef} className="navbar_sound-lottie h-full w-full" />

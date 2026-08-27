@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { useLabSlider } from "@/lib/useLabSlider";
 import { useSectionHeadings } from "@/lib/useHeaderReveal";
-import { workLabSlides } from "@/data/work";
+import { workLabSlides, workLabHeader } from "@/data/work";
 import { audio } from "@/data/site";
 import LogosElement from "../LogosElement";
 import AutoVideo from "../media/AutoVideo";
@@ -43,17 +43,20 @@ export default function WorkLabSection() {
                     header-animation-type="heading-1"
                     className="heading-style-h2"
                   >
-                    From the <span className="header_italic-word">labs</span>
+                    {workLabHeader.title1}{" "}
+                    <span className="header_italic-word">
+                      {workLabHeader.italicWord}
+                    </span>
                   </h2>
                 </div>
               </div>
-              <LogosElement caption="LAB_BF_188" />
+              <LogosElement caption={workLabHeader.caption} />
             </div>
             {/* Controls bar: counter + prev/next buttons + CTA */}
             <SliderControls
               right={
                 <Button href="/experiments" variant="secondary">
-                  See experiments
+                  {workLabHeader.visitButtonLabel}
                 </Button>
               }
             />
@@ -98,7 +101,7 @@ export default function WorkLabSection() {
                         rel="noopener noreferrer"
                         className="btn btn-secondary btn-small btn-icon"
                       >
-                        <div className="btn__text">View project</div>
+                        <div className="btn__text">{workLabHeader.viewProjectLabel}</div>
                         <ArrowIcon />
                       </a>
                     </div>

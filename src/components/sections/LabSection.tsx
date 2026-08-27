@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { useLabSlider } from "@/lib/useLabSlider";
 import { useSectionHeadings } from "@/lib/useHeaderReveal";
-import { labSlides } from "@/data/home";
+import { labSlides, labHeader } from "@/data/home";
 import { audio } from "@/data/site";
 import LogosElement from "../LogosElement";
 import AutoVideo from "../media/AutoVideo";
@@ -35,7 +35,7 @@ export default function LabSection() {
                     header-animation-type="heading-1"
                     className="heading-style-h0"
                   >
-                    From
+                    {labHeader.line1}
                   </div>
                 </div>
                 <div className="flex items-stretch justify-start -mt-2 pl-[7.2vw] desktop:pl-24 max-[991px]:pl-[10vw] max-[767px]:mt-[-0.2rem] max-[767px]:pl-0">
@@ -43,16 +43,16 @@ export default function LabSection() {
                     header-animation-type="heading-2"
                     className="heading-style-h0"
                   >
-                    the lab
+                    {labHeader.line2}
                   </h2>
                 </div>
               </div>
-              <LogosElement caption="LAB_BF_188" />
+              <LogosElement caption={labHeader.caption} />
             </div>
             <SliderControls
               right={
                 <Button href="/experiments" variant="secondary">
-                  Visit experiments page
+                  {labHeader.visitButtonLabel}
                 </Button>
               }
             />
@@ -92,7 +92,7 @@ export default function LabSection() {
                           rel="noopener noreferrer"
                           className="btn btn-secondary btn-small btn-icon"
                         >
-                          <div className="btn__text">View project</div>
+                          <div className="btn__text">{labHeader.viewProjectLabel}</div>
                           <ArrowIcon />
                         </a>
                       </div>

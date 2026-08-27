@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { gsap, SplitText } from "@/lib/gsap";
-import { testimonials } from "@/data/home";
+import { testimonials, testimonialsHeader } from "@/data/home";
 import { audio } from "@/data/site";
 import Image from "next/image";
 import LogosElement from "../LogosElement";
@@ -315,16 +315,16 @@ export default function TestimonialsSection() {
               <div className="pt-[7rem] pb-6 pr-6 max-[991px]:pt-20">
                 <div className="flex justify-start">
                   <h2 id="testimonial-h1" className="heading-style-h0">
-                    Words From
+                    {testimonialsHeader.line1}
                   </h2>
                 </div>
                 <div className="flex items-stretch justify-start -mt-2 pl-[7.3vw] desktop:pl-24 max-[991px]:pl-[10.7vw] max-[767px]:mt-[-0.2rem] max-[767px]:pl-0">
                   <div id="testimonial-h2" className="heading-style-h0">
-                    collaborators
+                    {testimonialsHeader.line2}
                   </div>
                 </div>
               </div>
-              <LogosElement caption="CLI_TES_104" />
+              <LogosElement caption={testimonialsHeader.caption} />
             </div>
             <div className="relative z-2 grid grid-cols-1 items-stretch">
               <div className="flex justify-end border-b border-l border-r border-white-20 px-[7.3vw] py-20 desktop:pl-0 desktop:pr-[6.88rem] max-[767px]:px-6 max-[767px]:py-8">

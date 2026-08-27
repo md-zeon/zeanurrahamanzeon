@@ -113,8 +113,8 @@ export default function Footer() {
 
   // Column index ranges for the [nn] numbering on each group of links.
   const columns = [
-    { title: "Overview", links: footer.overview, start: 1 },
-    { title: "Case Studies", links: footer.caseStudies, start: 5 },
+    { title: footer.overviewTitle, links: footer.overview, start: 1 },
+    { title: footer.caseStudiesTitle, links: footer.caseStudies, start: 5 },
   ];
 
   return (
@@ -151,7 +151,7 @@ export default function Footer() {
                           >
                             <CredentialIcon />
                             <div className="text-size-small text-weight-medium text-style-allcaps">
-                              Open to Work
+                              {footer.credentialText}
                             </div>
                           </a>
                         </div>
@@ -193,7 +193,7 @@ export default function Footer() {
                       <div className="footer_link-column is-connect flex w-full flex-col gap-4 max-[991px]:w-auto max-[767px]:gap-2">
                         <div className="overflow-hidden">
                           <div className="heading-style-h6 text-color-teritary">
-                            Connect
+                            {footer.connectTitle}
                           </div>
                         </div>
                         <div className="grid w-full grid-cols-[auto_auto] gap-12 max-[991px]:grid-cols-2 max-[991px]:gap-16 wide:gap-20 max-[767px]:gap-6 max-[479px]:flex max-[479px]:flex-wrap max-[479px]:justify-between max-[479px]:gap-12">
@@ -223,9 +223,9 @@ export default function Footer() {
                 <div className="h-px w-full bg-white-20" />
                 <div className="grid grid-cols-3 items-center justify-between gap-8 overflow-hidden max-[991px]:grid-cols-2 max-[767px]:flex max-[767px]:flex-col max-[767px]:items-start max-[767px]:justify-between max-[767px]:gap-6 max-[767px]:pb-4 max-[479px]:flex max-[479px]:flex-col max-[479px]:grid-cols-[auto]">
                   <div className="text-size-small text-color-teritary">
-                    © <span className="footer_year">2024</span>{" "}
+                    © <span className="footer_year">{footer.copyrightYear}</span>{" "}
                     {brand.logoStart}
-                    {brand.logoEnd}. All rights reserved.
+                    {brand.logoEnd}. {footer.copyrightText}
                   </div>
                   <div className="footer_local-time flex items-center justify-center gap-2 max-[767px]:w-full max-[767px]:items-center max-[767px]:justify-start max-[479px]:order-1">
                     <div
@@ -237,12 +237,12 @@ export default function Footer() {
                   </div>
                   <div className="flex justify-end gap-6 max-[767px]:w-full max-[767px]:justify-start max-[767px]:gap-8 max-[479px]:order-2">
                     <Link
-                      href="/privacy-policy"
+                      href={footer.privacyPolicyHref}
                       data-audio={audio.scramble}
                       className="text-brand-white no-underline"
                     >
                       <div className="text-size-small text-color-teritary">
-                        Privacy Policy
+                        {footer.privacyPolicyLabel}
                       </div>
                     </Link>
                   </div>

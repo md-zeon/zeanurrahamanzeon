@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { getLenis } from "@/lib/lenis";
-import { featuredProjects } from "@/data/home";
+import { featuredProjects, homeProjectsLabels } from "@/data/home";
 import { audio } from "@/data/site";
 import AutoVideo from "../media/AutoVideo";
 
@@ -397,19 +397,18 @@ export default function HomeProjects() {
       <div className="home-projects_banner-component absolute bottom-8 left-8 z-3 flex w-full max-w-fit flex-col gap-4 rounded border border-white-20 bg-black-30 p-6 shadow-[inset_0_0_0_1000px_#0a090e33] backdrop-blur-[100px] max-[767px]:bottom-16 max-[767px]:gap-6 max-[767px]:p-4 max-[479px]:bottom-[12%] max-[479px]:left-[4%] max-[479px]:w-[90%]">
         <div className="flex-none">
           <div className="heading-style-h3 block max-w-full max-h-24 overflow-hidden whitespace-normal wrap-break-word min-[992px]:max-h-16">
-            Smart NUB Campus
+            {featuredProjects[0]?.title}
           </div>
           <div className="text-size-regular block max-w-100 max-h-24 overflow-hidden whitespace-normal wrap-break-word min-[992px]:max-h-16">
-            A real-time academic collaboration network — messaging, study
-            groups, gamified learning, and an AI assistant for campus life.
+            {featuredProjects[0]?.description}
           </div>
         </div>
         <div className="btn-group">
-          <a href="#" data-audio={audio.hover} className="btn btn-small">
-            <div className="btn__text">View case study</div>
+          <a href={featuredProjects[0]?.link ?? "/work"} data-audio={audio.hover} className="btn btn-small">
+            <div className="btn__text">{homeProjectsLabels.viewCaseStudy}</div>
           </a>
           <Link href="/work" data-audio={audio.hover} className="btn btn-secondary btn-small">
-            <div className="btn__text">See all work</div>
+            <div className="btn__text">{homeProjectsLabels.seeAllWork}</div>
           </Link>
         </div>
       </div>

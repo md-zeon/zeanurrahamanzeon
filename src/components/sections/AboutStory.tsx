@@ -106,7 +106,7 @@ export default function AboutStory() {
       // Each ScrollTrigger fires `scrambleTo` on enter/enter-back.
       const yearEl = el.querySelector<HTMLElement>("#career-year");
       if (yearEl) {
-        const yearSequence = [
+        const yearSequence = aboutStory.yearSequence ?? [
           { year: 2018, start: "top 70%" },
           { year: 2019, start: "top 65%" },
           { year: 2021, start: "top 55%" },

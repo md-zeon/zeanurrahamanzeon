@@ -232,7 +232,7 @@ export function ChatWidget({ className }: ChatWidgetProps) {
               id="cta-chat-partner-1"
               className="text-[0.625rem] font-light leading-[120%] text-neutral-light-grey"
             >
-              USER_1230
+              {cta.chat.partnerName ?? "USER_1230"}
             </div>
           </div>
           <div
@@ -246,7 +246,7 @@ export function ChatWidget({ className }: ChatWidgetProps) {
           id="cta-chat-partner-photo-1"
           className="flex h-8 w-8 flex-none items-center justify-center overflow-hidden rounded-full bg-brand-purple"
         >
-          <div className="text-size-small">U</div>
+          <div className="text-size-small">{cta.chat.partnerAvatar ?? "U"}</div>
         </div>
       </div>
       <div className="cta_chat-content is-client is-2 flex items-center justify-end gap-2">
@@ -256,7 +256,7 @@ export function ChatWidget({ className }: ChatWidgetProps) {
               id="cta-chat-partner-2"
               className="text-[0.625rem] font-light leading-[120%] text-neutral-light-grey"
             >
-              USER_1230
+              {cta.chat.partnerName ?? "USER_1230"}
             </div>
           </div>
           <div
@@ -270,7 +270,7 @@ export function ChatWidget({ className }: ChatWidgetProps) {
           id="cta-chat-partner-photo-2"
           className="flex h-8 w-8 flex-none items-center justify-center overflow-hidden rounded-full bg-brand-purple"
         >
-          <div className="text-size-small">U</div>
+          <div className="text-size-small">{cta.chat.partnerAvatar ?? "U"}</div>
         </div>
       </div>
       <div className="cta_chat-divider is-2 h-px w-full bg-[#ffffff1a]" />

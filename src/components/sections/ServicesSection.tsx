@@ -1,17 +1,10 @@
 "use client";
 
 import { useRef } from "react";
-import { services } from "@/data/home";
+import { services, servicesHeader, serviceAssets } from "@/data/home";
 import { audio } from "@/data/site";
 import { useSectionHeadings } from "@/lib/useHeaderReveal";
 import LogosElement from "../LogosElement";
-
-// Thumbnail videos cycled through the service cards, one per card (looping).
-const SERVICE_ASSETS = [
-  "/assets/videos/Videos/Experiments/spaceman-gsap---new-thumbnail.mp4",
-  "/assets/videos/Videos/Experiments/noirve---new-thumbnail.mp4",
-  "/assets/videos/Videos/Experiments/pitch---new-thumbnail.mp4",
-];
 
 /**
  * Services & Expertise section.
@@ -45,7 +38,7 @@ export default function ServicesSection() {
                     header-animation-type="heading-1"
                     className="heading-style-h0"
                   >
-                    SERVICES &
+                    {servicesHeader.line1}
                   </h2>
                 </div>
                 <div className="flex items-stretch justify-start -mt-2 pl-[12.4vw] desktop:pl-24 max-[991px]:pl-[10.7vw] max-[767px]:mt-[-0.2rem] max-[767px]:pl-0">
@@ -53,11 +46,11 @@ export default function ServicesSection() {
                     header-animation-type="heading-2"
                     className="heading-style-h0"
                   >
-                    EXPERTISE
+                    {servicesHeader.line2}
                   </div>
                 </div>
               </div>
-              <LogosElement caption="SER_EXP_019" />
+              <LogosElement caption={servicesHeader.caption} />
             </div>
             <div className="relative z-2 flex flex-col items-stretch justify-start gap-6">
               {services.map((service, i) => (
@@ -107,7 +100,7 @@ export default function ServicesSection() {
                         }}
                       >
                         <source
-                          src={SERVICE_ASSETS[i % SERVICE_ASSETS.length]}
+                          src={serviceAssets[i % serviceAssets.length]}
                           type="video/mp4"
                         />
                       </video>

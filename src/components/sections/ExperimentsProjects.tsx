@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { getLenis } from "@/lib/lenis";
-import { experimentsStack } from "@/data/experiments";
+import { experimentsStack, experimentsHeader } from "@/data/experiments";
 import { audio } from "@/data/site";
 import AutoVideo from "../media/AutoVideo";
 import { ArrowIcon } from "../shared";
@@ -392,7 +392,7 @@ export default function ExperimentsProjects() {
             rel="noopener noreferrer"
             className="btn btn-small btn-icon"
           >
-            <div className="btn__text">View project</div>
+            <div className="btn__text">{experimentsHeader.viewProjectLabel ?? "View project"}</div>
             <ArrowIcon />
           </a>
         </div>

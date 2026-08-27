@@ -242,7 +242,7 @@ export default function HeroSection() {
                       </div>
                     </div>
                     <div className="relative flex flex-wrap items-start justify-start gap-6 desktop:pt-16 max-[991px]:pt-0">
-                      <Badge href={socials.github} badge="Open to Work" />
+                      <Badge href={socials.github} badge={brand.credentialBadge} />
                       <div
                         data-hero-fade="cta"
                         className="flex w-full max-w-148 flex-col gap-10 desktop:pl-16 max-[991px]:mt-0 max-[991px]:max-w-none max-[991px]:gap-8 max-[991px]:pl-0 max-[767px]:gap-6"
@@ -251,9 +251,9 @@ export default function HeroSection() {
                           {brand.heroIntro}
                         </div>
                         <div className="btn-group btn-group--grid">
-                          <Button href="/contact" dataAudio={audio.hover}>Get in touch</Button>
+                          <Button href="/contact" dataAudio={audio.hover}>{brand.heroCtaContact}</Button>
                           <Button href="/work" variant="secondary" dataAudio={audio.hover}>
-                            See work
+                            {brand.heroCtaWork}
                           </Button>
                         </div>
                       </div>

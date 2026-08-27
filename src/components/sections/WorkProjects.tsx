@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { workProjects } from "@/data/work";
+import { workProjects, workNavTabs, workFeaturedHeader } from "@/data/work";
 import { audio } from "@/data/site";
 import AutoVideo from "../media/AutoVideo";
 
@@ -13,15 +13,12 @@ export default function WorkProjects() {
   return (
     <section
       id="home-services"
-      data-projects-section="second"
       data-parallax-type="section"
-      className="relative z-2 overflow-hidden"
+      className="relative z-2 overflow-hidden background-color-primary"
     >
       <div className="padding-global is-bigger">
         <div className="container-large">
-          <div>
-            {/* Center hairline behind the grid */}
-            <div className="work-projects_content-divider absolute left-1/2 z-3 h-full w-px -ml-px bg-white-20 max-[767px]:hidden" />
+          <div className="flex flex-col">
             {/* Portfolio / Labs switcher */}
             <div className="work-projects_nav">
               <Link
@@ -31,7 +28,7 @@ export default function WorkProjects() {
                 className="work-projects_nav-wrapper w-inline-block w--current"
               >
                 <div className="text-size-tiny text-style-allcaps">
-                  Portfolio
+                  {workNavTabs.portfolio}
                 </div>
               </Link>
               <Link
@@ -40,12 +37,14 @@ export default function WorkProjects() {
                 className="work-projects_nav-wrapper w-inline-block"
               >
                 <div className="text-size-tiny text-style-allcaps">
-                  [See Labs]
+                  {workNavTabs.labs}
                 </div>
               </Link>
               <div header-content-type="border" className="frame" />
               <div header-content-type="border" className="frame is-right" />
             </div>
+            {/* Center hairline behind the grid */}
+            <div className="work-projects_content-divider absolute left-1/2 z-3 h-full w-px -ml-px bg-white-20 max-[767px]:hidden" />
             {/* Project cards */}
             <div className="work-projects_content relative grid auto-cols-fr grid-cols-2 gap-0 border-x border-t border-white-20 max-[767px]:grid-cols-1">
               {workProjects.map((project) => (
@@ -95,7 +94,7 @@ export default function WorkProjects() {
                         href={project.href}
                         className="btn btn-small"
                       >
-                        <div className="btn__text">View case study</div>
+                        <div className="btn__text">{workFeaturedHeader.viewCaseStudyLabel}</div>
                       </Link>
                     </div>
                     <div className="work-projects_card-result">

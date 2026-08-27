@@ -209,7 +209,7 @@ export default function Navbar() {
           gsap.to(logo, {
             duration: 0.5,
             scrambleText: {
-              text: "rahamanzeon",
+              text: brand.logoEnd,
               chars: "1101011101",
               speed: 0.3,
             },

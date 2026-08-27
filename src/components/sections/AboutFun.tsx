@@ -107,10 +107,10 @@ export default function AboutFun() {
               {/* Left column: oversized stacked "FUN / Facts" heading */}
               <div className="flex flex-col pl-4 max-[991px]:place-items-start">
                 <div className="flex justify-end pr-[0.7rem]">
-                  <h2 className="heading-style-h0">FUN</h2>
+                  <h2 className="heading-style-h0">{aboutFacts.header?.title1 ?? "FUN"}</h2>
                 </div>
                 <div className="flex flex-col items-start justify-start gap-[0.7rem] max-[479px]:gap-[0.3rem]">
-                  <div className="heading-style-h0">Facts</div>
+                  <div className="heading-style-h0">{aboutFacts.header?.title2 ?? "Facts"}</div>
                   <div className="flex flex-col items-stretch justify-end gap-1">
                     <div className="h-px w-full bg-border-tertiary" />
                     <div className="flex gap-[0.6rem]">
@@ -157,7 +157,7 @@ export default function AboutFun() {
                             <div className="absolute inset-0 z-2 block h-full w-full flex-none bg-neutral-dark-grey object-cover w-embed">
                               <AutoVideo src={slide.video} />
                             </div>
-                          ) : (
+                          ) : slide.image ? (
                             <>
                               <div className="absolute inset-0 z-2 h-full w-full bg-[#0a090f4d]" />
                               {slide.imageClass === "is-plants" || slide.imageClass === "is-photo" ? (
@@ -176,7 +176,7 @@ export default function AboutFun() {
                                 />
                               )}
                             </>
-                          )}
+                          ) : null}
                         </div>
                         {/* Vertical caption running up the left edge */}
                         <div className="absolute left-[-2.7rem] bottom-[4.2rem] -rotate-90 max-[767px]:bottom-[3.7rem] max-[767px]:-left-8 max-[479px]:bottom-[12vw]">
