@@ -1,9 +1,12 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { gsap } from "@/lib/gsap";
 import { contactForm } from "@/data/contact";
 import { audio } from "@/data/site";
+
+/** Form lifecycle: idle before submit, else loading/success/error. */
+type SubmitState = "idle" | "loading" | "success" | "error";
 
 /**
  * Contact section with a two-column layout: email + info on the left, the
@@ -80,6 +83,7 @@ function CheckIcon() {
 
 export default function ContactForm() {
   const emailRef = useRef<HTMLDivElement>(null);
+  const [submitState, setSubmitState] = useState<SubmitState>("idle");
 
   const handleCopy = async (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
@@ -116,18 +120,26 @@ export default function ContactForm() {
     if (pill) pill.classList.add("w--redirected-checked");
   };
 
-  // Client-side only submit: no network call, just reveal the success panel.
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  // Client-side submit: POST to the contact API, then reveal success or error.
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
+    if (submitState === "loading") return;
     if (!form.checkValidity()) {
       form.reportValidity();
       return;
     }
-    const formBlock = form.closest(".w-form");
-    const success = formBlock?.querySelector<HTMLElement>(".w-form-done");
-    form.style.display = "none";
-    if (success) success.style.display = "block";
+    setSubmitState("loading");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        body: new FormData(form),
+      });
+      if (!res.ok) throw new Error();
+      setSubmitState("success");
+    } catch {
+      setSubmitState("error");
+    }
   };
 
   return (
@@ -198,7 +210,10 @@ export default function ContactForm() {
                 ))}
               </div>
               {/* Right column: the brief form */}
-              <div className="flex w-form flex-col items-stretch pb-8 pt-14 max-[991px]:px-10 max-[991px]:pt-0 max-[479px]:px-[1.3rem]">
+              <div
+                className="flex w-form flex-col items-stretch pb-8 pt-14 max-[991px]:px-10 max-[991px]:pt-0 max-[479px]:px-[1.3rem]"
+                style={{ display: submitState === "success" ? "none" : undefined }}
+              >
                 <form
                   id="wf-form-Contact"
                   name="wf-form-Contact"
@@ -401,21 +416,32 @@ export default function ContactForm() {
                   <div className="flex flex-col items-start justify-start gap-4 pt-6">
                     <input
                       type="submit"
+                      disabled={submitState === "loading"}
                       data-wait={contactForm.submitWait ?? "Please wait..."}
                       data-audio={audio.hover}
                       data-audio-click={audio.closeMenu}
                       className="btn btn-small cursor-pointer border-0"
-                      value={contactForm.submit ?? "Submit"}
+                      value={
+                        submitState === "loading"
+                          ? (contactForm.submitWait ?? "Please wait...")
+                          : (contactForm.submit ?? "Submit")
+                      }
                     />
                   </div>
                 </form>
-                {/* Success / failure panels, hidden until submit */}
-                <div className="relative h-full w-form-done bg-transparent p-[10vw_0]">
+                {/* Success panel, shown only after a confirmed send */}
+                <div
+                  className="relative h-full w-form-done bg-transparent p-[10vw_0]"
+                  style={{ display: submitState === "success" ? "block" : "none" }}
+                >
                   <div className="mx-auto flex h-full w-[40vw] flex-col items-center justify-center bg-transparent">
                     <div className="success-text">{contactForm.success}</div>
                   </div>
                 </div>
-                <div className="mt-4 w-form-fail p-0">
+                <div
+                  className="mt-4 w-form-fail p-0"
+                  style={{ display: submitState === "error" ? "block" : "none" }}
+                >
                   <div className="flex flex-col items-center justify-center p-4">
                     <div className="error-text text-[#e23939]">
                       {contactForm.error}
