@@ -61,7 +61,9 @@ export function CredentialIcon({ className = "" }: { className?: string }) {
 /** Diagonal arrow icon used in "View project" buttons. */
 export function ArrowIcon({
   className = "btn__icon w-embed",
-}: { className?: string }) {
+}: {
+  className?: string;
+}) {
   return (
     <div className={className}>
       <svg
@@ -83,13 +85,8 @@ export function ArrowIcon({
 }
 
 /** Left or right arrow for slider prev/next controls. */
-export function SliderArrow({
-  direction,
-}: { direction: "left" | "right" }) {
-  const d1 =
-    direction === "left"
-      ? "M38 24.7002H10"
-      : "M10 24.7002H38";
+export function SliderArrow({ direction }: { direction: "left" | "right" }) {
+  const d1 = direction === "left" ? "M38 24.7002H10" : "M10 24.7002H38";
   const d2 =
     direction === "left"
       ? "M24 38.7002L10 24.7002L24 10.7002"
@@ -195,7 +192,7 @@ export function ChatWidget({ className }: ChatWidgetProps) {
     <div
       className={
         className ??
-        "flex w-full max-w-93 flex-col gap-4 overflow-hidden rounded-lg border border-white-20 p-4 backdrop-blur-[100px] bg-[#efefe60d]"
+        "flex w-full max-w-95 flex-col gap-4 overflow-hidden rounded-lg border border-white-20 p-4 backdrop-blur-[100px] bg-[#efefe60d]"
       }
     >
       <div className="flex flex-col gap-4">
@@ -235,10 +232,7 @@ export function ChatWidget({ className }: ChatWidgetProps) {
               {cta.chat.partnerName ?? "USER_1230"}
             </div>
           </div>
-          <div
-            id="cta-chat-p-1"
-            className="text-size-small text-align-right"
-          >
+          <div id="cta-chat-p-1" className="text-size-small text-align-right">
             {cta.chat.partnerMessages[0]}
           </div>
         </div>
@@ -259,10 +253,7 @@ export function ChatWidget({ className }: ChatWidgetProps) {
               {cta.chat.partnerName ?? "USER_1230"}
             </div>
           </div>
-          <div
-            id="cta-chat-p-2"
-            className="text-size-small text-align-right"
-          >
+          <div id="cta-chat-p-2" className="text-size-small text-align-right">
             {cta.chat.partnerMessages[1]}
           </div>
         </div>

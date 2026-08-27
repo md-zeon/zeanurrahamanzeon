@@ -19,7 +19,11 @@ import {
  * turned on and in reverse when turned off. Clicking also toggles background
  * music.
  */
-export default function SoundButton() {
+export default function SoundButton({
+  textClassName = "",
+}: {
+  textClassName?: string;
+}) {
   // React 18 pattern: subscribe to the sound store on the client while the
   // server snapshot (always `true`) keeps hydration deterministic.
   const on = useSyncExternalStore(subscribeSound, getSoundSnapshot, getSoundServerSnapshot);
@@ -64,7 +68,10 @@ export default function SoundButton() {
       onClick={handleClick}
       className="navbar_sound-button relative flex items-center justify-start gap-1 rounded-[0.25rem] border border-transparent pl-3 no-underline w-inline-block"
     >
-      <div sound-control-type="text" className="text-caption-2">
+      <div
+        sound-control-type="text"
+        className={`text-caption-2 ${textClassName}`}
+      >
         {on ? soundLabels.turnOff : soundLabels.turnOn}
       </div>
       <div className="navbar_sound relative flex h-10 w-10 items-center justify-center gap-[0.15rem] text-brand-white max-[767px]:h-8 max-[767px]:w-8">

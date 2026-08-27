@@ -537,7 +537,7 @@ export default function Navbar() {
       <div ref={rootRef} className="fixed inset-x-0 top-0 z-9999 w-nav">
         <div className="navbar_inner fixed inset-x-0 top-0 z-2 border border-transparent border-b-white-20 bg-brand-black">
           <div className="padding-global">
-            <div className="relative grid h-full w-full grid-cols-[.5fr_auto] items-center justify-between gap-4 py-4 desktop:grid-cols-[.5fr_auto_.55fr] wide:grid-cols-[.4fr_auto_.4fr] max-[991px]:flex max-[991px]:grid-cols-[.25fr_1fr] max-[767px]:py-[1.1rem] max-[479px]:py-[1.4rem]">
+            <div className="relative grid h-full w-full grid-cols-[.5fr_auto] items-center justify-between gap-4 py-4 desktop:grid-cols-[.5fr_auto_.55fr] wide:grid-cols-[.4fr_auto_.4fr] min-[992px]:grid-cols-[.5fr_auto_.55fr] max-[991px]:flex max-[991px]:grid-cols-[.25fr_1fr] max-[767px]:py-[1.1rem] max-[479px]:py-[1.4rem]">
               <div>
                 <Link
                   href="/"
@@ -571,10 +571,10 @@ export default function Navbar() {
                 <div className="navbar_link-bg absolute left-0 top-0 z-0 h-full w-full rounded-[0.25rem] border-0 bg-transparent" />
               </nav>
 
-              <div className="flex gap-4 pr-20 desktop:pr-0 max-[991px]:items-center max-[767px]:pr-16">
+              <div className="flex gap-4 pr-20 desktop:pr-0 min-[992px]:pr-0 max-[991px]:items-center max-[767px]:pr-16">
                 <div className="flex items-center justify-end gap-4 max-[767px]:gap-2">
                   <div className="flex gap-2 max-[479px]:hidden">
-                    <SoundButton />
+                    <SoundButton textClassName="max-[568px]:hidden" />
                   </div>
                   <div className="flex items-center justify-start gap-2">
                     <div
@@ -599,7 +599,7 @@ export default function Navbar() {
         aria-label={menuOpen ? "Close menu" : "Open menu"}
         aria-expanded={menuOpen}
         aria-controls="mobile-menu"
-        className="navbar_h-menu-button fixed right-6 top-3 z-10001 flex items-center justify-center rounded-full border border-white-20 bg-black-30 p-2 shadow-[inset_0_0_0_1000px_#0a090e33] backdrop-blur-[100px] desktop:hidden desktop:top-6 max-[767px]:right-4 max-[767px]:top-[0.8rem] w-inline-block"
+        className="navbar_h-menu-button fixed right-6 top-3 z-10001 flex items-center justify-center rounded-full border border-white-20 bg-black-30 p-2 shadow-[inset_0_0_0_1000px_#0a090e33] backdrop-blur-[100px] desktop:hidden min-[992px]:hidden desktop:top-6 max-[767px]:right-4 max-[767px]:top-[0.8rem] w-inline-block"
         onClick={toggleMenu}
       >
         <div className="relative z-1 flex h-8 w-8 flex-col items-center justify-center gap-1 max-[767px]:h-[1.7rem] max-[767px]:w-[1.7rem]">
