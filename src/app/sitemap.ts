@@ -3,7 +3,14 @@ import { siteMeta } from "@/data/site";
 import { getAllCaseStudySlugs } from "@/data/caseStudies";
 
 /** Static routes, updated here when new pages are added. */
-const staticRoutes = ["", "/work", "/experiments", "/about", "/contact"] as const;
+const staticRoutes = [
+  "",
+  "/work",
+  "/experiments",
+  "/about",
+  "/contact",
+  "/privacy-policy",
+] as const;
 
 /** Generated at build time so search engines always see the live slug set. */
 export default function sitemap(): MetadataRoute.Sitemap {
