@@ -1,3 +1,10 @@
+/** Metadata for the About page. */
+export const aboutMeta = {
+  title: "About",
+  description:
+    "I'm Zeanur Rahaman Zeon — a software engineer from Bangladesh who solves real problems end-to-end with clean architecture and solid fundamentals, and picks the right tools for each job.",
+};
+
 /** Copy for the About page hero header. */
 export const aboutHeader = {
   title1: "Hi, I'm",
@@ -12,6 +19,12 @@ export const aboutHeader = {
   videoCaption: "ABOUT_ME",
 };
 
+/** Divider marquee configuration for the Career story section. */
+export const aboutDivider = {
+  text: "Career story",
+  caption: "CRS_gjx1_30731",
+};
+
 /** Marquee strip label for the "Career story" divider. */
 export const aboutDividerText = "Software Engineer";
 
@@ -22,6 +35,14 @@ export const aboutDividerText = "Software Engineer";
  */
 export const aboutStory = {
   year: "2023",
+  yearSequence: [
+    { year: 2018, start: "top 70%" },
+    { year: 2019, start: "top 65%" },
+    { year: 2021, start: "top 55%" },
+    { year: 2022, start: "top 35%" },
+    { year: 2023, start: "top 10%" },
+    { year: 2026, start: "top 0%" },
+  ],
   body: [
     "I'm a Computer Science & Engineering student at Northern University Bangladesh, graduating in 2027 — and I've been building for the web since 2023.",
     "I learned by shipping complete products rather than just pages: a developer Q&A platform, a medicine marketplace for Bangladesh, and a real-time campus collaboration network.",
@@ -75,7 +96,15 @@ export type FactSlide = {
 };
 
 /** The "FUN FACTS" deck: a caption plus the stack of fact cards. */
-export const aboutFacts: { caption: string; slides: FactSlide[] } = {
+export const aboutFacts: {
+  header: { title1: string; title2: string };
+  caption: string;
+  slides: FactSlide[];
+} = {
+  header: {
+    title1: "FUN",
+    title2: "Facts",
+  },
   caption: "FUN_FCT_005",
   slides: [
     {
@@ -92,7 +121,7 @@ export const aboutFacts: { caption: string; slides: FactSlide[] } = {
     {
       caption: "BASED IN",
       title: "Bangladesh",
-      video: "/assets/videos/Videos/Experiments/noirve---new-thumbnail.mp4",
+      video: "/assets/videos/Videos/Experiments/space-shooter.mp4",
       videoCaption: "FUN_FCT_002",
       elementCaption: "FUN_FCT_002",
       text: "I'm based in Tongi, Gazipur — building for teams and users around the world, working in UTC+06.",
@@ -100,7 +129,7 @@ export const aboutFacts: { caption: string; slides: FactSlide[] } = {
     {
       caption: "MY APPROACH",
       title: "Tool-Agnostic",
-      video: "/assets/videos/Videos/Experiments/pitch---new-thumbnail.mp4",
+      video: "/assets/videos/Videos/Experiments/shortle.mp4",
       videoCaption: "FUN_FCT_003",
       elementCaption: "FUN_FCT_003",
       ctaLabel: "See GitHub",
@@ -110,7 +139,7 @@ export const aboutFacts: { caption: string; slides: FactSlide[] } = {
     {
       caption: "DRIVEN BY",
       title: "Real Problems",
-      video: "/assets/videos/Videos/Experiments/bertani---new-thumbnail.mp4",
+      video: "/assets/videos/Videos/Experiments/brick-breaker.mp4",
       videoCaption: "FUN_FCT_004",
       elementCaption: "FUN_FCT_004",
       text: "I like products that solve real problems — from developer Q&A and medicine delivery to campus collaboration.",
@@ -118,8 +147,7 @@ export const aboutFacts: { caption: string; slides: FactSlide[] } = {
     {
       caption: "ALWAYS",
       title: "Open to Work",
-      video:
-        "/assets/videos/Videos/Experiments/battlefield-4---new-thumbnail.mp4",
+      video: "/assets/videos/Videos/Experiments/qr-generator.mp4",
       videoCaption: "FUN_FCT_005",
       elementCaption: "FUN_FCT_005",
       ctaLabel: "Get in touch",

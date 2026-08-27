@@ -1,3 +1,10 @@
+/** Metadata for the Contact page. */
+export const contactMeta = {
+  title: "Contact",
+  description:
+    "Get in touch today if you're looking to launch a website, refine your existing site, or discuss a potential collaboration.",
+};
+
 /** Copy for the contact page hero header. */
 export const contactHeader = {
   title1: "Let's work",
@@ -13,6 +20,17 @@ export const contactHeader = {
  */
 export const contactForm = {
   email: "zeon.cse@gmail.com",
+  emailSectionLabel: "[Email]",
+  nameLabel: "What's your name?",
+  namePlaceholder: "Full Name",
+  emailLabel: "What's your email?",
+  emailPlaceholder: "name@company.com",
+  briefLabel: "What's your brief?",
+  briefPlaceholder:
+    "Write your brief here: I need ___ with this scope, pages, specific needs ___.",
+  websiteUrlLabel: "Current website URL",
+  websiteUrlPlaceholder: "www.example.com",
+  selectPlaceholder: "Please select",
   sections: [
     {
       label: "[for collaborations]",
@@ -70,6 +88,7 @@ export const contactForm = {
     ],
   },
   submit: "Submit",
+  submitWait: "Please wait...",
   success:
     "Thank you for your submission. I'll get back to you within 2 business days.",
   error: "Oops! Something went wrong while submitting the form.",

@@ -584,3 +584,9 @@ export const caseStudies: CaseStudy[] = [
 export function getCaseStudy(slug: string): CaseStudy | undefined {
   return caseStudies.find((study) => study.slug === slug);
 }
+
+/** Returns all available case study slugs for static route generation. */
+export function getAllCaseStudySlugs(): { slug: string }[] {
+  return caseStudies.map((study) => ({ slug: study.slug }));
+}
+

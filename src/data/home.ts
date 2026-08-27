@@ -46,6 +46,12 @@ export const featuredProjects = [
   },
 ];
 
+/** Labels for the featured projects carousel. */
+export const homeProjectsLabels = {
+  viewCaseStudy: "View case study",
+  seeAllWork: "See all work",
+};
+
 /** "Why partner with me?" section heading and highlight copy. */
 export const whyHeader = {
   line1: "Why work",
@@ -62,8 +68,7 @@ export const whyCards = [
     buttonLabel: "GitHub profile",
     href: "https://github.com/md-zeon",
     icon: true,
-    video:
-      "/assets/videos/Videos/Experiments/spaceman-gsap---new-thumbnail.mp4",
+    video: "/assets/videos/Videos/Experiments/kurosumi.mp4",
     webgl: false,
   },
   {
@@ -71,7 +76,7 @@ export const whyCards = [
     buttonLabel: "LinkedIn",
     href: "https://www.linkedin.com/in/zeanur-rahaman-zeon/",
     icon: true,
-    video: "/assets/videos/Videos/Experiments/noirve---new-thumbnail.mp4",
+    video: "/assets/videos/Videos/Experiments/space-shooter.mp4",
     webgl: false,
   },
   {
@@ -79,7 +84,7 @@ export const whyCards = [
     buttonLabel: "Open to work",
     href: "/contact",
     icon: true,
-    video: "/assets/videos/Videos/Experiments/pitch---new-thumbnail.mp4",
+    video: "/assets/videos/Videos/Experiments/shortle.mp4",
     webgl: false,
   },
   {
@@ -87,9 +92,23 @@ export const whyCards = [
     buttonLabel: "Get to know me",
     href: "/about",
     icon: false,
-    video: "/assets/videos/Videos/Experiments/bertani---new-thumbnail.mp4",
+    video: "/assets/videos/Videos/Experiments/brick-breaker.mp4",
     webgl: false,
   },
+];
+
+/** Header and caption for Services & Expertise. */
+export const servicesHeader = {
+  line1: "SERVICES &",
+  line2: "EXPERTISE",
+  caption: "SER_EXP_019",
+};
+
+/** Thumbnail videos cycled through the service cards, one per card (looping). */
+export const serviceAssets = [
+  "/assets/videos/Videos/Experiments/kurosumi.mp4",
+  "/assets/videos/Videos/Experiments/space-shooter.mp4",
+  "/assets/videos/Videos/Experiments/shortle.mp4",
 ];
 
 /** The three service offerings (product, interface, systems). */
@@ -158,6 +177,13 @@ export const services = [
   },
 ];
 
+/** Header and caption for Testimonials. */
+export const testimonialsHeader = {
+  line1: "Words From",
+  line2: "collaborators",
+  caption: "CLI_TES_104",
+};
+
 /** Client testimonials shown on the home page. */
 export const testimonials = [
   {
@@ -194,59 +220,58 @@ export const testimonials = [
   },
 ];
 
+/** Header and configuration for the home lab slider. */
+export const labHeader = {
+  line1: "From",
+  line2: "the lab",
+  caption: "LAB_ZN_188",
+  visitButtonLabel: "Visit experiments page",
+  viewProjectLabel: "View project",
+};
+
 /** "From the labs" side-project slides for the home lab slider. */
 export const labSlides = [
   {
     caption: "Project_001",
-    title: "DevTrack",
-    href: "https://devtrack-gamma.vercel.app",
-    video:
-      "/assets/videos/Videos/Experiments/spaceman-gsap---new-thumbnail.mp4",
+    title: "Kurosumi",
+    href: "https://kurosumi.vercel.app",
+    video: "/assets/videos/Videos/Experiments/kurosumi.mp4",
   },
   {
     caption: "Project_002",
-    title: "HistoTrack",
-    href: "https://histo-track.web.app",
-    video: "/assets/videos/Videos/Experiments/noirve---new-thumbnail.mp4",
+    title: "Space Shooter",
+    href: "https://space-shooter-dun.vercel.app",
+    video: "/assets/videos/Videos/Experiments/space-shooter.mp4",
   },
   {
     caption: "Project_003",
-    title: "Taskero",
-    href: "https://github.com/md-zeon",
-    video: "/assets/videos/Videos/Experiments/pitch---new-thumbnail.mp4",
+    title: "Brick Breaker",
+    href: "https://brick-breaker-lac.vercel.app",
+    video: "/assets/videos/Videos/Experiments/brick-breaker.mp4",
   },
   {
     caption: "Project_004",
-    title: "MicroEarn",
-    href: "https://micro-earn-7be08.web.app",
-    video: "/assets/videos/Videos/Experiments/plink---new-thumbnail.mp4",
+    title: "HistoTrack",
+    href: "https://histo-track.web.app",
+    video: "/assets/videos/Videos/Experiments/histotrack.mp4",
   },
   {
     caption: "Project_005",
-    title: "GSAP Scroll Lab",
-    href: "/experiments",
-    video: "/assets/videos/Videos/Experiments/bertani---new-thumbnail.mp4",
+    title: "Shortle",
+    href: "https://shortle-phi.vercel.app",
+    video: "/assets/videos/Videos/Experiments/shortle.mp4",
   },
   {
     caption: "Project_006",
-    title: "Motion Playground",
-    href: "/experiments",
-    video:
-      "/assets/videos/Videos/Experiments/battlefield-4---new-thumbnail.mp4",
+    title: "QR Generator",
+    href: "https://qr-generator-omega-swart.vercel.app",
+    video: "/assets/videos/Videos/Experiments/qr-generator.mp4",
   },
   {
     caption: "Project_007",
-    title: "Real-time Playground",
-    href: "/experiments",
-    video:
-      "/assets/videos/Videos/Experiments/scramble-pizza-chaos---new-thumbnail.mp4",
-  },
-  {
-    caption: "Project_008",
-    title: "UI Motion Library",
-    href: "/experiments",
-    video:
-      "/assets/videos/Videos/Experiments/thumbnails/callisto---new-thumbnail.webp",
+    title: "Taskero",
+    href: "https://github.com/md-zeon",
+    video: "/assets/videos/Videos/Experiments/taskero.mp4",
   },
 ];
 
@@ -263,6 +288,8 @@ export const cta = {
   videoCaption: "VIDEO_ZN_628",
   chat: {
     name: "Zeanur Rahaman Zeon",
+    partnerName: "USER_1230",
+    partnerAvatar: "U",
     firstMessage: "What are you building?",
     partnerMessages: [
       "I need help turning an idea into a working product.",

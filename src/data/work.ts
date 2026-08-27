@@ -1,3 +1,10 @@
+/** Metadata for the Work page. */
+export const workMeta = {
+  title: "Work",
+  description:
+    "I build real world applications that solve real problems — from a developer Q&A platform and a medicine marketplace to a real-time campus network and a micro-task economy.",
+};
+
 /** Copy for the work page hero header. */
 export const workHeader = {
   title1: "Selected",
@@ -7,6 +14,30 @@ export const workHeader = {
   buttonLabel: "Get in touch",
   badge: "Open to Work",
   badgeLink: "https://github.com/md-zeon",
+};
+
+/** Header configuration for the Featured client projects slider. */
+export const workFeaturedHeader = {
+  title1: "Featured",
+  title2: "client projects",
+  caption: "WRK_CS_267",
+  visitButtonLabel: "Visit work page",
+  viewCaseStudyLabel: "View case study",
+};
+
+/** Header configuration for the From the labs slider on the work page. */
+export const workLabHeader = {
+  title1: "From the",
+  italicWord: "labs",
+  caption: "LAB_ZN_188",
+  visitButtonLabel: "See experiments",
+  viewProjectLabel: "View project",
+};
+
+/** Navigation switcher tabs for the work page. */
+export const workNavTabs = {
+  portfolio: "Portfolio",
+  labs: "[See Labs]",
 };
 
 /** Copy for the "Let's build something distinctive" CTA on the work page. */
@@ -21,45 +52,45 @@ export const workCta = {
 export const workLabSlides = [
   {
     caption: "Project_001",
-    title: "DevTrack",
-    href: "https://devtrack-gamma.vercel.app",
-    video: "/assets/videos/Videos/Experiments/spaceman-gsap---new-thumbnail.mp4",
+    title: "Kurosumi",
+    href: "https://kurosumi.vercel.app",
+    video: "/assets/videos/Videos/Experiments/kurosumi.mp4",
   },
   {
     caption: "Project_002",
-    title: "HistoTrack",
-    href: "https://histo-track.web.app",
-    video: "/assets/videos/Videos/Experiments/noirve---new-thumbnail.mp4",
+    title: "Space Shooter",
+    href: "https://space-shooter-dun.vercel.app",
+    video: "/assets/videos/Videos/Experiments/space-shooter.mp4",
   },
   {
     caption: "Project_003",
-    title: "Taskero",
-    href: "https://github.com/md-zeon",
-    video: "/assets/videos/Videos/Experiments/pitch---new-thumbnail.mp4",
+    title: "Brick Breaker",
+    href: "https://brick-breaker-lac.vercel.app",
+    video: "/assets/videos/Videos/Experiments/brick-breaker.mp4",
   },
   {
     caption: "Project_004",
-    title: "MicroEarn",
-    href: "https://micro-earn-7be08.web.app",
-    video: "/assets/videos/Videos/Experiments/plink---new-thumbnail.mp4",
+    title: "HistoTrack",
+    href: "https://histo-track.web.app",
+    video: "/assets/videos/Videos/Experiments/histotrack.mp4",
   },
   {
     caption: "Project_005",
-    title: "GSAP Scroll Lab",
-    href: "/experiments",
-    video: "/assets/videos/Videos/Experiments/bertani---new-thumbnail.mp4",
+    title: "Shortle",
+    href: "https://shortle-phi.vercel.app",
+    video: "/assets/videos/Videos/Experiments/shortle.mp4",
   },
   {
     caption: "Project_006",
-    title: "Motion Playground",
-    href: "/experiments",
-    video: "/assets/videos/Videos/Experiments/battlefield-4---new-thumbnail.mp4",
+    title: "QR Generator",
+    href: "https://qr-generator-omega-swart.vercel.app",
+    video: "/assets/videos/Videos/Experiments/qr-generator.mp4",
   },
   {
     caption: "Project_007",
-    title: "Real-time Playground",
-    href: "/experiments",
-    video: "/assets/videos/Videos/Experiments/scramble-pizza-chaos---new-thumbnail.mp4",
+    title: "Taskero",
+    href: "https://github.com/md-zeon",
+    video: "/assets/videos/Videos/Experiments/taskero.mp4",
   },
 ];
 
@@ -124,35 +155,35 @@ export const workProjects: WorkProject[] = [
   },
   {
     index: "project_005",
-    title: "DevTrack",
-    ariaLabel: "DevTrack — project tracker",
-    tags: ["Productivity", "Next.js"],
-    href: "https://devtrack-gamma.vercel.app",
-    poster: "/assets/images/projects/devtrack/cover.webp",
-    video: "/assets/videos/hero-clip-vid.mp4",
+    title: "Kurosumi",
+    ariaLabel: "Kurosumi — markdown notes app",
+    tags: ["Notes", "Next.js"],
+    href: "https://kurosumi.vercel.app",
+    poster: "/assets/images/projects/kurosumi/cover.webp",
+    video: "/assets/videos/Videos/Experiments/kurosumi.mp4",
     result: "Live",
-    resultLabel: "sprint boards with auth, subtasks, and progress",
+    resultLabel: "markdown notes with a clean, fast editor",
   },
   {
     index: "project_006",
-    title: "HistoTrack",
-    ariaLabel: "HistoTrack — historical artifact tracker",
-    tags: ["Heritage", "React"],
-    href: "https://histo-track.web.app",
-    poster: "/assets/images/projects/histotrack/cover.webp",
-    video: "/assets/videos/hero-clip-vid.mp4",
-    result: "Global",
-    resultLabel: "artifact timelines — React, Firebase, and MongoDB",
+    title: "Space Shooter",
+    ariaLabel: "Space Shooter — arcade game",
+    tags: ["Game", "Canvas"],
+    href: "https://space-shooter-dun.vercel.app",
+    poster: "/assets/images/projects/space-shooter/cover.webp",
+    video: "/assets/videos/Videos/Experiments/space-shooter.mp4",
+    result: "Live",
+    resultLabel: "arcade space shooter built on the canvas",
   },
   {
     index: "project_007",
-    title: "Taskero",
-    ariaLabel: "Taskero — freelance task marketplace",
-    tags: ["Freelance", "MERN"],
-    href: "https://github.com/md-zeon",
-    poster: "/assets/images/projects/taskero/cover.webp",
-    video: "/assets/videos/hero-clip-vid.mp4",
-    result: "Market",
-    resultLabel: "role-based freelance task marketplace",
+    title: "Brick Breaker",
+    ariaLabel: "Brick Breaker — arcade game",
+    tags: ["Game", "Canvas"],
+    href: "https://brick-breaker-lac.vercel.app",
+    poster: "/assets/images/projects/brick-breaker/cover.webp",
+    video: "/assets/videos/Videos/Experiments/brick-breaker.mp4",
+    result: "Live",
+    resultLabel: "classic brick breaker arcade game",
   },
 ];
