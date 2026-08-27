@@ -68,12 +68,12 @@ export default function WorkProjects() {
                         ))}
                       </div>
                     </div>
-                    {/* Clickable video media */}
+                    {/* Clickable video media with title + CTA overlay */}
                     <Link
                       aria-label={project.ariaLabel}
                       data-audio={audio.hover}
                       href={project.href}
-                      className="work-projects_card-content relative w-inline-block"
+                      className="work-projects_card-content relative block w-full"
                     >
                       <div className="work-projects_card-asset-wrapper relative z-1 flex aspect-video items-center justify-center overflow-hidden rounded-lg">
                         <div className="work-projects_card-asset h-[120%] w-[120%] flex-none">
@@ -83,25 +83,19 @@ export default function WorkProjects() {
                           />
                         </div>
                       </div>
+                      <div className="work-projects_card-cta-wrapper absolute inset-0 z-2 flex flex-wrap items-end justify-start gap-x-4 gap-y-3 p-4">
+                        <h3 className="heading-style-h4">{project.title}</h3>
+                        <span className="btn btn-small" aria-hidden="true">
+                          <span className="btn__text">{workFeaturedHeader.viewCaseStudyLabel}</span>
+                        </span>
+                      </div>
                     </Link>
                   </div>
-                  {/* Title CTA overlay + result stat */}
-                  <div className="work-projects_card-bottom">
-                    <div className="work-projects_card-cta-wrapper absolute inset-0 z-2 flex items-end justify-start p-4">
-                      <h3 className="heading-style-h4">{project.title}</h3>
-                      <Link
-                        data-audio={audio.hover}
-                        href={project.href}
-                        className="btn btn-small"
-                      >
-                        <div className="btn__text">{workFeaturedHeader.viewCaseStudyLabel}</div>
-                      </Link>
-                    </div>
-                    <div className="work-projects_card-result">
-                      <div className="heading-style-h5">{project.result}</div>
-                      <div className="text-size-small text-color-secondary">
-                        {project.resultLabel}
-                      </div>
+                  {/* Headline result stat, separated as a footer row */}
+                  <div className="work-projects_card-result mt-2 border-t border-white-20 pt-4">
+                    <div className="heading-style-h5">{project.result}</div>
+                    <div className="text-size-small text-color-secondary">
+                      {project.resultLabel}
                     </div>
                   </div>
                 </div>
