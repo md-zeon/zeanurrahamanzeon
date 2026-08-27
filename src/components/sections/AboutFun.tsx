@@ -103,7 +103,7 @@ export default function AboutFun() {
       <div className="padding-global is-bigger">
         <div className="container-large">
           <div className="relative grid auto-cols-auto grid-cols-[auto_1fr] items-start gap-44 border-l border-white-20 py-28">
-            <div className="grid auto-cols-fr grid-cols-[0.25fr_auto] items-stretch justify-items-start gap-x-24 gap-y-24 desktop:justify-items-stretch desktop:gap-44 max-[991px]:grid-cols-1 max-[991px]:justify-items-stretch max-[991px]:gap-y-20 max-[767px]:gap-12">
+            <div className="grid auto-cols-fr grid-cols-[0.25fr_auto] items-stretch justify-items-start gap-x-24 gap-y-24 desktop:justify-items-stretch desktop:gap-72 max-[991px]:grid-cols-1 max-[991px]:justify-items-stretch max-[991px]:gap-y-20 max-[767px]:gap-12">
               {/* Left column: oversized stacked "FUN / Facts" heading */}
               <div className="flex flex-col pl-4 max-[991px]:place-items-start">
                 <div className="flex justify-end pr-[0.7rem]">
