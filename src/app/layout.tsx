@@ -68,40 +68,16 @@ export const robotoMono = Roboto_Mono({
   preload: true,
 });
 
+import { siteMeta } from "@/data/site";
+
 /** Site-wide metadata (title template, description, keywords). */
 export const metadata: Metadata = {
-  title: {
-    default: "Zeanur Rahaman Zeon | Software Engineer",
-    template: "%s | Zeanur Rahaman Zeon",
-  },
-  description:
-    "Software Engineer who solves real problems end-to-end with clean architecture and solid fundamentals — comfortable across stacks and quick to adapt. Explore projects, case studies, and open source.",
-  keywords: [
-    "Zeanur Rahaman Zeon",
-    "Software Engineer",
-    "Software Developer",
-    "Full Stack Developer",
-    "Problem Solver",
-    "Web Developer",
-    "Portfolio",
-    "Open to Work",
-    "JavaScript",
-    "Next.js",
-    "React",
-    "TypeScript",
-    "Node.js",
-    "Tailwind CSS",
-    "MongoDB",
-    "PostgreSQL",
-    "Prisma",
-    "Portfolio",
-    "Web Developer",
-    "GSAP",
-    "motion",
-  ],
-  authors: [{ name: "Zeanur Rahaman Zeon" }],
-  creator: "Zeanur Rahaman Zeon",
-  applicationName: "Zeanur Rahaman Zeon Portfolio",
+  title: siteMeta.title,
+  description: siteMeta.description,
+  keywords: siteMeta.keywords,
+  authors: [{ name: siteMeta.author }],
+  creator: siteMeta.creator,
+  applicationName: siteMeta.applicationName,
   robots: { index: true, follow: true },
 };
 

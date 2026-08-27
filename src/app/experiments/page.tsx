@@ -4,10 +4,11 @@ import ExperimentsProjects from "@/components/sections/ExperimentsProjects";
 import ExperimentsCards from "@/components/sections/ExperimentsCards";
 import CtaSection from "@/components/sections/CtaSection";
 
+import { experimentsMeta } from "@/data/experiments";
+
 export const metadata: Metadata = {
-  title: "Experiments & Side Projects",
-  description:
-    "A growing collection of side projects, open-source tools, and motion experiments exploring engineering patterns, real-time features, and creative interactions.",
+  title: experimentsMeta.title,
+  description: experimentsMeta.description,
 };
 
 /**

@@ -4,10 +4,11 @@ import WorkProjects from "@/components/sections/WorkProjects";
 import WorkCtaSection from "@/components/sections/WorkCtaSection";
 import WorkLabSection from "@/components/sections/WorkLabSection";
 
+import { workMeta } from "@/data/work";
+
 export const metadata: Metadata = {
-  title: "Work",
-  description:
-    "I build real world applications that solve real problems — from a developer Q&A platform and a medicine marketplace to a real-time campus network and a micro-task economy.",
+  title: workMeta.title,
+  description: workMeta.description,
 };
 
 /** Work page: hero, project grid, CTA, and "from the labs" slider. */

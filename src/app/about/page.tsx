@@ -7,10 +7,11 @@ import AboutFun from "@/components/sections/AboutFun";
 import LabSection from "@/components/sections/LabSection";
 import CtaSection from "@/components/sections/CtaSection";
 
+import { aboutMeta } from "@/data/about";
+
 export const metadata: Metadata = {
-  title: "About",
-  description:
-    "I'm Zeanur Rahaman Zeon — a aspiring software engineer from Bangladesh who solves real problems end-to-end with clean architecture and solid fundamentals, and picks the right tools for each job.",
+  title: aboutMeta.title,
+  description: aboutMeta.description,
 };
 
 /**

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getCaseStudy } from "@/data/caseStudies";
+import { getCaseStudy, getAllCaseStudySlugs } from "@/data/caseStudies";
 import CaseStudyHeader from "@/components/sections/CaseStudyHeader";
 import CaseStudyBlocks from "@/components/sections/CaseStudyBlocks";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
@@ -11,14 +11,9 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
-/** Statically pre-renders the known case study slugs at build time. */
+/** Statically pre-renders all known case study slugs at build time. */
 export function generateStaticParams() {
-  return [
-    { slug: "smart-nub-campus" },
-    { slug: "devqna" },
-    { slug: "oshudpati-marketplace" },
-    { slug: "microearn" },
-  ];
+  return getAllCaseStudySlugs();
 }
 
 /** Page metadata comes from the matched case study. */
