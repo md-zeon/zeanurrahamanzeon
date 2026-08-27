@@ -70,8 +70,10 @@ export const robotoMono = Roboto_Mono({
 
 import { siteMeta } from "@/data/site";
 
-/** Site-wide metadata (title template, description, keywords). */
+/** Site-wide metadata (title template, description, keywords, social cards). */
 export const metadata: Metadata = {
+  metadataBase: new URL(siteMeta.siteUrl),
+  alternates: { canonical: "/" },
   title: siteMeta.title,
   description: siteMeta.description,
   keywords: siteMeta.keywords,
@@ -79,6 +81,20 @@ export const metadata: Metadata = {
   creator: siteMeta.creator,
   applicationName: siteMeta.applicationName,
   robots: { index: true, follow: true },
+  openGraph: {
+    type: "website",
+    url: siteMeta.siteUrl,
+    siteName: siteMeta.applicationName,
+    title: siteMeta.title.default,
+    description: siteMeta.description,
+    images: [{ url: siteMeta.ogImage, width: 1200, height: 630, alt: siteMeta.author }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteMeta.title.default,
+    description: siteMeta.description,
+    images: [siteMeta.ogImage],
+  },
 };
 
 /** Responsive viewport + theme color (the site's dark background). */

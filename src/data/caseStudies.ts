@@ -58,6 +58,20 @@ export type CaseStudy = {
 /** Interim shared reel used until per-project media is provided. */
 const reel = "/assets/videos/hero-clip-vid.mp4";
 
+/** First video poster found in a study's blocks — used as its share card. */
+export function getCaseStudyCover(slug: string): string | undefined {
+  const study = caseStudies.find((s) => s.slug === slug);
+  if (!study) return undefined;
+  for (const block of study.blocks) {
+    if (block.type !== "example") continue;
+    const video = block.media.find(
+      (m): m is Extract<typeof m, { kind: "video" }> => m.kind === "video"
+    );
+    if (video?.poster) return video.poster;
+  }
+  return undefined;
+}
+
 /** Real recorded walkthroughs (others pending). */
 const devqnaVideo = "/assets/videos/Videos/Work/devqna/DevQnA.mp4";
 const oshudpatiVideo = "/assets/videos/Videos/Work/oshudpati-marketplace/Oshudpati-Marketplace.mp4";

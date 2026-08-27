@@ -5,11 +5,13 @@ import WorkCtaSection from "@/components/sections/WorkCtaSection";
 import WorkLabSection from "@/components/sections/WorkLabSection";
 
 import { workMeta } from "@/data/work";
+import { pageMetadata } from "@/data/site";
 
-export const metadata: Metadata = {
-  title: workMeta.title,
-  description: workMeta.description,
-};
+export const metadata: Metadata = pageMetadata(
+  workMeta.title,
+  workMeta.description,
+  "/work"
+);
 
 /** Work page: hero, project grid, CTA, and "from the labs" slider. */
 export default function Work() {

@@ -8,11 +8,13 @@ import LabSection from "@/components/sections/LabSection";
 import CtaSection from "@/components/sections/CtaSection";
 
 import { aboutMeta } from "@/data/about";
+import { pageMetadata } from "@/data/site";
 
-export const metadata: Metadata = {
-  title: aboutMeta.title,
-  description: aboutMeta.description,
-};
+export const metadata: Metadata = pageMetadata(
+  aboutMeta.title,
+  aboutMeta.description,
+  "/about"
+);
 
 /**
  * About page: hero, career-story marquee, the story section, testimonials,

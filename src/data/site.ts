@@ -1,5 +1,7 @@
 /** Site-wide SEO and root metadata. */
 export const siteMeta = {
+  siteUrl: "https://zeanurrahamanzeon.vercel.app",
+  ogImage: "/og.png",
   title: {
     default: "Zeanur Rahaman Zeon | Software Engineer",
     template: "%s | Zeanur Rahaman Zeon",
@@ -121,3 +123,25 @@ export const footer = {
     { label: "email", href: socials.email },
   ],
 };
+
+/** Per-page metadata shared by sub-pages: canonical URL, Open Graph, twitter card. */
+export function pageMetadata(
+  title: string,
+  description: string,
+  path: string,
+  image: string = siteMeta.ogImage
+) {
+  return {
+    title,
+    description,
+    alternates: { canonical: path },
+    openGraph: {
+      type: "website",
+      url: `${siteMeta.siteUrl}${path}`,
+      title,
+      description,
+      images: [{ url: image, width: 1200, height: 630, alt: siteMeta.author }],
+    },
+    twitter: { title, description, images: [image] },
+  };
+}

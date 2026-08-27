@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getCaseStudy, getAllCaseStudySlugs } from "@/data/caseStudies";
+import { getCaseStudy, getAllCaseStudySlugs, getCaseStudyCover } from "@/data/caseStudies";
+import { siteMeta } from "@/data/site";
 import CaseStudyHeader from "@/components/sections/CaseStudyHeader";
 import CaseStudyBlocks from "@/components/sections/CaseStudyBlocks";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
@@ -16,12 +17,31 @@ export function generateStaticParams() {
   return getAllCaseStudySlugs();
 }
 
-/** Page metadata comes from the matched case study. */
+/** Page metadata comes from the matched case study (with a project cover card). */
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const study = getCaseStudy(slug);
   if (!study) return { title: "Case Study" };
-  return { title: study.metaTitle, description: study.metaDescription };
+
+  const image = getCaseStudyCover(slug) ?? siteMeta.ogImage;
+  return {
+    title: study.metaTitle,
+    description: study.metaDescription,
+    alternates: { canonical: `/work/${slug}` },
+    openGraph: {
+      type: "website",
+      url: `${siteMeta.siteUrl}/work/${slug}`,
+      title: study.metaTitle,
+      description: study.metaDescription,
+      images: [{ url: image, alt: study.header.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: study.metaTitle,
+      description: study.metaDescription,
+      images: [image],
+    },
+  };
 }
 
 /**

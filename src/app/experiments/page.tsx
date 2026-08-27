@@ -5,11 +5,13 @@ import ExperimentsCards from "@/components/sections/ExperimentsCards";
 import CtaSection from "@/components/sections/CtaSection";
 
 import { experimentsMeta } from "@/data/experiments";
+import { pageMetadata } from "@/data/site";
 
-export const metadata: Metadata = {
-  title: experimentsMeta.title,
-  description: experimentsMeta.description,
-};
+export const metadata: Metadata = pageMetadata(
+  experimentsMeta.title,
+  experimentsMeta.description,
+  "/experiments"
+);
 
 /**
  * Experiments page: hero, pinned 3D carousel of side projects, side-project
