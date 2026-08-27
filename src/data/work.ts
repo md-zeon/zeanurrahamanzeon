@@ -101,7 +101,7 @@ export type WorkProject = {
   ariaLabel: string;
   tags: string[];
   href: string;
-  poster: string;
+  poster?: string;
   video: string;
   result: string;
   resultLabel: string;
@@ -159,7 +159,6 @@ export const workProjects: WorkProject[] = [
     ariaLabel: "Kurosumi — markdown notes app",
     tags: ["Notes", "Next.js"],
     href: "https://kurosumi.vercel.app",
-    poster: "/assets/images/projects/kurosumi/cover.webp",
     video: "/assets/videos/Videos/Experiments/kurosumi.mp4",
     result: "Live",
     resultLabel: "markdown notes with a clean, fast editor",
@@ -170,7 +169,6 @@ export const workProjects: WorkProject[] = [
     ariaLabel: "Space Shooter — arcade game",
     tags: ["Game", "Canvas"],
     href: "https://space-shooter-dun.vercel.app",
-    poster: "/assets/images/projects/space-shooter/cover.webp",
     video: "/assets/videos/Videos/Experiments/space-shooter.mp4",
     result: "Live",
     resultLabel: "arcade space shooter built on the canvas",
@@ -181,7 +179,6 @@ export const workProjects: WorkProject[] = [
     ariaLabel: "Brick Breaker — arcade game",
     tags: ["Game", "Canvas"],
     href: "https://brick-breaker-lac.vercel.app",
-    poster: "/assets/images/projects/brick-breaker/cover.webp",
     video: "/assets/videos/Videos/Experiments/brick-breaker.mp4",
     result: "Live",
     resultLabel: "classic brick breaker arcade game",
