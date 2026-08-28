@@ -226,7 +226,19 @@ export default function ExperimentsProjects() {
         }
       };
 
-      const bannerTrigger = ScrollTrigger.create({
+      // Banner visibility follows the pinned phase (in while pinned, out
+      // when the section is fully scrolled past). Callbacks are passed
+      // inline to ScrollTrigger.create (post-hoc vars.onEnter is ignored).
+      const bannerFade = (state: "in" | "out") => {
+        gsap.to(".home-projects_banner-component", {
+          opacity: state === "in" ? 1 : 0,
+          yPercent: state === "in" ? 0 : 20,
+          ease: state === "in" ? "expo.out" : "expo.in",
+          duration: 0.3,
+        });
+      };
+
+      ScrollTrigger.create({
         trigger: el,
         start: "top top",
         end: "+=400%",
@@ -235,6 +247,10 @@ export default function ExperimentsProjects() {
           const st = ScrollTrigger.getById("projectsScroll");
           if (st) updateActiveProject();
         },
+        onEnter: () => bannerFade("in"),
+        onLeave: () => bannerFade("out"),
+        onEnterBack: () => bannerFade("in"),
+        onLeaveBack: () => bannerFade("out"),
       });
 
       // Banner and side nav slide/fade in once the section scrolls in.
@@ -254,21 +270,6 @@ export default function ExperimentsProjects() {
           onComplete: () => gsap.to(navButtons[0], { opacity: 1 }),
         },
       );
-
-      // Banner visibility follows the pinned phase (in while pinned, out
-      // when the section is fully scrolled past).
-      const bannerFade = (state: "in" | "out") => {
-        gsap.to(".home-projects_banner-component", {
-          opacity: state === "in" ? 1 : 0,
-          yPercent: state === "in" ? 0 : 20,
-          ease: state === "in" ? "expo.out" : "expo.in",
-          duration: 0.3,
-        });
-      };
-      bannerTrigger.vars.onEnter = () => bannerFade("in");
-      bannerTrigger.vars.onLeave = () => bannerFade("out");
-      bannerTrigger.vars.onEnterBack = () => bannerFade("in");
-      bannerTrigger.vars.onLeaveBack = () => bannerFade("out");
 
       // Hover feedback on the thumbnails: brighten the border and indent the
       // thumbnail, restoring the scroll-driven active state on leave.
