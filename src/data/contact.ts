@@ -1,8 +1,8 @@
 /** Metadata for the Contact page. */
 export const contactMeta = {
-  title: "Contact",
+  title: "Contact Zeanur Rahaman Zeon – Let's Work Together",
   description:
-    "Get in touch today if you're looking to launch a website, refine your existing site, or discuss a potential collaboration.",
+    "Get in touch with Zeanur Rahaman Zeon today if you're looking to launch a website, refine your existing site, or discuss a potential collaboration.",
 };
 
 /** Copy for the contact page hero header. */

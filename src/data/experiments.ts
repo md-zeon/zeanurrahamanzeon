@@ -1,8 +1,8 @@
 /** Metadata for the Experiments page. */
 export const experimentsMeta = {
-  title: "Experiments & Side Projects",
+  title: "Experiments & Side Projects – Zeanur Rahaman Zeon",
   description:
-    "A growing collection of side projects, open-source tools, and motion experiments — exploring engineering patterns, real-time features, and creative interactions.",
+    "A growing collection of side projects, open-source tools, and motion experiments by Zeanur Rahaman Zeon — exploring engineering patterns, real-time features, and creative interactions.",
 };
 
 /** Copy for the experiments page hero header. */

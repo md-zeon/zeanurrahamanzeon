@@ -52,7 +52,7 @@ export const metadata: Metadata = {
   title: siteMeta.title,
   description: siteMeta.description,
   keywords: siteMeta.keywords,
-  authors: [{ name: siteMeta.author }],
+  authors: [{ name: siteMeta.author, url: siteMeta.siteUrl }],
   creator: siteMeta.creator,
   applicationName: siteMeta.applicationName,
   robots: { index: true, follow: true },
@@ -66,9 +66,16 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
+    site: "@developer_zeon",
+    creator: "@developer_zeon",
     title: siteMeta.title.default,
     description: siteMeta.description,
     images: [siteMeta.ogImage],
+  },
+  // rel="me" links to social profiles — help Google associate all profiles with the same person
+  other: {
+    "geo.region": "BD",
+    "geo.placename": "Tongi, Gazipur, Bangladesh",
   },
 };
 
@@ -79,6 +86,63 @@ export const viewport: Viewport = {
   themeColor: "#0a090f",
 };
 
+/** JSON-LD structured data for Google to understand the person and website. */
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": `${siteMeta.siteUrl}/#person`,
+      name: siteMeta.author,
+      url: siteMeta.siteUrl,
+      jobTitle: "Software Engineer",
+      description: siteMeta.description,
+      image: {
+        "@type": "ImageObject",
+        url: `${siteMeta.siteUrl}/og.png`,
+        width: 1200,
+        height: 630,
+      },
+      sameAs: [
+        "https://www.linkedin.com/in/zeanur-rahaman-zeon/",
+        "https://github.com/md-zeon",
+        "https://x.com/developer_zeon",
+      ],
+      knowsAbout: [
+        "TypeScript",
+        "React",
+        "Next.js",
+        "Node.js",
+        "PostgreSQL",
+        "MongoDB",
+        "Full Stack Web Development",
+        "Software Engineering",
+        "REST APIs",
+        "GSAP Animation",
+      ],
+      alumniOf: {
+        "@type": "CollegeOrUniversity",
+        name: "Northern University Bangladesh",
+        url: "https://nub.ac.bd",
+      },
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Tongi, Gazipur",
+        addressCountry: "BD",
+      },
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteMeta.siteUrl}/#website`,
+      url: siteMeta.siteUrl,
+      name: siteMeta.author,
+      description: `Portfolio of ${siteMeta.author} — Software Engineer`,
+      author: { "@id": `${siteMeta.siteUrl}/#person` },
+      inLanguage: "en",
+    },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
@@ -87,7 +151,19 @@ export default function RootLayout({
       lang="en"
       className={`${brockmann.variable} ${robotoMono.variable} w-mod-js scrollbar-thin`}
     >
+      <head>
+        {/* rel=me: Verifies this site's identity matches these social profiles */}
+        <link rel="me" href="https://www.linkedin.com/in/zeanur-rahaman-zeon/" />
+        <link rel="me" href="https://github.com/md-zeon" />
+        <link rel="me" href="https://x.com/developer_zeon" />
+        <link rel="me" href="mailto:zeon.cse@gmail.com" />
+      </head>
       <body>
+        {/* JSON-LD: Person + WebSite schema — critical for Google Knowledge Panel */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <noscript>
           <style>{".is-gsap-hidden { visibility: visible !important; }"}</style>
         </noscript>

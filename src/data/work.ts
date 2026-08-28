@@ -1,6 +1,6 @@
 /** Metadata for the Work page. */
 export const workMeta = {
-  title: "Work",
+  title: "Work & Projects – Zeanur Rahaman Zeon",
   description:
     "I build real world applications that solve real problems — from a developer Q&A platform and a medicine marketplace to a real-time campus network and a micro-task economy.",
 };

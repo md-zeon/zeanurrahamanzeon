@@ -1,6 +1,6 @@
 /** Metadata for the About page. */
 export const aboutMeta = {
-  title: "About",
+  title: "About Zeanur Rahaman Zeon – Full Stack Software Engineer",
   description:
     "I'm Zeanur Rahaman Zeon — a software engineer from Bangladesh who solves real problems end-to-end with clean architecture and solid fundamentals, and picks the right tools for each job.",
 };
