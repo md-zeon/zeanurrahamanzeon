@@ -107,7 +107,7 @@ export default function CtaSection({
                       />
                     </svg>
                   </div>
-                  <div className="relative flex h-full w-full items-center justify-center [clip-path:polygon(98.5%_0,98.5%_6%,100%_7%,100%_100%,10%_100%,0_90%,0_0)]">
+                  <div className="relative flex h-full w-full items-center justify-center overflow-hidden [clip-path:polygon(98.5%_0,98.5%_6%,100%_7%,100%_100%,10%_100%,0_90%,0_0)]">
                     {/* The three video layers for the chat: the neutral loop,
                         and the two option-specific loops. `useCtaChat` swaps
                         which one is visible. */}

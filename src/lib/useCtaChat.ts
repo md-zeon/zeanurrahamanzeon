@@ -6,10 +6,11 @@ import { gsap } from "@/lib/gsap";
 /**
  * Animates the mock "chat" widget inside the CTA section.
  *
- * When the visitor picks one of two options, the corresponding looping video
- * plays, a scripted conversation is revealed one message at a time (with a
- * binary scramble on the text), and the choice buttons disappear. All tweens
- * are scoped via `gsap.context` so they're reverted on unmount.
+ * When the visitor picks one of two options, a scripted conversation is
+ * revealed one message at a time (with a binary scramble on the text), and
+ * the choice buttons disappear. The hero loop video keeps playing behind the
+ * chat the whole time. All tweens are scoped via `gsap.context` so they're
+ * reverted on unmount.
  */
 export function useCtaChat(container: RefObject<HTMLElement | null>) {
   useEffect(() => {
@@ -107,20 +108,15 @@ export function useCtaChat(container: RefObject<HTMLElement | null>) {
         });
       };
 
-      // Handles choosing option 1 or 2: swap the playing video, hide the
-      // choice buttons, then play the client -> my reply sequence.
+      // Handles choosing option 1 or 2: keep the hero loop video playing,
+      // hide the choice buttons, then play the client -> my reply sequence.
       const onClick = (which: 1 | 2) => {
-        const active = which === 1 ? video2 : video3;
-        const inactive = which === 1 ? video3 : video2;
-        if (active) {
-          active.pause();
-          active.currentTime = 0;
-          active.play().catch(() => undefined);
-        }
-        if (inactive) inactive.pause();
-
-        gsap.set(".cta_loop-video.is-1", { display: "none" });
-        gsap.set(`.cta_loop-video.is-${which}`, { display: "block" });
+        // Always keep the hero clip visible; never swap to the option videos.
+        gsap.set(".cta_loop-video.is-1", { display: "block" });
+        gsap.set(".cta_loop-video.is-2", { display: "none" });
+        gsap.set(".cta_loop-video.is-3", { display: "none" });
+        video2?.pause();
+        video3?.pause();
 
         revealClient(which, () => revealMe(which));
         gsap.set(".cta_chat-cta", { display: "none" });
