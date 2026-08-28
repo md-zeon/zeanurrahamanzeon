@@ -57,10 +57,7 @@ export default function WhySection() {
                     <div
                       className={`absolute inset-0 z-2 h-full w-full opacity-30 ${i % 2 === 1 ? "bg-[linear-gradient(-45deg,#000,#000_0%,#0000)]" : "bg-[linear-gradient(45deg,#000,#000_0%,#0000)]"}`}
                     />
-                    <div
-                      data-parallax-type="video"
-                      className="relative z-1 h-[110%] w-[110%] flex-none object-cover max-[767px]:h-[120%] max-[767px]:w-[120%]"
-                    >
+                    <div className="relative z-1 h-[110%] w-[110%] flex-none object-cover max-[767px]:h-[120%] max-[767px]:w-[120%]">
                       <AutoVideo
                         src={
                           card.video ??

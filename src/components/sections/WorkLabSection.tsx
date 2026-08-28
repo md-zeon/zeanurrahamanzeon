@@ -24,7 +24,6 @@ export default function WorkLabSection() {
   return (
     <section
       id="home-services"
-      data-parallax-type="section"
       className="relative z-2 overflow-hidden background-color-primary"
       ref={ref}
     >

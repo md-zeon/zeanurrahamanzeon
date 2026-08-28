@@ -91,7 +91,7 @@ export default function SiteShell({ children }: { children: ReactNode }) {
         <div id="smooth-wrapper" className="smooth-wrapper">
           <div id="smooth-content" className="smooth-content">
             <Navbar />
-            <main className="main-wrapper background-color-black">{children}</main>
+            <div className="main-wrapper background-color-black">{children}</div>
             <Footer />
           </div>
         </div>

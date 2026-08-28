@@ -18,7 +18,6 @@ export default function LabSection() {
   return (
     <section
       id="lab"
-      data-parallax-type="ssection"
       className="relative z-2 overflow-hidden"
       ref={ref}
     >
@@ -75,7 +74,6 @@ export default function LabSection() {
                     <div className="relative">
                       <div className="relative z-1 flex h-full w-full items-center justify-center overflow-hidden rounded-lg">
                         <div
-                          data-parallax-type="video"
                           className="aspect-video h-[110%] w-[110%] flex-none max-[991px]:h-[120%] max-[991px]:w-[120%]"
                         >
                           <AutoVideo src={slide.video} />

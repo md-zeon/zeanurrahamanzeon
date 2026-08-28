@@ -198,7 +198,7 @@ export default function AboutStory() {
   }, []);
 
   return (
-    <section data-parallax-type="section" className="relative z-2" ref={ref}>
+    <section className="relative z-2" ref={ref}>
       <div className="padding-global is-bigger">
         <div className="container-large">
           <div className="relative z-2 grid w-full auto-cols-fr grid-cols-1 items-center justify-center border-l border-white-20 max-[767px]:pb-12 max-[479px]:border-l-0 max-[479px]:pb-0">

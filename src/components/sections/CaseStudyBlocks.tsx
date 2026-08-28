@@ -9,7 +9,7 @@ type CaseStudyBlocksProps = {
 
 /**
  * Shared media class — slightly oversized and centered so AutoVideo / image
- * crops fill the rounded frame without letterboxing, on a parallax page.
+ * crops fill the rounded frame without letterboxing.
  */
 const VIDEO_CLASS =
   "relative z-2 h-full w-full shrink-0 object-cover max-[767px]:h-[120%] max-[767px]:w-[120%] max-[767px]:rounded";
@@ -57,8 +57,7 @@ const TEXT_WRAPPER_CLASS =
 
 /**
  * Full-bleed showcase row for a study: a single wide asset or a two-column
- * grid of square tiles. Kept as one `data-parallax-type="section"` block so
- * the GSAP page parallax scrolls the whole strip together.
+ * grid of square tiles.
  */
 function Example({
   block,
@@ -74,10 +73,7 @@ function Example({
     ? "relative z-1 grid w-[90%] auto-cols-fr grid-rows-[auto] grid-cols-2 gap-8 [transform-origin:50%_0] [transform-style:preserve-3d] max-[991px]:grid-cols-1"
     : "relative z-1 flex w-[90%] [transform-origin:50%_0] [transform-style:preserve-3d]";
   return (
-    <section
-      data-parallax-type="section"
-      className="relative z-2 flex w-full flex-col gap-8 overflow-hidden"
-    >
+    <section className="relative z-2 flex w-full flex-col gap-8 overflow-hidden">
       <div className={layoutClass}>
         {isGrid ? (
           <div className={projectClass}>

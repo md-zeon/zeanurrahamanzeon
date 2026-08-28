@@ -125,7 +125,6 @@ export default function AboutHeader() {
 
   return (
     <header
-      data-parallax-type="section"
       className="relative z-2 overflow-hidden"
       ref={ref}
     >
@@ -176,7 +175,6 @@ export default function AboutHeader() {
                       </div>
                       <div className="flex h-full w-full items-center justify-center [clip-path:polygon(99%_0,99%_6%,100%_7%,100%_100%,6%_100%,0_94%,0_0)]">
                         <div
-                          data-parallax-type="video"
                           className="z-2 flex-none bg-neutral-dark-grey object-cover h-[110%] w-[110%]"
                         >
                           <AutoVideo src={aboutHeader.video} />

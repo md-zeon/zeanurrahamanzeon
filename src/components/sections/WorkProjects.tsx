@@ -5,7 +5,7 @@ import AutoVideo from "../media/AutoVideo";
 
 /**
  * Work page project grid — two-column list of full case-study cards. Each
- * card shows the index, tags, a looped video (page-parallax target), title,
+ * card shows the index, tags, a looped video, title,
  * "View case study" link, and a headline result. A small nav row at the top
  * toggles between Portfolio and [See Labs].
  */
@@ -13,7 +13,6 @@ export default function WorkProjects() {
   return (
     <section
       id="home-services"
-      data-parallax-type="section"
       className="relative z-2 overflow-hidden background-color-primary"
     >
       <div className="padding-global is-bigger">

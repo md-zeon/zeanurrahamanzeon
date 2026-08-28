@@ -21,7 +21,6 @@ export default function ServicesSection() {
   return (
     <section
       id="services"
-      data-parallax-type="ssection"
       className="relative z-2"
       ref={ref}
     >

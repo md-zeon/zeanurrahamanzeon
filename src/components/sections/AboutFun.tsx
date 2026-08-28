@@ -96,10 +96,7 @@ function LinkIcon() {
  */
 export default function AboutFun() {
   return (
-    <section
-      data-parallax-type="section"
-      className="relative z-2 overflow-hidden"
-    >
+    <section className="relative z-2 overflow-hidden">
       <div className="padding-global is-bigger">
         <div className="container-large">
           <div className="relative grid auto-cols-auto grid-cols-[auto_1fr] items-start gap-44 border-l border-white-20 py-28">

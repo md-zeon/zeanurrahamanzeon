@@ -10,7 +10,7 @@ import SiteShell from "@/components/SiteShell";
  * pages in SiteShell (preloader, cursor, navbar, footer, audio).
  */
 
-/** Local display font (Brockmann) with its weights/italics preloaded. */
+/** Local display font (Brockmann) with the weights actually used preloaded. */
 export const brockmann = localFont({
   src: [
     {
@@ -19,39 +19,14 @@ export const brockmann = localFont({
       style: "normal",
     },
     {
-      path: "./fonts/brockmann/brockmann-400i.woff2",
-      weight: "400",
-      style: "italic",
-    },
-    {
       path: "./fonts/brockmann/brockmann-500.woff2",
       weight: "500",
       style: "normal",
     },
     {
-      path: "./fonts/brockmann/brockmann-500i.woff2",
-      weight: "500",
-      style: "italic",
-    },
-    {
       path: "./fonts/brockmann/brockmann-600.woff2",
       weight: "600",
       style: "normal",
-    },
-    {
-      path: "./fonts/brockmann/brockmann-600i.woff2",
-      weight: "600",
-      style: "italic",
-    },
-    {
-      path: "./fonts/brockmann/brockmann-700.woff2",
-      weight: "700",
-      style: "normal",
-    },
-    {
-      path: "./fonts/brockmann/brockmann-700i.woff2",
-      weight: "700",
-      style: "italic",
     },
   ],
   variable: "--font-brockmann",
@@ -62,7 +37,7 @@ export const brockmann = localFont({
 /** Mono font used for labels/captions, preloaded via next/font/google. */
 export const robotoMono = Roboto_Mono({
   subsets: ["latin"],
-  style: ["normal", "italic"],
+  style: ["normal"],
   variable: "--font-roboto-mono",
   display: "swap",
   preload: true,
@@ -113,6 +88,9 @@ export default function RootLayout({
       className={`${brockmann.variable} ${robotoMono.variable} w-mod-js scrollbar-thin`}
     >
       <body>
+        <noscript>
+          <style>{".is-gsap-hidden { visibility: visible !important; }"}</style>
+        </noscript>
         <SiteShell>{children}</SiteShell>
       </body>
     </html>

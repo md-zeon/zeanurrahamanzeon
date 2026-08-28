@@ -111,21 +111,15 @@ export default function CtaSection({
                     {/* The three video layers for the chat: the neutral loop,
                         and the two option-specific loops. `useCtaChat` swaps
                         which one is visible. */}
-                    <div
-                      data-parallax-type="video"
-                      className="cta_loop-video is-1 absolute inset-auto z-1 block aspect-square h-[110%] w-[110%] flex-none bg-neutral-dark-grey object-cover max-[767px]:h-[120%] max-[767px]:w-[120%]"
-                    >
+                    <div className="cta_loop-video is-1 absolute inset-auto z-1 block aspect-square h-[110%] w-[110%] flex-none bg-neutral-dark-grey object-cover max-[767px]:h-[120%] max-[767px]:w-[120%]">
                       <AutoVideo src={cta.videoLoop} />
                     </div>
-                    <div
-                      data-parallax-type="video"
-                      className="cta_loop-video is-2 absolute inset-auto z-2 hidden aspect-square h-[110%] w-[110%] flex-none bg-neutral-dark-grey object-cover max-[767px]:h-[120%] max-[767px]:w-[120%]"
-                    >
+                    <div className="cta_loop-video is-2 absolute inset-auto z-2 hidden aspect-square h-[110%] w-[110%] flex-none bg-neutral-dark-grey object-cover max-[767px]:h-[120%] max-[767px]:w-[120%]">
                       <video
                         muted
                         loop
                         playsInline
-                        autoPlay
+                        preload="none"
                         style={{
                           position: "absolute",
                           top: "50%",
@@ -140,15 +134,12 @@ export default function CtaSection({
                         Your browser does not support the video tag.
                       </video>
                     </div>
-                    <div
-                      data-parallax-type="video"
-                      className="cta_loop-video is-3 absolute inset-auto z-3 hidden aspect-square h-[110%] w-[110%] flex-none bg-neutral-dark-grey object-cover max-[767px]:h-[120%] max-[767px]:w-[120%]"
-                    >
+                    <div className="cta_loop-video is-3 absolute inset-auto z-3 hidden aspect-square h-[110%] w-[110%] flex-none bg-neutral-dark-grey object-cover max-[767px]:h-[120%] max-[767px]:w-[120%]">
                       <video
                         muted
                         loop
                         playsInline
-                        autoPlay
+                        preload="none"
                         style={{
                           position: "absolute",
                           top: "50%",

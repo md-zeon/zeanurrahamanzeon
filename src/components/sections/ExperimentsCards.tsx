@@ -5,7 +5,7 @@ import { ArrowIcon } from "../shared";
 
 /**
  * "Side projects" grid — two-column row of experiment cards. Each card shows a
- * looped video (with a page-parallax target on the asset) and a "View
+ * looped video and a "View
  * project" button linking out.
  */
 export default function ExperimentsCards() {
@@ -13,7 +13,6 @@ export default function ExperimentsCards() {
     <section
       id="home-services"
       data-projects-section="second"
-      data-parallax-type="section"
       className="relative z-2 overflow-hidden"
     >
       <div className="padding-global is-bigger">
@@ -35,12 +34,9 @@ export default function ExperimentsCards() {
                       </div>
                     </div>
                     <div className="work-projects_card-content relative">
-                      {/* Oversized media + page-parallax target + dark wash */}
+                      {/* Oversized media + dark wash */}
                       <div className="work-projects_card-asset-wrapper relative z-1 flex aspect-video items-center justify-center overflow-hidden rounded-lg">
-                        <div
-                          data-parallax-type="video"
-                          className="work-projects_card-asset h-[120%] w-[120%] flex-none"
-                        >
+                        <div className="work-projects_card-asset h-[120%] w-[120%] flex-none">
                           <AutoVideo src={card.video} poster={card.poster} />
                         </div>
                         <div className="work_card-overlay absolute inset-0 z-2 h-full w-full bg-[linear-gradient(45deg,#000,#000_0%,#0000)] opacity-30" />

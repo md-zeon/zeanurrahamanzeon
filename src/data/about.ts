@@ -31,7 +31,7 @@ export const aboutDivider = {
  * year sequence, and the left-column photos/quote stack.
  */
 export const aboutStory = {
-  year: "2023",
+  year: "2026",
   yearSequence: [
     { year: 2018, start: "top 70%" },
     { year: 2019, start: "top 65%" },
@@ -55,7 +55,7 @@ export const aboutStory = {
     },
     {
       text: "real-time campus collaboration network",
-      href: "https://github.com/smart-nub-campus-client",
+      href: "https://smart-nub-campus-client.vercel.app",
     },
     { text: "open source", href: "https://github.com/md-zeon" },
   ],
