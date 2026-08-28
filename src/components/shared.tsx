@@ -397,6 +397,8 @@ type ButtonProps = {
   target?: string;
   /** Hover sound played via `data-audio`, matched by the global sound system. */
   dataAudio?: string;
+  /** Optional click handler passed through to the anchor/link. */
+  onClick?: React.MouseEventHandler<HTMLAnchorElement>;
 };
 
 /**
@@ -412,6 +414,7 @@ export function Button({
   size = "default",
   target,
   dataAudio,
+  onClick,
 }: ButtonProps) {
   const className = `btn ${variant === "secondary" ? "btn-secondary" : ""} ${size === "small" ? "btn-small" : ""}`;
   if (href.startsWith("http")) {
@@ -421,6 +424,7 @@ export function Button({
         target={target ?? "_blank"}
         rel="noopener noreferrer"
         data-audio={dataAudio}
+        onClick={onClick}
         className={className}
       >
         <div className="btn__text">{children}</div>
@@ -428,7 +432,7 @@ export function Button({
     );
   }
   return (
-    <Link href={href} data-audio={dataAudio} className={className}>
+    <Link href={href} data-audio={dataAudio} onClick={onClick} className={className}>
       <div className="btn__text">{children}</div>
     </Link>
   );
