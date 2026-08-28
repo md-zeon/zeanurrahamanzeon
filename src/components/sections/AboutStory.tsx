@@ -241,32 +241,30 @@ export default function AboutStory() {
                       <div className="absolute -top-[0.15rem] right-0 h-2 w-2 rounded-full bg-brand-white" />
                     </div>
                   </div>
-                  <div className="relative mt-6">
-                    <div className="flex flex-col justify-between gap-5 rounded-lg border border-white-20 bg-[#0a090fb3] p-6 backdrop-blur-[100px] max-[767px]:p-4">
-                      <div className="relative">
-                        <div className="absolute left-[-0.6rem] top-0">
-                          <div className="text-size-medium">&quot;</div>
-                        </div>
-                        <div className="text-size-medium">
-                          {aboutStory.quote}
-                        </div>
-                      </div>
-                      <div>
-                        <div className="text-size-regular text-weight-medium">
-                          {aboutStory.quoteName}
-                        </div>
-                        <div className="text-size-regular text-color-secondary">
-                          {aboutStory.quoteRole}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </div>
               <div className="flex max-w-214.5 flex-col items-start justify-start gap-8 wide:max-w-262">
                 <div className="border-l border-r border-white-20 px-4 py-28 max-[991px]:px-12 max-[991px]:py-20 max-[767px]:px-8 max-[767px]:py-12 max-[479px]:px-6">
                   <div id="highlighted-text" className="heading-style-h4">
                     <StoryBody />
+                  </div>
+                </div>
+                <div className="flex w-full flex-col justify-between gap-5 rounded-lg border border-white-20 bg-[#0a090fb3] p-8 backdrop-blur-[100px] max-[767px]:p-4">
+                  <div className="relative">
+                    <div className="absolute left-[-0.6rem] top-0">
+                      <div className="text-size-medium">&quot;</div>
+                    </div>
+                    <div className="text-size-medium">
+                      {aboutStory.quote}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-size-regular text-weight-medium">
+                      {aboutStory.quoteName}
+                    </div>
+                    <div className="text-size-regular text-color-secondary">
+                      {aboutStory.quoteRole}
+                    </div>
                   </div>
                 </div>
               </div>
