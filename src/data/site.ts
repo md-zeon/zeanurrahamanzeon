@@ -77,10 +77,9 @@ export const soundWaves = {
 export const photos = {
   ellipseLight: "/assets/images/zeon.webp",
   ellipseBlack: "/assets/images/zeon.webp",
-  dscf: "/assets/images/68a45a760cd92325bdbe6e29_DSCF1373.webp",
-  img6121: "/assets/images/68a45d04c04a2d5dfbf53d01_IMG_6121.webp",
-  farSocial:
-    "/assets/images/68a4558cc7d9b14451d2e8c6_4e9a496a616d6af1cb78d162097fe750_far-social.webp",
+  about1: "/assets/images/about/zeon-1.webp",
+  about2: "/assets/images/about/zeon-2.webp",
+  about3: "/assets/images/about/zeon-3.webp",
 };
 
 /** Primary navigation links shown in the navbar and mobile menu. */

@@ -9,14 +9,13 @@ import LogosElement from "../LogosElement";
 import { SliderArrow } from "../shared";
 
 /**
- * Client testimonials: quote, marks, name/role and photo, plus a strip of
- * client logos used as navigation.
+ * Client testimonials: quote, marks, name/role and photo, with prev/next
+ * arrows and a 6s auto-advance.
  *
  * On scroll the quote reveals line-by-line (each line wrapped in an
- * overflow-hidden box), the photo/name/role scramble-fade in, and the nav
- * slides up. Clicking a logo tile, the prev/next arrows, or letting the
- * 6s auto-advance tick swaps the quote/name/role/photo with a slide-out +
- * slide-in transition.
+ * overflow-hidden box), the photo/name/role scramble-fade in. The prev/next
+ * arrows and the auto-advance swap the quote/name/role/photo with a
+ * slide-out + slide-in transition.
  */
 export default function TestimonialsSection() {
   const ref = useRef<HTMLElement>(null);
@@ -128,23 +127,8 @@ export default function TestimonialsSection() {
           once: true,
         },
       });
-      gsap.set(".testimonial_nav-wrapper", { y: 50, opacity: 0 });
-      gsap.to(".testimonial_nav-wrapper", {
-        y: 0,
-        opacity: 1,
-        duration: 0.6,
-        stagger: 0.1,
-        ease: "expo.out",
-        scrollTrigger: {
-          trigger: ".testimonial_nav-component",
-          start: "top 90%",
-          once: true,
-        },
-      });
-
       // Swap to testimonial `index`: slide the current quote out (re-wrapped
-      // to match the new text length), swap content, slide the new one in,
-      // and highlight the active nav logo.
+      // to match the new text length), swap content, slide the new one in.
       const switchTo = (index: number) => {
         if (currentIndexRef.current === index || !quoteElement) return;
         currentIndexRef.current = index;
@@ -185,48 +169,7 @@ export default function TestimonialsSection() {
             });
           },
         });
-        el.querySelectorAll(".testimonial_nav-wrapper").forEach((nav, i) => {
-          gsap.to(nav, {
-            opacity: i === index ? 1 : 0.5,
-            duration: 0.3,
-            ease: "power2.out",
-          });
-        });
       };
-
-      el.querySelectorAll(".testimonial_nav-wrapper").forEach((nav, index) => {
-        const onClick = (event: Event) => {
-          event.preventDefault();
-          if (index !== currentIndexRef.current) {
-            switchTo(index);
-            resetTimer();
-          }
-        };
-        nav.addEventListener("click", onClick);
-        cleanups.push(() => nav.removeEventListener("click", onClick));
-        // Hover feedback: brighten the logo tile, restoring the active state
-        // on leave.
-        const onEnter = () =>
-          gsap.to(nav, {
-            opacity: 1,
-            borderColor: "#efefe680",
-            duration: 0.25,
-            ease: "power2.out",
-          });
-        const onLeave = () =>
-          gsap.to(nav, {
-            opacity: index === currentIndexRef.current ? 1 : 0.5,
-            borderColor: "rgba(239, 239, 230, 0.2)",
-            duration: 0.25,
-            ease: "power2.out",
-          });
-        nav.addEventListener("mouseenter", onEnter);
-        nav.addEventListener("mouseleave", onLeave);
-        cleanups.push(() => {
-          nav.removeEventListener("mouseenter", onEnter);
-          nav.removeEventListener("mouseleave", onLeave);
-        });
-      });
 
       // Prev/next arrows wrap around the testimonial list.
       const total = testimonials.length;
@@ -396,26 +339,7 @@ export default function TestimonialsSection() {
                   </div>
                 </div>
               </div>
-              <div className="testimonial_nav-component no-scrollbar hidden max-[991px]:flex max-[991px]:overflow-auto max-[991px]:rounded-r max-[991px]:border-r max-[991px]:border-white-20">
-                {testimonials.map((item, i) => (
-                  <a
-                    key={i}
-                    data-audio={audio.secondaryHover}
-                    data-audio-click={audio.closeMenu}
-                    href="#"
-                    className={`testimonial_nav-wrapper relative flex aspect-[1.3] items-center justify-center border border-white-20 bg-[#efefe600] backdrop-blur-[100px] transition-all duration-200 max-[991px]:min-h-28 max-[767px]:min-h-24 max-[479px]:min-h-[30vw] ${i === 0 ? "rounded-l is-first is-active" : i === testimonials.length - 1 ? "rounded-r is-last" : ""} w-inline-block`}
-                  >
-                    <Image
-                      src={item.logo}
-                      alt=""
-                      fill
-                      className="testimonial_nav-logo object-contain"
-                    />
-                  </a>
-                ))}
-              </div>
             </div>
-            <div className="hidden h-28 border-l border-white-20" />
           </div>
         </div>
       </div>
