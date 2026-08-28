@@ -80,12 +80,7 @@ export default function CaseStudyFeatured() {
                         {project.index}
                       </div>
                     </div>
-                    <Link
-                      aria-label={project.ariaLabel}
-                      data-audio={audio.hover}
-                      href={project.href}
-                      className="relative w-inline-block"
-                    >
+                    <div className="relative w-inline-block">
                       <div className="relative z-1 flex h-full w-full items-center justify-center overflow-hidden rounded-lg">
                         {/* Oversized media so the looped video covers the
                             frame completely on every breakpoint */}
@@ -96,7 +91,7 @@ export default function CaseStudyFeatured() {
                           />
                         </div>
                       </div>
-                    </Link>
+                    </div>
                     {/* Overlay: title + "View case study" action */}
                     <div className="absolute inset-0 z-2 flex items-end justify-start p-4">
                       <h3 className="heading-style-h4">{project.title}</h3>

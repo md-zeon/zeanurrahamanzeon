@@ -78,19 +78,13 @@ export default function WorkLabSection() {
                       </div>
                     </div>
                     {/* Oversized media so the looped video covers the frame */}
-                    <a
-                      aria-label={slide.title}
-                      href={slide.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="relative w-inline-block"
-                    >
+                    <div className="relative w-inline-block">
                       <div className="relative z-1 flex h-full w-full items-center justify-center overflow-hidden rounded-lg">
                         <div className="aspect-video h-[110%] w-[110%] flex-none max-[991px]:h-[120%] max-[991px]:w-[120%]">
                           <AutoVideo src={slide.video} />
                         </div>
                       </div>
-                    </a>
+                    </div>
                     {/* Overlay: title + "View project" action */}
                     <div className="absolute inset-0 z-2 flex items-end justify-start p-4">
                       <h3 className="heading-style-h4">{slide.title}</h3>

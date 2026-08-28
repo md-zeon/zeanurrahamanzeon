@@ -32,9 +32,9 @@ export const experimentsStack = [
   },
   {
     index: "Experiment_003",
-    title: "Brick Breaker",
-    video: "/assets/videos/Videos/Experiments/brick-breaker.mp4",
-    href: "https://brick-breaker-lac.vercel.app",
+    title: "Taskero",
+    video: "/assets/videos/Videos/Experiments/taskero.mp4",
+    href: "https://taskero-60a20.web.app",
   },
   {
     index: "Experiment_004",
@@ -47,14 +47,20 @@ export const experimentsStack = [
 /** Side-project cards (project_005..006) shown in the "Side projects" grid. */
 export const experimentsCards = [
   {
-    index: "project_005",
+    index: "Experiment_005",
+    title: "Brick Breaker",
+    video: "/assets/videos/Videos/Experiments/brick-breaker.mp4",
+    href: "https://brick-breaker-lac.vercel.app",
+  },
+  {
+    index: "project_006",
     title: "Shortle",
     href: "https://shortle-phi.vercel.app",
     poster: "/assets/videos/Videos/Experiments/thumbnails/shortle.webp",
     video: "/assets/videos/Videos/Experiments/shortle.mp4",
   },
   {
-    index: "project_006",
+    index: "project_007",
     title: "QR Generator",
     href: "https://qr-generator-omega-swart.vercel.app",
     poster: "/assets/videos/Videos/Experiments/thumbnails/qr-generator.webp",

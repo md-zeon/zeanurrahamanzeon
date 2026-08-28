@@ -68,13 +68,8 @@ export default function WorkProjects() {
                         ))}
                       </div>
                     </div>
-                    {/* Clickable video media with title + CTA overlay */}
-                    <Link
-                      aria-label={project.ariaLabel}
-                      data-audio={audio.hover}
-                      href={project.href}
-                      className="work-projects_card-content relative block w-full"
-                    >
+                    {/* Media + title + CTA overlay (only the button links) */}
+                    <div className="work-projects_card-content relative block w-full">
                       <div className="work-projects_card-asset-wrapper relative z-1 flex aspect-video items-center justify-center overflow-hidden rounded-lg">
                         <div className="work-projects_card-asset h-[120%] w-[120%] flex-none">
                           <AutoVideo
@@ -85,11 +80,16 @@ export default function WorkProjects() {
                       </div>
                       <div className="work-projects_card-cta-wrapper absolute inset-0 z-2 flex flex-wrap items-end justify-start gap-x-4 gap-y-3 p-4">
                         <h3 className="heading-style-h4">{project.title}</h3>
-                        <span className="btn btn-small" aria-hidden="true">
+                        <Link
+                          aria-label={project.ariaLabel}
+                          data-audio={audio.hover}
+                          href={project.href}
+                          className="btn btn-small"
+                        >
                           <span className="btn__text">{workFeaturedHeader.viewCaseStudyLabel}</span>
-                        </span>
+                        </Link>
                       </div>
-                    </Link>
+                    </div>
                   </div>
                   {/* Headline result stat, separated as a footer row */}
                   <div className="work-projects_card-result mt-2 border-t border-white-20 pt-4">
