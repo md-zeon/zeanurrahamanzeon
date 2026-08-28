@@ -198,8 +198,8 @@ export default function AboutStory() {
                         />
                       </div>
                     ))}
-                    <div className="absolute inset-0 z-10 flex h-full w-full items-center justify-center overflow-hidden rounded-lg">
-                      <div className="flex h-full w-full flex-col justify-between rounded-lg border border-white-20 bg-[#efefe60d] p-6 backdrop-blur-[100px] max-[991px]:p-4">
+                    <div className="absolute bottom-3 right-3 z-10 w-[70%] overflow-hidden rounded-lg max-[479px]:w-full max-[479px]:max-w-none">
+                      <div className="flex flex-col justify-between gap-5 rounded-lg border border-white-20 bg-[#0a090fb3] p-6 backdrop-blur-[100px] max-[767px]:p-4 max-[479px]:w-auto">
                         <div className="relative">
                           <div className="absolute left-[-0.6rem] top-0">
                             <div className="text-size-medium">&quot;</div>
