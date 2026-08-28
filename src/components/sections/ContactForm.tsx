@@ -210,16 +210,16 @@ export default function ContactForm() {
                 ))}
               </div>
               {/* Right column: the brief form */}
-              <div
-                className="flex w-form flex-col items-stretch pb-8 pt-14 max-[991px]:px-10 max-[991px]:pt-0 max-[479px]:px-[1.3rem]"
-                style={{ display: submitState === "success" ? "none" : undefined }}
-              >
+              <div className="flex w-form flex-col items-stretch pb-8 pt-14 max-[991px]:px-10 max-[991px]:pt-0 max-[479px]:px-[1.3rem]">
                 <form
                   id="wf-form-Contact"
                   name="wf-form-Contact"
                   method="get"
                   className="grid auto-cols-fr grid-cols-1 gap-12"
                   onSubmit={handleSubmit}
+                  style={{
+                    display: submitState === "success" ? "none" : undefined,
+                  }}
                 >
                   {/* Name + email */}
                   <div className="grid auto-cols-fr grid-cols-2 gap-8 max-[767px]:grid-cols-1">
@@ -431,11 +431,16 @@ export default function ContactForm() {
                 </form>
                 {/* Success panel, shown only after a confirmed send */}
                 <div
-                  className="relative h-full w-form-done bg-transparent p-[10vw_0]"
+                  className="relative w-full p-[5rem_0]"
                   style={{ display: submitState === "success" ? "block" : "none" }}
                 >
-                  <div className="mx-auto flex h-full w-[40vw] flex-col items-center justify-center bg-transparent">
-                    <div className="success-text">{contactForm.success}</div>
+                  <div className="mx-auto flex w-full max-w-104 flex-col items-center justify-center gap-4 text-center">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-full border border-white-20 bg-white-10 text-[#5eead4]">
+                      <CheckIcon />
+                    </div>
+                    <div className="success-text heading-style-h5">
+                      {contactForm.success}
+                    </div>
                   </div>
                 </div>
                 <div
