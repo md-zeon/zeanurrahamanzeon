@@ -55,9 +55,6 @@ export type CaseStudy = {
   blocks: CaseBlock[];
 };
 
-/** Interim shared reel used until per-project media is provided. */
-const reel = "/assets/videos/hero-clip-vid.mp4";
-
 /** First video poster found in a study's blocks — used as its share card. */
 export function getCaseStudyCover(slug: string): string | undefined {
   const study = caseStudies.find((s) => s.slug === slug);
@@ -74,9 +71,17 @@ export function getCaseStudyCover(slug: string): string | undefined {
 
 /** Real recorded walkthroughs (others pending). */
 const devqnaVideo = "/assets/videos/Videos/Work/devqna/DevQnA.mp4";
+const devqnaVideo2 = "/assets/videos/Videos/Work/devqna/DevQnA-2.mp4";
+const devqnaVideo3 = "/assets/videos/Videos/Work/devqna/DevQnA-3.mp4";
 const oshudpatiVideo = "/assets/videos/Videos/Work/oshudpati-marketplace/Oshudpati-Marketplace.mp4";
+const oshudpatiVideo2 = "/assets/videos/Videos/Work/oshudpati-marketplace/Oshudpati-Marketplace-2.mp4";
+const oshudpatiVideo3 = "/assets/videos/Videos/Work/oshudpati-marketplace/Oshudpati-Marketplace-3.mp4";
 const smartNubVideo = "/assets/videos/Videos/Work/smart-nub-campus/Smart-NUB-Campus.mp4";
+const smartNubVideo2 = "/assets/videos/Videos/Work/smart-nub-campus/Smart-NUB-Campus-2.mp4";
+const smartNubVideo3 = "/assets/videos/Videos/Work/smart-nub-campus/Smart-NUB-Campus-3.mp4";
 const microearnVideo = "/assets/videos/Videos/Work/microearn/MicroEarn.mp4";
+const microearnVideo2 = "/assets/videos/Videos/Work/microearn/MicroEarn-2.mp4";
+const microearnVideo3 = "/assets/videos/Videos/Work/microearn/MicroEarn-3.mp4";
 
 /** All case studies in the site (looked up by slug in the detail page). */
 export const caseStudies: CaseStudy[] = [
@@ -142,7 +147,7 @@ export const caseStudies: CaseStudy[] = [
           {
             kind: "video",
             caption: "Video_CS_002",
-            video: reel,
+            video: devqnaVideo2,
             poster: "/assets/images/projects/devqna/cover.webp",
           },
         ],
@@ -181,7 +186,7 @@ export const caseStudies: CaseStudy[] = [
           {
             kind: "video",
             caption: "Video_CS_003",
-            video: reel,
+            video: devqnaVideo3,
             poster: "/assets/images/projects/devqna/cover.webp",
           },
         ],
@@ -270,7 +275,7 @@ export const caseStudies: CaseStudy[] = [
           {
             kind: "video",
             caption: "Video_CS_002",
-            video: reel,
+            video: oshudpatiVideo2,
             poster: "/assets/images/projects/oshudpati/cover.webp",
           },
         ],
@@ -309,7 +314,7 @@ export const caseStudies: CaseStudy[] = [
           {
             kind: "video",
             caption: "Video_CS_003",
-            video: reel,
+            video: oshudpatiVideo3,
             poster: "/assets/images/projects/oshudpati/cover.webp",
           },
         ],
@@ -398,7 +403,7 @@ export const caseStudies: CaseStudy[] = [
           {
             kind: "video",
             caption: "Video_CS_002",
-            video: reel,
+            video: smartNubVideo2,
             poster: "/assets/images/projects/smart-nub/cover.webp",
           },
         ],
@@ -437,7 +442,7 @@ export const caseStudies: CaseStudy[] = [
           {
             kind: "video",
             caption: "Video_CS_003",
-            video: reel,
+            video: smartNubVideo3,
             poster: "/assets/images/projects/smart-nub/cover.webp",
           },
         ],
@@ -526,7 +531,7 @@ export const caseStudies: CaseStudy[] = [
           {
             kind: "video",
             caption: "Video_CS_002",
-            video: microearnVideo,
+            video: microearnVideo2,
             poster: "/assets/images/projects/microearn/cover.webp",
           },
         ],
@@ -565,7 +570,7 @@ export const caseStudies: CaseStudy[] = [
           {
             kind: "video",
             caption: "Video_CS_003",
-            video: microearnVideo,
+            video: microearnVideo3,
             poster: "/assets/images/projects/microearn/cover.webp",
           },
         ],
