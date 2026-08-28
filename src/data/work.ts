@@ -52,45 +52,45 @@ export const workCta = {
 export const workLabSlides = [
   {
     caption: "Project_001",
-    title: "Kurosumi",
-    href: "https://kurosumi.vercel.app",
-    video: "/assets/videos/Videos/Experiments/kurosumi.mp4",
-  },
-  {
-    caption: "Project_002",
     title: "Space Shooter",
     href: "https://space-shooter-dun.vercel.app",
     video: "/assets/videos/Videos/Experiments/space-shooter.mp4",
   },
   {
-    caption: "Project_003",
-    title: "Brick Breaker",
-    href: "https://brick-breaker-lac.vercel.app",
-    video: "/assets/videos/Videos/Experiments/brick-breaker.mp4",
+    caption: "Project_002",
+    title: "Taskero",
+    href: "https://github.com/md-zeon",
+    video: "/assets/videos/Videos/Experiments/taskero.mp4",
   },
   {
-    caption: "Project_004",
+    caption: "Project_003",
     title: "HistoTrack",
     href: "https://histo-track.web.app",
     video: "/assets/videos/Videos/Experiments/histotrack.mp4",
   },
   {
+    caption: "Project_004",
+    title: "Brick Breaker",
+    href: "https://brick-breaker-lac.vercel.app",
+    video: "/assets/videos/Videos/Experiments/brick-breaker.mp4",
+  },
+  {
     caption: "Project_005",
+    title: "Kurosumi",
+    href: "https://kurosumi.vercel.app",
+    video: "/assets/videos/Videos/Experiments/kurosumi.mp4",
+  },
+  {
+    caption: "Project_006",
     title: "Shortle",
     href: "https://shortle-phi.vercel.app",
     video: "/assets/videos/Videos/Experiments/shortle.mp4",
   },
   {
-    caption: "Project_006",
+    caption: "Project_007",
     title: "QR Generator",
     href: "https://qr-generator-omega-swart.vercel.app",
     video: "/assets/videos/Videos/Experiments/qr-generator.mp4",
-  },
-  {
-    caption: "Project_007",
-    title: "Taskero",
-    href: "https://github.com/md-zeon",
-    video: "/assets/videos/Videos/Experiments/taskero.mp4",
   },
 ];
 
@@ -142,7 +142,8 @@ export const workProjects: WorkProject[] = [
     href: "/work/oshudpati-marketplace",
     hasCaseStudy: true,
     poster: "/assets/images/projects/oshudpati/cover.webp",
-    video: "/assets/videos/Videos/Work/oshudpati-marketplace/Oshudpati-Marketplace.mp4",
+    video:
+      "/assets/videos/Videos/Work/oshudpati-marketplace/Oshudpati-Marketplace.mp4",
     result: "17+",
     resultLabel: "database models, 3-role RBAC, 4-step order lifecycle",
   },

@@ -28,6 +28,10 @@ export default function TestimonialsSection() {
 
     const ctx = gsap.context(() => {
       const cleanups: Array<() => void> = [];
+      // Track the current SplitText instance so swaps revert it before the
+      // text is replaced (new SplitText restores the element's ORIGINAL text,
+      // which would clobber an updated textContent).
+      let quoteSplit: SplitText | null = null;
       const quoteElement = el.querySelector<HTMLElement>("#testimonial-quote");
       const marksElement = el.querySelector<HTMLElement>("#testimonial-marks");
       const nameElement = el.querySelector<HTMLElement>("#testimonial-name");
@@ -53,7 +57,7 @@ export default function TestimonialsSection() {
         // Hide marks + lines, reveal them when scrolled into view.
         gsap.set(marksElement, { opacity: 0, y: 30 });
         gsap.set(quoteElement, { opacity: 0 });
-        wrapLines(quoteElement);
+        quoteSplit = wrapLines(quoteElement);
         gsap.set(quoteElement, { opacity: 1 });
         gsap.set(quoteElement.querySelectorAll(".line-wrapper > *"), {
           y: 100,
@@ -130,10 +134,11 @@ export default function TestimonialsSection() {
       // Swap to testimonial `index`: slide the current quote out (re-wrapped
       // to match the new text length), swap content, slide the new one in.
       const switchTo = (index: number) => {
-        if (currentIndexRef.current === index || !quoteElement) return;
+        if (currentIndexRef.current === index || !quoteElement || !quoteSplit)
+          return;
         currentIndexRef.current = index;
         const { quote, name, role, image } = testimonials[index];
-        const split = wrapLines(quoteElement);
+        const split = quoteSplit;
         gsap.to([marksElement, split.lines[0]], {
           y: 100,
           opacity: 0,
@@ -147,11 +152,20 @@ export default function TestimonialsSection() {
           ease: "expo.in",
           stagger: 0.07,
           onComplete: () => {
+            // Revert the previous split FIRST (this also restores the plain
+            // text) so a fresh SplitText captures the NEW quote as its
+            // original instead of the stale first one.
+            split.revert();
+            quoteSplit = null;
             quoteElement.textContent = quote;
             if (nameElement) nameElement.textContent = name;
             if (roleElement) roleElement.textContent = role;
-            if (photoElement) photoElement.src = image;
+            if (photoElement) {
+              photoElement.removeAttribute("srcset");
+              photoElement.src = image;
+            }
             const newSplit = wrapLines(quoteElement);
+            quoteSplit = newSplit;
             gsap.set(newSplit.lines, { y: 100, opacity: 0 });
             gsap.to([marksElement, newSplit.lines[0]], {
               y: 0,
@@ -225,10 +239,10 @@ export default function TestimonialsSection() {
       });
 
       // Auto-advance every 6s, paused while the section is hovered.
-      let timer = window.setInterval(() => goTo(1), 6000);
+      let timer = window.setInterval(() => goTo(1), 10000);
       const resetTimer = () => {
         window.clearInterval(timer);
-        timer = window.setInterval(() => goTo(1), 6000);
+        timer = window.setInterval(() => goTo(1), 10000);
       };
       const pause = () => window.clearInterval(timer);
       const resume = () => resetTimer();

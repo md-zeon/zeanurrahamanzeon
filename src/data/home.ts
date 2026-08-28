@@ -190,29 +190,29 @@ export const testimonials = [
     quote:
       "I treat every project as an end-to-end product problem — from data models and authentication to the pixels people actually touch. I choose the right tools for the job, ship clean code, and stay open to collaboration on anything that solves a real problem.",
     name: "Zeanur Rahaman Zeon",
-    role: "Software Engineer",
+    role: "Aspiring Software Engineer",
     image: photos.ellipseLight,
   },
   {
     quote:
-      "Zeanur took a rough idea and turned it into a product we actually ship — clean APIs, thoughtful UI, and real-time features that just work. Handover was smooth and the code was easy to pick up.",
-    name: "Product Partner",
-    role: "Startup Founder",
-    image: photos.about1,
+      "Zeon and I built Smart NUB Campus together — real-time systems, clean architecture, and late nights we don't regret. Reliable peer, sharp engineer, and the kind of person you want on a hard project.",
+    name: "Md Sajib",
+    role: "Engineering Peer",
+    image: photos.sajib,
   },
   {
     quote:
-      "The interface work was excellent — responsive, animated, and genuinely pleasant to use. He balanced the visual polish with performance, which is rare.",
-    name: "Design Collaborator",
-    role: "Product Designer",
-    image: photos.about2,
+      "Zeon was our vice team lead on Project Quadra — real-time messages with Socket.io, typing indicators, delivery and read states — shipped from a rough spec to a feature that worked. We took first place, and that feature was a big part of it.",
+    name: "Sumyta Bentey Habib",
+    role: "Team Lead, Quadra",
+    image: photos.sumyta,
   },
   {
     quote:
-      "We needed authentication, payments, and real-time messaging shipped on a deadline. Zeanur handled the hard parts and kept everything secure and observable.",
-    name: "Engineering Peer",
-    role: "Backend Engineer",
-    image: photos.about3,
+      "Zeon led our academic projects end to end — a hospital management system and a movie recommendation platform — and the plan, the structure, the working final demo were all his doing. Getting those two projects through together taught me how a real team lead works.",
+    name: "Md. Kamal Hossain",
+    role: "Academic Project Collaborator",
+    image: photos.kamal,
   },
 ];
 
@@ -229,45 +229,45 @@ export const labHeader = {
 export const labSlides = [
   {
     caption: "Project_001",
-    title: "Kurosumi",
-    href: "https://kurosumi.vercel.app",
-    video: "/assets/videos/Videos/Experiments/kurosumi.mp4",
-  },
-  {
-    caption: "Project_002",
     title: "Space Shooter",
     href: "https://space-shooter-dun.vercel.app",
     video: "/assets/videos/Videos/Experiments/space-shooter.mp4",
   },
   {
-    caption: "Project_003",
-    title: "Brick Breaker",
-    href: "https://brick-breaker-lac.vercel.app",
-    video: "/assets/videos/Videos/Experiments/brick-breaker.mp4",
+    caption: "Project_002",
+    title: "Taskero",
+    href: "https://github.com/md-zeon",
+    video: "/assets/videos/Videos/Experiments/taskero.mp4",
   },
   {
-    caption: "Project_004",
+    caption: "Project_003",
     title: "HistoTrack",
     href: "https://histo-track.web.app",
     video: "/assets/videos/Videos/Experiments/histotrack.mp4",
   },
   {
+    caption: "Project_004",
+    title: "Brick Breaker",
+    href: "https://brick-breaker-lac.vercel.app",
+    video: "/assets/videos/Videos/Experiments/brick-breaker.mp4",
+  },
+  {
     caption: "Project_005",
+    title: "Kurosumi",
+    href: "https://kurosumi.vercel.app",
+    video: "/assets/videos/Videos/Experiments/kurosumi.mp4",
+  },
+  {
+    caption: "Project_006",
     title: "Shortle",
     href: "https://shortle-phi.vercel.app",
     video: "/assets/videos/Videos/Experiments/shortle.mp4",
   },
   {
-    caption: "Project_006",
+    caption: "Project_007",
     title: "QR Generator",
     href: "https://qr-generator-omega-swart.vercel.app",
     video: "/assets/videos/Videos/Experiments/qr-generator.mp4",
-  },
-  {
-    caption: "Project_007",
-    title: "Taskero",
-    href: "https://github.com/md-zeon",
-    video: "/assets/videos/Videos/Experiments/taskero.mp4",
   },
 ];
 

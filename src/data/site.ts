@@ -80,6 +80,9 @@ export const photos = {
   about1: "/assets/images/about/zeon-1.webp",
   about2: "/assets/images/about/zeon-2.webp",
   about3: "/assets/images/about/zeon-3.webp",
+  sajib: "/assets/images/testimonials/sajib.jpg",
+  sumyta: "/assets/images/testimonials/sumyta-bentey-habib.jpg",
+  kamal: "/assets/images/testimonials/md-kamal-hossain.jpg",
 };
 
 /** Primary navigation links shown in the navbar and mobile menu. */
