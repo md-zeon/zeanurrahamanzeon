@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { useScrubbedHighlight } from "@/lib/useHeaderReveal";
 import Image from "next/image";
@@ -70,6 +70,8 @@ function StoryBody() {
 
 export default function AboutStory() {
   const ref = useRef<HTMLElement>(null);
+  // Which photo is visible: swaps as the story text scrolls through viewport.
+  const [photoIndex, setPhotoIndex] = useState(0);
 
   // Story text brightens word-by-word as it scrolls through the viewport.
   useScrubbedHighlight(ref);
@@ -80,6 +82,21 @@ export default function AboutStory() {
 
     const ctx = gsap.context(() => {
       const element = el.querySelector<HTMLElement>("#highlighted-text");
+
+      // Crossfade the left-column photos as the story scrolls: divide the
+      // text's journey across the viewport into three bands, one per photo.
+      ScrollTrigger.create({
+        trigger: "#highlighted-text",
+        start: "top 90%",
+        end: "bottom 40%",
+        onUpdate: (self) => {
+          const index = Math.min(
+            2,
+            Math.floor(Math.max(0, self.progress) * 3),
+          );
+          setPhotoIndex(index);
+        },
+      });
 
       // Keep the year number in place while the section scrolls.
       ScrollTrigger.create({
@@ -164,17 +181,24 @@ export default function AboutStory() {
                 </div>
                 <div className="about-story_cards-component absolute right-4 top-24 w-[80%] max-[767px]:hidden">
                   <div className="relative aspect-2/3">
-                    <div className="absolute inset-0 z-1 flex h-full w-full items-center justify-center overflow-hidden rounded-lg">
-                      <Image
-                        src={aboutStory.images[0].src}
-                        alt={aboutStory.images[0].alt}
-                        fill
-                        priority
-                        sizes="(max-width: 991px) 0px, 40vw"
-                        className="flex-none object-cover"
-                      />
-                    </div>
-                    <div className="absolute inset-0 z-1 flex h-full w-full items-center justify-center overflow-hidden rounded-lg">
+                    {aboutStory.images.map((image, index) => (
+                      <div
+                        key={image.src}
+                        className={`absolute inset-0 z-1 flex h-full w-full items-center justify-center overflow-hidden rounded-lg transition-opacity duration-700 ${
+                          index === photoIndex ? "opacity-100" : "opacity-0"
+                        }`}
+                      >
+                        <Image
+                          src={image.src}
+                          alt={image.alt}
+                          fill
+                          priority={index === 0}
+                          sizes="(max-width: 991px) 0px, 40vw"
+                          className="flex-none object-cover"
+                        />
+                      </div>
+                    ))}
+                    <div className="absolute inset-0 z-10 flex h-full w-full items-center justify-center overflow-hidden rounded-lg">
                       <div className="flex h-full w-full flex-col justify-between rounded-lg border border-white-20 bg-[#efefe60d] p-6 backdrop-blur-[100px] max-[991px]:p-4">
                         <div className="relative">
                           <div className="absolute left-[-0.6rem] top-0">
@@ -193,24 +217,6 @@ export default function AboutStory() {
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <div className="absolute inset-0 z-1 flex h-full w-full items-center justify-center overflow-hidden rounded-lg">
-                      <Image
-                        src={aboutStory.images[1].src}
-                        alt={aboutStory.images[1].alt}
-                        fill
-                        sizes="(max-width: 991px) 0px, 40vw"
-                        className="flex-none object-cover"
-                      />
-                    </div>
-                    <div className="absolute inset-0 z-1 flex h-full w-full items-center justify-center overflow-hidden rounded-lg">
-                      <Image
-                        src={aboutStory.images[2].src}
-                        alt={aboutStory.images[2].alt}
-                        fill
-                        sizes="(max-width: 991px) 0px, 40vw"
-                        className="flex-none object-cover"
-                      />
                     </div>
                   </div>
                   <div className="absolute left-[-2.7rem] bottom-[1.9rem] -rotate-90">
