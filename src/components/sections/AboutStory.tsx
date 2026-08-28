@@ -169,6 +169,8 @@ export default function AboutStory() {
                         src={aboutStory.images[0].src}
                         alt={aboutStory.images[0].alt}
                         fill
+                        priority
+                        sizes="(max-width: 991px) 0px, 40vw"
                         className="flex-none object-cover"
                       />
                     </div>
@@ -197,6 +199,7 @@ export default function AboutStory() {
                         src={aboutStory.images[1].src}
                         alt={aboutStory.images[1].alt}
                         fill
+                        sizes="(max-width: 991px) 0px, 40vw"
                         className="flex-none object-cover"
                       />
                     </div>
@@ -205,6 +208,7 @@ export default function AboutStory() {
                         src={aboutStory.images[2].src}
                         alt={aboutStory.images[2].alt}
                         fill
+                        sizes="(max-width: 991px) 0px, 40vw"
                         className="flex-none object-cover"
                       />
                     </div>
