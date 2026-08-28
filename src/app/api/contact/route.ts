@@ -96,7 +96,7 @@ export async function POST(request: NextRequest) {
                 <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
                   <tr>
                     <td style="vertical-align:middle">
-                      <span style="display:inline-block;width:36px;height:36px;background-color:#0a090f;border:1px solid rgba(94,234,212,0.4);border-radius:10px;text-align:center;line-height:36px;color:#ffffff;font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:18px">Z</span>
+                      <span style="display:inline-block;width:36px;height:36px;background-color:#0a090f;border:1px solid rgba(248,255,49,0.4);border-radius:10px;text-align:center;line-height:36px;color:#ffffff;font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:18px">Z</span>
                     </td>
                     <td style="vertical-align:middle;padding-left:14px">
                       <div style="color:#f4f2ff;font-family:Arial,Helvetica,sans-serif;font-weight:700;font-size:15px;letter-spacing:0.5px">ZEANUR RAHAMAN ZEON</div>
@@ -111,8 +111,8 @@ export async function POST(request: NextRequest) {
             </tr>
             <tr>
               <td style="padding:36px 40px 0">
-                <div style="color:#5eead4;font-family:Arial,Helvetica,sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase">[new message]</div>
-                <div style="color:#f4f2ff;font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:28px;line-height:34px;margin-top:10px">A new inquiry from <span style="color:#5eead4">${escapeHtml(name)}</span></div>
+                <div style="color:#f8ff31;font-family:Arial,Helvetica,sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase">[new message]</div>
+                <div style="color:#f4f2ff;font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:28px;line-height:34px;margin-top:10px">A new inquiry from <span style="color:#f8ff31">${escapeHtml(name)}</span></div>
               </td>
             </tr>
             <tr>
@@ -122,7 +122,7 @@ export async function POST(request: NextRequest) {
             </tr>
             <tr>
               <td style="padding:26px 40px">
-                <div style="border-left:2px solid #5eead4;padding:4px 0 4px 18px;color:#eae6f2;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:26px">${escapeHtml(message)}</div>
+                <div style="border-left:2px solid #f8ff31;padding:4px 0 4px 18px;color:#eae6f2;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:26px">${escapeHtml(message)}</div>
               </td>
             </tr>
             <tr>
@@ -143,7 +143,7 @@ export async function POST(request: NextRequest) {
                   <tr>
                     <td style="vertical-align:middle;color:#8a8599;font-family:Arial,Helvetica,sans-serif;font-size:11px;letter-spacing:1.5px;text-transform:uppercase">Reply to ${escapeHtml(email)}</td>
                     <td style="vertical-align:middle;text-align:right">
-                      <a href="https://zeanurrahamanzeon.vercel.app" style="color:#5eead4;font-family:Arial,Helvetica,sans-serif;font-size:12px;letter-spacing:1px;text-transform:uppercase;text-decoration:none">zeanurrahamanzeon.vercel.app</a>
+                      <a href="https://zeanurrahamanzeon.vercel.app" style="color:#f8ff31;font-family:Arial,Helvetica,sans-serif;font-size:12px;letter-spacing:1px;text-transform:uppercase;text-decoration:none">zeanurrahamanzeon.vercel.app</a>
                     </td>
                   </tr>
                 </table>
