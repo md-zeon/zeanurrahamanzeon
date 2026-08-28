@@ -227,16 +227,17 @@ export default function AboutStory() {
                         />
                       </div>
                     ))}
-                    <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex justify-between gap-6 px-6 pb-5">
-                      <div className="text-caption-2 text-color-teritary">
-                        {aboutStory.misc}
-                      </div>
-                      <div className="max-w-[55%] text-right text-caption-2 text-color-secondary">
-                        01 · 02 · 03 — {aboutStory.year}
-                      </div>
+                  </div>
+                  <div className="mt-4 flex items-center justify-between gap-6">
+
+                    <div className="text-caption-2 text-color-teritary">
+                      {aboutStory.misc}
+                    </div>
+                    <div className="text-right text-caption-2 text-color-secondary">
+                      01 · 02 · 03 — {aboutStory.year}
                     </div>
                   </div>
-                  <div className="relative mt-4 h-px w-full bg-white-20">
+                  <div className="relative mt-3 h-px w-full bg-white-20">
                     <div className="about-story_photo-progress h-px w-full origin-left bg-brand-white">
                       <div className="absolute -top-[0.15rem] right-0 h-2 w-2 rounded-full bg-brand-white" />
                     </div>
