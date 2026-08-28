@@ -3,20 +3,34 @@
 import { useEffect, useRef, type ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
-import { initSound, playSound } from "@/lib/sound";
+import { destroyLenis, getLenis, initLenis } from "@/lib/lenis";
+import { initSound, playSound, preloadSounds, startMusicIfEnabled } from "@/lib/sound";
 import { useButtonEffects } from "@/lib/useButtonEffects";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Cursor from "./Cursor";
 
+/**
+ * Global application shell mounted once in the root layout.
+ *
+ * Owns everything that spans the whole site: the Navbar/Footer/Cursor, global
+ * event delegation for `data-audio` hover/click sounds, the page fade-in, and
+ * a scroll-to-top + ScrollTrigger refresh on every route change.
+ */
 export default function SiteShell({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const rootRef = useRef<HTMLDivElement>(null);
 
+  // Scramble/magnetic effects for `.btn` and `.badge-link` elements (dynamic too).
   useButtonEffects();
 
+  // Global sound delegation: any element with `data-audio` plays a hover
+  // sound, `data-audio-click` a click sound. Keeps sound wiring out of the
+  // markup of every individual button.
   useEffect(() => {
     initSound();
+    preloadSounds();
+    startMusicIfEnabled();
 
     const onAudioOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
@@ -38,6 +52,7 @@ export default function SiteShell({ children }: { children: ReactNode }) {
     };
   }, []);
 
+  // Fade the whole page in on first load.
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
@@ -47,8 +62,23 @@ export default function SiteShell({ children }: { children: ReactNode }) {
     }
   }, []);
 
+  // Boot smooth scroll once and tear it down when the shell unmounts.
   useEffect(() => {
-    window.scrollTo(0, 0);
+    initLenis();
+    return () => destroyLenis();
+  }, []);
+
+  // On route change: reset scroll and recompute ScrollTrigger positions after
+  // the new page has had a moment to lay out. Uses Lenis when active so the
+  // reset is instant (not a slow animated scroll), otherwise falls back to
+  // the native API.
+  useEffect(() => {
+    const lenis = getLenis();
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: true, force: true });
+    } else {
+      window.scrollTo(0, 0);
+    }
     const t = setTimeout(() => {
       ScrollTrigger.refresh();
     }, 120);

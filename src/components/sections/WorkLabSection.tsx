@@ -3,33 +3,18 @@
 import { useRef } from "react";
 import { useLabSlider } from "@/lib/useLabSlider";
 import { useSectionHeadings } from "@/lib/useHeaderReveal";
-import { workLabSlides } from "@/data/work";
+import { workLabSlides, workLabHeader } from "@/data/work";
 import { audio } from "@/data/site";
 import LogosElement from "../LogosElement";
 import AutoVideo from "../media/AutoVideo";
-import { Button } from "../shared";
+import { ArrowIcon, Button, SliderControls } from "../shared";
 
-function ArrowIcon() {
-  return (
-    <div className="btn__icon w-embed">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="100%"
-        height="100%"
-        viewBox="0 0 14 14"
-        fill="none"
-        preserveAspectRatio="xMidYMid meet"
-        role="img"
-      >
-        <path
-          d="M0.823227 13.4736L12.8232 1.47362M12.8232 1.47362V11.3272M12.8232 1.47362H3.17677"
-          stroke="currentColor"
-        />
-      </svg>
-    </div>
-  );
-}
-
+/**
+ * "From the labs" slider on the work page — a 2-up carousel of side projects
+ * driven by `useLabSlider` via the `data-slider="list" / slide /
+ * button-prev / button-next` attributes, with a step/total counter. Each
+ * slide links out to the live project with a looped video preview.
+ */
 export default function WorkLabSection() {
   const ref = useRef<HTMLElement>(null);
 
@@ -46,6 +31,8 @@ export default function WorkLabSection() {
       <div className="padding-global is-bigger">
         <div className="container-large">
           <div className="flex flex-col">
+            {/* Header row: heading (revealed via header-animation-type) +
+                corner caption chip */}
             <div
               header-animation-type="container"
               className="grid auto-cols-fr grid-cols-[1fr_1fr] justify-between gap-0 border-b border-l border-white-20 pl-4 max-[991px]:grid-cols-1 max-[991px]:place-items-start"
@@ -56,107 +43,24 @@ export default function WorkLabSection() {
                     header-animation-type="heading-1"
                     className="heading-style-h2"
                   >
-                    From the <span className="header_italic-word">labs</span>
+                    {workLabHeader.title1}{" "}
+                    <span className="header_italic-word">
+                      {workLabHeader.italicWord}
+                    </span>
                   </h2>
                 </div>
               </div>
-              <LogosElement caption="LAB_BF_188" />
+              <LogosElement caption={workLabHeader.caption} />
             </div>
-            <div className="border-x border-border-tertiary">
-              <div className="relative grid auto-cols-fr grid-cols-[1fr_1fr] items-center justify-between gap-0 border-r border-white-20 p-[1.8rem_1.5rem] max-[767px]:flex max-[767px]:flex-col max-[767px]:items-start max-[767px]:gap-4 max-[767px]:p-4 max-[479px]:flex-row max-[479px]:flex-wrap">
-                <div className="flex w-full items-center justify-between pr-6 max-[767px]:order-1 max-[767px]:pr-0">
-                  <div className="flex items-center justify-start">
-                    <div className="text-size-large">[</div>
-                    <div data-slide-count="step" className="text-size-large">
-                      01
-                    </div>
-                    <div className="text-size-large">/</div>
-                    <div data-slide-count="total" className="text-size-large">
-                      00
-                    </div>
-                    <div className="text-size-large">]</div>
-                  </div>
-                  <div className="flex gap-2">
-                    <a
-                      data-audio={audio.hover}
-                      data-slider="button-prev"
-                      aria-label="previous slide"
-                      href="#"
-                      className="w-inline-block"
-                    >
-                      <div className="icon-embed-medium w-embed">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="100%"
-                          height="100%"
-                          viewBox="0 0 48 49"
-                          fill="none"
-                          preserveAspectRatio="xMidYMid meet"
-                          aria-hidden="true"
-                          role="img"
-                        >
-                          <path
-                            d="M38 24.7002H10"
-                            stroke="currentColor"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                          <path
-                            d="M24 38.7002L10 24.7002L24 10.7002"
-                            stroke="currentColor"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                      </div>
-                    </a>
-                    <a
-                      data-audio={audio.hover}
-                      data-slider="button-next"
-                      aria-label="next slide"
-                      href="#"
-                      className="w-inline-block"
-                    >
-                      <div className="icon-embed-medium w-embed">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="100%"
-                          height="100%"
-                          viewBox="0 0 48 49"
-                          fill="none"
-                          preserveAspectRatio="xMidYMid meet"
-                          aria-hidden="true"
-                          role="img"
-                        >
-                          <path
-                            d="M10 24.7002H38"
-                            stroke="currentColor"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                          <path
-                            d="M24 10.7002L38 24.7002L24 38.7002"
-                            stroke="currentColor"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-                <div className="absolute left-1/2 z-3 -ml-px h-full w-px bg-white-20 max-[767px]:hidden" />
-                <div className="flex items-center justify-end max-[767px]:w-full max-[767px]:flex-col max-[767px]:items-stretch">
-                  <Button href="/experiments" variant="secondary">
-                    See experiments
-                  </Button>
-                </div>
-              </div>
-            </div>
+            {/* Controls bar: counter + prev/next buttons + CTA */}
+            <SliderControls
+              right={
+                <Button href="/experiments" variant="secondary">
+                  {workLabHeader.visitButtonLabel}
+                </Button>
+              }
+            />
+              {/* Slide track: two side-project slides side-by-side per page */}
             <div
               data-slider="list"
               className="relative flex border-x border-border-tertiary"
@@ -173,19 +77,15 @@ export default function WorkLabSection() {
                         {slide.caption}
                       </div>
                     </div>
-                    <a
-                      aria-label={slide.title}
-                      href={slide.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="relative w-inline-block"
-                    >
+                    {/* Oversized media so the looped video covers the frame */}
+                    <div className="relative w-inline-block">
                       <div className="relative z-1 flex h-full w-full items-center justify-center overflow-hidden rounded-lg">
                         <div className="aspect-video h-[110%] w-[110%] flex-none max-[991px]:h-[120%] max-[991px]:w-[120%]">
                           <AutoVideo src={slide.video} />
                         </div>
                       </div>
-                    </a>
+                    </div>
+                    {/* Overlay: title + "View project" action */}
                     <div className="absolute inset-0 z-2 flex items-end justify-start p-4">
                       <h3 className="heading-style-h4">{slide.title}</h3>
                       <a
@@ -195,7 +95,7 @@ export default function WorkLabSection() {
                         rel="noopener noreferrer"
                         className="btn btn-secondary btn-small btn-icon"
                       >
-                        <div className="btn__text">View clonable</div>
+                        <div className="btn__text">{workLabHeader.viewProjectLabel}</div>
                         <ArrowIcon />
                       </a>
                     </div>

@@ -3,9 +3,20 @@
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
-import { featuredProjects } from "@/data/home";
+import { getLenis } from "@/lib/lenis";
+import { featuredProjects, homeProjectsLabels } from "@/data/home";
+import { audio } from "@/data/site";
 import AutoVideo from "../media/AutoVideo";
 
+/**
+ * Home page "featured projects" pinned 3D carousel.
+ *
+ * While the section is pinned, the project cards tilt back and forth on the
+ * X axis (a "cards fan" effect), the track and background animate between
+ * dark and brand colors, and a floating banner is scramble-text updated to
+ * match whichever card is currently centered. The right-hand nav thumbnails
+ * let the visitor jump straight to a specific card.
+ */
 export default function HomeProjects() {
   const ref = useRef<HTMLElement>(null);
 
@@ -14,6 +25,7 @@ export default function HomeProjects() {
     if (!el) return;
 
     const ctx = gsap.context(() => {
+      const cleanups: Array<() => void> = [];
       const projects = gsap.utils.toArray<HTMLElement>(
         ".home-projects_project",
       );
@@ -30,10 +42,13 @@ export default function HomeProjects() {
       const track = el.querySelector(".home-projects_track");
       const section = el;
 
+      // Project cards live in one grid cell, so they stack. `preserve-3d`
+      // + a shared perspective makes the rotationX fan look dimensional.
       gsap.set(projects, {
         transformStyle: "preserve-3d",
         transformPerspective: 800,
       });
+      // The "middle" cards start below the viewport, rotated away.
       gsap.set(
         projects.filter((p) => p.classList.contains("middle")),
         {
@@ -43,6 +58,8 @@ export default function HomeProjects() {
           scale: 1.1,
         },
       );
+      // Pre-paint the (dark) background so there's no flash of white before
+      // the first scrub tween fires.
       gsap.set(
         [
           track,
@@ -51,12 +68,14 @@ export default function HomeProjects() {
         ],
         { backgroundColor: "#0A090F" },
       );
+      // First card is hidden until its scroll-in trigger.
       gsap.set(el.querySelector(".home-projects_project.first"), {
         transformOrigin: "center top",
         yPercent: 20,
         opacity: 0,
       });
 
+      // Fade the first card up when the section scrolls into view.
       ScrollTrigger.create({
         trigger: el.querySelector(".home-projects_project.first"),
         start: "top 85%",
@@ -71,6 +90,9 @@ export default function HomeProjects() {
         },
       });
 
+      // The core pinned scroll. Pins the section for 300% of scroll; as you
+      // scrub, cards fan from front to back. Background shifts to brand
+      // purple while pinned and back when leaving.
       const timeline = gsap.timeline({
         scrollTrigger: {
           id: "projectsScroll",
@@ -123,6 +145,8 @@ export default function HomeProjects() {
         },
       });
 
+      // Fan sequence: the current card tips away (back), the next cards
+      // stand up, then they all tip forward again so the next one leads.
       timeline
         .to(".home-projects_project.first", {
           rotationX: -40,
@@ -154,6 +178,9 @@ export default function HomeProjects() {
           "<+=0.5",
         );
 
+      // During scrubbing, derive which project is "active" from scroll
+      // progress and update the banner (title/description via scramble,
+      // button href, and the active nav thumbnail) whenever it changes.
       let lastActiveIndex = -1;
       const updateActiveProject = () => {
         const st = ScrollTrigger.getById("projectsScroll");
@@ -207,6 +234,8 @@ export default function HomeProjects() {
         }
       };
 
+      // Slide the floating banner in/out as the pinned section is entered
+      // and left.
       const bannerFade = (state: "in" | "out") => {
         gsap.to(".home-projects_banner-component", {
           opacity: state === "in" ? 1 : 0,
@@ -231,6 +260,7 @@ export default function HomeProjects() {
       });
 
       gsap.set(".home-projects_banner-component", { opacity: 0, yPercent: 20 });
+      // Nav thumbnails slide in from the right once, when scrolled to.
       gsap.set(navButtons, { x: "100%", opacity: 0, visibility: "hidden" });
       gsap.fromTo(
         navButtons,
@@ -246,11 +276,53 @@ export default function HomeProjects() {
           onComplete: () => gsap.to(navButtons[0], { opacity: 1 }),
         },
       );
+
+      // Hover feedback on the thumbnails: brighten the border and indent the
+      // thumbnail, restoring the scroll-driven active state on leave.
+      navButtons.forEach((b, index) => {
+        const imgWrap = b.querySelector(".home-projects_nav-image-wrapper");
+        const isActive = () => index === Math.max(0, lastActiveIndex);
+        const onEnter = () => {
+          gsap.to(b, {
+            marginLeft: isActive() ? "-0.7rem" : "-0.35rem",
+            opacity: 1,
+            duration: 0.25,
+            ease: "expo.out",
+          });
+          if (imgWrap)
+            gsap.to(imgWrap, { borderColor: "#EFEFE6", duration: 0.25 });
+        };
+        const onLeave = () => {
+          gsap.to(b, {
+            marginLeft: isActive() ? "-0.7rem" : "0rem",
+            opacity: isActive() ? 1 : 0.9,
+            duration: 0.25,
+            ease: "expo.out",
+          });
+          if (imgWrap)
+            gsap.to(imgWrap, {
+              borderColor: isActive() ? "#EFEFE6" : "transparent",
+              duration: 0.25,
+            });
+        };
+        b.addEventListener("mouseenter", onEnter);
+        b.addEventListener("mouseleave", onLeave);
+        cleanups.push(() => {
+          b.removeEventListener("mouseenter", onEnter);
+          b.removeEventListener("mouseleave", onLeave);
+        });
+      });
+
+      return () => cleanups.forEach((fn) => fn());
     }, el);
 
     return () => ctx.revert();
   }, []);
 
+  // Jump to a specific project card from the nav thumbnails. The pinned
+  // section lives inside ScrollTrigger's generated `.pin-spacer`, so we
+  // compute the target scroll position from that spacer's offset plus an
+  // estimated per-card distance.
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
     index: number,
@@ -265,11 +337,16 @@ export default function HomeProjects() {
       projectHeight -= window.innerHeight * 0.01;
     }
     const targetScrollY = pinSpacer.offsetTop + index * projectHeight;
-    gsap.to(window, {
-      duration: 1.5,
-      scrollTo: targetScrollY,
-      ease: "expo.out",
-    });
+    const lenis = getLenis();
+    if (lenis) {
+      lenis.scrollTo(targetScrollY, { duration: 1.5 });
+    } else {
+      gsap.to(window, {
+        duration: 1.5,
+        scrollTo: targetScrollY,
+        ease: "expo.out",
+      });
+    }
   };
 
   return (
@@ -300,7 +377,8 @@ export default function HomeProjects() {
         {featuredProjects.map((project, i) => (
           <a
             key={project.index}
-            data-audio="https://bjornflow-assets.b-cdn.net/Audio/secondary%20hover%20sound.wav"
+            data-audio={audio.secondaryHover}
+            data-audio-click={audio.closeMenu}
             data-project={i + 1}
             href="#"
             className={`home-projects_nav-wrapper is-${i + 1} w-inline-block flex flex-col items-start justify-start gap-1 text-brand-white no-underline`}
@@ -316,22 +394,21 @@ export default function HomeProjects() {
         ))}
       </div>
 
-      <div className="home-projects_banner-component absolute bottom-8 left-8 z-3 flex w-full max-w-100 flex-col gap-4 rounded border border-white-20 bg-black-30 p-6 shadow-[inset_0_0_0_1000px_#0a090e33] backdrop-blur-[100px] max-[767px]:bottom-16 max-[767px]:gap-6 max-[767px]:p-4 max-[479px]:bottom-[12%] max-[479px]:left-[4%] max-[479px]:w-[90%]">
+      <div className="home-projects_banner-component absolute bottom-8 left-8 z-3 flex w-full max-w-fit flex-col gap-4 rounded border border-white-20 bg-black-30 p-6 shadow-[inset_0_0_0_1000px_#0a090e33] backdrop-blur-[100px] max-[767px]:bottom-16 max-[767px]:gap-6 max-[767px]:p-4 max-[479px]:bottom-[12%] max-[479px]:left-[4%] max-[479px]:w-[90%]">
         <div className="flex-none">
           <div className="heading-style-h3 block max-w-full max-h-24 overflow-hidden whitespace-normal wrap-break-word min-[992px]:max-h-16">
-            Plus X Innovation
+            {featuredProjects[0]?.title}
           </div>
-          <div className="text-size-regular block max-w-full max-h-24 overflow-hidden whitespace-normal wrap-break-word min-[992px]:max-h-16">
-            Helped the marketing team migrate to Webflow, optimise SEO, and
-            scale their site with a flexible CMS.
+          <div className="text-size-regular block max-w-100 max-h-24 overflow-hidden whitespace-normal wrap-break-word min-[992px]:max-h-16">
+            {featuredProjects[0]?.description}
           </div>
         </div>
         <div className="btn-group">
-          <a href="#" className="btn btn-small">
-            <div className="btn__text">View case study</div>
+          <a href={featuredProjects[0]?.link ?? "/work"} data-audio={audio.hover} className="btn btn-small">
+            <div className="btn__text">{homeProjectsLabels.viewCaseStudy}</div>
           </a>
-          <Link href="/work" className="btn btn-secondary btn-small">
-            <div className="btn__text">See all work</div>
+          <Link href="/work" data-audio={audio.hover} className="btn btn-secondary btn-small">
+            <div className="btn__text">{homeProjectsLabels.seeAllWork}</div>
           </Link>
         </div>
       </div>

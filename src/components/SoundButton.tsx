@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useSyncExternalStore } from "react";
 import lottie, { type AnimationItem } from "lottie-web";
-import { soundWaves } from "@/data/site";
+import { soundWaves, audio, soundLabels } from "@/data/site";
 import {
   setSoundEnabled,
   toggleMusic,
@@ -11,11 +11,26 @@ import {
   getSoundServerSnapshot,
 } from "@/lib/sound";
 
-export default function SoundButton() {
+/**
+ * Navbar sound toggle.
+ *
+ * State lives in the shared sound store (see `@/lib/sound`), consumed via
+ * `useSyncExternalStore`. The lottie animation plays forward when sound is
+ * turned on and in reverse when turned off. Clicking also toggles background
+ * music.
+ */
+export default function SoundButton({
+  textClassName = "",
+}: {
+  textClassName?: string;
+}) {
+  // React 18 pattern: subscribe to the sound store on the client while the
+  // server snapshot (always `true`) keeps hydration deterministic.
   const on = useSyncExternalStore(subscribeSound, getSoundSnapshot, getSoundServerSnapshot);
   const wrapRef = useRef<HTMLDivElement>(null);
   const animRef = useRef<AnimationItem | null>(null);
 
+  // Load the sound-wave lottie animation once; destroy it on unmount.
   useEffect(() => {
     if (wrapRef.current) {
       animRef.current = lottie.loadAnimation({
@@ -48,13 +63,16 @@ export default function SoundButton() {
 
   return (
     <a
-      data-audio="https://bjornflow-assets.b-cdn.net/Audio/button%20hover.wav"
+      data-audio={audio.hover}
       href="#"
       onClick={handleClick}
       className="navbar_sound-button relative flex items-center justify-start gap-1 rounded-[0.25rem] border border-transparent pl-3 no-underline w-inline-block"
     >
-      <div sound-control-type="text" className="text-caption-2">
-        {on ? "Turn off sound" : "Turn on sound"}
+      <div
+        sound-control-type="text"
+        className={`text-caption-2 ${textClassName}`}
+      >
+        {on ? soundLabels.turnOff : soundLabels.turnOn}
       </div>
       <div className="navbar_sound relative flex h-10 w-10 items-center justify-center gap-[0.15rem] text-brand-white max-[767px]:h-8 max-[767px]:w-8">
         <div ref={wrapRef} className="navbar_sound-lottie h-full w-full" />

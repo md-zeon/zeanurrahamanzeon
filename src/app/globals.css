@@ -97,6 +97,24 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+/* Lenis smooth scroll base styles (recommended by lenis.dev) */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
 @media (min-width: 1440px) {
   html {
     font-size: 1vw;
@@ -129,6 +147,35 @@ body {
   a {
     color: inherit;
     text-decoration: none;
+  }
+}
+
+@layer utilities {
+  .scrollbar-none {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: oklch(0.8 0.01 280 / 0.4) transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    background: oklch(0.8 0.01 280 / 0.4);
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: oklch(0.7 0.01 280 / 0.5);
   }
 }
 
@@ -215,7 +262,7 @@ input[type="file"]:focus-visible {
   }
 
   .heading-style-h0.is-faq {
-    @apply text-[9.5vw] tracking-[-0.6vw];
+    @apply text-[7.6vw] tracking-[-0.6vw];
   }
 
   .heading-style-h0.is-career {
@@ -427,7 +474,7 @@ input[type="file"]:focus-visible {
   }
 
   .badge-link {
-    @apply flex flex-none items-center justify-start gap-1 py-1 text-brand-white no-underline;
+    @apply flex flex-row flex-none items-center justify-start gap-1 py-1 text-brand-white no-underline;
   }
 
   .frame {
@@ -748,7 +795,7 @@ input[type="file"]:focus-visible {
     }
   }
 
-  /* ---------- Injected masks (from page <style> blocks, 2025 tokens) ---------- */
+  /* ---------- Injected masks (from page <style> blocks, 2026 tokens) ---------- */
 
   .about-header_video-w {
     -webkit-clip-path: polygon(
@@ -1066,7 +1113,7 @@ input[type="file"]:focus-visible {
     width: 0;
     height: 0;
     pointer-events: none;
-    z-index: 9999;
+    z-index: 10002;
     mix-blend-mode: difference;
     transform: translate(-50%, -50%);
   }

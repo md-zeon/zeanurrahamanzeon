@@ -4,22 +4,62 @@ import localFont from "next/font/local";
 import "./globals.css";
 import SiteShell from "@/components/SiteShell";
 
+/**
+ * Root layout: loads the two typefaces (local Brockmann + Google Roboto
+ * Mono) as CSS variables, sets global metadata/viewport, and wraps all
+ * pages in SiteShell (preloader, cursor, navbar, footer, audio).
+ */
+
+/** Local display font (Brockmann) with its weights/italics preloaded. */
 export const brockmann = localFont({
   src: [
-    { path: "./fonts/brockmann/brockmann-400.woff2", weight: "400", style: "normal" },
-    { path: "./fonts/brockmann/brockmann-400i.woff2", weight: "400", style: "italic" },
-    { path: "./fonts/brockmann/brockmann-500.woff2", weight: "500", style: "normal" },
-    { path: "./fonts/brockmann/brockmann-500i.woff2", weight: "500", style: "italic" },
-    { path: "./fonts/brockmann/brockmann-600.woff2", weight: "600", style: "normal" },
-    { path: "./fonts/brockmann/brockmann-600i.woff2", weight: "600", style: "italic" },
-    { path: "./fonts/brockmann/brockmann-700.woff2", weight: "700", style: "normal" },
-    { path: "./fonts/brockmann/brockmann-700i.woff2", weight: "700", style: "italic" },
+    {
+      path: "./fonts/brockmann/brockmann-400.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "./fonts/brockmann/brockmann-400i.woff2",
+      weight: "400",
+      style: "italic",
+    },
+    {
+      path: "./fonts/brockmann/brockmann-500.woff2",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "./fonts/brockmann/brockmann-500i.woff2",
+      weight: "500",
+      style: "italic",
+    },
+    {
+      path: "./fonts/brockmann/brockmann-600.woff2",
+      weight: "600",
+      style: "normal",
+    },
+    {
+      path: "./fonts/brockmann/brockmann-600i.woff2",
+      weight: "600",
+      style: "italic",
+    },
+    {
+      path: "./fonts/brockmann/brockmann-700.woff2",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "./fonts/brockmann/brockmann-700i.woff2",
+      weight: "700",
+      style: "italic",
+    },
   ],
   variable: "--font-brockmann",
   display: "swap",
   preload: true,
 });
 
+/** Mono font used for labels/captions, preloaded via next/font/google. */
 export const robotoMono = Roboto_Mono({
   subsets: ["latin"],
   style: ["normal", "italic"],
@@ -28,38 +68,36 @@ export const robotoMono = Roboto_Mono({
   preload: true,
 });
 
+import { siteMeta } from "@/data/site";
+
+/** Site-wide metadata (title template, description, keywords, social cards). */
 export const metadata: Metadata = {
-  title: {
-    default: "Zeanur Rahaman Zeon | Software Engineer",
-    template: "%s | Zeanur Rahaman Zeon",
-  },
-  description:
-    "Software Engineer specializing in Next.js, React, TypeScript, Node.js, and scalable web applications. Explore my projects, experience, and technical expertise.",
-  keywords: [
-    "Zeanur Rahaman Zeon",
-    "Software Engineer",
-    "Software Developer",
-    "Full Stack Developer",
-    "Frontend Developer",
-    "Next.js",
-    "React",
-    "TypeScript",
-    "Node.js",
-    "Tailwind CSS",
-    "MongoDB",
-    "PostgreSQL",
-    "Prisma",
-    "Portfolio",
-    "Web Developer",
-    "GSAP",
-    "motion",
-  ],
-  authors: [{ name: "Zeanur Rahaman Zeon" }],
-  creator: "Zeanur Rahaman Zeon",
-  applicationName: "Zeanur Rahaman Zeon Portfolio",
+  metadataBase: new URL(siteMeta.siteUrl),
+  alternates: { canonical: "/" },
+  title: siteMeta.title,
+  description: siteMeta.description,
+  keywords: siteMeta.keywords,
+  authors: [{ name: siteMeta.author }],
+  creator: siteMeta.creator,
+  applicationName: siteMeta.applicationName,
   robots: { index: true, follow: true },
+  openGraph: {
+    type: "website",
+    url: siteMeta.siteUrl,
+    siteName: siteMeta.applicationName,
+    title: siteMeta.title.default,
+    description: siteMeta.description,
+    images: [{ url: siteMeta.ogImage, width: 1200, height: 630, alt: siteMeta.author }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteMeta.title.default,
+    description: siteMeta.description,
+    images: [siteMeta.ogImage],
+  },
 };
 
+/** Responsive viewport + theme color (the site's dark background). */
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
@@ -72,7 +110,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${brockmann.variable} ${robotoMono.variable} w-mod-js`}
+      className={`${brockmann.variable} ${robotoMono.variable} w-mod-js scrollbar-thin`}
     >
       <body>
         <SiteShell>{children}</SiteShell>

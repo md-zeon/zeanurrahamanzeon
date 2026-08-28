@@ -1,16 +1,18 @@
 "use client";
 
 import { useRef } from "react";
-import { services } from "@/data/home";
+import { services, servicesHeader, serviceAssets } from "@/data/home";
+import { audio } from "@/data/site";
 import { useSectionHeadings } from "@/lib/useHeaderReveal";
 import LogosElement from "../LogosElement";
 
-const SERVICE_ASSETS = [
-  "/assets/videos/Videos/Experiments/spaceman-gsap---new-thumbnail.mp4",
-  "/assets/videos/Videos/Experiments/noirve---new-thumbnail.mp4",
-  "/assets/videos/Videos/Experiments/pitch---new-thumbnail.mp4",
-];
-
+/**
+ * Services & Expertise section.
+ *
+ * Header heading is char-split/slid in via `useSectionHeadings`; each
+ * service is a bordered card with an index, title, description, skill tags
+ * and a looping background video on the right (desktop only).
+ */
 export default function ServicesSection() {
   const ref = useRef<HTMLElement>(null);
 
@@ -36,7 +38,7 @@ export default function ServicesSection() {
                     header-animation-type="heading-1"
                     className="heading-style-h0"
                   >
-                    SERVICES &
+                    {servicesHeader.line1}
                   </h2>
                 </div>
                 <div className="flex items-stretch justify-start -mt-2 pl-[12.4vw] desktop:pl-24 max-[991px]:pl-[10.7vw] max-[767px]:mt-[-0.2rem] max-[767px]:pl-0">
@@ -44,18 +46,18 @@ export default function ServicesSection() {
                     header-animation-type="heading-2"
                     className="heading-style-h0"
                   >
-                    EXPERTISE
+                    {servicesHeader.line2}
                   </div>
                 </div>
               </div>
-              <LogosElement caption="SER_EXP_019" />
+              <LogosElement caption={servicesHeader.caption} />
             </div>
             <div className="relative z-2 flex flex-col items-stretch justify-start gap-6">
               {services.map((service, i) => (
                 <div
                   key={service.index}
-                  data-audio="https://bjornflow-assets.b-cdn.net/Audio/Card%20Hover.wav"
-                  className="relative flex h-146.5 flex-col items-stretch justify-between overflow-hidden rounded-lg border border-white-20 bg-[#efefe60d] p-[2.5rem_2.5rem_2.5rem_2rem] backdrop-blur-[100px] transform-3d transition-all duration-200 ease-out max-[991px]:h-auto max-[991px]:gap-16 max-[991px]:px-0 max-[991px]:py-8 max-[767px]:gap-8"
+                  data-audio={audio.cardHover}
+                  className="relative flex h-146.5 flex-col items-stretch justify-between overflow-hidden rounded-lg border border-white-20 bg-[#efefe60d] p-[2.5rem_2.5rem_2.5rem_2rem] backdrop-blur-[100px] transform-3d transition-all duration-200 ease-out hover:border-white-30 hover:bg-white-10 max-[991px]:h-auto max-[991px]:gap-16 max-[991px]:px-0 max-[991px]:py-8 max-[767px]:gap-8"
                 >
                   <div className="relative z-2 flex flex-col gap-2 max-[991px]:px-8 max-[767px]:px-6 max-[767px]:gap-y-[0.3rem]">
                     <div className="flex gap-2 overflow-hidden max-[991px]:flex-col max-[767px]:gap-1">
@@ -83,7 +85,6 @@ export default function ServicesSection() {
                   <div className="absolute inset-y-0 right-0 z-1 flex w-[40%] items-center justify-center overflow-hidden max-[991px]:relative max-[991px]:inset-auto max-[991px]:bottom-0 max-[991px]:hidden max-[991px]:w-full">
                     <div
                       data-us-lazyload="true"
-                      data-us-project={service.usProject}
                       className="z-2 h-[110%] w-[110%] flex-none object-cover object-[0%_0%]"
                     >
                       <video
@@ -99,7 +100,7 @@ export default function ServicesSection() {
                         }}
                       >
                         <source
-                          src={SERVICE_ASSETS[i % SERVICE_ASSETS.length]}
+                          src={serviceAssets[i % serviceAssets.length]}
                           type="video/mp4"
                         />
                       </video>

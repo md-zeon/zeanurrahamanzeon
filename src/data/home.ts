@@ -1,260 +1,300 @@
 import { photos } from "./site";
 
-export const logosBannerText = "Collaborations & Brand Experience";
+/** Text for the animated collaboration marquee. */
+export const logosBannerText = "Projects & Open Source";
 
+/** Featured projects shown in the home hero carousel. */
 export const featuredProjects = [
   {
     index: "001",
-    title: "Plus X Innovation",
+    title: "Smart NUB Campus",
     description:
-      "Helped the marketing team migrate to Webflow, optimise SEO, and scale their site with a flexible CMS.",
-    link: "/work/plus-x-innovation",
-    video: "/assets/videos/Videos/Work/plus-x/plus-x---new-thumb.mp4",
-    navVideo: "/assets/videos/Videos/Work/plus-x/plus-x---new-thumb.mp4",
+      "A real-time academic collaboration network — messaging, study groups, gamified learning, and an AI assistant for campus life.",
+    link: "/work/smart-nub-campus",
+    video: "/assets/videos/Videos/Work/smart-nub-campus/Smart-NUB-Campus.mp4",
+    navVideo:
+      "/assets/videos/Videos/Work/smart-nub-campus/Smart-NUB-Campus.mp4",
   },
   {
     index: "002",
-    title: "Appetite",
+    title: "DevQnA",
     description:
-      "Migrated to Webflow and helped the marketing team scale with CMS setup, optimisation, and continued support.",
-    link: "/work/appetite",
-    video: "/assets/videos/Videos/Work/appetite/appetite---new-thumb.mp4",
-    navVideo: "/assets/videos/Videos/Work/appetite/appetite---new-thumb.mp4",
+      "A developer Q&A platform built from scratch — voting, rich authoring, and AI-assisted answers that help developers learn faster.",
+    link: "/work/devqna",
+    video: "/assets/videos/Videos/Work/devqna/DevQnA.mp4",
+    navVideo: "/assets/videos/Videos/Work/devqna/DevQnA.mp4",
   },
   {
     index: "003",
-    title: "Lendhub",
+    title: "Oshudpati Marketplace",
     description:
-      "Built a scalable website and supported marketing with integrations and continuous optimisation.",
-    link: "/work/lendhub",
-    video: "/assets/videos/Videos/Work/lendhub/lendhub---new-thumb.mp4",
-    navVideo: "/assets/videos/Videos/Work/lendhub/lendhub---new-thumb.mp4",
+      "A medicine and healthcare marketplace for Bangladesh — product discovery, orders, and delivery built for the local market.",
+    link: "/work/oshudpati-marketplace",
+    video:
+      "/assets/videos/Videos/Work/oshudpati-marketplace/Oshudpati-Marketplace.mp4",
+    navVideo:
+      "/assets/videos/Videos/Work/oshudpati-marketplace/Oshudpati-Marketplace.mp4",
   },
   {
     index: "004",
-    title: "Upkeep",
+    title: "MicroEarn",
     description:
-      "Developed a scalable Webflow site and supported ongoing updates while integrating third-party tools.",
-    link: "/work/upkeep",
-    video: "/assets/videos/Videos/Work/upkeep/upkeep---new-thumb.mp4",
-    navVideo: "/assets/videos/Videos/Work/upkeep/upkeep---new-thumb.mp4",
+      "A micro-task marketplace with a real economy — users post tasks, complete them, and get paid through wallets and rewards.",
+    link: "/work/microearn",
+    video: "/assets/videos/Videos/Work/microearn/MicroEarn.mp4",
+    navVideo: "/assets/videos/Videos/Work/microearn/MicroEarn.mp4",
   },
 ];
 
-export const whyHeader = {
-  line1: "Why partner",
-  line2: "with me?",
-  caption: "ABT_ME_188",
-  highlight:
-    "With a background in design and development, I craft structured, high-performing Webflow websites that drive results, scale easily, and maintain visual integrity over time.",
+/** Labels for the featured projects carousel. */
+export const homeProjectsLabels = {
+  viewCaseStudy: "View case study",
+  seeAllWork: "See all work",
 };
 
+/** "Why partner with me?" section heading and highlight copy. */
+export const whyHeader = {
+  line1: "Why work",
+  line2: "with me?",
+  caption: "ABOUT ME",
+  highlight:
+    "I'm a problem solver first: I focus on understanding what needs to be built, then choose the tools that fit — rather than forcing a favorite stack. Clean architecture, real-time features, and interfaces that feel fast and intuitive from the first click.",
+};
+
+/** Credibility cards in the "Why partner with me?" section. */
 export const whyCards = [
   {
-    caption: "Why_ME_001",
-    buttonLabel: "Webflow community educator",
-    href: "https://www.youtube.com/@bjorn_flow",
+    caption: "WHY_ME_001",
+    buttonLabel: "GitHub profile",
+    href: "https://github.com/md-zeon",
     icon: true,
-    video: "/assets/videos/Videos/Experiments/spaceman-gsap---new-thumbnail.mp4",
+    video: "/assets/videos/Videos/Experiments/kurosumi.mp4",
     webgl: false,
   },
   {
-    caption: "Why_ME_002",
-    buttonLabel: "Webflow partner",
-    href: "https://webflow.com/@bjorn-encutescu",
+    caption: "WHY_ME_002",
+    buttonLabel: "LinkedIn",
+    href: "https://www.linkedin.com/in/zeanur-rahaman-zeon/",
     icon: true,
-    webgl: true,
-    usProject: "dwvNIGK9sc6kSmQFyc8T",
-  },
-  {
-    caption: "Why_ME_003",
-    buttonLabel: "Featured by Webflow",
-    href: "https://youtu.be/2TYLsY-FhF8?si=QP3E4meUH8CMH711",
-    icon: true,
-    video: "/assets/videos/Videos/Experiments/noirve---new-thumbnail.mp4",
+    video: "/assets/videos/Videos/Experiments/space-shooter.mp4",
     webgl: false,
   },
   {
-    caption: "Why_ME_004",
+    caption: "WHY_ME_003",
+    buttonLabel: "Open to work",
+    href: "/contact",
+    icon: true,
+    video: "/assets/videos/Videos/Experiments/shortle.mp4",
+    webgl: false,
+  },
+  {
+    caption: "WHY_ME_004",
     buttonLabel: "Get to know me",
     href: "/about",
     icon: false,
-    video: "/assets/videos/Videos/Experiments/pitch---new-thumbnail.mp4",
+    video: "/assets/videos/Videos/Experiments/brick-breaker.mp4",
     webgl: false,
   },
 ];
 
+/** Header and caption for Services & Expertise. */
+export const servicesHeader = {
+  line1: "SERVICES &",
+  line2: "EXPERTISE",
+  caption: "SER_EXP_019",
+};
+
+/** Thumbnail videos cycled through the service cards, one per card (looping). */
+export const serviceAssets = [
+  "/assets/videos/Videos/Experiments/kurosumi.mp4",
+  "/assets/videos/Videos/Experiments/space-shooter.mp4",
+  "/assets/videos/Videos/Experiments/shortle.mp4",
+];
+
+/** The three service offerings (product, interface, systems). */
 export const services = [
   {
     index: "01",
-    title: "Creative Webflow Development",
+    title: "Product Engineering",
     description:
-      "Building marketing and e-commerce websites with advanced interactions, clean architecture, and reliable performance, designed to scale and stay consistent as your brand grows.",
+      "Turning a problem into a shipped product end-to-end — from data modeling and APIs to the interface users touch — with clean, maintainable architecture that scales as the product grows.",
     items: [
-      "Webflow Development",
-      "Platform Migration to Webflow",
-      "GSAP & Advanced Interactions",
-      "CMS Architecture",
-      "E-commerce Integration",
-      "Style Guide System",
-      "Accessibility",
-      "SEO-Ready Structure",
-      "API & Integrations",
+      "Problem Discovery",
+      "Product Architecture",
+      "API Design & Integration",
+      "Database Modeling",
+      "Authentication & Authorization",
+      "Real-time Features",
+      "Testing & Reliability",
+      "Deployment & Monitoring",
+      "TypeScript",
+      "Next.js",
+      "Node.js",
+      "React",
+      "PostgreSQL",
+      "MongoDB",
     ],
-    usProject: "H9hGn4sMY28E78k8piXw",
   },
   {
     index: "02",
-    title: "Web & Interaction Design",
+    title: "Interface Engineering & UI",
     description:
-      "Crafting thoughtful, design-led interfaces where structure, motion, and usability work together to create memorable web experiences.",
+      "Crafting responsive, interactive interfaces where structure, motion, and usability work together — from component systems to buttery-smooth animations.",
     items: [
-      "Wireframes",
-      "Website Strategy",
-      "UI/UX Design",
-      "Prototyping",
-      "Interaction Design",
-      "Visual Design",
+      "Responsive & Interactive UI",
       "Design Systems",
-      "Style Guide",
-      "Brand Identity Design",
-      "Art Direction",
-      "Creative Direction",
+      "Component Architecture",
+      "Motion & Interaction Design",
+      "Accessibility",
+      "Performance Optimization",
+      "Dark Mode",
+      "Micro-interactions",
+      "Tailwind CSS",
+      "GSAP",
+      "Framer Motion",
     ],
-    usProject: "xr6zzxkUu23oXAGNAOSx",
   },
   {
     index: "03",
-    title: "Webflow Optimisation & Scalability",
+    title: "Backend, Auth & Infrastructure",
     description:
-      "Enhancing and scaling existing Webflow websites with clean structure, improved performance, and advanced analytics to support growing brands.",
+      "Designing robust APIs, authentication, and real-time systems — secure, observable, and deployed with confidence on modern cloud platforms.",
     items: [
-      "Webflow Enterprise Setup",
-      "Webflow Localization Setup",
-      "Webflow Optimize Setup",
-      "Webflow Analytics Setup",
-      "Webflow Ecommerce Setup",
-      "Performance Optimisation",
-      "GDPR-Compliant Configuration",
-      "Webflow Training",
-      "Ongoing Optimisation",
+      "API Design & Validation",
+      "Auth & Role-Based Access",
+      "Real-time Communication",
+      "File Uploads & Media",
+      "Secure & Observed Systems",
+      "Payment Integration",
+      "Testing & CI",
+      "Cloud Deployment",
+      "Express",
+      "Socket.IO",
+      "Prisma",
+      "Vercel",
+      "Firebase",
     ],
-    usProject: "54PpK3hT4QRCjYuTRGya",
   },
 ];
 
+/** Header and caption for Testimonials. */
+export const testimonialsHeader = {
+  line1: "Words From",
+  line2: "collaborators",
+  caption: "CLI_TES_104",
+};
+
+/** Client testimonials shown on the home page. */
 export const testimonials = [
   {
     quote:
-      "I've worked with Bjorn on several projects over the years, and it's always been a positive experience. Building a website can get complicated, especially with multiple stakeholders involved, but Bjorn brings a steady, can-do approach that really helps keep things moving. He listens closely to what clients want and offers thoughtful, practical solutions—especially when the challenges aren't straightforward. If you need a Webflow developer, I'd definitely recommend Bjorn—I already have, more than once.",
-    name: "Anni Haugan",
-    role: "Product Designer - Appetite",
+      "I treat every project as an end-to-end product problem — from data models and authentication to the pixels people actually touch. I choose the right tools for the job, ship clean code, and stay open to collaboration on anything that solves a real problem.",
+    name: "Zeanur Rahaman Zeon",
+    role: "Aspiring Software Engineer",
     image: photos.ellipseLight,
-    logo: "/assets/images/677056164bccc35aba788abc_d9743b34182def9321b08034b660e0ae_altiverse.svg",
   },
   {
     quote:
-      "Suspendisse varius enim in eros elementum tristique.",
-    name: "Jane Smith",
-    role: "CTO - Company B",
-    image: photos.ellipseLight,
-    logo: "/assets/images/677056168e060f50417adc2b_mindsum.svg",
+      "Zeon and I built Smart NUB Campus together — real-time systems, clean architecture, and late nights we don't regret. Reliable peer, sharp engineer, and the kind of person you want on a hard project.",
+    name: "Md Sajib",
+    role: "Engineering Peer",
+    image: photos.sajib,
   },
   {
-    quote: "Duis cursus, mi quis viverra ornare, eros dolor interdum nulla.",
-    name: "Alice Johnson",
-    role: "Designer - Company C",
-    image: photos.ellipseLight,
-    logo: "/assets/images/677056168e060f50417adc2b_mindsum.svg",
+    quote:
+      "Zeon was our vice team lead on Project Quadra — real-time messages with Socket.io, typing indicators, delivery and read states — shipped from a rough spec to a feature that worked. We took first place, and that feature was a big part of it.",
+    name: "Sumyta Bentey Habib",
+    role: "Team Lead, Quadra",
+    image: photos.sumyta,
   },
   {
-    quote: "Ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet.",
-    name: "Bob Brown",
-    role: "Manager - Company D",
-    image: photos.ellipseLight,
-    logo: "/assets/images/677056168e060f50417adc2b_mindsum.svg",
-  },
-  {
-    quote: "Curabitur dapibus nisl nec fringilla tempus.",
-    name: "Charlie Green",
-    role: "Director - Company E",
-    image: photos.ellipseLight,
-    logo: "/assets/images/677056168e060f50417adc2b_mindsum.svg",
+    quote:
+      "Zeon led our academic projects end to end — a hospital management system and a movie recommendation platform — and the plan, the structure, the working final demo were all his doing. Getting those two projects through together taught me how a real team lead works.",
+    name: "Md. Kamal Hossain",
+    role: "Academic Project Collaborator",
+    image: photos.kamal,
   },
 ];
 
+/** Header and configuration for the home lab slider. */
+export const labHeader = {
+  line1: "From",
+  line2: "the lab",
+  caption: "LAB_ZN_188",
+  visitButtonLabel: "Visit experiments page",
+  viewProjectLabel: "View project",
+};
+
+/** "From the labs" side-project slides for the home lab slider. */
 export const labSlides = [
   {
-    caption: "Clonable_001",
-    title: "Spaceman",
-    href: "https://spaceman-gsap.webflow.io/",
-    video: "/assets/videos/Videos/Experiments/spaceman-gsap---new-thumbnail.mp4",
+    caption: "Project_001",
+    title: "Space Shooter",
+    href: "https://space-shooter-dun.vercel.app",
+    video: "/assets/videos/Videos/Experiments/space-shooter.mp4",
   },
   {
-    caption: "Clonable_002",
-    title: "Noirve",
-    href: "https://noirve.webflow.io/",
-    video: "/assets/videos/Videos/Experiments/noirve---new-thumbnail.mp4",
+    caption: "Project_002",
+    title: "Taskero",
+    href: "https://github.com/md-zeon",
+    video: "/assets/videos/Videos/Experiments/taskero.mp4",
   },
   {
-    caption: "Clonable_003",
-    title: "Pitch",
-    href: "https://pitch-rebuild.webflow.io/",
-    video: "/assets/videos/Videos/Experiments/pitch---new-thumbnail.mp4",
+    caption: "Project_003",
+    title: "HistoTrack",
+    href: "https://histo-track.web.app",
+    video: "/assets/videos/Videos/Experiments/histotrack.mp4",
   },
   {
-    caption: "Clonable_004",
-    title: "Plink",
-    href: "https://plink-rebuild.webflow.io/",
-    video: "/assets/videos/Videos/Experiments/plink---new-thumbnail.mp4",
+    caption: "Project_004",
+    title: "Brick Breaker",
+    href: "https://brick-breaker-lac.vercel.app",
+    video: "/assets/videos/Videos/Experiments/brick-breaker.mp4",
   },
   {
-    caption: "Clonable_005",
-    title: "Bertani",
-    href: "https://bertani-rebuild.webflow.io/",
-    video: "/assets/videos/Videos/Experiments/bertani---new-thumbnail.mp4",
+    caption: "Project_005",
+    title: "Kurosumi",
+    href: "https://kurosumi.vercel.app",
+    video: "/assets/videos/Videos/Experiments/kurosumi.mp4",
   },
   {
-    caption: "Clonable_006",
-    title: "Battlefield 4",
-    href: "https://battlefield-4-webflow-rebuild.webflow.io/",
-    video: "/assets/videos/Videos/Experiments/battlefield-4---new-thumbnail.mp4",
+    caption: "Project_006",
+    title: "Shortle",
+    href: "https://shortle-phi.vercel.app",
+    video: "/assets/videos/Videos/Experiments/shortle.mp4",
   },
   {
-    caption: "Clonable_007",
-    title: "Pizza Chaos",
-    href: "/experiments",
-    video: "/assets/videos/Videos/Experiments/scramble-pizza-chaos---new-thumbnail.mp4",
-  },
-  {
-    caption: "Clonable_008",
-    title: "Callisto",
-    href: "/experiments",
-    video: "/assets/videos/Videos/Experiments/thumbnails/callisto---new-thumbnail.webp",
+    caption: "Project_007",
+    title: "QR Generator",
+    href: "https://qr-generator-omega-swart.vercel.app",
+    video: "/assets/videos/Videos/Experiments/qr-generator.mp4",
   },
 ];
 
+/** Bottom CTA: heading, caption, video assets, and the chat script. */
 export const cta = {
   line1: "Interested in",
   line2: "working",
   line3: "together?",
-  caption: "CTA_BF_195",
+  caption: "CTA_ZN_195",
   buttonLabel: "Send a message",
-  videoLoop: "/assets/videos/Videos/CTA/cta-loop---new.mp4",
+  videoLoop: "/assets/videos/hero-clip-vid.mp4",
   videoClientCall: "/assets/videos/Videos/CTA/cta-client-call---new.mp4",
   videoFun: "/assets/videos/Videos/CTA/cta-fun---new.mp4",
-  videoCaption: "VIDEO_628",
+  videoCaption: "VIDEO_ZN_628",
   chat: {
-    name: "Bjorn Encuțescu",
-    firstMessage: "What brings you here today?",
+    name: "Zeanur Rahaman Zeon",
+    partnerName: "USER_1230",
+    partnerAvatar: "U",
+    firstMessage: "What are you building?",
     partnerMessages: [
-      "I'm ready to collaborate on something incredible with you!",
-      "I'm here for all the creative and nerdy goodness!",
+      "I need help turning an idea into a working product.",
+      "I have a problem and want to bring it to life.",
     ],
     myMessages: [
-      "Awesome! Let's get started. Ready?",
-      "Let's dive in! Webflow, GSAP, or gaming nostalgia, you're in the right place.",
+      "Awesome — let's talk about the problem and the goals.",
+      "I'm in — let's find the right tools for what you're building.",
     ],
-    buttons: ["Build something amazing!", "Geek out with you!"],
+    buttons: ["Let's build together!", "Tell me about your idea!"],
   },
 };

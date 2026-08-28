@@ -1,59 +1,73 @@
-export const experimentsHeader = {
-  title1: "Experiments",
-  title2: "& Clonables",
-  paragraph:
-    "A growing collection of Webflow experiments and clonables built to test ideas, push animation boundaries, and share new techniques with the community.",
-  button1: "Get in touch",
-  button2: "See case studies",
+/** Metadata for the Experiments page. */
+export const experimentsMeta = {
+  title: "Experiments & Side Projects",
+  description:
+    "A growing collection of side projects, open-source tools, and motion experiments — exploring engineering patterns, real-time features, and creative interactions.",
 };
 
+/** Copy for the experiments page hero header. */
+export const experimentsHeader = {
+  title1: "Experiments",
+  title2: "& Side Projects",
+  paragraph:
+    "A growing collection of side projects, open-source tools, and motion experiments — exploring engineering patterns, real-time features, and creative interactions.",
+  button1: "Get in touch",
+  button2: "See case studies",
+  viewProjectLabel: "View project",
+};
+
+/** Projects shown in the pinned 3D carousel on the experiments page. */
 export const experimentsStack = [
   {
     index: "Experiment_001",
-    title: "Spaceman",
-    video: "/assets/videos/Videos/Experiments/spaceman-gsap---new-thumbnail.mp4",
-    href: "https://spaceman-gsap.webflow.io/",
+    title: "Kurosumi",
+    description: "markdown notes with a clean, fast editor",
+    video: "/assets/videos/Videos/Experiments/kurosumi.mp4",
+    href: "https://kurosumi.vercel.app",
   },
   {
     index: "Experiment_002",
-    title: "Noirve",
-    video: "/assets/videos/Videos/Experiments/noirve---new-thumbnail.mp4",
-    href: "https://noirve.webflow.io/",
+    title: "Space Shooter",
+    description: "arcade space shooter built on the canvas",
+    video: "/assets/videos/Videos/Experiments/space-shooter.mp4",
+    href: "https://space-shooter-dun.vercel.app",
   },
   {
     index: "Experiment_003",
-    title: "Pitch",
-    video: "/assets/videos/Videos/Experiments/pitch---new-thumbnail.mp4",
-    href: "https://pitch-rebuild.webflow.io/",
+    title: "Taskero",
+    description: "simple, focused task management that stays out of the way",
+    video: "/assets/videos/Videos/Experiments/taskero.mp4",
+    href: "https://taskero-60a20.web.app",
   },
   {
     index: "Experiment_004",
-    title: "Plink",
-    video: "/assets/videos/Videos/Experiments/plink---new-thumbnail.mp4",
-    href: "https://plink-rebuild.webflow.io/",
+    title: "HistoTrack",
+    description: "a historical figure explorer with rich timelines",
+    video: "/assets/videos/Videos/Experiments/histotrack.mp4",
+    href: "https://histo-track.web.app",
   },
 ];
 
+/** Side-project cards (project_005..006) shown in the "Side projects" grid. */
 export const experimentsCards = [
   {
-    index: "project_005",
-    title: "Bertani",
-    href: "https://bertani-rebuild.webflow.io/",
-    poster: "/assets/videos/Videos/Experiments/thumbnails/bertani---new-thumbnail.webp",
-    video: "/assets/videos/Videos/Experiments/bertani---new-thumbnail.mp4",
+    index: "Experiment_005",
+    title: "Brick Breaker",
+    video: "/assets/videos/Videos/Experiments/brick-breaker.mp4",
+    href: "https://brick-breaker-lac.vercel.app",
   },
   {
     index: "project_006",
-    title: "Battlefield 4",
-    href: "https://battlefield-4-webflow-rebuild.webflow.io/",
-    poster: "/assets/videos/Videos/Experiments/thumbnails/battlefield---new-thumbnail.webp",
-    video: "/assets/videos/Videos/Experiments/battlefield-4---new-thumbnail.mp4",
+    title: "Shortle",
+    href: "https://shortle-phi.vercel.app",
+    poster: "/assets/videos/Videos/Experiments/thumbnails/shortle.webp",
+    video: "/assets/videos/Videos/Experiments/shortle.mp4",
   },
   {
     index: "project_007",
-    title: "Scrambled Pizza Chaos",
-    href: "https://scrambled-pizza-chaos.webflow.io/",
-    poster: "/assets/videos/Videos/Experiments/thumbnails/pizza---new-thumbnail.webp",
-    video: "/assets/videos/Videos/Experiments/scramble-pizza-chaos---new-thumbnail.mp4",
+    title: "QR Generator",
+    href: "https://qr-generator-omega-swart.vercel.app",
+    poster: "/assets/videos/Videos/Experiments/thumbnails/qr-generator.webp",
+    video: "/assets/videos/Videos/Experiments/qr-generator.mp4",
   },
 ];

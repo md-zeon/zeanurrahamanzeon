@@ -3,6 +3,14 @@
 import { useEffect, type RefObject } from "react";
 import { gsap } from "@/lib/gsap";
 
+/**
+ * Animates the mock "chat" widget inside the CTA section.
+ *
+ * When the visitor picks one of two options, the corresponding looping video
+ * plays, a scripted conversation is revealed one message at a time (with a
+ * binary scramble on the text), and the choice buttons disappear. All tweens
+ * are scoped via `gsap.context` so they're reverted on unmount.
+ */
 export function useCtaChat(container: RefObject<HTMLElement | null>) {
   useEffect(() => {
     const el = container.current;
@@ -12,6 +20,8 @@ export function useCtaChat(container: RefObject<HTMLElement | null>) {
       const video2 = el.querySelector<HTMLVideoElement>(".cta_loop-video.is-2 video");
       const video3 = el.querySelector<HTMLVideoElement>(".cta_loop-video.is-3 video");
 
+      // Hide every message/divider that shouldn't be visible before the
+      // conversation starts.
       gsap.set(
         [
           ".cta_chat-content.is-1",
@@ -23,6 +33,9 @@ export function useCtaChat(container: RefObject<HTMLElement | null>) {
         { display: "none", autoAlpha: 0 }
       );
 
+      // Reveals text with a per-frame binary scramble: real characters are
+      // appended left-to-right while garbage bits trail behind, until the
+      // whole message is "typed". `onComplete` fires ~1s after finishing.
       const scrambleRevealText = (target: HTMLElement | null, onComplete?: () => void) => {
         if (!target) return;
         const finalText = target.textContent?.trim() ?? "";
@@ -51,6 +64,7 @@ export function useCtaChat(container: RefObject<HTMLElement | null>) {
         }, 15);
       };
 
+      // Fades in a "client" bubble (avatar + message).
       const revealClient = (which: 1 | 2, onDone?: () => void) => {
         gsap.set([`.cta_chat-content.is-client.is-${which}`, ".cta_chat-divider.is-2"], {
           display: "flex",
@@ -73,6 +87,7 @@ export function useCtaChat(container: RefObject<HTMLElement | null>) {
         });
       };
 
+      // Fades in one of "my" bubbles in the conversation.
       const revealMe = (which: 1 | 2) => {
         gsap.set([`.cta_chat-content.is-${which}`], { display: "flex", autoAlpha: 1 });
 
@@ -92,6 +107,8 @@ export function useCtaChat(container: RefObject<HTMLElement | null>) {
         });
       };
 
+      // Handles choosing option 1 or 2: swap the playing video, hide the
+      // choice buttons, then play the client -> my reply sequence.
       const onClick = (which: 1 | 2) => {
         const active = which === 1 ? video2 : video3;
         const inactive = which === 1 ? video3 : video2;

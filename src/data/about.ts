@@ -1,51 +1,83 @@
-import { photos } from "./site";
+/** Metadata for the About page. */
+export const aboutMeta = {
+  title: "About",
+  description:
+    "I'm Zeanur Rahaman Zeon — a software engineer from Bangladesh who solves real problems end-to-end with clean architecture and solid fundamentals, and picks the right tools for each job.",
+};
 
+/** Copy for the About page hero header. */
 export const aboutHeader = {
-  title1: "Please",
-  title2: "call me Bjorn",
+  title1: "Hi, I'm",
+  title2: "Zeanur Rahaman",
   paragraph:
-    "I'm an independent web designer and creative developer with years of experience building scalable, interactive web experiences, giving individuals and teams full control over their sites.",
+    "I'm a software engineer who cares about solving problems, not just shipping code. I focus on clean architecture, solid fundamentals, and experiences that feel fast and intuitive — and I pick the right tool for each job rather than relying on a favorite stack.",
   button1: "Get in touch",
   button2: "See work",
-  badge: "Webflow Certified Partner",
-  video: "/assets/videos/Videos/Experiments/spaceman-gsap---new-thumbnail.mp4",
-  videoCaption: "VIDEO_041",
+  badge: "Open to Work",
+  badgeLink: "https://github.com/md-zeon",
+  video: "/assets/videos/hero-clip-vid.mp4",
+  videoCaption: "ABOUT_ME",
 };
 
-export const aboutDividerText = "Webflow & Creative Developer";
+/** Divider marquee configuration for the Career story section. */
+export const aboutDivider = {
+  text: "Career story",
+  caption: "CRS_gjx1_30731",
+};
 
+/**
+ * Career story content: the body paragraphs with inline link fragments
+ * (`links` splice into the text by matching their `text`), the milestone
+ * year sequence, and the left-column photos/quote stack.
+ */
 export const aboutStory = {
-  year: "2018",
+  year: "2023",
+  yearSequence: [
+    { year: 2018, start: "top 70%" },
+    { year: 2019, start: "top 65%" },
+    { year: 2021, start: "top 55%" },
+    { year: 2022, start: "top 35%" },
+    { year: 2023, start: "top 10%" },
+    { year: 2026, start: "top 0%" },
+  ],
   body: [
-    "After earning my degree in graphic design, I founded Brandenstein, a studio focused on branding and Webflow development.",
-    "I was drawn to working with purpose-driven companies. One of the most meaningful collaborations was with Mindsum, a UK-based mental health non-profit.",
-    "After a few years, I closed my studio and shifted my focus fully to Webflow development. I began partnering with teams like Flooz and Upkeep, and later joined a digital agency I helped achieve Webflow Partner status, working on projects for companies like Shop Circle and Plus X Innovation.",
-    "This journey also led me to become an Official Webflow Partner.",
-    "Outside client work, I collaborate with Webflow on feature launches (including being featured in the GSAP-powered interactions release), content creation, and the development of new exams like the Practitioner Certification.",
-    "I also teach Webflow to creatives and teams through my growing YouTube channel and social media.",
+    "I'm a Computer Science & Engineering student at Northern University Bangladesh, graduating in 2027 — and I've been building for the web since 2023.",
+    "I learned by shipping complete products rather than just pages: a developer Q&A platform, a medicine marketplace for Bangladesh, and a real-time campus collaboration network.",
+    "I don't tie myself to a single stack. Frameworks change, but fundamentals don't — data modeling, API design, authentication, and clean architecture transfer across tools. When I meet a new stack, I map its core concepts onto patterns I already know instead of starting from zero.",
+    "I publish open source, and I'm always experimenting with motion, AI integrations, and whatever idea catches my interest.",
+    "I'm currently open to internships, freelance work, and open-source collaboration.",
   ],
   links: [
-    { text: "Mindsum", href: "https://www.mindsum.org/" },
-    { text: "Flooz", href: "https://flooz.xyz/" },
-    { text: "Upkeep", href: "https://www.upkeepbeauty.com/" },
-    { text: "Shop Circle", href: "https://shopcircle.co/" },
-    { text: "Plus X Innovation", href: "https://www.plusxinnovation.com/" },
-    { text: "Official Webflow Partner", href: "https://webflow.com/@bjorn-encutescu" },
-    { text: "interactions release", href: "https://youtu.be/2TYLsY-FhF8?si=hWMhWffja8tetnuW" },
-    { text: "the Practitioner Certification", href: "https://www.credential.net/93f14a78-69a7-44e0-b30b-3463783d533b" },
-    { text: "YouTube channel", href: "https://www.youtube.com/@bjorn_flow" },
+    { text: "developer Q&A platform", href: "https://dev-qna.vercel.app" },
+    {
+      text: "medicine marketplace",
+      href: "https://oshudpati-marketplace-client.vercel.app",
+    },
+    {
+      text: "real-time campus collaboration network",
+      href: "https://github.com/smart-nub-campus-client",
+    },
+    { text: "open source", href: "https://github.com/md-zeon" },
   ],
-  quote: "If you want to get the job to the highest standard of quality, with 10 times less hassle or pain, and 10 times faster, go and talk to Brandenstein.",
-  quoteName: "Fareed Baloch",
-  quoteRole: "Management - Mindsum",
+  quote:
+    "A dedicated builder who turns ideas into shipped products — clean code, real features, and attention to the details users actually notice.",
+  quoteName: "Zeanur Rahaman Zeon",
+  quoteRole: "Aspiring Software Engineer",
   images: [
-    { src: "/assets/images/68a4679c41de25071bed5245_brandenstein.webp", alt: "Brandenstein" },
-    { src: "/assets/images/68a467ad9cb5817976d878b6_plus-x.webp", alt: "Plus X Innovation's website on a laptop." },
-    { src: "/assets/images/68a467be9c4a2fa8b724aa18_webflow-partner.webp", alt: "Webflow Partner Certification" },
+    {
+      src: "/assets/images/about/zeon-1.webp",
+      alt: "Zeanur working on a full-stack project.",
+    },
+    {
+      src: "/assets/images/about/zeon-2.webp",
+      alt: "A screen of code from one of Zeanur's projects.",
+    },
+    { src: "/assets/images/about/zeon-3.webp", alt: "Zeanur's dev setup." },
   ],
-  misc: "Image_356",
+  misc: "ABOUT_ZEON",
 };
 
+/** One card in the "FUN FACTS" deck (media is video, or image with a crop variant). */
 export type FactSlide = {
   caption: string;
   title: string;
@@ -60,54 +92,64 @@ export type FactSlide = {
   misc?: string;
 };
 
-export const aboutFacts: { caption: string; slides: FactSlide[] } = {
+/** The "FUN FACTS" deck: a caption plus the stack of fact cards. */
+export const aboutFacts: {
+  header: { title1: string; title2: string };
+  caption: string;
+  slides: FactSlide[];
+} = {
+  header: {
+    title1: "FUN",
+    title2: "Facts",
+  },
   caption: "FUN_FCT_005",
   slides: [
     {
-      caption: "FIRST GAME PLAYED AT",
-      title: "5 years old",
-      video: "/assets/videos/Videos/Experiments/spaceman-gsap---new-thumbnail.mp4",
-      videoCaption: "VIDEO_407",
+      caption: "CURRENTLY STUDYING",
+      title: "Computer Science",
+      video:
+        "/assets/videos/Videos/Experiments/spaceman-gsap---new-thumbnail.mp4",
+      videoCaption: "FUN_FCT_001",
       elementCaption: "FUN_FCT_001",
-      ctaLabel: "See gaming channel",
-      ctaHref: "https://www.youtube.com/@uauizaui",
-      text: "My gaming journey started when I was 5 years old on a PC and a PlayStation 2. At 14, I started a YouTube gaming channel, which a few years later helped me earn my first income as content creator.",
+      ctaLabel: "See my education",
+      ctaHref: "https://github.com/md-zeon",
+      text: "BSc in Computer Science & Engineering at Northern University Bangladesh, graduating in 2027 — where most of my projects were born.",
     },
     {
-      caption: "BACKGROUND IN",
-      title: "Fine Arts",
-      image: photos.farSocial,
-      misc: "Image_362",
+      caption: "BASED IN",
+      title: "Bangladesh",
+      video: "/assets/videos/Videos/Experiments/space-shooter.mp4",
+      videoCaption: "FUN_FCT_002",
       elementCaption: "FUN_FCT_002",
-      ctaLabel: "See illustrations portfolio",
-      ctaHref: "https://www.behance.net/bjorn_encutescu",
-      text: "I started with fine arts before studying graphic design, and I won a contest at 6 for my kindergarten. I later built a skateboard illustration portfolio and designed my own tattoo.",
+      text: "I'm based in Tongi, Gazipur — building for teams and users around the world, working in UTC+06.",
     },
     {
-      caption: "One of my hobbies includes",
-      title: "photography",
-      image: photos.dscf,
-      imageClass: "is-photo",
-      misc: "IMAGE_857",
+      caption: "MY APPROACH",
+      title: "Tool-Agnostic",
+      video: "/assets/videos/Videos/Experiments/shortle.mp4",
+      videoCaption: "FUN_FCT_003",
       elementCaption: "FUN_FCT_003",
-      text: "At first my wish was to study photography instead of graphic design. I was always fascinated about capturing moments in time and showing others the way I see the world.",
+      ctaLabel: "See GitHub",
+      ctaHref: "https://github.com/md-zeon",
+      text: "I don't bind myself to a single stack. I pick the right tools for each problem, and when a new framework comes up I map it onto fundamentals I already know — so I'm productive fast in any codebase.",
     },
     {
-      caption: "PROUD PLANT PARENT OF",
-      title: "18 plants",
-      image: photos.img6121,
-      imageClass: "is-plants",
-      misc: "IMAGE_619",
+      caption: "DRIVEN BY",
+      title: "Real Problems",
+      video: "/assets/videos/Videos/Experiments/brick-breaker.mp4",
+      videoCaption: "FUN_FCT_004",
       elementCaption: "FUN_FCT_004",
-      text: "Currently raising 18 plants (and counting) that are growing faster than my video games collection, and that is scary. Luckily, my cat had something to say about it once she entered my life.",
+      text: "I like products that solve real problems — from developer Q&A and medicine delivery to campus collaboration.",
     },
     {
-      caption: "CITY HOPPER",
-      title: "4 cities",
-      image: "/assets/images/6713ba0d300a1099644dddd8_Frame-84.png",
-      misc: "IMAGE_827",
+      caption: "ALWAYS",
+      title: "Open to Work",
+      video: "/assets/videos/Videos/Experiments/qr-generator.mp4",
+      videoCaption: "FUN_FCT_005",
       elementCaption: "FUN_FCT_005",
-      text: "I've lived in 4 different cities in Romania in the last decade. I'm currently living in Bucharest, but Cluj-Napoca is forever living in my heart. And yes, we do have vampires!",
+      ctaLabel: "Get in touch",
+      ctaHref: "/contact",
+      text: "Currently open to internships, freelance projects, and open-source collaboration. If you have a problem worth solving, let's talk.",
     },
   ],
 };

@@ -1,13 +1,24 @@
 import type { CaseBlock, CaseMedia, CaseStudy } from "@/data/caseStudies";
+import { audio } from "@/data/site";
+import Image from "next/image";
 import AutoVideo from "../media/AutoVideo";
 
 type CaseStudyBlocksProps = {
   study: CaseStudy;
 };
 
+/**
+ * Shared media class — slightly oversized and centered so AutoVideo / image
+ * crops fill the rounded frame without letterboxing, on a parallax page.
+ */
 const VIDEO_CLASS =
   "relative z-2 h-full w-full shrink-0 object-cover max-[767px]:h-[120%] max-[767px]:w-[120%] max-[767px]:rounded";
 
+/**
+ * Renders one media asset (video with poster, or lazy image) inside the
+ * section-appropriate frame. `grid` picks square tiles for multi-media
+ * rows versus a wide hero aspect for a single asset.
+ */
 function Media({ media, grid }: { media: CaseMedia; grid: boolean }) {
   const wrapperClass = grid
     ? "relative z-2 flex aspect-square h-full w-full items-center justify-center overflow-hidden rounded-lg border border-[#1f1e1e33] inset-0 desktop:max-h-[93.4vh] max-[767px]:rounded"
@@ -25,19 +36,25 @@ function Media({ media, grid }: { media: CaseMedia; grid: boolean }) {
   }
   return (
     <div className={wrapperClass}>
-      <img
+      <Image
         className={VIDEO_CLASS}
         src={media.image}
         alt={media.alt}
-        loading="lazy"
+        fill
       />
     </div>
   );
 }
 
+/** Rotated caption that runs vertically up the left edge of each asset. */
 const TEXT_WRAPPER_CLASS =
   "absolute left-[-2.7rem] top-1/2 [transform:rotate(-90deg)_translateY(-50%)] max-[991px]:left-[-2.2rem] max-[767px]:left-[-2.3rem] max-[479px]:left-[-2rem]";
 
+/**
+ * Full-bleed showcase row for a study: a single wide asset or a two-column
+ * grid of square tiles. Kept as one `data-parallax-type="section"` block so
+ * the GSAP page parallax scrolls the whole strip together.
+ */
 function Example({
   block,
 }: {
@@ -84,6 +101,7 @@ function Example({
             <Media media={block.media[0]} grid={false} />
           </div>
         )}
+        {/* Subtle framing rule spanning the width behind the media */}
         <div className="z-0 flex w-auto max-w-325 items-start justify-end border-l border-r border-white-20 absolute inset-[0_4.37rem] max-[991px]:inset-x-6" />
       </div>
     </section>
@@ -93,12 +111,17 @@ function Example({
 const INFO_ITEM_CLASS =
   "rounded-full border-[0.5px] border-neutral-black px-3.5 py-1.5 text-sm text-color-secondary [backdrop-filter:blur(100px)] [-webkit-backdrop-filter:blur(100px)] max-[767px]:px-3 max-[767px]:py-1 max-[767px]:text-[.9rem] max-[767px]:tracking-[-0.03rem] max-[479px]:text-[.85rem] max-[479px]:tracking-[-0.025rem]";
 
+/**
+ * Standard "info" block: services list, project date, and an external link
+ * to the live site, laid out across two bordered columns.
+ */
 function Info({ study }: { study: CaseStudy }) {
   return (
     <section cs-content-type="container">
       <div className="padding-global is-bigger">
         <div className="container-large">
           <div className="relative grid auto-cols-fr grid-rows-[auto] grid-cols-[1.3fr_1fr] gap-0 border-b border-l border-neutral-black py-10 max-[991px]:grid-cols-[1fr_auto] max-[767px]:grid-cols-1 max-[767px]:gap-8">
+            {/* Left: service tags */}
             <div className="flex flex-wrap items-start justify-between gap-4 pl-4 max-[991px]:flex-col max-[767px]:flex-wrap max-[479px]:gap-8">
               <div className="flex flex-col items-start justify-start gap-4">
                 <div
@@ -119,6 +142,7 @@ function Info({ study }: { study: CaseStudy }) {
                 </div>
               </div>
             </div>
+            {/* Right: date + live-site button */}
             <div className="flex flex-wrap items-start justify-between gap-4 pl-4 max-[991px]:flex-col max-[767px]:flex-wrap max-[479px]:gap-8">
               <div className="flex flex-col items-start justify-start gap-8">
                 <div className="flex flex-col items-start justify-start gap-4">
@@ -134,7 +158,7 @@ function Info({ study }: { study: CaseStudy }) {
                 </div>
               </div>
               <a
-                data-audio="https://bjornflow-assets.b-cdn.net/Audio/button%20hover.wav"
+                data-audio={audio.hover}
                 href={study.info.websiteUrl}
                 target="_blank"
                 className="btn btn-secondary btn-icon"
@@ -167,6 +191,10 @@ function Info({ study }: { study: CaseStudy }) {
   );
 }
 
+/**
+ * Plain paragraph block — caption over one or more paragraphs (blank-line
+ * separated) in a single bordered column.
+ */
 function Content({
   block,
 }: {
@@ -207,6 +235,11 @@ function Content({
   );
 }
 
+/**
+ * Renders every content block of a case study in order. The block "type"
+ * discriminates between `info`, `content`, and `example` (anything else
+ * falls through to the showcase strip).
+ */
 export default function CaseStudyBlocks({ study }: CaseStudyBlocksProps) {
   return (
     <>

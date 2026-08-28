@@ -4,12 +4,16 @@ import WorkProjects from "@/components/sections/WorkProjects";
 import WorkCtaSection from "@/components/sections/WorkCtaSection";
 import WorkLabSection from "@/components/sections/WorkLabSection";
 
-export const metadata: Metadata = {
-  title: "Work",
-  description:
-    "A curated collection of web design and Webflow development projects crafted with strategy, design, and development in one process.",
-};
+import { workMeta } from "@/data/work";
+import { pageMetadata } from "@/data/site";
 
+export const metadata: Metadata = pageMetadata(
+  workMeta.title,
+  workMeta.description,
+  "/work"
+);
+
+/** Work page: hero, project grid, CTA, and "from the labs" slider. */
 export default function Work() {
   return (
     <main className="main-wrapper background-color-black">

@@ -7,12 +7,19 @@ import AboutFun from "@/components/sections/AboutFun";
 import LabSection from "@/components/sections/LabSection";
 import CtaSection from "@/components/sections/CtaSection";
 
-export const metadata: Metadata = {
-  title: "About",
-  description:
-    "I'm an independent web designer and creative developer with years of experience building scalable, interactive web experiences.",
-};
+import { aboutMeta } from "@/data/about";
+import { pageMetadata } from "@/data/site";
 
+export const metadata: Metadata = pageMetadata(
+  aboutMeta.title,
+  aboutMeta.description,
+  "/about"
+);
+
+/**
+ * About page: hero, career-story marquee, the story section, testimonials,
+ * "fun facts" deck, labs slider, and closing CTA.
+ */
 export default function About() {
   return (
     <main className="main-wrapper background-color-black">
