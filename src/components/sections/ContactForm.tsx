@@ -434,12 +434,23 @@ export default function ContactForm() {
                   className="relative w-full p-[5rem_0]"
                   style={{ display: submitState === "success" ? "block" : "none" }}
                 >
-                  <div className="mx-auto flex w-full max-w-104 flex-col items-center justify-center gap-4 text-center">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full border border-white-20 bg-white-10 text-[#5eead4]">
-                      <CheckIcon />
+                  <div className="mx-auto flex w-full max-w-104 flex-col gap-5">
+                    <div className="text-caption-2 text-color-teritary">
+                      [submission received]
                     </div>
-                    <div className="success-text heading-style-h5">
+                    <div className="heading-style-h4">
                       {contactForm.success}
+                    </div>
+                    <div className="h-px w-full bg-white-20" />
+                    <div className="text-size-regular text-color-secondary">
+                      {contactForm.emailSectionLabel ?? ""}
+                      {" "}
+                      <a
+                        href={`mailto:${contactForm.email}`}
+                        className="text-style-nounderline text-color-secondary"
+                      >
+                        {contactForm.email}
+                      </a>
                     </div>
                   </div>
                 </div>
