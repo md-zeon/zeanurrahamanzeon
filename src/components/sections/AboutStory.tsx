@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { useScrubbedHighlight } from "@/lib/useHeaderReveal";
 import Image from "next/image";
@@ -70,8 +70,6 @@ function StoryBody() {
 
 export default function AboutStory() {
   const ref = useRef<HTMLElement>(null);
-  // Which photo is visible: swaps as the story text scrolls through viewport.
-  const [photoIndex, setPhotoIndex] = useState(0);
 
   // Story text brightens word-by-word as it scrolls through the viewport.
   useScrubbedHighlight(ref);
@@ -83,20 +81,52 @@ export default function AboutStory() {
     const ctx = gsap.context(() => {
       const element = el.querySelector<HTMLElement>("#highlighted-text");
 
-      // Crossfade the left-column photos as the story scrolls: divide the
-      // text's journey across the viewport into three bands, one per photo.
-      ScrollTrigger.create({
-        trigger: "#highlighted-text",
-        start: "top 90%",
-        end: "bottom 40%",
-        onUpdate: (self) => {
-          const index = Math.min(
+      // Crossfade the left-column photos on a scrubbed timeline aligned to
+      // the story's scroll journey: photo 1 during the first stretch, then
+      // photo 2 / 3 as its chapter reaches the center of the viewport.
+      // Writing opacity directly (no React state) keeps the scrub at 60fps.
+      const photoLayers = el.querySelectorAll<HTMLElement>(
+        ".about-story_photo-layer",
+      );
+      const storyProgress = el.querySelector<HTMLElement>(
+        ".about-story_photo-progress",
+      );
+      if (photoLayers.length >= 3 && element) {
+        gsap.set(photoLayers[1], { opacity: 0 });
+        gsap.set(photoLayers[2], { opacity: 0 });
+        const fade = 0.35;
+        const timeline = gsap.timeline({
+          scrollTrigger: {
+            trigger: "#highlighted-text",
+            start: "top 90%",
+            end: "bottom 40%",
+            scrub: 0.4,
+          },
+        });
+        timeline
+          .to(photoLayers[0], { opacity: 0, duration: fade, ease: "power1.inOut" }, 1)
+          .fromTo(
+            photoLayers[1],
+            { opacity: 0 },
+            { opacity: 1, duration: fade, ease: "power1.inOut" },
+            1,
+          )
+          .to(photoLayers[1], { opacity: 0, duration: fade, ease: "power1.inOut" }, 2)
+          .fromTo(
+            photoLayers[2],
+            { opacity: 0 },
+            { opacity: 1, duration: fade, ease: "power1.inOut" },
             2,
-            Math.floor(Math.max(0, self.progress) * 3),
           );
-          setPhotoIndex(index);
-        },
-      });
+        if (storyProgress) {
+          timeline.fromTo(
+            storyProgress,
+            { scaleX: 0 },
+            { scaleX: 1, ease: "none", duration: 3 },
+            0,
+          );
+        }
+      }
 
       // Keep the year number in place while the section scrolls.
       ScrollTrigger.create({
@@ -184,9 +214,8 @@ export default function AboutStory() {
                     {aboutStory.images.map((image, index) => (
                       <div
                         key={image.src}
-                        className={`absolute inset-0 z-1 flex h-full w-full items-center justify-center overflow-hidden rounded-lg transition-opacity duration-700 ${
-                          index === photoIndex ? "opacity-100" : "opacity-0"
-                        }`}
+                        className="about-story_photo-layer absolute inset-0 z-1 flex h-full w-full items-center justify-center overflow-hidden rounded-lg"
+                        style={{ opacity: index === 0 ? 1 : 0 }}
                       >
                         <Image
                           src={image.src}
@@ -198,30 +227,38 @@ export default function AboutStory() {
                         />
                       </div>
                     ))}
-                    <div className="absolute bottom-3 right-3 z-10 w-[70%] overflow-hidden rounded-lg max-[479px]:w-full max-[479px]:max-w-none">
-                      <div className="flex flex-col justify-between gap-5 rounded-lg border border-white-20 bg-[#0a090fb3] p-6 backdrop-blur-[100px] max-[767px]:p-4 max-[479px]:w-auto">
-                        <div className="relative">
-                          <div className="absolute left-[-0.6rem] top-0">
-                            <div className="text-size-medium">&quot;</div>
-                          </div>
-                          <div className="text-size-medium">
-                            {aboutStory.quote}
-                          </div>
-                        </div>
-                        <div>
-                          <div className="text-size-regular text-weight-medium">
-                            {aboutStory.quoteName}
-                          </div>
-                          <div className="text-size-regular text-color-secondary">
-                            {aboutStory.quoteRole}
-                          </div>
-                        </div>
+                    <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex justify-between gap-6 px-6 pb-5">
+                      <div className="text-caption-2 text-color-teritary">
+                        {aboutStory.misc}
+                      </div>
+                      <div className="max-w-[55%] text-right text-caption-2 text-color-secondary">
+                        01 · 02 · 03 — {aboutStory.year}
                       </div>
                     </div>
                   </div>
-                  <div className="absolute left-[-2.7rem] bottom-[1.9rem] -rotate-90">
-                    <div className="text-caption-2 text-color-teritary">
-                      {aboutStory.misc}
+                  <div className="relative mt-4 h-px w-full bg-white-20">
+                    <div className="about-story_photo-progress h-px w-full origin-left bg-brand-white">
+                      <div className="absolute -top-[0.15rem] right-0 h-2 w-2 rounded-full bg-brand-white" />
+                    </div>
+                  </div>
+                  <div className="relative mt-6">
+                    <div className="flex flex-col justify-between gap-5 rounded-lg border border-white-20 bg-[#0a090fb3] p-6 backdrop-blur-[100px] max-[767px]:p-4">
+                      <div className="relative">
+                        <div className="absolute left-[-0.6rem] top-0">
+                          <div className="text-size-medium">&quot;</div>
+                        </div>
+                        <div className="text-size-medium">
+                          {aboutStory.quote}
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-size-regular text-weight-medium">
+                          {aboutStory.quoteName}
+                        </div>
+                        <div className="text-size-regular text-color-secondary">
+                          {aboutStory.quoteRole}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
