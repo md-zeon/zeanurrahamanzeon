@@ -108,19 +108,7 @@ export default function ContactForm() {
     });
   };
 
-  // Pills are styled via a separate element; keep the "checked" pill state in
-  // sync by moving the w--redirected-checked class between siblings.
-  const handleRadioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const layout = e.currentTarget.closest(".form_checkbox-layout");
-    if (!layout) return;
-    layout
-      .querySelectorAll<HTMLElement>(".form_pill-check")
-      .forEach((pill) => pill.classList.remove("w--redirected-checked"));
-    const pill = e.currentTarget.previousElementSibling;
-    if (pill) pill.classList.add("w--redirected-checked");
-  };
-
-  // Client-side submit: POST to the contact API, then reveal success or error.
+// Client-side submit: POST to the contact API, then reveal success or error.
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
@@ -221,6 +209,17 @@ export default function ContactForm() {
                     display: submitState === "success" ? "none" : undefined,
                   }}
                 >
+                  {/* Honeypot: off-screen, so humans never fill it in; bots do.
+                      The server silently drops submissions that include it. */}
+                  <input
+                    type="text"
+                    name="Company"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                    className="sr-only"
+                    style={{ position: "absolute", left: "-9999px", opacity: 0 }}
+                  />
                   {/* Name + email */}
                   <div className="grid auto-cols-fr grid-cols-2 gap-8 max-[767px]:grid-cols-1">
                     <div className="relative">
@@ -283,9 +282,12 @@ export default function ContactForm() {
                     <div className="relative">
                       <label
                         htmlFor="Current-website-URL"
-                        className="mb-2 text-[0.875rem] font-normal uppercase leading-[140%] tracking-[-0.04375rem] text-brand-white"
+                        className="mb-2 flex items-center gap-2 text-[0.875rem] font-normal uppercase leading-[140%] tracking-[-0.04375rem] text-brand-white"
                       >
                         {contactForm.websiteUrlLabel ?? "Current website URL"}
+                        <span className="rounded-full border border-white-20 px-2 py-0.5 text-caption-2 normal-case tracking-normal text-color-teritary">
+                          optional
+                        </span>
                       </label>
                       <input
                         className={textInput}
@@ -378,13 +380,16 @@ export default function ContactForm() {
                     </div>
                   </div>
                   {/* "How did you hear about me" pill radios */}
-                  <div className="relative">
-                    <label
-                      htmlFor="Source"
-                      className="mb-2 text-[0.875rem] font-normal uppercase leading-[140%] tracking-[-0.04375rem] text-brand-white"
+                  <div className="relative" role="group" aria-labelledby="source-group-label">
+                    <span
+                      id="source-group-label"
+                      className="mb-2 flex items-center gap-2 text-[0.875rem] font-normal uppercase leading-[140%] tracking-[-0.04375rem] text-brand-white"
                     >
                       {contactForm.source.label}
-                    </label>
+                      <span className="rounded-full border border-white-20 px-2 py-0.5 text-caption-2 normal-case tracking-normal text-color-teritary">
+                        optional
+                      </span>
+                    </span>
                     <div className="form_checkbox-layout flex flex-wrap gap-2">
                       {contactForm.source.options.map((option) => (
                         <label
@@ -392,8 +397,8 @@ export default function ContactForm() {
                           className="relative mb-0 flex w-radio items-center justify-center p-[0.5rem_1rem]"
                         >
                           <div className="form_pill-check w-radio-input absolute inset-0 z-2 m-0 h-full w-full rounded border border-white-20 bg-white-10 transition-all duration-200" />
-                          {/* Real radio is invisible; the pill element is
-                              layered behind it and toggled via handleRadioChange */}
+                          {/* Real radio is invisible; its checked state styles
+                              the pill and label via CSS :has() */}
                           <input
                             type="radio"
                             data-name="Source"
@@ -405,7 +410,6 @@ export default function ContactForm() {
                               zIndex: -1,
                             }}
                             value={option}
-                            onChange={handleRadioChange}
                           />
                           <span className="w-form-label">{option}</span>
                         </label>

@@ -5,6 +5,34 @@ export const runtime = "nodejs";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+/**
+ * Per-IP sliding-window limiter. In-memory (per serverless instance), so it's
+ * a cheap first line of defence against drive-by spam, not a hard quota.
+ */
+const RATE_LIMIT_MAX = 5;
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
+const rateBuckets = new Map<string, number[]>();
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const hits = (rateBuckets.get(ip) ?? []).filter(
+    (t) => now - t < RATE_LIMIT_WINDOW_MS,
+  );
+  if (hits.length >= RATE_LIMIT_MAX) {
+    rateBuckets.set(ip, hits);
+    return true;
+  }
+  hits.push(now);
+  rateBuckets.set(ip, hits);
+  return false;
+}
+
+function clientIp(request: NextRequest): string {
+  const forwarded = request.headers.get("x-forwarded-for");
+  if (forwarded) return forwarded.split(",")[0].trim();
+  return request.headers.get("x-real-ip") ?? "unknown";
+}
+
 function field(data: FormData, name: string): string {
   return String(data.get(name) ?? "").trim();
 }
@@ -25,6 +53,18 @@ export async function POST(request: NextRequest) {
   const deadline = field(data, "Deadline");
   const budget = field(data, "Budget");
   const source = field(data, "Source");
+
+  // Honeypot: hidden from humans, bots tend to fill it in. Pretend success so
+  // spam tools never learn the trap works.
+  const honeypot = field(data, "Company");
+  if (honeypot) return NextResponse.json({ ok: true });
+
+  if (isRateLimited(clientIp(request))) {
+    return NextResponse.json(
+      { error: "Too many submissions. Please try again in a few minutes." },
+      { status: 429 },
+    );
+  }
 
   if (!name || !email || !message) {
     return NextResponse.json(

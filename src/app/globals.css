@@ -834,14 +834,20 @@ input[type="file"]:focus-visible {
   /* ---------- Runtime-required rules (dropped by generate-migrated.js:
    not className literals in the JSX) ---------- */
 
-  /* ContactForm toggles .w--redirected-checked on the pill via JS on radio change
-   (Webflow radio-check behaviour, verbatim from webflow.css) */
-  .form_pill-check.w--redirected-checked {
-    background-color: #efefe633;
+  /* ContactForm source pills: the chosen pill gets a clear lime accent so the
+   selected Source is obvious at a glance. Pure CSS via :has(input:checked) —
+   no JS class-toggling needed, works even without markup mutations. */
+  .w-radio:has(input:checked) .form_pill-check {
+    background-color: rgba(248, 255, 49, 0.14);
     background-image: none;
-    background-size: auto;
-    border-width: 1px;
-    border-color: #efefe64d;
+    border-color: #f8ff31;
+  }
+  .w-radio:has(input:checked) .w-form-label {
+    color: #f8ff31;
+  }
+  .w-radio:has(input:focus-visible) .form_pill-check {
+    outline: 2px solid #f8ff31;
+    outline-offset: 2px;
   }
 
   /* Footer: Webflow #w-node- placement rules (id-based, so the generator skips them).
@@ -1180,4 +1186,34 @@ input[type="file"]:focus-visible {
   html.has-target-cursor [data-default-cursor] a * {
     cursor: pointer !important;
   }
+}
+
+/* ---------- Contact form fields ----------
+   Override Webflow's .w-input/.w-select white/grey fills (their unlayered
+   rules beat Tailwind utilities) with the translucent dark theme fill,
+   and strip the native <select> chrome so the control matches the inputs. */
+select.form_input.w-select,
+input.form_input.w-input {
+  background-color: #efefe61a;
+  color: #efefe6;
+}
+input.form_input.w-input::placeholder,
+select.form_input.w-select::placeholder {
+  color: #8f8a9c;
+}
+select.form_input.w-select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M2.5 4.5 6 8l3.5-3.5' stroke='%23efefe6' stroke-opacity='0.6' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 0.7rem;
+  cursor: pointer;
+}
+/* The open dropdown list matches the theme (Chromium/Safari) */
+select.form_input.w-select option,
+select.form_input.w-select optgroup {
+  background-color: #100e18;
+  color: #efefe6;
 }

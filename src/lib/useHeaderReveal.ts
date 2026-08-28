@@ -275,17 +275,31 @@ export function usePageHeaderEntrance(
 
       // Hide the secondary elements until their timeline step plays. The
       // CTA buttons (header-content-type="button") deliberately stay visible.
+      // Only some pages render every piece (line-bg, asterisk, badge-link),
+      // so query each once and pass element references instead of string
+      // selectors — a missing element is then a quiet no-op rather than a
+      // "GSAP target not found" console warning.
+      const paragraph = el.querySelector<HTMLElement>(
+        '[header-content-type="paragraph"]',
+      );
+      const border = el.querySelector<HTMLElement>(
+        '[header-content-type="border"]',
+      );
+      const asterisk = el.querySelector<HTMLElement>(
+        '[header-content-type="asterisk"]',
+      );
+      const lineBg = el.querySelector<HTMLElement>(
+        '[header-content-type="line-bg"]',
+      );
+      const badgeLink = el.querySelector<HTMLElement>(".badge-link");
+
       gsap.set(
-        [
-          '[header-content-type="paragraph"]',
-          '[header-content-type="border"]',
-          '[header-content-type="asterisk"]',
-          '[header-content-type="line-bg"]',
-          ".badge-link",
-        ],
+        [paragraph, border, asterisk, lineBg, badgeLink].filter(
+          (node): node is HTMLElement => Boolean(node),
+        ),
         { autoAlpha: 0 },
       );
-      gsap.set('[header-content-type="line-bg"]', { xPercent: -100 });
+      if (lineBg) gsap.set(lineBg, { xPercent: -100 });
 
       // Wrap each character in an overflow-hidden box so the slide-in masks
       // cleanly; the small padding/margin pair keeps descenders from
@@ -312,9 +326,6 @@ export function usePageHeaderEntrance(
       // like the About header. Lines are hidden at commit (pre-paint) so
       // nothing flashes before the reveal.
       const lineWrappers: HTMLElement[] = [];
-      const paragraph = el.querySelector(
-        '[header-content-type="paragraph"]',
-      );
       if (paragraph) {
         const splitText = new SplitText(paragraph, { type: "lines" });
         splitText.lines.forEach((line) => {
@@ -344,17 +355,23 @@ export function usePageHeaderEntrance(
       });
 
       tl.to(
-        '[header-content-type="asterisk"], [header-content-type="border"]',
+        [asterisk, border].filter((node): node is HTMLElement => Boolean(node)),
         { autoAlpha: 1, duration: 0.1 },
         "headings+=0.6",
       );
-      tl.to('[header-content-type="asterisk"]', { rotate: 90, duration: 0.3 }, "<");
-      tl.to(
-        '[header-content-type="line-bg"]',
-        { xPercent: 0, autoAlpha: 1, duration: 0.3 },
-        "headings+=0.8",
-      );
-      tl.to(".badge-link", { autoAlpha: 1, duration: 0.1 }, "headings+=1.1");
+      if (asterisk) {
+        tl.to(asterisk, { rotate: 90, duration: 0.3 }, "<");
+      }
+      if (lineBg) {
+        tl.to(
+          lineBg,
+          { xPercent: 0, autoAlpha: 1, duration: 0.3 },
+          "headings+=0.8",
+        );
+      }
+      if (badgeLink) {
+        tl.to(badgeLink, { autoAlpha: 1, duration: 0.1 }, "headings+=1.1");
+      }
 
       if (lineWrappers.length) {
         tl.to(
