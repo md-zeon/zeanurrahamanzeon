@@ -30,6 +30,9 @@ export default function ExperimentsProjects() {
       const heading = el.querySelector(
         ".home-projects_banner-component .heading-style-h3",
       );
+      const description = el.querySelector(
+        ".home-projects_banner-component .text-size-regular",
+      );
       const button = el.querySelector(".home-projects_banner-component .btn");
       const navButtons = el.querySelectorAll(".home-projects_nav-wrapper");
       const track = el.querySelector(".home-projects_track");
@@ -193,6 +196,16 @@ export default function ExperimentsProjects() {
             },
             ease: "expo.out",
           });
+          if (description)
+            gsap.to(description, {
+              duration: 1.2,
+              scrambleText: {
+                text: experimentsStack[activeIndex].description ?? "",
+                chars: "10",
+                speed: 0.2,
+              },
+              ease: "expo.out",
+            });
           if (button)
             button.setAttribute("href", experimentsStack[activeIndex].href);
           navButtons.forEach((b, index) => {
@@ -377,11 +390,14 @@ export default function ExperimentsProjects() {
         ))}
       </div>
 
-      {/* Floating banner: current project title (scrambles on change) + CTA */}
-      <div className="home-projects_banner-component is-experiments absolute bottom-8 left-8 z-3 flex w-full max-w-[16rem] max-h-40 flex-col gap-4 rounded border border-white-20 bg-black-30 p-6 shadow-[inset_0_0_0_1000px_#0a090e33] backdrop-blur-[100px] max-[767px]:bottom-16 max-[767px]:gap-6 max-[767px]:p-4 max-[479px]:bottom-[12%] max-[479px]:left-[4%] max-[479px]:w-[90%]">
+      {/* Floating info card: current project title + description (scramble) + CTA */}
+      <div className="home-projects_banner-component is-experiments absolute bottom-8 left-8 z-3 flex w-full max-w-fit flex-col gap-4 rounded border border-white-20 bg-black-30 p-6 shadow-[inset_0_0_0_1000px_#0a090e33] backdrop-blur-[100px] max-[767px]:bottom-16 max-[767px]:gap-6 max-[767px]:p-4 max-[479px]:bottom-[12%] max-[479px]:left-[4%] max-[479px]:w-[90%]">
         <div className="flex-none">
           <div className="heading-style-h3 block max-w-full max-h-24 overflow-hidden whitespace-normal wrap-break-word min-[992px]:max-h-16">
             {experimentsStack[0].title}
+          </div>
+          <div className="text-size-regular block max-w-100 max-h-24 overflow-hidden whitespace-normal wrap-break-word min-[992px]:max-h-16">
+            {experimentsStack[0].description}
           </div>
         </div>
         <div className="btn-group">

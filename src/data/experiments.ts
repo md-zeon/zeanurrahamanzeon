@@ -21,24 +21,28 @@ export const experimentsStack = [
   {
     index: "Experiment_001",
     title: "Kurosumi",
+    description: "markdown notes with a clean, fast editor",
     video: "/assets/videos/Videos/Experiments/kurosumi.mp4",
     href: "https://kurosumi.vercel.app",
   },
   {
     index: "Experiment_002",
     title: "Space Shooter",
+    description: "arcade space shooter built on the canvas",
     video: "/assets/videos/Videos/Experiments/space-shooter.mp4",
     href: "https://space-shooter-dun.vercel.app",
   },
   {
     index: "Experiment_003",
     title: "Taskero",
+    description: "simple, focused task management that stays out of the way",
     video: "/assets/videos/Videos/Experiments/taskero.mp4",
     href: "https://taskero-60a20.web.app",
   },
   {
     index: "Experiment_004",
     title: "HistoTrack",
+    description: "a historical figure explorer with rich timelines",
     video: "/assets/videos/Videos/Experiments/histotrack.mp4",
     href: "https://histo-track.web.app",
   },
