@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { workProjects, workNavTabs, workFeaturedHeader } from "@/data/work";
+import { workProjects, workNavTabs, workFeaturedHeader, workLabHeader } from "@/data/work";
 import { audio } from "@/data/site";
 import AutoVideo from "../media/AutoVideo";
 
@@ -80,14 +80,27 @@ export default function WorkProjects() {
                       </div>
                       <div className="work-projects_card-cta-wrapper absolute inset-0 z-2 flex flex-wrap items-end justify-start gap-x-4 gap-y-3 p-4">
                         <h3 className="heading-style-h4">{project.title}</h3>
-                        <Link
-                          aria-label={project.ariaLabel}
-                          data-audio={audio.hover}
-                          href={project.href}
-                          className="btn btn-small"
-                        >
-                          <span className="btn__text">{workFeaturedHeader.viewCaseStudyLabel}</span>
-                        </Link>
+                        {project.hasCaseStudy ? (
+                          <Link
+                            aria-label={project.ariaLabel}
+                            data-audio={audio.hover}
+                            href={project.href}
+                            className="btn btn-small"
+                          >
+                            <span className="btn__text">{workFeaturedHeader.viewCaseStudyLabel}</span>
+                          </Link>
+                        ) : (
+                          <a
+                            aria-label={project.ariaLabel}
+                            data-audio={audio.hover}
+                            href={project.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="btn btn-small"
+                          >
+                            <span className="btn__text">{workLabHeader.viewProjectLabel}</span>
+                          </a>
+                        )}
                       </div>
                     </div>
                   </div>

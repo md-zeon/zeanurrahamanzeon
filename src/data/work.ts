@@ -101,6 +101,7 @@ export type WorkProject = {
   ariaLabel: string;
   tags: string[];
   href: string;
+  hasCaseStudy: boolean;
   poster?: string;
   video: string;
   result: string;
@@ -115,6 +116,7 @@ export const workProjects: WorkProject[] = [
     ariaLabel: "Smart NUB Campus — real-time academic network",
     tags: ["Academic Network", "Real-time"],
     href: "/work/smart-nub-campus",
+    hasCaseStudy: true,
     poster: "/assets/images/projects/smart-nub/cover.webp",
     video: "/assets/videos/Videos/Work/smart-nub-campus/Smart-NUB-Campus.mp4",
     result: "195+",
@@ -126,6 +128,7 @@ export const workProjects: WorkProject[] = [
     ariaLabel: "DevQnA — developer Q&A platform",
     tags: ["Developer Q&A", "Next.js 15"],
     href: "/work/devqna",
+    hasCaseStudy: true,
     poster: "/assets/images/projects/devqna/cover.webp",
     video: "/assets/videos/Videos/Work/devqna/DevQnA.mp4",
     result: "100%",
@@ -137,6 +140,7 @@ export const workProjects: WorkProject[] = [
     ariaLabel: "Oshudpati — medicine marketplace",
     tags: ["Health e-Commerce", "Express 5"],
     href: "/work/oshudpati-marketplace",
+    hasCaseStudy: true,
     poster: "/assets/images/projects/oshudpati/cover.webp",
     video: "/assets/videos/Videos/Work/oshudpati-marketplace/Oshudpati-Marketplace.mp4",
     result: "17+",
@@ -148,39 +152,10 @@ export const workProjects: WorkProject[] = [
     ariaLabel: "MicroEarn — micro-task marketplace",
     tags: ["Micro-tasks", "MERN"],
     href: "/work/microearn",
+    hasCaseStudy: true,
     poster: "/assets/images/projects/microearn/cover.webp",
     video: "/assets/videos/Videos/Work/microearn/MicroEarn.mp4",
     result: "3-in-1",
     resultLabel: "task feed, wallets, and rewards on the MERN stack",
-  },
-  {
-    index: "project_005",
-    title: "Kurosumi",
-    ariaLabel: "Kurosumi — markdown notes app",
-    tags: ["Notes", "Next.js"],
-    href: "https://kurosumi.vercel.app",
-    video: "/assets/videos/Videos/Experiments/kurosumi.mp4",
-    result: "Live",
-    resultLabel: "markdown notes with a clean, fast editor",
-  },
-  {
-    index: "project_006",
-    title: "Space Shooter",
-    ariaLabel: "Space Shooter — arcade game",
-    tags: ["Game", "Canvas"],
-    href: "https://space-shooter-dun.vercel.app",
-    video: "/assets/videos/Videos/Experiments/space-shooter.mp4",
-    result: "Live",
-    resultLabel: "arcade space shooter built on the canvas",
-  },
-  {
-    index: "project_007",
-    title: "Brick Breaker",
-    ariaLabel: "Brick Breaker — arcade game",
-    tags: ["Game", "Canvas"],
-    href: "https://brick-breaker-lac.vercel.app",
-    video: "/assets/videos/Videos/Experiments/brick-breaker.mp4",
-    result: "Live",
-    resultLabel: "classic brick breaker arcade game",
   },
 ];

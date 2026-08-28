@@ -4,7 +4,7 @@ import { useRef } from "react";
 import Link from "next/link";
 import { useLabSlider } from "@/lib/useLabSlider";
 import { useSectionHeadings } from "@/lib/useHeaderReveal";
-import { workProjects, workFeaturedHeader } from "@/data/work";
+import { workProjects, workFeaturedHeader, workLabHeader } from "@/data/work";
 import { audio } from "@/data/site";
 import LogosElement from "../LogosElement";
 import AutoVideo from "../media/AutoVideo";
@@ -95,13 +95,25 @@ export default function CaseStudyFeatured() {
                     {/* Overlay: title + "View case study" action */}
                     <div className="absolute inset-0 z-2 flex items-end justify-start p-4">
                       <h3 className="heading-style-h4">{project.title}</h3>
-                      <Link
-                        data-audio={audio.hover}
-                        href={project.href}
-                        className="btn btn-small"
-                      >
-                        <div className="btn__text">{workFeaturedHeader.viewCaseStudyLabel}</div>
-                      </Link>
+                      {project.hasCaseStudy ? (
+                        <Link
+                          data-audio={audio.hover}
+                          href={project.href}
+                          className="btn btn-small"
+                        >
+                          <div className="btn__text">{workFeaturedHeader.viewCaseStudyLabel}</div>
+                        </Link>
+                      ) : (
+                        <a
+                          data-audio={audio.hover}
+                          href={project.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="btn btn-small"
+                        >
+                          <div className="btn__text">{workLabHeader.viewProjectLabel}</div>
+                        </a>
+                      )}
                     </div>
                   </div>
                 </div>
