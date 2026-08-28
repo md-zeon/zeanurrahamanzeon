@@ -1,12 +1,12 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { getLenis } from "@/lib/lenis";
 import { experimentsStack, experimentsHeader } from "@/data/experiments";
 import { audio } from "@/data/site";
 import AutoVideo from "../media/AutoVideo";
-import { ArrowIcon } from "../shared";
 
 /**
  * Full-screen pinned 3D carousel of experiment projects. The stacked
@@ -406,11 +406,13 @@ export default function ExperimentsProjects() {
             href={experimentsStack[0].href}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn btn-small btn-icon"
+            className="btn btn-small"
           >
             <div className="btn__text">{experimentsHeader.viewProjectLabel ?? "View project"}</div>
-            <ArrowIcon />
           </a>
+          <Link href="/work" data-audio={audio.hover} className="btn btn-secondary btn-small">
+            <div className="btn__text">{experimentsHeader.button2 ?? "See case studies"}</div>
+          </Link>
         </div>
       </div>
     </section>
