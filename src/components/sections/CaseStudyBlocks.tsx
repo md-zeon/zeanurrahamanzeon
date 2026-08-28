@@ -41,6 +41,11 @@ function Media({ media, grid }: { media: CaseMedia; grid: boolean }) {
         src={media.image}
         alt={media.alt}
         fill
+        sizes={
+          grid
+            ? "(min-width: 992px) 45vw, 90vw"
+            : "(min-width: 992px) 80vw, 90vw"
+        }
       />
     </div>
   );

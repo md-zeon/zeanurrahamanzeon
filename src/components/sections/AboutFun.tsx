@@ -165,6 +165,7 @@ export default function AboutFun() {
                                   src={slide.image}
                                   alt={slide.caption}
                                   fill
+                                  sizes="(min-width: 992px) 45vw, 90vw"
                                   className="z-1 m-0 flex-none overflow-hidden object-cover object-[50%_85%]"
                                 />
                               ) : (
@@ -172,6 +173,7 @@ export default function AboutFun() {
                                   src={slide.image}
                                   alt={slide.caption}
                                   fill
+                                  sizes="(min-width: 992px) 45vw, 90vw"
                                   className="z-1 m-0 flex-none overflow-hidden object-cover"
                                 />
                               )}
