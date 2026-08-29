@@ -164,20 +164,20 @@ export default function HeroSection() {
                         >
                           <div className="flex items-center justify-start gap-4 mb-[0.8rem] max-[991px]:absolute max-[991px]:inset-x-0 max-[991px]:top-0 max-[991px]:mb-0 max-[991px]:w-full max-[991px]:justify-center max-[991px]:pl-[3.5vw] max-[767px]:mr-[-26.5vw]">
                             <div className="flex flex-row">
-                              <p
+                              <h1
                                 id="home-hero-name"
                                 className="text-size-medium"
                               >
                                 {brand.heroName}
-                              </p>
+                              </h1>
                             </div>
                           </div>
-                          <h1
+                          <div
                             id="home-hero-header-1"
                             className="heading-style-h0"
                           >
                             {brand.heroLine1}
-                          </h1>
+                          </div>
                         </div>
                         <div
                           data-hero-fade="header"
@@ -230,7 +230,11 @@ export default function HeroSection() {
                         <div
                           className="z-2 flex-none bg-neutral-dark-grey object-cover h-full w-full ultrawide:ml-8 ultrawide:mt-12"
                         >
-                          <AutoVideo src={brand.heroVideo} decorative />
+                          <AutoVideo
+                            src={brand.heroVideo}
+                            poster={brand.heroVideoPoster}
+                            decorative
+                          />
                         </div>
                       </div>
                       <div className="absolute -rotate-90 bottom-[3.2rem] left-[-2.7rem] max-[991px]:bottom-[7.9vw] max-[991px]:-left-10 max-[767px]:bottom-[9.9vw] max-[767px]:left-[-2.1rem] max-[479px]:bottom-[10.2vw] max-[479px]:left-[-1.9rem]">
