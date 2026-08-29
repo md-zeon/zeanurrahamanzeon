@@ -3,7 +3,7 @@ export const siteMeta = {
   siteUrl: "https://zeanurrahamanzeon.vercel.app",
   ogImage: "/og.png",
   title: {
-    default: "Zeanur Rahaman Zeon Portfolio | Software Engineer",
+    default: "Zeanur Rahaman Zeon Portfolio | Full-Stack Software Engineer",
     template: "%s | Zeanur Rahaman Zeon",
   },
   description:
@@ -87,7 +87,6 @@ export const soundWaves = {
 
 /** Shared image assets referenced by content across the site. */
 export const photos = {
-  ellipseLight: "/assets/images/zeon.webp",
   ellipseBlack: "/assets/images/zeon.webp",
   about1: "/assets/images/about/zeon-1.webp",
   about2: "/assets/images/about/zeon-2.webp",
@@ -138,15 +137,23 @@ export const footer = {
   ],
 };
 
+/** Per-page metadata options. */
+export type PageMetadataOptions = {
+  image?: string;
+  /** Use an absolute title so the global "%s | Zeanur Rahaman Zeon" suffix is skipped. */
+  absoluteTitle?: boolean;
+};
+
 /** Per-page metadata shared by sub-pages: canonical URL, Open Graph, twitter card. */
 export function pageMetadata(
   title: string,
   description: string,
   path: string,
-  image: string = siteMeta.ogImage,
+  options: PageMetadataOptions = {},
 ) {
+  const image = options.image ?? siteMeta.ogImage;
   return {
-    title,
+    title: options.absoluteTitle ? { absolute: title } : title,
     description,
     alternates: { canonical: path },
     openGraph: {

@@ -35,7 +35,7 @@ export default function ExperimentsHeader() {
                           <h1
                             id="home-hero-header-1"
                             header-content-type="heading-1"
-                            className="heading-style-h0 text-[5rem]"
+                            className="heading-style-h0 lg:text-[4.7rem] max-lg:text-[5rem] max-sm:text-[12vw]"
                           >
                             {experimentsHeader.title1}
                           </h1>
@@ -44,7 +44,7 @@ export default function ExperimentsHeader() {
                           <div
                             id="home-hero-header-2"
                             header-content-type="heading-2"
-                            className="heading-style-h0 text-[5rem]"
+                            className="heading-style-h0 lg:text-[4.7rem] max-lg:text-[5rem] max-sm:text-[12vw]"
                           >
                             {experimentsHeader.title2}
                           </div>
@@ -93,7 +93,10 @@ export default function ExperimentsHeader() {
                         header-content-type="border"
                         className="absolute inset-y-0 left-0 z-2 h-full w-px bg-white-20 max-[991px]:hidden"
                       />
-                      <Badge href={workHeader.badgeLink} badge={workHeader.badge} />
+                      <Badge
+                        href={workHeader.badgeLink}
+                        badge={workHeader.badge}
+                      />
                     </div>
                   </div>
                 </div>

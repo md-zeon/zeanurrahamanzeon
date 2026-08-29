@@ -9,7 +9,8 @@ import { pageMetadata } from "@/data/site";
 export const metadata: Metadata = pageMetadata(
   contactMeta.title,
   contactMeta.description,
-  "/contact"
+  "/contact",
+  { absoluteTitle: true }
 );
 
 /** Contact page: hero, brief form, and FAQ accordion. */

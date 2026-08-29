@@ -10,7 +10,8 @@ import { pageMetadata } from "@/data/site";
 export const metadata: Metadata = pageMetadata(
   workMeta.title,
   workMeta.description,
-  "/work"
+  "/work",
+  { absoluteTitle: true }
 );
 
 /** Work page: hero, project grid, CTA, and "from the labs" slider. */

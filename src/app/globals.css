@@ -548,7 +548,7 @@ input[type="file"]:focus-visible {
 
   @media (max-width: 991px) {
     .heading-style-h0 {
-      @apply text-[9vw];
+      @apply text-[8vw];
     }
     .heading-style-h0.is-cta {
       @apply text-[9vw];

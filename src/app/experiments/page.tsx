@@ -10,7 +10,8 @@ import { pageMetadata } from "@/data/site";
 export const metadata: Metadata = pageMetadata(
   experimentsMeta.title,
   experimentsMeta.description,
-  "/experiments"
+  "/experiments",
+  { absoluteTitle: true }
 );
 
 /**

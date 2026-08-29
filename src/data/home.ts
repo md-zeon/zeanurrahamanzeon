@@ -188,13 +188,6 @@ export const testimonialsHeader = {
 export const testimonials = [
   {
     quote:
-      "I treat every project as an end-to-end product problem — from data models and authentication to the pixels people actually touch. I choose the right tools for the job, ship clean code, and stay open to collaboration on anything that solves a real problem.",
-    name: "Zeanur Rahaman Zeon",
-    role: "Software Engineer",
-    image: photos.ellipseLight,
-  },
-  {
-    quote:
       "Zeon and I built Smart NUB Campus together — real-time systems, clean architecture, and late nights we don't regret. Reliable peer, sharp engineer, and the kind of person you want on a hard project.",
     name: "Md Sajib",
     role: "Engineering Peer",

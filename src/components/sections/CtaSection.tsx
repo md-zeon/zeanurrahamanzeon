@@ -88,7 +88,7 @@ export default function CtaSection({
             <div className="relative grid grid-cols-[1.3fr_1fr] items-stretch justify-center max-[991px]:grid-cols-[1.3fr]">
               <div className="border-x border-white-20 p-20 max-[991px]:p-12 max-[767px]:p-8">
                 <div className="relative z-2 flex aspect-[1.27] w-full items-end justify-center">
-                  <div className="absolute bottom-4 right-4 z-2 flex items-center justify-center max-[991px]:bottom-auto max-[991px]:left-4 max-[991px]:right-auto max-[991px]:top-4">
+                  <div className="absolute bottom-4 right-4 z-2 flex items-center justify-center">
                     <Button href="/contact" dataAudio={audio.hover}>
                       {buttonLabel}
                     </Button>
@@ -163,7 +163,7 @@ export default function CtaSection({
                 </div>
               </div>
               <div className="flex items-start justify-center px-4 py-24 max-[991px]:relative max-[991px]:z-4 max-[991px]:justify-end max-[991px]:items-start max-[991px]:border-x max-[991px]:border-white-20 max-[991px]:pb-12 max-[991px]:pt-0 max-[479px]:justify-center max-[479px]:items-start">
-                <ChatWidget className="flex w-full max-w-95 flex-col gap-4 overflow-hidden rounded-lg border border-white-20 p-4 backdrop-blur-[100px] bg-[#efefe60d] max-[991px]:mt-[-5.6rem] max-[991px]:mr-[3.6rem] max-[767px]:mt-[-3.1rem] max-[767px]:mr-0 max-[479px]:mt-0" />
+                <ChatWidget className="flex w-full max-w-95 flex-col gap-4 overflow-hidden rounded-lg border border-white-20 p-4 backdrop-blur-[100px] bg-[#efefe60d] max-[991px]:mt-[-3rem] max-[991px]:mr-[3.6rem] max-[767px]:mt-[-2rem] max-[767px]:mr-0 max-[479px]:mt-0" />
               </div>
             </div>
           </div>
