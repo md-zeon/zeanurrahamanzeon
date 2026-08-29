@@ -9,6 +9,11 @@ type AutoVideoProps = {
   preload?: "auto" | "metadata" | "none";
   /** If true, play only while the video is on screen (via IntersectionObserver). */
   playsOnScroll?: boolean;
+  /** Accessible name for screen readers. */
+  label?: string;
+  /** If true, the video is ambient decoration and is hidden from screen
+   * readers and focus (e.g. background loops with adjacent text content). */
+  decorative?: boolean;
 };
 
 /**
@@ -19,7 +24,15 @@ type AutoVideoProps = {
  * false it simply plays on mount. Videos are muted/inline/looping because
  * browsers block unmuted autoplay without user interaction.
  */
-export default function AutoVideo({ src, poster, className, preload = "metadata", playsOnScroll = true }: AutoVideoProps) {
+export default function AutoVideo({
+  src,
+  poster,
+  className,
+  preload = "metadata",
+  playsOnScroll = true,
+  label,
+  decorative = false,
+}: AutoVideoProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -53,6 +66,9 @@ export default function AutoVideo({ src, poster, className, preload = "metadata"
         preload={preload}
         poster={poster}
         data-autoplay-on-scroll
+        aria-label={decorative ? undefined : label}
+        aria-hidden={decorative || undefined}
+        tabIndex={decorative ? -1 : undefined}
         style={{
           position: "absolute",
           top: "50%",

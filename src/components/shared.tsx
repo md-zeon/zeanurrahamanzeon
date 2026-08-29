@@ -125,6 +125,9 @@ export function SliderArrow({ direction }: { direction: "left" | "right" }) {
 type SliderControlsProps = {
   /** Slot rendered in the right column (e.g. a CTA button). */
   right?: React.ReactNode;
+  /** Total slide count, rendered server-side so the `[nn/total]` counter is
+   * correct in the initial HTML (the JS hook re-sets it at runtime anyway). */
+  total?: number;
 };
 
 /**
@@ -132,7 +135,7 @@ type SliderControlsProps = {
  * + optional right-side CTA. The `data-slide-count` and `data-slider`
  * attributes wire up to `useLabSlider`.
  */
-export function SliderControls({ right }: SliderControlsProps) {
+export function SliderControls({ right, total = 0 }: SliderControlsProps) {
   return (
     <div className="border-x border-border-tertiary">
       <div className="relative grid auto-cols-fr grid-cols-[1fr_1fr] items-center justify-between gap-0 border-r border-white-20 p-[1.8rem_1.5rem] max-[767px]:flex max-[767px]:flex-col max-[767px]:items-start max-[767px]:gap-4 max-[767px]:p-4 max-[479px]:flex-row max-[479px]:flex-wrap">
@@ -144,7 +147,7 @@ export function SliderControls({ right }: SliderControlsProps) {
             </div>
             <div className="text-size-large">/</div>
             <div data-slide-count="total" className="text-size-large">
-              00
+              {String(total).padStart(2, "0")}
             </div>
             <div className="text-size-large">]</div>
           </div>
@@ -350,8 +353,33 @@ type BadgeProps = {
   labelClassName?: string;
 };
 
+/** Shared inner content (icon + label) for the badge link variants. */
+function BadgeLinkContent({
+  label,
+  labelClassName,
+}: {
+  label: string;
+  labelClassName?: string;
+}) {
+  return (
+    <>
+      <CredentialIcon />
+      <div
+        className={
+          labelClassName ??
+          "text-size-small text-weight-medium text-style-allcaps"
+        }
+      >
+        {label}
+      </div>
+    </>
+  );
+}
+
 /**
  * Reusable badge with asterisk icon, animated line, and credential link.
+ * Renders a real `<a>` with `target="_blank"` for external URLs and a Next
+ * `<Link>` for internal routes, matching the `Button` component's behaviour.
  * Used in page headers with `header-content-type` attributes for animation.
  */
 export function Badge({ href, badge, labelClassName }: BadgeProps) {
@@ -369,22 +397,25 @@ export function Badge({ href, badge, labelClassName }: BadgeProps) {
       <div className="badge__line">
         <div header-content-type="line-bg" className="badge__line-bg" />
       </div>
-      <a
-        data-audio={audio.scramble}
-        href={href}
-        target="_blank"
-        className="badge-link"
-      >
-        <CredentialIcon />
-        <div
-          className={
-            labelClassName ??
-            "text-size-small text-weight-medium text-style-allcaps"
-          }
+      {href.startsWith("http") ? (
+        <a
+          data-audio={audio.scramble}
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="badge-link"
         >
-          {badge}
-        </div>
-      </a>
+          <BadgeLinkContent label={badge} labelClassName={labelClassName} />
+        </a>
+      ) : (
+        <Link
+          data-audio={audio.scramble}
+          href={href}
+          className="badge-link"
+        >
+          <BadgeLinkContent label={badge} labelClassName={labelClassName} />
+        </Link>
+      )}
     </div>
   );
 }
@@ -450,19 +481,26 @@ export function CredentialBadge({
   href,
   label,
 }: CredentialBadgeProps) {
-  return (
-    <a
-      href={href}
-      target="_blank"
-      aria-label={label}
-      data-audio={audio.scramble}
-      className="badge-link"
-      style={{ display: "flex", flexDirection: "row", alignItems: "center" }}
-    >
+  const className = "badge-link";
+  const props = {
+    "aria-label": label,
+    "data-audio": audio.scramble,
+    className,
+  } as const;
+  return href.startsWith("http") ? (
+    <a href={href} target="_blank" rel="noopener noreferrer" {...props}>
       <CredentialIcon />
       <div className="text-size-small text-weight-medium text-style-allcaps">
         {text}
       </div>
     </a>
+  ) : (
+    <Link
+      href={href}
+      {...props}
+      style={{ display: "flex", flexDirection: "row", alignItems: "center" }}
+    >
+      <BadgeLinkContent label={text} />
+    </Link>
   );
 }

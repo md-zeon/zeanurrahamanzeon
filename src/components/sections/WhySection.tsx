@@ -63,6 +63,7 @@ export default function WhySection() {
                           card.video ??
                           "/assets/videos/Videos/Experiments/spaceman-gsap---new-thumbnail.mp4"
                         }
+                        decorative
                       />
                     </div>
                   </div>

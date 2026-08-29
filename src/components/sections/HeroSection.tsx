@@ -2,7 +2,7 @@
 
 import { useLayoutEffect, useRef } from "react";
 import { gsap, SplitText } from "@/lib/gsap";
-import { audio, brand, socials } from "@/data/site";
+import { audio, brand } from "@/data/site";
 import { HERO_ENTRANCE_COMPLETE } from "@/lib/utils";
 import { Button, Badge } from "../shared";
 import AutoVideo from "../media/AutoVideo";
@@ -230,7 +230,7 @@ export default function HeroSection() {
                         <div
                           className="z-2 flex-none bg-neutral-dark-grey object-cover h-full w-full ultrawide:ml-8 ultrawide:mt-12"
                         >
-                          <AutoVideo src={brand.heroVideo} />
+                          <AutoVideo src={brand.heroVideo} decorative />
                         </div>
                       </div>
                       <div className="absolute -rotate-90 bottom-[3.2rem] left-[-2.7rem] max-[991px]:bottom-[7.9vw] max-[991px]:-left-10 max-[767px]:bottom-[9.9vw] max-[767px]:left-[-2.1rem] max-[479px]:bottom-[10.2vw] max-[479px]:left-[-1.9rem]">
@@ -240,7 +240,7 @@ export default function HeroSection() {
                       </div>
                     </div>
                     <div className="relative flex flex-wrap items-start justify-start gap-6 desktop:pt-16 max-[991px]:pt-0">
-                      <Badge href={socials.github} badge={brand.credentialBadge} />
+                      <Badge href="/contact" badge={brand.credentialBadge} />
                       <div
                         data-hero-fade="cta"
                         className="flex w-full max-w-148 flex-col gap-10 desktop:pl-16 max-[991px]:mt-0 max-[991px]:max-w-none max-[991px]:gap-8 max-[991px]:pl-0 max-[767px]:gap-6"

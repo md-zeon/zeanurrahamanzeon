@@ -152,7 +152,7 @@ export default function AboutFun() {
                               plants/photo crop variants */}
                           {slide.video ? (
                             <div className="absolute inset-0 z-2 block h-full w-full flex-none bg-neutral-dark-grey object-cover w-embed">
-                              <AutoVideo src={slide.video} />
+                              <AutoVideo src={slide.video} decorative />
                             </div>
                           ) : slide.image ? (
                             <>

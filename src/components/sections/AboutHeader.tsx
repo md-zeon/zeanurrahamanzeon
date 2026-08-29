@@ -177,7 +177,7 @@ export default function AboutHeader() {
                         <div
                           className="z-2 flex-none bg-neutral-dark-grey object-cover h-[110%] w-[110%]"
                         >
-                          <AutoVideo src={aboutHeader.video} />
+                          <AutoVideo src={aboutHeader.video} decorative />
                         </div>
                       </div>
                       <div
@@ -205,17 +205,31 @@ export default function AboutHeader() {
                             className="absolute inset-0 bg-brand-white"
                           />
                         </div>
-                        <a
-                          data-audio={audio.scramble}
-                          href={aboutHeader.badgeLink}
-                          target="_blank"
-                          className="badge-link"
-                        >
-                          <CredentialIcon />
-                          <div className="text-size-small text-weight-medium text-style-allcaps">
-                            {aboutHeader.badge}
-                          </div>
-                        </a>
+                        {aboutHeader.badgeLink.startsWith("http") ? (
+                          <a
+                            data-audio={audio.scramble}
+                            href={aboutHeader.badgeLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="badge-link"
+                          >
+                            <CredentialIcon />
+                            <div className="text-size-small text-weight-medium text-style-allcaps">
+                              {aboutHeader.badge}
+                            </div>
+                          </a>
+                        ) : (
+                          <Link
+                            data-audio={audio.scramble}
+                            href={aboutHeader.badgeLink}
+                            className="badge-link"
+                          >
+                            <CredentialIcon />
+                            <div className="text-size-small text-weight-medium text-style-allcaps">
+                              {aboutHeader.badge}
+                            </div>
+                          </Link>
+                        )}
                       </div>
                       <div
                         data-about-cta

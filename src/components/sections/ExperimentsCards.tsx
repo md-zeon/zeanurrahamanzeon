@@ -37,7 +37,7 @@ export default function ExperimentsCards() {
                       {/* Oversized media + dark wash */}
                       <div className="work-projects_card-asset-wrapper relative z-1 flex aspect-video items-center justify-center overflow-hidden rounded-lg">
                         <div className="work-projects_card-asset h-[120%] w-[120%] flex-none">
-                          <AutoVideo src={card.video} poster={card.poster} />
+                          <AutoVideo src={card.video} poster={card.poster} label={card.title} />
                         </div>
                         <div className="work_card-overlay absolute inset-0 z-2 h-full w-full bg-[linear-gradient(45deg,#000,#000_0%,#0000)] opacity-30" />
                       </div>

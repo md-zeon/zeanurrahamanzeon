@@ -52,6 +52,7 @@ export default function CaseStudyFeatured() {
               <LogosElement caption={workFeaturedHeader.caption} />
             </div>
             <SliderControls
+              total={workProjects.length}
               right={
                 <Link
                   href="/work"
@@ -87,6 +88,7 @@ export default function CaseStudyFeatured() {
                           <AutoVideo
                             src={project.video}
                             poster={project.poster}
+                            label={project.title}
                           />
                         </div>
                       </div>

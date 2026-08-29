@@ -10,10 +10,10 @@ type SubmitState = "idle" | "loading" | "success" | "error";
 
 /**
  * Contact section with a two-column layout: email + info on the left, the
- * project brief form on the right. Form handling is client-side only —
- * submit validates the HTML5 form, then swaps the form for the "done" panel
- * (no backend). Also includes the copy-email button and the pill-style
- * radio group for "how did you hear about me".
+ * project brief form on the right. Submit validates the HTML5 form, POSTs
+ * the data to the contact API (which forwards it by email), then swaps the
+ * form for the success/error panel. Also includes the copy-email button and
+ * the pill-style radio group for "how did you hear about me".
  */
 
 /** Reusable input/select class strings (Webflow-style form field styling). */
@@ -202,7 +202,7 @@ export default function ContactForm() {
                 <form
                   id="wf-form-Contact"
                   name="wf-form-Contact"
-                  method="get"
+                  method="post"
                   className="grid auto-cols-fr grid-cols-1 gap-12"
                   onSubmit={handleSubmit}
                   style={{

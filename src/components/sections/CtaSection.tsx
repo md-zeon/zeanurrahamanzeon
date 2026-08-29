@@ -112,7 +112,7 @@ export default function CtaSection({
                         and the two option-specific loops. `useCtaChat` swaps
                         which one is visible. */}
                     <div className="cta_loop-video is-1 absolute inset-auto z-1 block aspect-square h-[110%] w-[110%] flex-none bg-neutral-dark-grey object-cover max-[767px]:h-[120%] max-[767px]:w-[120%]">
-                      <AutoVideo src={cta.videoLoop} />
+                      <AutoVideo src={cta.videoLoop} decorative />
                     </div>
                     <div className="cta_loop-video is-2 absolute inset-auto z-2 hidden aspect-square h-[110%] w-[110%] flex-none bg-neutral-dark-grey object-cover max-[767px]:h-[120%] max-[767px]:w-[120%]">
                       <video
