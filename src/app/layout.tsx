@@ -79,6 +79,9 @@ export const metadata: Metadata = {
     "geo.region": "BD",
     "geo.placename": "Tongi, Gazipur, Bangladesh",
   },
+  verification: {
+    google: "xxz9mW5Xl8Jsr49MBmC9SDSuHlx21hK_nJ14tC0gvjs",
+  },
 };
 
 /** Responsive viewport + theme color (the site's dark background). */
