@@ -62,7 +62,9 @@ export const metadata: Metadata = {
     siteName: siteMeta.applicationName,
     title: siteMeta.title.default,
     description: siteMeta.description,
-    images: [{ url: siteMeta.ogImage, width: 1200, height: 630, alt: siteMeta.author }],
+    images: [
+      { url: siteMeta.ogImage, width: 1200, height: 630, alt: siteMeta.author },
+    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -136,7 +138,7 @@ const jsonLd = {
       "@id": `${siteMeta.siteUrl}/#website`,
       url: siteMeta.siteUrl,
       name: siteMeta.author,
-      description: `Portfolio of ${siteMeta.author} — Software Engineer`,
+      description: `Portfolio of ${siteMeta.author} — Full Stack Software Engineer`,
       author: { "@id": `${siteMeta.siteUrl}/#person` },
       inLanguage: "en",
     },
@@ -153,7 +155,10 @@ export default function RootLayout({
     >
       <head>
         {/* rel=me: Verifies this site's identity matches these social profiles */}
-        <link rel="me" href="https://www.linkedin.com/in/zeanur-rahaman-zeon/" />
+        <link
+          rel="me"
+          href="https://www.linkedin.com/in/zeanur-rahaman-zeon/"
+        />
         <link rel="me" href="https://github.com/md-zeon" />
         <link rel="me" href="https://x.com/developer_zeon" />
         <link rel="me" href="mailto:zeon.cse@gmail.com" />

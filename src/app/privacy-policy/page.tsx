@@ -16,7 +16,7 @@ export default function PrivacyPolicy() {
     },
     {
       heading: "Information you submit",
-      body: "The contact page includes a brief form. Submissions are handled entirely in your browser and are not transmitted to any server or third party — no messages are stored or received through this form. If you contact the owner directly (for example by email), only the details you choose to share are used to respond.",
+      body: "The contact page includes a brief form. When you send it, your name, email, and the details you enter are transmitted to the site owner via email to follow up on your message. Only the details you choose to share are used to respond, and they are not sold or shared with third parties for marketing.",
     },
     {
       heading: "Analytics and tracking",

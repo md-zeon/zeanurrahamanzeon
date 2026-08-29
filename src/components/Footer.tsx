@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
-import { audio, brand, footer, socials } from "@/data/site";
+import { audio, brand, footer } from "@/data/site";
 import Clock from "./Clock";
 import { CredentialIcon } from "./shared";
 
@@ -144,8 +144,7 @@ export default function Footer() {
                       <div className="flex w-full max-w-104 flex-col items-stretch justify-end gap-1 pr-[0.2rem] max-[991px]:w-[28vw] max-[767px]:w-auto max-[767px]:max-w-none">
                         <div className="text-right">
                           <a
-                            href={socials.github}
-                            target="_blank"
+                            href="/contact"
                             className="badge-link"
                             data-audio={audio.scramble}
                           >

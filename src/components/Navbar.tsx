@@ -6,7 +6,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { gsap, Observer } from "@/lib/gsap";
 import { getLenis } from "@/lib/lenis";
 import { HERO_ENTRANCE_COMPLETE } from "@/lib/utils";
-import { navLinks, brand, socials, audio } from "@/data/site";
+import { navLinks, brand, audio } from "@/data/site";
 import SoundButton from "./SoundButton";
 import Clock from "./Clock";
 import { CredentialBadge } from "./shared";
@@ -685,7 +685,7 @@ export default function Navbar() {
                 </div>
               </div>
               <div menu-link="misc">
-                <CredentialBadge href={socials.github} />
+                <CredentialBadge href="/contact" />
               </div>
               <div
                 menu-link="misc"

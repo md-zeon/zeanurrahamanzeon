@@ -26,8 +26,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     page(route, route === "" ? 1 : 0.7, route === "" ? "weekly" : "monthly")
   );
 
-  const caseStudyPages = getAllCaseStudySlugs().map((slug) =>
-    page(`/work/${slug}`, 0.6)
+  const caseStudyPages = getAllCaseStudySlugs().map((study) =>
+    page(`/work/${study.slug}`, 0.6)
   );
 
   return [...staticPages, ...caseStudyPages];

@@ -140,7 +140,7 @@ export async function POST(request: NextRequest) {
                     </td>
                     <td style="vertical-align:middle;padding-left:14px">
                       <div style="color:#f4f2ff;font-family:Arial,Helvetica,sans-serif;font-weight:700;font-size:15px;letter-spacing:0.5px">ZEANUR RAHAMAN ZEON</div>
-                      <div style="color:#8a8599;font-family:Arial,Helvetica,sans-serif;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;margin-top:2px">Aspiring Software Engineer</div>
+                      <div style="color:#8a8599;font-family:Arial,Helvetica,sans-serif;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;margin-top:2px">Software Engineer</div>
                     </td>
                     <td style="vertical-align:middle;text-align:right">
                       <span style="color:#8a8599;font-family:Arial,Helvetica,sans-serif;font-size:11px;letter-spacing:1.5px;text-transform:uppercase">[inquiry]</span>
