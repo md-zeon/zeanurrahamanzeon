@@ -14,7 +14,7 @@ export const aboutHeader = {
   button1: "Get in touch",
   button2: "See work",
   badge: "Open to Work",
-  badgeLink: "https://github.com/md-zeon",
+  badgeLink: "/contact",
   video: "/assets/videos/hero-clip-vid.mp4",
   videoCaption: "ABOUT_ME",
 };

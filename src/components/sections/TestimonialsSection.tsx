@@ -10,7 +10,8 @@ import { SliderArrow } from "../shared";
 
 /**
  * Client testimonials: quote, marks, name/role and photo, with prev/next
- * arrows and a 6s auto-advance.
+ * arrows and a 10s auto-advance (paused on hover/focus, skipped for
+ * reduced-motion users).
  *
  * On scroll the quote reveals line-by-line (each line wrapped in an
  * overflow-hidden box), the photo/name/role scramble-fade in. The prev/next
@@ -238,19 +239,30 @@ export default function TestimonialsSection() {
         });
       });
 
-      // Auto-advance every 6s, paused while the section is hovered.
-      let timer = window.setInterval(() => goTo(1), 10000);
+      // Auto-advance every 10s, paused while the section is hovered or focused
+      // (keyboard users / anyone reading get to take their time), and skipped
+      // entirely when the user prefers reduced motion.
+      const reducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+      let timer: number | undefined;
       const resetTimer = () => {
+        if (reducedMotion) return;
         window.clearInterval(timer);
         timer = window.setInterval(() => goTo(1), 10000);
       };
       const pause = () => window.clearInterval(timer);
       const resume = () => resetTimer();
+      if (!reducedMotion) resetTimer();
       el.addEventListener("mouseenter", pause);
       el.addEventListener("mouseleave", resume);
+      el.addEventListener("focusin", pause);
+      el.addEventListener("focusout", resume);
       cleanups.push(() => {
         el.removeEventListener("mouseenter", pause);
         el.removeEventListener("mouseleave", resume);
+        el.removeEventListener("focusin", pause);
+        el.removeEventListener("focusout", resume);
         window.clearInterval(timer);
       });
 

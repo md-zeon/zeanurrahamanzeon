@@ -49,6 +49,7 @@ export default function LabSection() {
               <LogosElement caption={labHeader.caption} />
             </div>
             <SliderControls
+              total={labSlides.length}
               right={
                 <Button href="/experiments" variant="secondary">
                   {labHeader.visitButtonLabel}
@@ -76,7 +77,7 @@ export default function LabSection() {
                         <div
                           className="aspect-video h-[110%] w-[110%] flex-none max-[991px]:h-[120%] max-[991px]:w-[120%]"
                         >
-                          <AutoVideo src={slide.video} />
+                          <AutoVideo src={slide.video} label={slide.title} />
                         </div>
                         <div className="absolute inset-0 z-2 h-full w-full bg-[linear-gradient(45deg,#000,#000_0%,#0000)] opacity-30" />
                       </div>

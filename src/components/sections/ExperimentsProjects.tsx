@@ -362,7 +362,7 @@ export default function ExperimentsProjects() {
               </div>
               {/* Project video, fill the frame */}
               <div className="relative inset-0 z-2 aspect-16/9.5 h-full w-full max-h-[93.5vh] overflow-hidden rounded-lg max-[767px]:rounded w-embed">
-                <AutoVideo src={project.video} />
+                <AutoVideo src={project.video} label={project.title} />
               </div>
             </div>
           ))}
@@ -384,7 +384,7 @@ export default function ExperimentsProjects() {
             <div className="text-caption-2">[0{i + 1}]</div>
             <div className="home-projects_nav-image-wrapper h-25 w-[8.85rem] overflow-hidden rounded desktop:border desktop:border-transparent">
               <div className="h-full w-full object-cover w-embed">
-                <AutoVideo src={project.video} />
+                <AutoVideo src={project.video} decorative />
               </div>
             </div>
           </a>

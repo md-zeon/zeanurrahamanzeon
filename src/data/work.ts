@@ -13,7 +13,7 @@ export const workHeader = {
     "Projects built to solve real problems — from developer tools and health marketplaces to real-time campus networks and a micro-task economy.",
   buttonLabel: "Get in touch",
   badge: "Open to Work",
-  badgeLink: "https://github.com/md-zeon",
+  badgeLink: "/contact",
 };
 
 /** Header configuration for the Featured client projects slider. */
@@ -59,7 +59,7 @@ export const workLabSlides = [
   {
     caption: "Project_002",
     title: "Taskero",
-    href: "https://github.com/md-zeon",
+    href: "https://taskero-60a20.web.app",
     video: "/assets/videos/Videos/Experiments/taskero.mp4",
   },
   {

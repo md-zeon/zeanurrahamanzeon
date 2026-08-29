@@ -190,7 +190,7 @@ export const testimonials = [
     quote:
       "I treat every project as an end-to-end product problem — from data models and authentication to the pixels people actually touch. I choose the right tools for the job, ship clean code, and stay open to collaboration on anything that solves a real problem.",
     name: "Zeanur Rahaman Zeon",
-    role: "Aspiring Software Engineer",
+    role: "Software Engineer",
     image: photos.ellipseLight,
   },
   {
@@ -226,50 +226,7 @@ export const labHeader = {
 };
 
 /** "From the labs" side-project slides for the home lab slider. */
-export const labSlides = [
-  {
-    caption: "Project_001",
-    title: "Space Shooter",
-    href: "https://space-shooter-dun.vercel.app",
-    video: "/assets/videos/Videos/Experiments/space-shooter.mp4",
-  },
-  {
-    caption: "Project_002",
-    title: "Taskero",
-    href: "https://github.com/md-zeon",
-    video: "/assets/videos/Videos/Experiments/taskero.mp4",
-  },
-  {
-    caption: "Project_003",
-    title: "HistoTrack",
-    href: "https://histo-track.web.app",
-    video: "/assets/videos/Videos/Experiments/histotrack.mp4",
-  },
-  {
-    caption: "Project_004",
-    title: "Brick Breaker",
-    href: "https://brick-breaker-lac.vercel.app",
-    video: "/assets/videos/Videos/Experiments/brick-breaker.mp4",
-  },
-  {
-    caption: "Project_005",
-    title: "Kurosumi",
-    href: "https://kurosumi.vercel.app",
-    video: "/assets/videos/Videos/Experiments/kurosumi.mp4",
-  },
-  {
-    caption: "Project_006",
-    title: "Shortle",
-    href: "https://shortle-phi.vercel.app",
-    video: "/assets/videos/Videos/Experiments/shortle.mp4",
-  },
-  {
-    caption: "Project_007",
-    title: "QR Generator",
-    href: "https://qr-generator-omega-swart.vercel.app",
-    video: "/assets/videos/Videos/Experiments/qr-generator.mp4",
-  },
-];
+export { workLabSlides as labSlides } from "./work";
 
 /** Bottom CTA: heading, caption, video assets, and the chat script. */
 export const cta = {

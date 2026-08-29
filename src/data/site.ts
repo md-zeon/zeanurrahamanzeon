@@ -40,7 +40,7 @@ export const brand = {
   logoStart: "zeanur",
   logoEnd: "rahamanzeon",
   heroName: "Hi, I'm Zeanur Rahaman Zeon",
-  heroLine1: "Aspiring",
+  heroLine1: "Full-Stack",
   heroLine2: "Software",
   heroLine3: "Engineer",
   heroIntro:
@@ -131,7 +131,7 @@ export function pageMetadata(
   title: string,
   description: string,
   path: string,
-  image: string = siteMeta.ogImage
+  image: string = siteMeta.ogImage,
 ) {
   return {
     title,

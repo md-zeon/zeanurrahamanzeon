@@ -100,7 +100,7 @@ export const caseStudies: CaseStudy[] = [
       buttonLabel: "Get in touch",
       buttonHref: "/contact",
       badge: "Open to Work",
-      badgeLink: "https://github.com/md-zeon",
+      badgeLink: "/contact",
     },
     info: {
       servicesCaption: "Services",
@@ -228,7 +228,7 @@ export const caseStudies: CaseStudy[] = [
       buttonLabel: "Get in touch",
       buttonHref: "/contact",
       badge: "Open to Work",
-      badgeLink: "https://github.com/md-zeon",
+      badgeLink: "/contact",
     },
     info: {
       servicesCaption: "Services",
@@ -356,7 +356,7 @@ export const caseStudies: CaseStudy[] = [
       buttonLabel: "Get in touch",
       buttonHref: "/contact",
       badge: "Open to Work",
-      badgeLink: "https://github.com/md-zeon",
+      badgeLink: "/contact",
     },
     info: {
       servicesCaption: "Services",
@@ -484,7 +484,7 @@ export const caseStudies: CaseStudy[] = [
       buttonLabel: "Get in touch",
       buttonHref: "/contact",
       badge: "Open to Work",
-      badgeLink: "https://github.com/md-zeon",
+      badgeLink: "/contact",
     },
     info: {
       servicesCaption: "Services",

@@ -53,6 +53,7 @@ export default function WorkLabSection() {
             </div>
             {/* Controls bar: counter + prev/next buttons + CTA */}
             <SliderControls
+              total={workLabSlides.length}
               right={
                 <Button href="/experiments" variant="secondary">
                   {workLabHeader.visitButtonLabel}
@@ -80,7 +81,7 @@ export default function WorkLabSection() {
                     <div className="relative w-inline-block">
                       <div className="relative z-1 flex h-full w-full items-center justify-center overflow-hidden rounded-lg">
                         <div className="aspect-video h-[110%] w-[110%] flex-none max-[991px]:h-[120%] max-[991px]:w-[120%]">
-                          <AutoVideo src={slide.video} />
+                          <AutoVideo src={slide.video} label={slide.title} />
                         </div>
                       </div>
                     </div>

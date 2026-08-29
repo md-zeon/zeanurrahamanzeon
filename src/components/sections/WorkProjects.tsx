@@ -74,6 +74,7 @@ export default function WorkProjects() {
                           <AutoVideo
                             src={project.video}
                             poster={project.poster}
+                            label={project.title}
                           />
                         </div>
                       </div>
