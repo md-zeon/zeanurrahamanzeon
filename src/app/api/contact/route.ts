@@ -73,7 +73,10 @@ export async function POST(request: NextRequest) {
     );
   }
   if (!EMAIL_RE.test(email)) {
-    return NextResponse.json({ error: "Email address is invalid." }, { status: 400 });
+    return NextResponse.json(
+      { error: "Email address is invalid." },
+      { status: 400 },
+    );
   }
 
   const host = process.env.SMTP_HOST;

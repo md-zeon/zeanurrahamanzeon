@@ -48,14 +48,14 @@ export const aboutStory = {
     "I'm currently open to internships, freelance work, and open-source collaboration.",
   ],
   links: [
-    { text: "developer Q&A platform", href: "https://dev-qna.vercel.app" },
+    { text: "developer Q&A platform", href: "https://dev-qna.vercel.app/" },
     {
       text: "medicine marketplace",
-      href: "https://oshudpati-marketplace-client.vercel.app",
+      href: "https://oshudpati-marketplace-client.vercel.app/",
     },
     {
       text: "real-time campus collaboration network",
-      href: "https://smart-nub-campus-client.vercel.app",
+      href: "https://smart-nub-campus-client.vercel.app/",
     },
     { text: "open source", href: "https://github.com/md-zeon" },
   ],
@@ -112,7 +112,7 @@ export const aboutFacts: {
       videoCaption: "FUN_FCT_001",
       elementCaption: "FUN_FCT_001",
       ctaLabel: "See my education",
-      ctaHref: "https://github.com/md-zeon",
+      ctaHref: "https://nub.ac.bd/",
       text: "BSc in Computer Science & Engineering at Northern University Bangladesh, graduating in 2027 — where most of my projects were born.",
     },
     {
