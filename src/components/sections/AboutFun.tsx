@@ -70,7 +70,7 @@ function LinkIcon() {
         viewBox="0 0 21 17"
         fill="none"
         preserveAspectRatio="xMidYMid meet"
-        role="img"
+        aria-hidden="true"
       >
         <path
           d="M5.49658 13.2106L14.6647 4.04248M14.6647 4.04248V12.2538M14.6647 4.04248L6.62603 4.04248"

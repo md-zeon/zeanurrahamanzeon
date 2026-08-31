@@ -23,7 +23,6 @@ export function Asterisk({ className = "" }: { className?: string }) {
         viewBox="0 0 16 17"
         fill="none"
         preserveAspectRatio="xMidYMid meet"
-        role="img"
       >
         <path
           d="M2.41002 14.2237L13.7237 2.91001M0 8.54529H16M8.0453 16.5V0.5M2.36688 2.91001L13.6806 14.2237"
@@ -46,7 +45,6 @@ export function CredentialIcon({ className = "" }: { className?: string }) {
         viewBox="0 0 16 17"
         fill="none"
         preserveAspectRatio="xMidYMid meet"
-        role="img"
       >
         <path
           d="M2.41002 14.2237L13.7237 2.91001M0 8.54529H16M8.0453 16.5V0.5M2.36688 2.91001L13.6806 14.2237"
@@ -73,7 +71,7 @@ export function ArrowIcon({
         viewBox="0 0 14 14"
         fill="none"
         preserveAspectRatio="xMidYMid meet"
-        role="img"
+        aria-hidden="true"
       >
         <path
           d="M0.823227 13.4736L12.8232 1.47362M12.8232 1.47362V11.3272M12.8232 1.47362H3.17677"
@@ -101,7 +99,6 @@ export function SliderArrow({ direction }: { direction: "left" | "right" }) {
         fill="none"
         preserveAspectRatio="xMidYMid meet"
         aria-hidden="true"
-        role="img"
       >
         <path
           d={d1}

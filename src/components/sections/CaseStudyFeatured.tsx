@@ -24,7 +24,7 @@ export default function CaseStudyFeatured() {
 
   return (
     <section
-      id="home-services"
+      id="case-study-featured"
       className="relative z-2 overflow-hidden background-color-primary"
       ref={ref}
     >

@@ -23,7 +23,7 @@ export default function WorkLabSection() {
 
   return (
     <section
-      id="home-services"
+      id="work-labs"
       className="relative z-2 overflow-hidden background-color-primary"
       ref={ref}
     >

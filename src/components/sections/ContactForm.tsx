@@ -35,7 +35,7 @@ function CopyIcon() {
         viewBox="0 0 25 25"
         fill="none"
         preserveAspectRatio="xMidYMid meet"
-        role="img"
+        aria-hidden="true"
       >
         <path
           d="M20.7795 9.74677H11.7795C10.675 9.74677 9.77954 10.6422 9.77954 11.7468V20.7468C9.77954 21.8513 10.675 22.7468 11.7795 22.7468H20.7795C21.8841 22.7468 22.7795 21.8513 22.7795 20.7468V11.7468C22.7795 10.6422 21.8841 9.74677 20.7795 9.74677Z"
@@ -67,7 +67,7 @@ function CheckIcon() {
         viewBox="0 0 25 25"
         fill="none"
         preserveAspectRatio="xMidYMid meet"
-        role="img"
+        aria-hidden="true"
       >
         <path
           d="M20.9375 6.55023L9.9375 17.5502L4.9375 12.5502"

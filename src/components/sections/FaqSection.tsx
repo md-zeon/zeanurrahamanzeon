@@ -18,7 +18,7 @@ function PlusIcon() {
         viewBox="0 0 32 33"
         fill="none"
         preserveAspectRatio="xMidYMid meet"
-        role="img"
+        aria-hidden="true"
       >
         <path
           d="M15.6165 23.8055V9.7998H16.3892V23.8055H15.6165ZM9 17.189V16.4163H23.0057V17.189H9Z"

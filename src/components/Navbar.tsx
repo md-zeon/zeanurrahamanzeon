@@ -551,7 +551,6 @@ export default function Navbar() {
               </div>
 
               <nav
-                role="navigation"
                 className="navbar_menu relative flex gap-2 max-[991px]:absolute max-[991px]:flex max-[991px]:w-full max-[991px]:justify-center max-[991px]:overflow-auto max-[991px]:border-b max-[991px]:border-neutral-black max-[991px]:bg-brand-black max-[991px]:px-[5%] max-[991px]:pt-4 max-[991px]:pb-10 w-nav-menu"
               >
                 {navLinks.map((link) => (

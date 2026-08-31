@@ -11,7 +11,7 @@ import { ArrowIcon } from "../shared";
 export default function ExperimentsCards() {
   return (
     <section
-      id="home-services"
+      id="experiments-cards"
       data-projects-section="second"
       className="relative z-2 overflow-hidden"
     >
@@ -55,7 +55,7 @@ export default function ExperimentsCards() {
                         </a>
                       </div>
                     </div>
-                    <h3 className="heading-style-h5">{card.title}</h3>
+                    <p className="heading-style-h5">{card.title}</p>
                   </div>
                 </div>
               ))}

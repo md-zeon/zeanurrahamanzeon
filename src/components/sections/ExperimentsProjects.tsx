@@ -374,6 +374,7 @@ export default function ExperimentsProjects() {
         {experimentsStack.map((project, i) => (
           <a
             key={project.index}
+            aria-label={project.title}
             data-audio={audio.secondaryHover}
             data-audio-click={audio.closeMenu}
             data-project={i + 1}

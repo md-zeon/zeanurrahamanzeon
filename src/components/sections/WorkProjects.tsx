@@ -12,7 +12,7 @@ import AutoVideo from "../media/AutoVideo";
 export default function WorkProjects() {
   return (
     <section
-      id="home-services"
+      id="work-projects"
       className="relative z-2 overflow-hidden background-color-primary"
     >
       <div className="padding-global is-bigger">
@@ -79,7 +79,7 @@ export default function WorkProjects() {
                         </div>
                       </div>
                       <div className="work-projects_card-cta-wrapper absolute inset-0 z-2 flex flex-wrap items-end justify-start gap-x-4 gap-y-3 p-4">
-                        <h3 className="heading-style-h4">{project.title}</h3>
+                        <p className="heading-style-h4">{project.title}</p>
                         {project.hasCaseStudy ? (
                           <Link
                             aria-label={project.ariaLabel}

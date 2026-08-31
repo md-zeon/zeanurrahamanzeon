@@ -174,7 +174,6 @@ function Info({ study }: { study: CaseStudy }) {
                     fill="none"
                     preserveAspectRatio="xMidYMid meet"
                     aria-hidden="true"
-                    role="img"
                   >
                     <path
                       d="M0.823227 13.0732L12.8232 1.07323M12.8232 1.07323V10.9268M12.8232 1.07323H3.17677"

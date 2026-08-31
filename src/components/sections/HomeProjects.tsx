@@ -377,6 +377,7 @@ export default function HomeProjects() {
         {featuredProjects.map((project, i) => (
           <a
             key={project.index}
+            aria-label={project.title}
             data-audio={audio.secondaryHover}
             data-audio-click={audio.closeMenu}
             data-project={i + 1}
