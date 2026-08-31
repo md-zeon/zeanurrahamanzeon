@@ -1,14 +1,35 @@
 "use client";
 
-import { useEffect, useRef, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
-import { destroyLenis, getLenis, initLenis } from "@/lib/lenis";
+import { destroyLenis, getLenis, initLenisDeferred } from "@/lib/lenis";
 import { initSound, playSound, preloadSounds, startMusicIfEnabled } from "@/lib/sound";
 import { useButtonEffects } from "@/lib/useButtonEffects";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Cursor from "./Cursor";
+
+/**
+ * Wraps useButtonEffects with a 200ms delay so the MutationObserver starts
+ * after the page fade-in completes and doesn't compete with critical rendering.
+ */
+function DeferredButtonEffects() {
+  const [ready, setReady] = useState(false);
+  useEffect(() => {
+    const t = setTimeout(() => setReady(true), 200);
+    return () => clearTimeout(t);
+  }, []);
+  // useButtonEffects is called unconditionally when ready=true — the
+  // conditional rendering of this component keeps the hook order stable.
+  return ready ? <ButtonEffectsBridge /> : null;
+}
+
+/** Thin wrapper that actually runs useButtonEffects. */
+function ButtonEffectsBridge() {
+  useButtonEffects();
+  return null;
+}
 
 /**
  * Global application shell mounted once in the root layout.
@@ -21,17 +42,11 @@ export default function SiteShell({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const rootRef = useRef<HTMLDivElement>(null);
 
-  // Scramble/magnetic effects for `.btn` and `.badge-link` elements (dynamic too).
-  useButtonEffects();
-
   // Global sound delegation: any element with `data-audio` plays a hover
   // sound, `data-audio-click` a click sound. Keeps sound wiring out of the
   // markup of every individual button.
+  // Deferred to idle so audio decoding and background music don't block first paint.
   useEffect(() => {
-    initSound();
-    preloadSounds();
-    startMusicIfEnabled();
-
     const onAudioOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       const el = target.closest?.("[data-audio]") as HTMLElement | null;
@@ -43,8 +58,21 @@ export default function SiteShell({ children }: { children: ReactNode }) {
       if (el?.dataset.audioClick) playSound(el.dataset.audioClick, 0.5);
     };
 
+    // Attach listeners immediately (lightweight) but defer audio init to idle.
     document.addEventListener("pointerover", onAudioOver);
     document.addEventListener("click", onAudioClick);
+
+    const initAudio = () => {
+      initSound();
+      preloadSounds();
+      startMusicIfEnabled();
+    };
+
+    if ("requestIdleCallback" in window) {
+      (window as unknown as { requestIdleCallback: (cb: () => void) => void }).requestIdleCallback(initAudio);
+    } else {
+      setTimeout(initAudio, 1000);
+    }
 
     return () => {
       document.removeEventListener("pointerover", onAudioOver);
@@ -63,8 +91,9 @@ export default function SiteShell({ children }: { children: ReactNode }) {
   }, []);
 
   // Boot smooth scroll once and tear it down when the shell unmounts.
+  // Deferred so first paint isn't blocked by Lenis setup.
   useEffect(() => {
-    initLenis();
+    initLenisDeferred();
     return () => destroyLenis();
   }, []);
 
@@ -96,6 +125,7 @@ export default function SiteShell({ children }: { children: ReactNode }) {
           </div>
         </div>
       </div>
+      <DeferredButtonEffects />
       <Cursor />
     </div>
   );

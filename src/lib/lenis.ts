@@ -6,6 +6,10 @@
  * eased scroll position. Smoothness is tuned to feel responsive, not floaty:
  * a short easeOutExpo pulse at native wheel speed, with touch left untouched
  * (mobile momentum is already polished and hardware-accelerated).
+ *
+ * Lenis is skipped on mobile (touch + small screen) and when the user prefers
+ * reduced motion. On desktop it defers to requestIdleCallback so first paint
+ * isn't blocked by smooth-scroll setup.
  */
 
 import Lenis from "lenis";
@@ -13,36 +17,34 @@ import { gsap, ScrollTrigger } from "./gsap";
 
 let lenis: Lenis | null = null;
 
+/** Whether the current device is mobile (touch + small screen). */
+function isMobileDevice(): boolean {
+  if (typeof window === "undefined") return false;
+  const hasTouchScreen = "ontouchstart" in window || navigator.maxTouchPoints > 0;
+  const isSmallScreen = window.innerWidth <= 768;
+  return hasTouchScreen && isSmallScreen;
+}
+
 /**
  * Create (once) and return the shared Lenis instance. Returns `null` on the
- * server or when the user prefers reduced motion, so callers can fall back to
- * native scrolling.
+ * server, on mobile devices, or when the user prefers reduced motion, so
+ * callers can fall back to native scrolling.
  */
 export function initLenis(): Lenis | null {
   if (typeof window === "undefined") return null;
   if (lenis) return lenis;
+
+  if (isMobileDevice()) return null;
 
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     return null;
   }
 
   lenis = new Lenis({
-    // Lerp-based smoothing (Lenis default) instead of duration+easing.
-    // Duration-based easing restarts a fixed-length easeOutExpo pulse on
-    // every wheel event; it's fast at the start and crawls to rest, so
-    // reversing direction mid-pulse reads as a delayed/stuttery response.
-    // Lerp is frame-independent damped interpolation — velocity stays
-    // proportional to the gap in both directions, so up/down feel identical.
-    // 0.1 = classic default; 0.08 keeps a touch more glide for this
-    // creative-portfolio feel without ever feeling heavy.
     lerp: 0.05,
-    // Keep wheel at native speed — multipliers are the usual cause of a
-    // "laggy" feel.
     wheelMultiplier: 1,
     touchMultiplier: 1,
     smoothWheel: true,
-    // `syncTouch` stays false (default): native touch scrolling on mobile,
-    // which is already polished and hardware-accelerated.
     autoResize: true,
   });
 
@@ -55,6 +57,21 @@ export function initLenis(): Lenis | null {
   gsap.ticker.lagSmoothing(0);
 
   return lenis;
+}
+
+/**
+ * Deferred init: calls `initLenis` inside requestIdleCallback so smooth
+ * scroll setup doesn't block first paint. Falls back to setTimeout for
+ * browsers without requestIdleCallback.
+ */
+export function initLenisDeferred(): void {
+  if (typeof window === "undefined") return;
+  const boot = () => initLenis();
+  if ("requestIdleCallback" in window) {
+    (window as unknown as { requestIdleCallback: (cb: () => void) => void }).requestIdleCallback(boot);
+  } else {
+    setTimeout(boot, 500);
+  }
 }
 
 /** Return the active Lenis instance, or `null` when smooth scroll is off. */
