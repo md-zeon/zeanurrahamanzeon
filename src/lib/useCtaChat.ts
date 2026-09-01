@@ -18,9 +18,6 @@ export function useCtaChat(container: RefObject<HTMLElement | null>) {
     if (!el) return;
 
     const ctx = gsap.context(() => {
-      const video2 = el.querySelector<HTMLVideoElement>(".cta_loop-video.is-2 video");
-      const video3 = el.querySelector<HTMLVideoElement>(".cta_loop-video.is-3 video");
-
       // Hide every message/divider that shouldn't be visible before the
       // conversation starts.
       gsap.set(
@@ -111,12 +108,8 @@ export function useCtaChat(container: RefObject<HTMLElement | null>) {
       // Handles choosing option 1 or 2: keep the hero loop video playing,
       // hide the choice buttons, then play the client -> my reply sequence.
       const onClick = (which: 1 | 2) => {
-        // Always keep the hero clip visible; never swap to the option videos.
+        // Keep the hero clip visible; never swap to option videos.
         gsap.set(".cta_loop-video.is-1", { display: "block" });
-        gsap.set(".cta_loop-video.is-2", { display: "none" });
-        gsap.set(".cta_loop-video.is-3", { display: "none" });
-        video2?.pause();
-        video3?.pause();
 
         revealClient(which, () => revealMe(which));
         gsap.set(".cta_chat-cta", { display: "none" });
