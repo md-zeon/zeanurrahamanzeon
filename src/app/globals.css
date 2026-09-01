@@ -932,6 +932,20 @@ input[type="file"]:focus-visible {
     }
   }
 
+  /* Touch devices: blur(100px) repaints a full backdrop every scroll frame,
+   which is expensive on mobile GPUs. Keep the frosted look but at a far
+   cheaper radius. Unlayered, so it wins over the Tailwind utility class. */
+  @media (pointer: coarse) {
+    .backdrop-blur-\[100px\] {
+      -webkit-backdrop-filter: blur(24px);
+      backdrop-filter: blur(24px);
+    }
+    .work_tag {
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+    }
+  }
+
   /* AUTO-MIGRATED from webflow.css / global-embed.css for classes used by the app.
    Values and ORDER are verbatim to guarantee zero visual drift. Phase-2 work replaces
    these entries with inline Tailwind utilities and deletes them here. */
