@@ -1,37 +1,19 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/pagination";
+import { useEffect, useRef } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { getLenis } from "@/lib/lenis";
 import { featuredProjects, homeProjectsLabels } from "@/data/home";
 import { audio } from "@/data/site";
 import AutoVideo from "../media/AutoVideo";
 
-/** Tracks portrait-mobile (≤767px), after hydration. */
-function useIsMobile(): boolean {
-  const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => {
-    const mql = window.matchMedia("(max-width: 767px)");
-    const update = () => setIsMobile(mql.matches);
-    update();
-    mql.addEventListener("change", update);
-    return () => mql.removeEventListener("change", update);
-  }, []);
-  return isMobile;
-}
-
 /**
- * The project "card": a rotated index label plus the looping video. Shared by
- * the desktop pinned fan and the mobile swipe carousel so the video markup is
- * defined once. The surrounding positioning differs per branch, so this only
- * renders the card contents.
+ * The project "card": a looping video box plus a rotated index label. Shared by
+ * the desktop pinned fan and the mobile stacked list so the media markup is
+ * defined once.
  */
-function ProjectCard({
+function ProjectMedia({
   project,
   index,
 }: {
@@ -51,29 +33,29 @@ function ProjectCard({
 }
 
 /**
- * Home page "featured projects" carousel.
+ * Home page "featured projects" showcase.
  *
- * Desktop/tablet: the original pinned 3D "cards fan" — while the section is
- * pinned the cards tilt back and forth on the X axis, the track and background
- * animate between dark and brand colors, and a floating banner is scramble-text
- * updated to match whichever card is currently centered. Right-hand nav
- * thumbnails jump straight to a specific card.
+ * Desktop/tablet (≥768px): the original pinned 3D "cards fan" — while the
+ * section is pinned the cards tilt back and forth on the X axis, the track and
+ * background animate between dark and brand colors, and a floating banner is
+ * scramble-text updated to match whichever card is currently centered.
+ * Right-hand nav thumbnails jump straight to a specific card.
  *
- * Mobile (≤767px): the same cards become a native horizontal swipe carousel so
- * touch viewers get standard swipe gestures and only the visible card's video
- * plays. The pinned fan and its 600vh scroll distance only exist ≥768px.
+ * Mobile (≤767px): per GSAP's guidance, the pinned fan is dropped entirely and
+ * the projects become an ordinary vertical list — nothing is hidden behind a
+ * swipe/carousel and the phone keeps its native vertical scroll. Only the
+ * card currently on screen decodes its video (AutoVideo pauses off-screen via
+ * its IO observer), so a phone never runs more than one project at a time.
  */
 export default function HomeProjects() {
   const ref = useRef<HTMLElement>(null);
-  const isMobile = useIsMobile();
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
 
-    // Desktop/tablet only: the pinned fan is pointless and costly on a phone
-    // (600vh pin + 3D transforms + full-height cards).
     const mm = gsap.matchMedia();
+
     mm.add("(min-width: 768px)", () => {
       const ctx = gsap.context(() => {
         const cleanups: Array<() => void> = [];
@@ -349,7 +331,8 @@ export default function HomeProjects() {
               duration: 0.25,
               ease: "expo.out",
             });
-            if (imgWrap) gsap.to(imgWrap, { borderColor: "#EFEFE6", duration: 0.25 });
+            if (imgWrap)
+              gsap.to(imgWrap, { borderColor: "#EFEFE6", duration: 0.25 });
           };
           const onLeave = () => {
             gsap.to(b, {
@@ -378,40 +361,34 @@ export default function HomeProjects() {
       return () => ctx.revert();
     });
 
+    mm.add("(max-width: 767px)", () => {
+      const ctx = gsap.context(() => {
+        const cards = gsap.utils.toArray<HTMLElement>(".home-projects_mobile");
+        // Gentle stagger reveal as the stacked cards scroll into view — light
+        // so it never fights native mobile scrolling.
+        gsap.fromTo(
+          cards,
+          { y: 40, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            stagger: 0.1,
+            duration: 0.6,
+            ease: "expo.out",
+            scrollTrigger: {
+              trigger: el,
+              start: "top 75%",
+              toggleActions: "play none none none",
+            },
+          },
+        );
+      }, el);
+
+      return () => ctx.revert();
+    });
+
     return () => mm.revert();
   }, []);
-
-  // On mobile, the Swiper is the source of truth for which project is active;
-  // update the floating banner to match the slide being swiped to.
-  const updateMobileBanner = (index: number) => {
-    const project = featuredProjects[index];
-    const el = ref.current;
-    if (!project || !el) return;
-    const heading = el.querySelector(
-      ".home-projects_banner-component .heading-style-h3",
-    );
-    const text = el.querySelector(
-      ".home-projects_banner-component .text-size-regular",
-    );
-    const button = el.querySelector(
-      ".home-projects_banner-component .btn:not(.btn-secondary)",
-    ) as HTMLAnchorElement | null;
-    if (heading) {
-      gsap.to(heading, {
-        duration: 1.2,
-        scrambleText: { text: project.title, chars: "10", speed: 0.2 },
-        ease: "expo.out",
-      });
-    }
-    if (text) {
-      gsap.to(text, {
-        duration: 1.2,
-        scrambleText: { text: project.description, chars: "10", speed: 0.2 },
-        ease: "expo.out",
-      });
-    }
-    if (button) button.setAttribute("href", project.link);
-  };
 
   // Jump to a specific project card from the nav thumbnails. The pinned
   // section lives inside ScrollTrigger's generated `.pin-spacer`, so we
@@ -445,49 +422,74 @@ export default function HomeProjects() {
 
   return (
     <section
-      className="relative z-2 min-h-screen max-h-screen w-full overflow-hidden"
+      className="relative z-2 w-full overflow-hidden min-h-screen max-h-screen max-[767px]:min-h-0 max-[767px]:max-h-none"
       ref={ref}
     >
-      {/* Desktop/tablet: pinned 3D fan. Hidden on mobile where the Swiper
-          below takes over. */}
+      {/* Desktop/tablet: pinned 3D fan. Hidden on mobile. */}
       <div className="home-projects_track relative h-[600vh] w-full overflow-hidden max-[767px]:hidden">
-        <div className="relative grid h-full w-full max-h-screen auto-cols-fr grid-cols-1 grid-rows-1 content-start items-center justify-center justify-items-center gap-0 py-8 transform-3d max-[767px]:pb-32">
+        <div
+          className="relative grid h-full w-full max-h-screen auto-cols-fr grid-cols-1 grid-rows-1 content-start items-center justify-center justify-items-center gap-0 py-8 transform-3d max-[767px]:pb-32"
+        >
           {featuredProjects.map((project, i) => (
             <div
               key={project.index}
               data-index={i + 1}
               className={`home-projects_project ${i === 0 ? "first" : "middle"} relative z-2 flex h-[54vw] w-[90%] [grid-area:1/1/2/2] origin-[50%_0] transform-3d desktop:h-full desktop:transform-[perspective(100vh)]`}
             >
-              <ProjectCard project={project} index={i + 1} />
+              <ProjectMedia project={project} index={i + 1} />
             </div>
           ))}
         </div>
       </div>
 
-      {/* Mobile: native swipe carousel. Only the visible slide's video plays
-          (AutoVideo pauses off-screen slides via its IO observer), so a phone
-          never decodes more than one project at a time. */}
-      {isMobile && (
-        <div className="absolute inset-0 z-2 flex items-center justify-center px-6">
-          <Swiper
-            className="home-projects-swiper"
-            modules={[Pagination]}
-            slidesPerView={1}
-            speed={600}
-            pagination={{ clickable: true }}
-            onSlideChange={(s) => updateMobileBanner(s.activeIndex)}
+      {/* Mobile: projects as a normal vertical list. No pin, no swipe — just
+          scroll. Each card carries its own title/description and a link to the
+          case study, so nothing important is hidden. */}
+      <div className="hidden px-6 py-20 max-[767px]:flex max-[767px]:flex-col max-[767px]:gap-16">
+        {featuredProjects.map((project, i) => (
+          <article
+            key={project.index}
+            className="home-projects_mobile flex flex-col gap-6"
           >
-            {featuredProjects.map((project, i) => (
-              <SwiperSlide key={project.index}>
-                <div className="relative z-2 flex h-[54vw] w-[76%] items-center justify-center max-[479px]:h-[58vw]">
-                  <ProjectCard project={project} index={i + 1} />
+            <div className="relative z-2 flex aspect-16/10 w-full items-center justify-center overflow-hidden rounded">
+              <ProjectMedia project={project} index={i + 1} />
+            </div>
+            <div className="flex flex-col gap-4">
+              <div className="flex items-baseline justify-between gap-4">
+                <h3 className="heading-style-h3">{project.title}</h3>
+                <div className="text-caption-2 text-color-teritary">
+                  0{i + 1}
                 </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+              </div>
+              <p className="text-size-regular text-color-teritary">
+                {project.description}
+              </p>
+              <div>
+                <Link
+                  href={project.link}
+                  data-audio={audio.hover}
+                  className="btn btn-small"
+                >
+                  <div className="btn__text">
+                    {homeProjectsLabels.viewCaseStudy}
+                  </div>
+                </Link>
+              </div>
+            </div>
+          </article>
+        ))}
+        <div className="flex justify-center">
+          <Link
+            href="/work"
+            data-audio={audio.hover}
+            className="btn btn-secondary btn-small"
+          >
+            <div className="btn__text">{homeProjectsLabels.seeAllWork}</div>
+          </Link>
         </div>
-      )}
+      </div>
 
+      {/* Desktop-only right-hand nav thumbnails. */}
       <div className="absolute top-1/2 right-[-7rem] z-3 hidden -translate-y-1/2 flex-col items-stretch justify-end gap-2 desktop:flex wide:right-[-6rem]">
         {featuredProjects.map((project, i) => (
           <a
@@ -510,7 +512,8 @@ export default function HomeProjects() {
         ))}
       </div>
 
-      <div className="home-projects_banner-component absolute bottom-8 left-8 z-3 flex w-full max-w-fit flex-col gap-4 rounded border border-white-20 bg-black-30 p-6 shadow-[inset_0_0_0_1000px_#0a090e33] backdrop-blur-[100px] max-[767px]:bottom-16 max-[767px]:gap-6 max-[767px]:p-4 max-[479px]:bottom-[12%] max-[479px]:left-[4%] max-[479px]:w-[90%]">
+      {/* Desktop-only floating banner (fan title/desc updates from scroll). */}
+      <div className="home-projects_banner-component absolute bottom-8 left-8 z-3 hidden w-full max-w-fit flex-col gap-4 rounded border border-white-20 bg-black-30 p-6 shadow-[inset_0_0_0_1000px_#0a090e33] backdrop-blur-[100px] min-[768px]:flex">
         <div className="flex-none">
           <div className="heading-style-h3 block max-w-full max-h-24 overflow-hidden whitespace-normal wrap-break-word min-[992px]:max-h-16">
             {featuredProjects[0]?.title}

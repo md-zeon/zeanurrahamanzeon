@@ -926,16 +926,7 @@ input[type="file"]:focus-visible {
     }
   }
 
-  /* Home projects mobile swipe carousel */
-  .swiper.home-projects-swiper {
-    width: 100%;
-    height: auto;
-  }
-
-  .swiper.home-projects-swiper .swiper-pagination {
-    position: relative;
-    margin-top: 1.5rem;
-  }
+  /* Home projects mobile: normal vertical list (no scroll-snap/carousel) */
 
   @media screen and (max-width: 991px) {
     .navbar_menu {
