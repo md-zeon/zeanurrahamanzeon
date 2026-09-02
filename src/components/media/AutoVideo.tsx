@@ -19,13 +19,19 @@ type AutoVideoProps = {
 /**
  * Maps a video path to its static poster frame:
  *   /assets/videos/<path>.mp4  ->  /assets/images/posters/<path>.webp
- * Only used when the caller didn't pass an explicit `poster`, so explicit
- * posters (e.g. the hero) are never overridden.
+ * The hero loop (used by the hero, the About header and the CTA) points at
+ * the site's branded hero image instead of a generic frame. Only used when
+ * the caller didn't pass an explicit `poster`, so explicit posters are never
+ * overridden.
  */
-const derivePoster = (src: string) =>
-  src
+const derivePoster = (src: string) => {
+  if (src === "/assets/videos/hero-clip-vid.mp4") {
+    return "/assets/images/zeon.webp";
+  }
+  return src
     .replace(/^\/assets\/videos\//, "/assets/images/posters/")
     .replace(/\.mp4$/i, ".webp");
+};
 
 /**
  * Cover-filling `<video>` that auto-plays.

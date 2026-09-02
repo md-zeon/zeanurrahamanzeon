@@ -1,5 +1,6 @@
 "use client";
 
+import { useCallback, useEffect, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCards, Pagination } from "swiper/modules";
 import "swiper/css";
@@ -95,8 +96,27 @@ function LinkIcon() {
  * with a caption, a rotated side label, and an optional external link.
  */
 export default function AboutFun() {
+  const aboutRef = useRef<HTMLElement>(null);
+
+  // The cards effect keeps the active card *and* the peeking cards inside the
+  // viewport, so AutoVideo's on-scroll observer would leave several loops
+  // decoding at once. Enforce active-only playback: pause every card's video
+  // and run only the active slide's.
+  const syncActiveVideo = useCallback(() => {
+    const el = aboutRef.current;
+    if (!el) return;
+    el.querySelectorAll("video").forEach((video) => video.pause());
+    const active =
+      el.querySelector<HTMLVideoElement>(".swiper-slide-active video");
+    active?.play().catch(() => undefined);
+  }, []);
+
+  useEffect(() => {
+    syncActiveVideo();
+  }, [syncActiveVideo]);
+
   return (
-    <section className="relative z-2 overflow-hidden">
+    <section className="relative z-2 overflow-hidden" ref={aboutRef}>
       <div className="padding-global is-bigger">
         <div className="container-large">
           <div className="relative grid auto-cols-auto grid-cols-[auto_1fr] items-start gap-44 border-l border-white-20 py-28">
@@ -124,6 +144,8 @@ export default function AboutFun() {
                 effect="cards"
                 grabCursor
                 pagination={{ clickable: true }}
+                onInit={syncActiveVideo}
+                onSlideChange={syncActiveVideo}
               >
                 {aboutFacts.slides.map((slide, i) => (
                   <SwiperSlide key={i}>

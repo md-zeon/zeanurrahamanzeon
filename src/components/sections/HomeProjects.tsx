@@ -1,323 +1,417 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { getLenis } from "@/lib/lenis";
 import { featuredProjects, homeProjectsLabels } from "@/data/home";
 import { audio } from "@/data/site";
 import AutoVideo from "../media/AutoVideo";
 
+/** Tracks portrait-mobile (≤767px), after hydration. */
+function useIsMobile(): boolean {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mql = window.matchMedia("(max-width: 767px)");
+    const update = () => setIsMobile(mql.matches);
+    update();
+    mql.addEventListener("change", update);
+    return () => mql.removeEventListener("change", update);
+  }, []);
+  return isMobile;
+}
+
 /**
- * Home page "featured projects" pinned 3D carousel.
+ * The project "card": a rotated index label plus the looping video. Shared by
+ * the desktop pinned fan and the mobile swipe carousel so the video markup is
+ * defined once. The surrounding positioning differs per branch, so this only
+ * renders the card contents.
+ */
+function ProjectCard({
+  project,
+  index,
+}: {
+  project: (typeof featuredProjects)[number];
+  index: number;
+}) {
+  return (
+    <>
+      <div className="absolute left-[-2.7rem] top-1/2 transform-[rotate(-90deg)_translateY(-50%)] max-[767px]:left-[-2.3rem] max-[479px]:-left-8">
+        <div className="text-caption-2">PROJECT_{index}</div>
+      </div>
+      <div className="relative inset-0 z-2 aspect-16/9.5 h-full w-full max-h-[93.5vh] overflow-hidden rounded-lg max-[767px]:rounded w-embed">
+        <AutoVideo src={project.video} label={project.title} />
+      </div>
+    </>
+  );
+}
+
+/**
+ * Home page "featured projects" carousel.
  *
- * While the section is pinned, the project cards tilt back and forth on the
- * X axis (a "cards fan" effect), the track and background animate between
- * dark and brand colors, and a floating banner is scramble-text updated to
- * match whichever card is currently centered. The right-hand nav thumbnails
- * let the visitor jump straight to a specific card.
+ * Desktop/tablet: the original pinned 3D "cards fan" — while the section is
+ * pinned the cards tilt back and forth on the X axis, the track and background
+ * animate between dark and brand colors, and a floating banner is scramble-text
+ * updated to match whichever card is currently centered. Right-hand nav
+ * thumbnails jump straight to a specific card.
+ *
+ * Mobile (≤767px): the same cards become a native horizontal swipe carousel so
+ * touch viewers get standard swipe gestures and only the visible card's video
+ * plays. The pinned fan and its 600vh scroll distance only exist ≥768px.
  */
 export default function HomeProjects() {
   const ref = useRef<HTMLElement>(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
 
-    const ctx = gsap.context(() => {
-      const cleanups: Array<() => void> = [];
-      const projects = gsap.utils.toArray<HTMLElement>(
-        ".home-projects_project",
-      );
-      const heading = el.querySelector(
-        ".home-projects_banner-component .heading-style-h3",
-      );
-      const text = el.querySelector(
-        ".home-projects_banner-component .text-size-regular",
-      );
-      const buttons = el.querySelectorAll(
-        ".home-projects_banner-component .btn:not(.btn-secondary)",
-      );
-      const navButtons = el.querySelectorAll(".home-projects_nav-wrapper");
-      const track = el.querySelector(".home-projects_track");
-      const section = el;
+    // Desktop/tablet only: the pinned fan is pointless and costly on a phone
+    // (600vh pin + 3D transforms + full-height cards).
+    const mm = gsap.matchMedia();
+    mm.add("(min-width: 768px)", () => {
+      const ctx = gsap.context(() => {
+        const cleanups: Array<() => void> = [];
+        const projects = gsap.utils.toArray<HTMLElement>(
+          ".home-projects_project",
+        );
+        const heading = el.querySelector(
+          ".home-projects_banner-component .heading-style-h3",
+        );
+        const text = el.querySelector(
+          ".home-projects_banner-component .text-size-regular",
+        );
+        const buttons = el.querySelectorAll(
+          ".home-projects_banner-component .btn:not(.btn-secondary)",
+        );
+        const navButtons = el.querySelectorAll(".home-projects_nav-wrapper");
+        const track = el.querySelector(".home-projects_track");
+        const section = el;
 
-      // Project cards live in one grid cell, so they stack. `preserve-3d`
-      // + a shared perspective makes the rotationX fan look dimensional.
-      gsap.set(projects, {
-        transformStyle: "preserve-3d",
-        transformPerspective: 800,
-      });
-      // The "middle" cards start below the viewport, rotated away.
-      gsap.set(
-        projects.filter((p) => p.classList.contains("middle")),
-        {
+        // Project cards live in one grid cell, so they stack. `preserve-3d`
+        // + a shared perspective makes the rotationX fan look dimensional.
+        gsap.set(projects, {
+          transformStyle: "preserve-3d",
+          transformPerspective: 800,
+        });
+        // The "middle" cards start below the viewport, rotated away.
+        gsap.set(
+          projects.filter((p) => p.classList.contains("middle")),
+          {
+            transformOrigin: "center top",
+            y: window.innerHeight,
+            rotationX: 40,
+            scale: 1.1,
+          },
+        );
+        // Pre-paint the (dark) background so there's no flash of white before
+        // the first scrub tween fires.
+        gsap.set(
+          [
+            track,
+            section,
+            document.querySelector('[data-projects-section="second"]'),
+          ],
+          { backgroundColor: "#0A090F" },
+        );
+        // First card is hidden until its scroll-in trigger.
+        gsap.set(el.querySelector(".home-projects_project.first"), {
           transformOrigin: "center top",
-          y: window.innerHeight,
-          rotationX: 40,
-          scale: 1.1,
-        },
-      );
-      // Pre-paint the (dark) background so there's no flash of white before
-      // the first scrub tween fires.
-      gsap.set(
-        [
-          track,
-          section,
-          document.querySelector('[data-projects-section="second"]'),
-        ],
-        { backgroundColor: "#0A090F" },
-      );
-      // First card is hidden until its scroll-in trigger.
-      gsap.set(el.querySelector(".home-projects_project.first"), {
-        transformOrigin: "center top",
-        yPercent: 20,
-        opacity: 0,
-      });
+          yPercent: 20,
+          opacity: 0,
+        });
 
-      // Fade the first card up when the section scrolls into view.
-      ScrollTrigger.create({
-        trigger: el.querySelector(".home-projects_project.first"),
-        start: "top 85%",
-        once: true,
-        onEnter: () => {
-          gsap.to(el.querySelector(".home-projects_project.first"), {
-            yPercent: 0,
-            opacity: 1,
-            ease: "expo.out",
-            duration: 0.6,
-          });
-        },
-      });
-
-      // The core pinned scroll. Pins the section for 300% of scroll; as you
-      // scrub, cards fan from front to back. Background shifts to brand
-      // purple while pinned and back when leaving.
-      const timeline = gsap.timeline({
-        scrollTrigger: {
-          id: "projectsScroll",
-          trigger: ".home-projects_track",
-          pin: el,
-          start: "top top",
-          end: "+=300%",
-          scrub: 1,
-          pinSpacing: true,
+        // Fade the first card up when the section scrolls into view.
+        ScrollTrigger.create({
+          trigger: el.querySelector(".home-projects_project.first"),
+          start: "top 85%",
+          once: true,
           onEnter: () => {
-            gsap.to(
-              [
-                track,
-                section,
-                document.querySelector('[data-projects-section="second"]'),
-              ],
-              { backgroundColor: "#5542ff", ease: "expo.out", duration: 1 },
-            );
-          },
-          onLeave: () => {
-            gsap.to(
-              [
-                track,
-                section,
-                document.querySelector('[data-projects-section="second"]'),
-              ],
-              { backgroundColor: "#0A090F", ease: "expo.out", duration: 1 },
-            );
-          },
-          onEnterBack: () => {
-            gsap.to(
-              [
-                track,
-                section,
-                document.querySelector('[data-projects-section="second"]'),
-              ],
-              { backgroundColor: "#5542ff", ease: "expo.out", duration: 1 },
-            );
-          },
-          onLeaveBack: () => {
-            gsap.to(
-              [
-                track,
-                section,
-                document.querySelector('[data-projects-section="second"]'),
-              ],
-              { backgroundColor: "#0A090F", ease: "expo.out", duration: 1 },
-            );
-          },
-        },
-      });
-
-      // Fan sequence: the current card tips away (back), the next cards
-      // stand up, then they all tip forward again so the next one leads.
-      timeline
-        .to(".home-projects_project.first", {
-          rotationX: -40,
-          y: -6,
-          ease: "expo.in",
-          scale: 0.7,
-        })
-        .to(
-          ".home-projects_project.middle",
-          {
-            scale: 1,
-            ease: "expo.out",
-            y: (i: number) => 2 * i,
-            rotationX: 0,
-            stagger: { each: 0.5 },
-          },
-          "-=0.4",
-        )
-        .to(
-          ".home-projects_project.middle",
-          {
-            rotationX: -40,
-            y: (i: number) => 20 * i,
-            ease: "expo.in",
-            scale: (i: number) =>
-              gsap.utils.mapRange(0, projects.length - 1, 0.75, 1)(i),
-            stagger: { each: 0.5 },
-          },
-          "<+=0.5",
-        );
-
-      // During scrubbing, derive which project is "active" from scroll
-      // progress and update the banner (title/description via scramble,
-      // button href, and the active nav thumbnail) whenever it changes.
-      let lastActiveIndex = -1;
-      const updateActiveProject = () => {
-        const st = ScrollTrigger.getById("projectsScroll");
-        if (!st || !projects.length) return;
-        const progress = st.progress;
-        const activeIndex = Math.min(
-          projects.length - 1,
-          Math.round(progress * projects.length),
-        );
-        if (activeIndex !== lastActiveIndex && featuredProjects[activeIndex]) {
-          lastActiveIndex = activeIndex;
-          gsap.to(heading, {
-            duration: 1.2,
-            scrambleText: {
-              text: featuredProjects[activeIndex].title,
-              chars: "10",
-              speed: 0.2,
-            },
-            ease: "expo.out",
-          });
-          gsap.to(text, {
-            duration: 1.2,
-            scrambleText: {
-              text: featuredProjects[activeIndex].description,
-              chars: "10",
-              speed: 0.2,
-            },
-            ease: "expo.out",
-          });
-          buttons.forEach((button) => {
-            (button as HTMLAnchorElement).setAttribute(
-              "href",
-              featuredProjects[activeIndex].link,
-            );
-          });
-          navButtons.forEach((b, index) => {
-            gsap.to(b, {
-              duration: 0.05,
+            gsap.to(el.querySelector(".home-projects_project.first"), {
+              yPercent: 0,
+              opacity: 1,
               ease: "expo.out",
-              marginLeft: index === activeIndex ? "-0.7rem" : "0rem",
-              opacity: index === activeIndex ? 1 : 0.9,
+              duration: 0.6,
             });
-            const imgWrap = b.querySelector(".home-projects_nav-image-wrapper");
-            if (imgWrap)
-              gsap.to(imgWrap, {
+          },
+        });
+
+        // The core pinned scroll. Pins the section for 300% of scroll; as you
+        // scrub, cards fan from front to back. Background shifts to brand
+        // purple while pinned and back when leaving.
+        const timeline = gsap.timeline({
+          scrollTrigger: {
+            id: "projectsScroll",
+            trigger: ".home-projects_track",
+            pin: el,
+            start: "top top",
+            end: "+=300%",
+            scrub: 1,
+            pinSpacing: true,
+            onEnter: () => {
+              gsap.to(
+                [
+                  track,
+                  section,
+                  document.querySelector('[data-projects-section="second"]'),
+                ],
+                { backgroundColor: "#5542ff", ease: "expo.out", duration: 1 },
+              );
+            },
+            onLeave: () => {
+              gsap.to(
+                [
+                  track,
+                  section,
+                  document.querySelector('[data-projects-section="second"]'),
+                ],
+                { backgroundColor: "#0A090F", ease: "expo.out", duration: 1 },
+              );
+            },
+            onEnterBack: () => {
+              gsap.to(
+                [
+                  track,
+                  section,
+                  document.querySelector('[data-projects-section="second"]'),
+                ],
+                { backgroundColor: "#5542ff", ease: "expo.out", duration: 1 },
+              );
+            },
+            onLeaveBack: () => {
+              gsap.to(
+                [
+                  track,
+                  section,
+                  document.querySelector('[data-projects-section="second"]'),
+                ],
+                { backgroundColor: "#0A090F", ease: "expo.out", duration: 1 },
+              );
+            },
+          },
+        });
+
+        // Fan sequence: the current card tips away (back), the next cards
+        // stand up, then they all tip forward again so the next one leads.
+        timeline
+          .to(".home-projects_project.first", {
+            rotationX: -40,
+            y: -6,
+            ease: "expo.in",
+            scale: 0.7,
+          })
+          .to(
+            ".home-projects_project.middle",
+            {
+              scale: 1,
+              ease: "expo.out",
+              y: (i: number) => 2 * i,
+              rotationX: 0,
+              stagger: { each: 0.5 },
+            },
+            "-=0.4",
+          )
+          .to(
+            ".home-projects_project.middle",
+            {
+              rotationX: -40,
+              y: (i: number) => 20 * i,
+              ease: "expo.in",
+              scale: (i: number) =>
+                gsap.utils.mapRange(0, projects.length - 1, 0.75, 1)(i),
+              stagger: { each: 0.5 },
+            },
+            "<+=0.5",
+          );
+
+        // During scrubbing, derive which project is "active" from scroll
+        // progress and update the banner (title/description via scramble,
+        // button href, and the active nav thumbnail) whenever it changes.
+        let lastActiveIndex = -1;
+        const updateActiveProject = () => {
+          const st = ScrollTrigger.getById("projectsScroll");
+          if (!st || !projects.length) return;
+          const progress = st.progress;
+          const activeIndex = Math.min(
+            projects.length - 1,
+            Math.round(progress * projects.length),
+          );
+          if (
+            activeIndex !== lastActiveIndex &&
+            featuredProjects[activeIndex]
+          ) {
+            lastActiveIndex = activeIndex;
+            gsap.to(heading, {
+              duration: 1.2,
+              scrambleText: {
+                text: featuredProjects[activeIndex].title,
+                chars: "10",
+                speed: 0.2,
+              },
+              ease: "expo.out",
+            });
+            gsap.to(text, {
+              duration: 1.2,
+              scrambleText: {
+                text: featuredProjects[activeIndex].description,
+                chars: "10",
+                speed: 0.2,
+              },
+              ease: "expo.out",
+            });
+            buttons.forEach((button) => {
+              (button as HTMLAnchorElement).setAttribute(
+                "href",
+                featuredProjects[activeIndex].link,
+              );
+            });
+            navButtons.forEach((b, index) => {
+              gsap.to(b, {
                 duration: 0.05,
                 ease: "expo.out",
-                borderColor: index === activeIndex ? "#EFEFE6" : "transparent",
+                marginLeft: index === activeIndex ? "-0.7rem" : "0rem",
+                opacity: index === activeIndex ? 1 : 0.9,
               });
-          });
-        }
-      };
-
-      // Slide the floating banner in/out as the pinned section is entered
-      // and left.
-      const bannerFade = (state: "in" | "out") => {
-        gsap.to(".home-projects_banner-component", {
-          opacity: state === "in" ? 1 : 0,
-          yPercent: state === "in" ? 0 : 20,
-          ease: state === "in" ? "expo.out" : "expo.in",
-          duration: 0.3,
-        });
-      };
-      ScrollTrigger.create({
-        trigger: el,
-        start: "top top",
-        end: "+=280%",
-        scrub: 1,
-        onUpdate: () => {
-          const st = ScrollTrigger.getById("projectsScroll");
-          if (st) updateActiveProject();
-        },
-        onEnter: () => bannerFade("in"),
-        onLeave: () => bannerFade("out"),
-        onEnterBack: () => bannerFade("in"),
-        onLeaveBack: () => bannerFade("out"),
-      });
-
-      gsap.set(".home-projects_banner-component", { opacity: 0, yPercent: 20 });
-      // Nav thumbnails slide in from the right once, when scrolled to.
-      gsap.set(navButtons, { x: "100%", opacity: 0, visibility: "hidden" });
-      gsap.fromTo(
-        navButtons,
-        { x: "100%", opacity: 0, visibility: "hidden" },
-        {
-          x: "0%",
-          opacity: 0.9,
-          visibility: "visible",
-          stagger: 0.05,
-          ease: "expo.out",
-          duration: 0.4,
-          scrollTrigger: { trigger: el, start: "top 60%", once: true },
-          onComplete: () => gsap.to(navButtons[0], { opacity: 1 }),
-        },
-      );
-
-      // Hover feedback on the thumbnails: brighten the border and indent the
-      // thumbnail, restoring the scroll-driven active state on leave.
-      navButtons.forEach((b, index) => {
-        const imgWrap = b.querySelector(".home-projects_nav-image-wrapper");
-        const isActive = () => index === Math.max(0, lastActiveIndex);
-        const onEnter = () => {
-          gsap.to(b, {
-            marginLeft: isActive() ? "-0.7rem" : "-0.35rem",
-            opacity: 1,
-            duration: 0.25,
-            ease: "expo.out",
-          });
-          if (imgWrap)
-            gsap.to(imgWrap, { borderColor: "#EFEFE6", duration: 0.25 });
-        };
-        const onLeave = () => {
-          gsap.to(b, {
-            marginLeft: isActive() ? "-0.7rem" : "0rem",
-            opacity: isActive() ? 1 : 0.9,
-            duration: 0.25,
-            ease: "expo.out",
-          });
-          if (imgWrap)
-            gsap.to(imgWrap, {
-              borderColor: isActive() ? "#EFEFE6" : "transparent",
-              duration: 0.25,
+              const imgWrap = b.querySelector(
+                ".home-projects_nav-image-wrapper",
+              );
+              if (imgWrap)
+                gsap.to(imgWrap, {
+                  duration: 0.05,
+                  ease: "expo.out",
+                  borderColor:
+                    index === activeIndex ? "#EFEFE6" : "transparent",
+                });
             });
+          }
         };
-        b.addEventListener("mouseenter", onEnter);
-        b.addEventListener("mouseleave", onLeave);
-        cleanups.push(() => {
-          b.removeEventListener("mouseenter", onEnter);
-          b.removeEventListener("mouseleave", onLeave);
+
+        // Slide the floating banner in/out as the pinned section is entered
+        // and left.
+        const bannerFade = (state: "in" | "out") => {
+          gsap.to(".home-projects_banner-component", {
+            opacity: state === "in" ? 1 : 0,
+            yPercent: state === "in" ? 0 : 20,
+            ease: state === "in" ? "expo.out" : "expo.in",
+            duration: 0.3,
+          });
+        };
+        ScrollTrigger.create({
+          trigger: el,
+          start: "top top",
+          end: "+=280%",
+          scrub: 1,
+          onUpdate: () => {
+            const st = ScrollTrigger.getById("projectsScroll");
+            if (st) updateActiveProject();
+          },
+          onEnter: () => bannerFade("in"),
+          onLeave: () => bannerFade("out"),
+          onEnterBack: () => bannerFade("in"),
+          onLeaveBack: () => bannerFade("out"),
         });
-      });
 
-      return () => cleanups.forEach((fn) => fn());
-    }, el);
+        gsap.set(".home-projects_banner-component", {
+          opacity: 0,
+          yPercent: 20,
+        });
+        // Nav thumbnails slide in from the right once, when scrolled to.
+        gsap.set(navButtons, { x: "100%", opacity: 0, visibility: "hidden" });
+        gsap.fromTo(
+          navButtons,
+          { x: "100%", opacity: 0, visibility: "hidden" },
+          {
+            x: "0%",
+            opacity: 0.9,
+            visibility: "visible",
+            stagger: 0.05,
+            ease: "expo.out",
+            duration: 0.4,
+            scrollTrigger: { trigger: el, start: "top 60%", once: true },
+            onComplete: () => gsap.to(navButtons[0], { opacity: 1 }),
+          },
+        );
 
-    return () => ctx.revert();
+        // Hover feedback on the thumbnails: brighten the border and indent
+        // the thumbnail, restoring the scroll-driven active state on leave.
+        navButtons.forEach((b, index) => {
+          const imgWrap = b.querySelector(".home-projects_nav-image-wrapper");
+          const isActive = () => index === Math.max(0, lastActiveIndex);
+          const onEnter = () => {
+            gsap.to(b, {
+              marginLeft: isActive() ? "-0.7rem" : "-0.35rem",
+              opacity: 1,
+              duration: 0.25,
+              ease: "expo.out",
+            });
+            if (imgWrap) gsap.to(imgWrap, { borderColor: "#EFEFE6", duration: 0.25 });
+          };
+          const onLeave = () => {
+            gsap.to(b, {
+              marginLeft: isActive() ? "-0.7rem" : "0rem",
+              opacity: isActive() ? 1 : 0.9,
+              duration: 0.25,
+              ease: "expo.out",
+            });
+            if (imgWrap)
+              gsap.to(imgWrap, {
+                borderColor: isActive() ? "#EFEFE6" : "transparent",
+                duration: 0.25,
+              });
+          };
+          b.addEventListener("mouseenter", onEnter);
+          b.addEventListener("mouseleave", onLeave);
+          cleanups.push(() => {
+            b.removeEventListener("mouseenter", onEnter);
+            b.removeEventListener("mouseleave", onLeave);
+          });
+        });
+
+        return () => cleanups.forEach((fn) => fn());
+      }, el);
+
+      return () => ctx.revert();
+    });
+
+    return () => mm.revert();
   }, []);
+
+  // On mobile, the Swiper is the source of truth for which project is active;
+  // update the floating banner to match the slide being swiped to.
+  const updateMobileBanner = (index: number) => {
+    const project = featuredProjects[index];
+    const el = ref.current;
+    if (!project || !el) return;
+    const heading = el.querySelector(
+      ".home-projects_banner-component .heading-style-h3",
+    );
+    const text = el.querySelector(
+      ".home-projects_banner-component .text-size-regular",
+    );
+    const button = el.querySelector(
+      ".home-projects_banner-component .btn:not(.btn-secondary)",
+    ) as HTMLAnchorElement | null;
+    if (heading) {
+      gsap.to(heading, {
+        duration: 1.2,
+        scrambleText: { text: project.title, chars: "10", speed: 0.2 },
+        ease: "expo.out",
+      });
+    }
+    if (text) {
+      gsap.to(text, {
+        duration: 1.2,
+        scrambleText: { text: project.description, chars: "10", speed: 0.2 },
+        ease: "expo.out",
+      });
+    }
+    if (button) button.setAttribute("href", project.link);
+  };
 
   // Jump to a specific project card from the nav thumbnails. The pinned
   // section lives inside ScrollTrigger's generated `.pin-spacer`, so we
@@ -354,7 +448,9 @@ export default function HomeProjects() {
       className="relative z-2 min-h-screen max-h-screen w-full overflow-hidden"
       ref={ref}
     >
-      <div className="home-projects_track relative h-[600vh] w-full overflow-hidden">
+      {/* Desktop/tablet: pinned 3D fan. Hidden on mobile where the Swiper
+          below takes over. */}
+      <div className="home-projects_track relative h-[600vh] w-full overflow-hidden max-[767px]:hidden">
         <div className="relative grid h-full w-full max-h-screen auto-cols-fr grid-cols-1 grid-rows-1 content-start items-center justify-center justify-items-center gap-0 py-8 transform-3d max-[767px]:pb-32">
           {featuredProjects.map((project, i) => (
             <div
@@ -362,16 +458,35 @@ export default function HomeProjects() {
               data-index={i + 1}
               className={`home-projects_project ${i === 0 ? "first" : "middle"} relative z-2 flex h-[54vw] w-[90%] [grid-area:1/1/2/2] origin-[50%_0] transform-3d desktop:h-full desktop:transform-[perspective(100vh)]`}
             >
-              <div className="absolute left-[-2.7rem] top-1/2 transform-[rotate(-90deg)_translateY(-50%)] max-[767px]:left-[-2.3rem] max-[479px]:-left-8">
-                <div className="text-caption-2">PROJECT_{project.index}</div>
-              </div>
-              <div className="relative inset-0 z-2 aspect-16/9.5 h-full w-full max-h-[93.5vh] overflow-hidden rounded-lg max-[767px]:rounded w-embed">
-                <AutoVideo src={project.video} label={project.title} />
-              </div>
+              <ProjectCard project={project} index={i + 1} />
             </div>
           ))}
         </div>
       </div>
+
+      {/* Mobile: native swipe carousel. Only the visible slide's video plays
+          (AutoVideo pauses off-screen slides via its IO observer), so a phone
+          never decodes more than one project at a time. */}
+      {isMobile && (
+        <div className="absolute inset-0 z-2 flex items-center justify-center px-6">
+          <Swiper
+            className="home-projects-swiper"
+            modules={[Pagination]}
+            slidesPerView={1}
+            speed={600}
+            pagination={{ clickable: true }}
+            onSlideChange={(s) => updateMobileBanner(s.activeIndex)}
+          >
+            {featuredProjects.map((project, i) => (
+              <SwiperSlide key={project.index}>
+                <div className="relative z-2 flex h-[54vw] w-[76%] items-center justify-center max-[479px]:h-[58vw]">
+                  <ProjectCard project={project} index={i + 1} />
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      )}
 
       <div className="absolute top-1/2 right-[-7rem] z-3 hidden -translate-y-1/2 flex-col items-stretch justify-end gap-2 desktop:flex wide:right-[-6rem]">
         {featuredProjects.map((project, i) => (
@@ -405,10 +520,18 @@ export default function HomeProjects() {
           </div>
         </div>
         <div className="btn-group">
-          <a href={featuredProjects[0]?.link ?? "/work"} data-audio={audio.hover} className="btn btn-small">
+          <a
+            href={featuredProjects[0]?.link ?? "/work"}
+            data-audio={audio.hover}
+            className="btn btn-small"
+          >
             <div className="btn__text">{homeProjectsLabels.viewCaseStudy}</div>
           </a>
-          <Link href="/work" data-audio={audio.hover} className="btn btn-secondary btn-small">
+          <Link
+            href="/work"
+            data-audio={audio.hover}
+            className="btn btn-secondary btn-small"
+          >
             <div className="btn__text">{homeProjectsLabels.seeAllWork}</div>
           </Link>
         </div>
