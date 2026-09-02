@@ -926,9 +926,25 @@ input[type="file"]:focus-visible {
     }
   }
 
+  /* Home projects mobile: normal vertical list (no scroll-snap/carousel) */
+
   @media screen and (max-width: 991px) {
     .navbar_menu {
       display: none !important;
+    }
+  }
+
+  /* Touch devices: blur(100px) repaints a full backdrop every scroll frame,
+   which is expensive on mobile GPUs. Keep the frosted look but at a far
+   cheaper radius. Unlayered, so it wins over the Tailwind utility class. */
+  @media (pointer: coarse) {
+    .backdrop-blur-\[100px\] {
+      -webkit-backdrop-filter: blur(24px);
+      backdrop-filter: blur(24px);
+    }
+    .work_tag {
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
     }
   }
 

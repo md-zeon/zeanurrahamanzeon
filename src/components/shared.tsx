@@ -321,7 +321,7 @@ export function ChatWidget({ className }: ChatWidgetProps) {
           </div>
         </div>
       </div>
-      <div className="cta_chat-cta flex items-center justify-end gap-2 max-[479px]:flex-wrap">
+      <div className="cta_chat-cta flex items-center justify-end gap-2 max-[767px]:flex-col max-[767px]:items-stretch">
         <a
           id="cta-chat-button-1"
           data-audio={audio.hover}

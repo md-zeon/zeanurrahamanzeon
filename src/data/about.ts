@@ -77,18 +77,17 @@ export const aboutStory = {
   misc: "ABOUT_ZEON",
 };
 
-/** One card in the "FUN FACTS" deck (media is video, or image with a crop variant). */
+/** One card in the "FUN FACTS" deck (media is a static image). */
 export type FactSlide = {
   caption: string;
   title: string;
   elementCaption: string;
   text: string;
-  video?: string;
+  image?: string;
+  imageClass?: string;
   videoCaption?: string;
   ctaLabel?: string;
   ctaHref?: string;
-  image?: string;
-  imageClass?: string;
   misc?: string;
 };
 
@@ -107,8 +106,8 @@ export const aboutFacts: {
     {
       caption: "CURRENTLY STUDYING",
       title: "Computer Science",
-      video:
-        "/assets/videos/Videos/Experiments/spaceman-gsap---new-thumbnail.mp4",
+      image: "/assets/images/about/facts/computer-science.webp",
+      imageClass: "is-photo",
       videoCaption: "FUN_FCT_001",
       elementCaption: "FUN_FCT_001",
       ctaLabel: "See my education",
@@ -118,7 +117,8 @@ export const aboutFacts: {
     {
       caption: "BASED IN",
       title: "Bangladesh",
-      video: "/assets/videos/Videos/Experiments/space-shooter.mp4",
+      image: "/assets/images/about/facts/bangladesh.webp",
+      imageClass: "is-photo",
       videoCaption: "FUN_FCT_002",
       elementCaption: "FUN_FCT_002",
       text: "I'm based in Tongi, Gazipur — building for teams and users around the world, working in UTC+06.",
@@ -126,7 +126,8 @@ export const aboutFacts: {
     {
       caption: "MY APPROACH",
       title: "Tool-Agnostic",
-      video: "/assets/videos/Videos/Experiments/shortle.mp4",
+      image: "/assets/images/about/facts/tool-agnostic.webp",
+      imageClass: "is-photo",
       videoCaption: "FUN_FCT_003",
       elementCaption: "FUN_FCT_003",
       ctaLabel: "See GitHub",
@@ -136,7 +137,8 @@ export const aboutFacts: {
     {
       caption: "DRIVEN BY",
       title: "Real Problems",
-      video: "/assets/videos/Videos/Experiments/brick-breaker.mp4",
+      image: "/assets/images/about/facts/real-problems.webp",
+      imageClass: "is-photo",
       videoCaption: "FUN_FCT_004",
       elementCaption: "FUN_FCT_004",
       text: "I like products that solve real problems — from developer Q&A and medicine delivery to campus collaboration.",
@@ -144,7 +146,8 @@ export const aboutFacts: {
     {
       caption: "ALWAYS",
       title: "Open to Work",
-      video: "/assets/videos/Videos/Experiments/qr-generator.mp4",
+      image: "/assets/images/about/facts/open-to-work.webp",
+      imageClass: "is-photo",
       videoCaption: "FUN_FCT_005",
       elementCaption: "FUN_FCT_005",
       ctaLabel: "Get in touch",

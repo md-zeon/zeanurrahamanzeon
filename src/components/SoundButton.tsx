@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useSyncExternalStore } from "react";
-import lottie, { type AnimationItem } from "lottie-web";
+// lottie_light ships only the SVG renderer — identical visuals for this
+// icon while cutting the shipped lottie-web bundle roughly in half.
+import lottie, { type AnimationItem } from "lottie-web/build/player/lottie_light";
 import { soundWaves, audio, soundLabels } from "@/data/site";
 import {
   setSoundEnabled,

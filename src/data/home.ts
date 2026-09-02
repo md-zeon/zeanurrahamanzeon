@@ -229,8 +229,6 @@ export const cta = {
   caption: "CTA_ZN_195",
   buttonLabel: "Send a message",
   videoLoop: "/assets/videos/hero-clip-vid.mp4",
-  videoClientCall: "/assets/videos/Videos/CTA/cta-client-call---new.mp4",
-  videoFun: "/assets/videos/Videos/CTA/cta-fun---new.mp4",
   videoCaption: "VIDEO_ZN_628",
   chat: {
     name: "Zeanur Rahaman Zeon",

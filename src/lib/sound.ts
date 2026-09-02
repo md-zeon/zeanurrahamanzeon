@@ -174,6 +174,9 @@ export function ensureMusic() {
     music = new Audio(audio.backgroundMusic);
     music.loop = true;
     music.volume = 0.4;
+    // No up-front fetch — autoplay is blocked until a user gesture anyway, so
+    // preload anything only then. Saves a large range request on mobile.
+    music.preload = "none";
   }
 }
 

@@ -17,12 +17,34 @@ type AutoVideoProps = {
 };
 
 /**
+ * Maps a video path to its static poster frame:
+ *   /assets/videos/<path>.mp4  ->  /assets/images/posters/<path>.webp
+ * The hero loop (used by the hero, the About header and the CTA) points at
+ * the site's branded hero image instead of a generic frame. Only used when
+ * the caller didn't pass an explicit `poster`, so explicit posters are never
+ * overridden.
+ */
+const derivePoster = (src: string) => {
+  if (src === "/assets/videos/hero-clip-vid.mp4") {
+    return "/assets/images/zeon.webp";
+  }
+  return src
+    .replace(/^\/assets\/videos\//, "/assets/images/posters/")
+    .replace(/\.mp4$/i, ".webp");
+};
+
+/**
  * Cover-filling `<video>` that auto-plays.
  *
  * By default playback is driven by an IntersectionObserver: it plays when at
  * least 15% is visible and pauses when scrolled out. With `playsOnScroll`
  * false it simply plays on mount. Videos are muted/inline/looping because
  * browsers block unmuted autoplay without user interaction.
+ *
+ * Scroll-gated videos skip preloading entirely (`play()` triggers the fetch
+ * when the viewer actually reaches them) so videos the visitor never scrolls
+ * to cost no mobile network/decoder budget. A static poster fills the space
+ * until the first frame decodes.
  */
 export default function AutoVideo({
   src,
@@ -34,6 +56,9 @@ export default function AutoVideo({
   decorative = false,
 }: AutoVideoProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const posterSrc = poster ?? derivePoster(src);
+  const effectivePreload =
+    preload === "metadata" && playsOnScroll ? "none" : preload;
 
   useEffect(() => {
     const video = videoRef.current;
@@ -63,8 +88,8 @@ export default function AutoVideo({
         muted
         loop
         playsInline
-        preload={preload}
-        poster={poster}
+        preload={effectivePreload}
+        poster={posterSrc}
         data-autoplay-on-scroll
         aria-label={decorative ? undefined : label}
         aria-hidden={decorative || undefined}

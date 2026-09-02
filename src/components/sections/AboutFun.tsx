@@ -9,7 +9,6 @@ import "swiper/css/pagination";
 import { aboutFacts } from "@/data/about";
 import { audio } from "@/data/site";
 import Image from "next/image";
-import AutoVideo from "../media/AutoVideo";
 
 /**
  * Renders the little diagonal logo strokes used as a footer accent on the
@@ -91,8 +90,9 @@ function LinkIcon() {
 
 /**
  * "FUN FACTS" section — a deck of cards shown with Swiper's cards effect.
- * Each slide flips through a media asset (video via AutoVideo, or a photo)
- * with a caption, a rotated side label, and an optional external link.
+ * Each slide flips through a media asset (a static image) with a caption, a
+ * rotated side label, and an optional external link. Static images keep the
+ * deck instant and lag-free on every device.
  */
 export default function AboutFun() {
   return (
@@ -148,13 +148,9 @@ export default function AboutFun() {
                       <div className="relative z-2 flex aspect-[1.27] w-full items-end justify-center overflow-visible">
                         <VideoBorder />
                         <div className="about-fun_loop-asset-w relative flex h-full w-full items-center justify-center">
-                          {/* Media: looping video, or a photo with the
-                              plants/photo crop variants */}
-                          {slide.video ? (
-                            <div className="absolute inset-0 z-2 block h-full w-full flex-none bg-neutral-dark-grey object-cover w-embed">
-                              <AutoVideo src={slide.video} decorative />
-                            </div>
-                          ) : slide.image ? (
+                          {/* Media: static poster frames (kept image-only so the
+                              deck never stutters from looping video decodes). */}
+                          {slide.image ? (
                             <>
                               <div className="absolute inset-0 z-2 h-full w-full bg-[#0a090f4d]" />
                               {slide.imageClass === "is-plants" || slide.imageClass === "is-photo" ? (

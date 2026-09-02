@@ -108,51 +108,9 @@ export default function CtaSection({
                     </svg>
                   </div>
                   <div className="relative flex h-full w-full items-center justify-center overflow-hidden [clip-path:polygon(98.5%_0,98.5%_6%,100%_7%,100%_100%,10%_100%,0_90%,0_0)]">
-                    {/* The three video layers for the chat: the neutral loop,
-                        and the two option-specific loops. `useCtaChat` swaps
-                        which one is visible. */}
+                    {/* Looping video behind the chat widget. */}
                     <div className="cta_loop-video is-1 absolute inset-auto z-1 block aspect-square h-[110%] w-[110%] flex-none bg-neutral-dark-grey object-cover max-[767px]:h-[120%] max-[767px]:w-[120%]">
                       <AutoVideo src={cta.videoLoop} decorative />
-                    </div>
-                    <div className="cta_loop-video is-2 absolute inset-auto z-2 hidden aspect-square h-[110%] w-[110%] flex-none bg-neutral-dark-grey object-cover max-[767px]:h-[120%] max-[767px]:w-[120%]">
-                      <video
-                        muted
-                        loop
-                        playsInline
-                        preload="none"
-                        style={{
-                          position: "absolute",
-                          top: "50%",
-                          left: "50%",
-                          transform: "translate(-50%, -50%)",
-                          width: "100%",
-                          height: "100%",
-                          objectFit: "cover",
-                        }}
-                      >
-                        <source src={cta.videoClientCall} type="video/mp4" />
-                        Your browser does not support the video tag.
-                      </video>
-                    </div>
-                    <div className="cta_loop-video is-3 absolute inset-auto z-3 hidden aspect-square h-[110%] w-[110%] flex-none bg-neutral-dark-grey object-cover max-[767px]:h-[120%] max-[767px]:w-[120%]">
-                      <video
-                        muted
-                        loop
-                        playsInline
-                        preload="none"
-                        style={{
-                          position: "absolute",
-                          top: "50%",
-                          left: "50%",
-                          transform: "translate(-50%, -50%)",
-                          width: "100%",
-                          height: "100%",
-                          objectFit: "cover",
-                        }}
-                      >
-                        <source src={cta.videoFun} type="video/mp4" />
-                        Your browser does not support the video tag.
-                      </video>
                     </div>
                   </div>
                   <div className="absolute bottom-[4.2rem] left-[-2.7rem] transform-[rotate(-90deg)] max-[767px]:left-[-2.2rem]">
