@@ -90,6 +90,7 @@ export default function Cursor({
   const containingBlockRef = useRef<HTMLElement | null>(null);
 
   const isActiveRef = useRef(false);
+  const hasRevealedRef = useRef(false);
   // Viewport-space positions of the four corners of the hovered target.
   const targetCornerPositionsRef = useRef<{ x: number; y: number }[] | null>(null);
   const tickerFnRef = useRef<(() => void) | null>(null);
@@ -223,7 +224,13 @@ export default function Cursor({
 
     tickerFnRef.current = tickerFn;
 
-    const moveHandler = (e: MouseEvent) => moveCursor(e.clientX, e.clientY);
+    const moveHandler = (e: MouseEvent) => {
+      if (cursorRef.current && !hasRevealedRef.current) {
+        hasRevealedRef.current = true;
+        cursorRef.current.style.opacity = "1";
+      }
+      moveCursor(e.clientX, e.clientY);
+    };
     window.addEventListener("mousemove", moveHandler);
 
     // If the page scrolls while hovering, verify the element is still under
@@ -420,7 +427,25 @@ export default function Cursor({
     };
     window.addEventListener("resize", resizeHandler);
 
+    // Hide the custom cursor when the pointer leaves the browser window,
+    // and show it again when it re-enters.
+    const bodyMouseLeave = () => {
+      if (cursorRef.current) cursorRef.current.style.display = "none";
+    };
+    const bodyMouseEnter = () => {
+      if (cursorRef.current && !activeTarget) {
+        cursorRef.current.style.display = "block";
+        hasRevealedRef.current = true;
+        cursorRef.current.style.opacity = "1";
+      }
+    };
+    document.body.addEventListener("mouseleave", bodyMouseLeave);
+    document.body.addEventListener("mouseenter", bodyMouseEnter);
+
     return () => {
+      document.body.removeEventListener("mouseleave", bodyMouseLeave);
+      document.body.removeEventListener("mouseenter", bodyMouseEnter);
+
       if (tickerFnRef.current) {
         gsap.ticker.remove(tickerFnRef.current);
       }

@@ -1139,6 +1139,7 @@ input[type="file"]:focus-visible {
     z-index: 10002;
     mix-blend-mode: difference;
     transform: translate(-50%, -50%);
+    opacity: 0;
   }
 
   .target-cursor-dot {
