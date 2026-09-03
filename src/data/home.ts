@@ -68,7 +68,7 @@ export const whyCards = [
     buttonLabel: "GitHub profile",
     href: "https://github.com/md-zeon",
     icon: true,
-    video: "/assets/videos/Videos/Experiments/kurosumi.mp4",
+    video: "/assets/videos/md-zeon-github.mp4",
     webgl: false,
   },
   {
@@ -76,7 +76,7 @@ export const whyCards = [
     buttonLabel: "LinkedIn",
     href: "https://www.linkedin.com/in/zeanur-rahaman-zeon/",
     icon: true,
-    video: "/assets/videos/Videos/Experiments/space-shooter.mp4",
+    video: "/assets/videos/zeanur-rahaman-zeon-linkedin.mp4",
     webgl: false,
   },
   {
@@ -84,7 +84,7 @@ export const whyCards = [
     buttonLabel: "Open to work",
     href: "/contact",
     icon: true,
-    video: "/assets/videos/Videos/Experiments/shortle.mp4",
+    video: "/assets/videos/zeanur-rahaman-zeon-linkedin.mp4",
     webgl: false,
   },
   {
@@ -92,7 +92,7 @@ export const whyCards = [
     buttonLabel: "Get to know me",
     href: "/about",
     icon: false,
-    video: "/assets/videos/Videos/Experiments/brick-breaker.mp4",
+    video: "/assets/videos/md-zeon-github.mp4",
     webgl: false,
   },
 ];
