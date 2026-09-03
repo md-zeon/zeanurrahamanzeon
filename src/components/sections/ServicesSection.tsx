@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { services, servicesHeader, serviceAssets } from "@/data/home";
 import { audio } from "@/data/site";
 import { useSectionHeadings } from "@/lib/useHeaderReveal";
@@ -11,7 +12,7 @@ import LogosElement from "../LogosElement";
  *
  * Header heading is char-split/slid in via `useSectionHeadings`; each
  * service is a bordered card with an index, title, description, skill tags
- * and a looping background video on the right (desktop only).
+ * and a static project screenshot on the right (desktop only).
  */
 export default function ServicesSection() {
   const ref = useRef<HTMLElement>(null);
@@ -19,11 +20,7 @@ export default function ServicesSection() {
   useSectionHeadings(ref);
 
   return (
-    <section
-      id="services"
-      className="relative z-2"
-      ref={ref}
-    >
+    <section id="services" className="relative z-2" ref={ref}>
       <div className="padding-global is-bigger">
         <div className="container-large">
           <div className="grid gap-20 max-[479px]:gap-12">
@@ -82,27 +79,15 @@ export default function ServicesSection() {
                     ))}
                   </div>
                   <div className="absolute inset-y-0 right-0 z-1 flex w-[40%] items-center justify-center overflow-hidden max-[991px]:relative max-[991px]:inset-auto max-[991px]:bottom-0 max-[991px]:hidden max-[991px]:w-full">
-                    <div
-                      data-us-lazyload="true"
-                      className="z-2 h-[110%] w-[110%] flex-none object-cover object-[0%_0%]"
-                    >
-                      <video
-                        muted
-                        loop
-                        playsInline
-                        autoPlay
-                        data-autoplay-on-scroll
-                        style={{
-                          width: "100%",
-                          height: "100%",
-                          objectFit: "cover",
-                        }}
-                      >
-                        <source
-                          src={serviceAssets[i % serviceAssets.length]}
-                          type="video/mp4"
-                        />
-                      </video>
+                    <div className="relative h-full w-[110%] flex-none overflow-hidden">
+                      <Image
+                        src={serviceAssets[i % serviceAssets.length]}
+                        alt={service.title}
+                        fill
+                        sizes="(min-width: 992px) 40vw, 90vw"
+                        className="object-cover object-[50%_50%]"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-l from-transparent to-[#0a0a0a66]" />
                     </div>
                   </div>
                 </div>

@@ -104,11 +104,11 @@ export const servicesHeader = {
   caption: "SER_EXP_019",
 };
 
-/** Thumbnail videos cycled through the service cards, one per card (looping). */
+/** Static images for the service cards, one per card. */
 export const serviceAssets = [
-  "/assets/videos/Videos/Experiments/kurosumi.mp4",
-  "/assets/videos/Videos/Experiments/space-shooter.mp4",
-  "/assets/videos/Videos/Experiments/shortle.mp4",
+  "/assets/images/services/product-engineering.webp",
+  "/assets/images/services/interface-engineering.webp",
+  "/assets/images/services/backend-infrastructure.webp",
 ];
 
 /** The three service offerings (product, interface, systems). */
