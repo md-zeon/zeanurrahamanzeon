@@ -572,7 +572,7 @@ export default function Navbar() {
 
               <div className="flex gap-4 pr-20 desktop:pr-0 min-[992px]:pr-0 max-[991px]:items-center max-[767px]:pr-16">
                 <div className="flex items-center justify-end gap-4 max-[767px]:gap-2">
-                  <div className="flex gap-2 max-[479px]:hidden">
+                  <div className="flex gap-2">
                     <SoundButton textClassName="max-[568px]:hidden" />
                   </div>
                   <div className="flex items-center justify-start gap-2">

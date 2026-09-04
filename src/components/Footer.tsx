@@ -10,11 +10,7 @@ import { CredentialIcon } from "./shared";
 export default function Footer() {
   const ref = useRef<HTMLElement>(null);
 
-  // Keep the copyright year current without hardcoding it in markup.
-  useEffect(() => {
-    const year = document.querySelector(".footer_year");
-    if (year) year.textContent = String(new Date().getFullYear());
-  }, []);
+  // Copyright year is computed inline — no DOM query needed.
 
   // Binary scramble hover effect on each footer link label.
   useEffect(() => {
@@ -222,7 +218,7 @@ export default function Footer() {
                 <div className="h-px w-full bg-white-20" />
                 <div className="grid grid-cols-3 items-center justify-between gap-8 overflow-hidden max-[991px]:grid-cols-2 max-[767px]:flex max-[767px]:flex-col max-[767px]:items-start max-[767px]:justify-between max-[767px]:gap-6 max-[767px]:pb-4 max-[479px]:flex max-[479px]:flex-col max-[479px]:grid-cols-[auto]">
                   <div className="text-size-small text-color-teritary">
-                    © <span className="footer_year">{footer.copyrightYear}</span>{" "}
+                    © <span>{new Date().getFullYear()}</span>{" "}
                     {brand.logoStart}
                     {brand.logoEnd}. {footer.copyrightText}
                   </div>

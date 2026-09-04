@@ -949,27 +949,13 @@ input[type="file"]:focus-visible {
   }
 
   /* AUTO-MIGRATED from webflow.css / global-embed.css for classes used by the app.
-   Values and ORDER are verbatim to guarantee zero visual drift. Phase-2 work replaces
-   these entries with inline Tailwind utilities and deletes them here. */
+     Unused Webflow classes (.w-button, .w-form-done, disabled/readonly states,
+     data-collapse responsive rules) have been removed. */
   .w-inline-block {
     max-width: 100%;
     display: inline-block;
   }
-  .w-button {
-    color: #fff;
-    line-height: inherit;
-    cursor: pointer;
-    background-color: #3898ec;
-    border: 0;
-    border-radius: 0;
-    padding: 9px 15px;
-    text-decoration: none;
-    display: inline-block;
-  }
-  input.w-button {
-    appearance: button; /* added this line  leter*/
-    -webkit-appearance: button;
-  }
+
   .w-embed:before,
   .w-embed:after {
     content: " ";
@@ -981,12 +967,6 @@ input[type="file"]:focus-visible {
   }
   .w-form {
     margin: 0 0 15px;
-  }
-  .w-form-done {
-    text-align: center;
-    background-color: #ddd;
-    padding: 20px;
-    display: none;
   }
   .w-form-fail {
     background-color: #ffdede;
@@ -1017,31 +997,8 @@ input[type="file"]:focus-visible {
     border-color: #3898ec;
     outline: 0;
   }
-  .w-input[disabled],
-  .w-select[disabled],
-  .w-input[readonly],
-  .w-select[readonly],
-  fieldset[disabled] .w-input,
-  fieldset[disabled] .w-select {
-    cursor: not-allowed;
-  }
-  .w-input[disabled]:not(.w-input-disabled),
-  .w-select[disabled]:not(.w-input-disabled),
-  .w-input[readonly],
-  .w-select[readonly],
-  fieldset[disabled]:not(.w-input-disabled) .w-input,
-  fieldset[disabled]:not(.w-input-disabled) .w-select {
-    background-color: #eee;
-  }
-  textarea.w-input,
-  textarea.w-select {
-    height: auto;
-  }
   .w-select {
     background-color: #f3f3f3;
-  }
-  .w-select[multiple] {
-    height: auto;
   }
   .w-form-label {
     cursor: pointer;
@@ -1097,27 +1054,9 @@ input[type="file"]:focus-visible {
     float: right;
     position: relative;
   }
-  .w-nav[data-collapse="all"] .w-nav-menu {
-    display: none;
-  }
-  @media screen and (max-width: 991px) {
-    .w-nav[data-collapse="medium"] .w-nav-menu {
-      display: none;
-    }
-  }
-  @media screen and (max-width: 767px) {
-    .w-nav[data-collapse="small"] .w-nav-menu {
-      display: none;
-    }
-  }
   @media screen and (max-width: 767px) {
     .w-nav-brand {
       padding-left: 10px;
-    }
-  }
-  @media screen and (max-width: 479px) {
-    .w-nav[data-collapse="tiny"] .w-nav-menu {
-      display: none;
     }
   }
   .w-layout-grid {

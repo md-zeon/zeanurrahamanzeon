@@ -118,7 +118,6 @@ export const footer = {
   caseStudiesTitle: "Case Studies",
   connectTitle: "Connect",
   credentialText: "Open to Work",
-  copyrightYear: 2026,
   copyrightText: "All rights reserved.",
   privacyPolicyLabel: "Privacy Policy",
   privacyPolicyHref: "/privacy-policy",

@@ -86,8 +86,8 @@ export default function ServicesSection() {
                         fill
                         sizes="(min-width: 992px) 40vw, 90vw"
                         className="object-cover object-[50%_50%]"
+                        loading="eager" // prioritize this image to load faster
                       />
-                      <div className="absolute inset-0 bg-gradient-to-l from-transparent to-[#0a0a0a66]" />
                     </div>
                   </div>
                 </div>

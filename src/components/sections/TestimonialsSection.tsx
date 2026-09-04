@@ -318,10 +318,11 @@ export default function TestimonialsSection() {
                     <div className="relative flex h-14 w-14 flex-none items-center justify-center overflow-hidden rounded-full max-[767px]:h-10 max-[767px]:w-10">
                       <Image
                         src={testimonials[0].image}
-                        alt=""
+                        alt={testimonials[0].name}
                         fill
                         sizes="56px"
                         className="testimonial_photo"
+                        loading="eager" // prioritize this image to load faster
                       />
                     </div>
                     <div className="testimonial_info-wrapper">

@@ -84,6 +84,7 @@ function CheckIcon() {
 export default function ContactForm() {
   const emailRef = useRef<HTMLDivElement>(null);
   const [submitState, setSubmitState] = useState<SubmitState>("idle");
+  const [messageLength, setMessageLength] = useState(0);
 
   const handleCopy = async (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
@@ -275,7 +276,13 @@ export default function ContactForm() {
                       placeholder={contactForm.briefPlaceholder ?? "Write your brief here..."}
                       required
                       className={areaInput}
+                      onChange={(e) => setMessageLength(e.currentTarget.value.length)}
                     />
+                    <div className="mt-1 text-right">
+                      <span className="text-caption-2 text-color-teritary">
+                        {messageLength}/5000
+                      </span>
+                    </div>
                   </div>
                   {/* Current URL + company stage */}
                   <div className="grid auto-cols-fr grid-cols-2 gap-8 max-[767px]:grid-cols-1">
