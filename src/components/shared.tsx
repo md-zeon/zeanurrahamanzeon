@@ -208,7 +208,7 @@ export function ChatWidget({ className }: ChatWidgetProps) {
           <Image
             src={photos.ellipseBlack}
             loading="lazy"
-            alt=""
+            alt="Zeanur Rahaman Zeon"
             className="h-full w-full object-cover"
             width={32}
             height={32}
@@ -273,7 +273,7 @@ export function ChatWidget({ className }: ChatWidgetProps) {
           <Image
             src={photos.ellipseBlack}
             loading="lazy"
-            alt=""
+            alt="Zeanur Rahaman Zeon"
             width={32}
             height={32}
             className="h-full w-full object-cover"
@@ -303,7 +303,7 @@ export function ChatWidget({ className }: ChatWidgetProps) {
             height={32}
             src={photos.ellipseBlack}
             loading="lazy"
-            alt=""
+            alt="Zeanur Rahaman Zeon"
             className="h-full w-full object-cover"
           />
         </div>
@@ -405,11 +405,7 @@ export function Badge({ href, badge, labelClassName }: BadgeProps) {
           <BadgeLinkContent label={badge} labelClassName={labelClassName} />
         </a>
       ) : (
-        <Link
-          data-audio={audio.scramble}
-          href={href}
-          className="badge-link"
-        >
+        <Link data-audio={audio.scramble} href={href} className="badge-link">
           <BadgeLinkContent label={badge} labelClassName={labelClassName} />
         </Link>
       )}
@@ -460,7 +456,12 @@ export function Button({
     );
   }
   return (
-    <Link href={href} data-audio={dataAudio} onClick={onClick} className={className}>
+    <Link
+      href={href}
+      data-audio={dataAudio}
+      onClick={onClick}
+      className={className}
+    >
       <div className="btn__text">{children}</div>
     </Link>
   );

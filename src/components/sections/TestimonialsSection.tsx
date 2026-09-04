@@ -164,6 +164,7 @@ export default function TestimonialsSection() {
             if (photoElement) {
               photoElement.removeAttribute("srcset");
               photoElement.src = image;
+              photoElement.alt = name;
             }
             const newSplit = wrapLines(quoteElement);
             quoteSplit = newSplit;
