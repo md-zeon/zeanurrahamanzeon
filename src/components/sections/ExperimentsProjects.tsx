@@ -395,10 +395,8 @@ export default function ExperimentsProjects() {
       ".pin-spacer-projectsScroll",
     );
     if (!pinSpacer) return;
-    let projectHeight = window.innerHeight * 0.7;
-    if (index >= 2) {
-      projectHeight -= window.innerHeight * 0.01;
-    }
+    const totalScroll = window.innerHeight * 4;
+    const projectHeight = totalScroll / experimentsStack.length;
     const targetScrollY = pinSpacer.offsetTop + index * projectHeight;
     const lenis = getLenis();
     if (lenis) {
