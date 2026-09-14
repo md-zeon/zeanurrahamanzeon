@@ -62,7 +62,7 @@ export function getCaseStudyCover(slug: string): string | undefined {
   for (const block of study.blocks) {
     if (block.type !== "example") continue;
     const video = block.media.find(
-      (m): m is Extract<typeof m, { kind: "video" }> => m.kind === "video"
+      (m): m is Extract<typeof m, { kind: "video" }> => m.kind === "video",
     );
     if (video?.poster) return video.poster;
   }
@@ -73,12 +73,18 @@ export function getCaseStudyCover(slug: string): string | undefined {
 const devqnaVideo = "/assets/videos/Videos/Work/devqna/DevQnA.mp4";
 const devqnaVideo2 = "/assets/videos/Videos/Work/devqna/DevQnA-2.mp4";
 const devqnaVideo3 = "/assets/videos/Videos/Work/devqna/DevQnA-3.mp4";
-const oshudpatiVideo = "/assets/videos/Videos/Work/oshudpati-marketplace/Oshudpati-Marketplace.mp4";
-const oshudpatiVideo2 = "/assets/videos/Videos/Work/oshudpati-marketplace/Oshudpati-Marketplace-2.mp4";
-const oshudpatiVideo3 = "/assets/videos/Videos/Work/oshudpati-marketplace/Oshudpati-Marketplace-3.mp4";
-const smartNubVideo = "/assets/videos/Videos/Work/smart-nub-campus/Smart-NUB-Campus.mp4";
-const smartNubVideo2 = "/assets/videos/Videos/Work/smart-nub-campus/Smart-NUB-Campus-2.mp4";
-const smartNubVideo3 = "/assets/videos/Videos/Work/smart-nub-campus/Smart-NUB-Campus-3.mp4";
+const oshudpatiVideo =
+  "/assets/videos/Videos/Work/oshudpati-marketplace/Oshudpati-Marketplace.mp4";
+const oshudpatiVideo2 =
+  "/assets/videos/Videos/Work/oshudpati-marketplace/Oshudpati-Marketplace-2.mp4";
+const oshudpatiVideo3 =
+  "/assets/videos/Videos/Work/oshudpati-marketplace/Oshudpati-Marketplace-3.mp4";
+const smartNubVideo =
+  "/assets/videos/Videos/Work/smart-nub-campus/Smart-NUB-Campus.mp4";
+const smartNubVideo2 =
+  "/assets/videos/Videos/Work/smart-nub-campus/Smart-NUB-Campus-2.mp4";
+const smartNubVideo3 =
+  "/assets/videos/Videos/Work/smart-nub-campus/Smart-NUB-Campus-3.mp4";
 const microearnVideo = "/assets/videos/Videos/Work/microearn/MicroEarn.mp4";
 const microearnVideo2 = "/assets/videos/Videos/Work/microearn/MicroEarn-2.mp4";
 const microearnVideo3 = "/assets/videos/Videos/Work/microearn/MicroEarn-3.mp4";
@@ -372,7 +378,7 @@ export const caseStudies: CaseStudy[] = [
       dateCaption: "Date",
       date: "2025",
       websiteLabel: "View source",
-      websiteUrl: "https://github.com/md-zeon",
+      websiteUrl: "https://smart-nub-campus-client.vercel.app",
     },
     blocks: [
       {
@@ -608,4 +614,3 @@ export function getCaseStudy(slug: string): CaseStudy | undefined {
 export function getAllCaseStudySlugs(): { slug: string }[] {
   return caseStudies.map((study) => ({ slug: study.slug }));
 }
-
